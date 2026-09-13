@@ -6604,3 +6604,23 @@ main > .page-section:nth-of-type(4n) {
   z-index: 2;
 }
 
+
+
+
+/* RV CREW HOMEPAGE HEADING - FULL OMBRE */
+
+.rv-preview .rv-ombre-heading {
+  background: linear-gradient(
+    90deg,
+    var(--pink),
+    var(--orange),
+    var(--purple),
+    var(--blue)
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+}
