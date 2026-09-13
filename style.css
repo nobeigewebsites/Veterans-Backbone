@@ -3439,3 +3439,246 @@ select:focus-visible {
 
 }
 
+/* =========================================================
+   MEET THE PEOPLE
+   ========================================================= */
+
+.person-feature,
+.steve-meet {
+  display: grid;
+  grid-template-columns: minmax(280px, .85fr) minmax(0, 1.15fr);
+  gap: clamp(32px, 6vw, 80px);
+  align-items: center;
+
+  padding: clamp(28px, 5vw, 60px);
+
+  background: var(--paper);
+  border: 3px solid var(--black);
+  border-radius: var(--radius-large);
+
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, .08);
+}
+
+
+/* SHELLEY */
+
+.person-feature-image {
+  position: relative;
+}
+
+.person-feature-image img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 5;
+
+  object-fit: cover;
+
+  border: 3px solid var(--black);
+  border-radius: var(--radius-large);
+}
+
+.person-photo-note {
+  position: absolute;
+  right: -15px;
+  bottom: 22px;
+
+  padding: 10px 16px;
+
+  background: var(--yellow);
+  border: 2px solid var(--black);
+  border-radius: var(--radius-small);
+
+  font-family: var(--scribble);
+  font-size: 1.05rem;
+
+  transform: rotate(-3deg);
+}
+
+.person-quote {
+  margin-top: 28px;
+  padding: 20px 24px;
+
+  background: rgba(239, 61, 134, .1);
+  border-left: 5px solid var(--pink);
+  border-radius: var(--radius-small);
+}
+
+.person-quote p {
+  margin: 0;
+
+  font-family: var(--heading);
+  font-size: 1.7rem;
+}
+
+
+/* STEVE */
+
+.steve-introduction {
+  position: relative;
+  overflow: hidden;
+}
+
+.steve-introduction::before {
+  content: "";
+
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  top: 5%;
+  right: -100px;
+
+  background: rgba(155, 89, 182, .1);
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.steve-meet {
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr);
+
+  background:
+    radial-gradient(
+      circle at 85% 20%,
+      rgba(239, 61, 134, .13),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 70% 80%,
+      rgba(32, 184, 207, .12),
+      transparent 32%
+    ),
+    var(--paper);
+}
+
+.steve-meet-image {
+  position: relative;
+}
+
+.steve-meet-image img {
+  display: block;
+  width: 100%;
+
+  border: 3px solid var(--black);
+  border-radius: var(--radius-large);
+}
+
+.steve-speech {
+  position: absolute;
+  top: -20px;
+  right: -20px;
+
+  max-width: 180px;
+  padding: 16px 20px;
+
+  background: var(--paper);
+  border: 3px solid var(--black);
+  border-radius: 50%;
+
+  text-align: center;
+
+  font-family: var(--scribble);
+  font-size: 1.05rem;
+
+  transform: rotate(4deg);
+
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, .08);
+}
+
+.steve-speech::after {
+  content: "";
+
+  position: absolute;
+  left: 22px;
+  bottom: -13px;
+
+  width: 22px;
+  height: 22px;
+
+  background: var(--paper);
+
+  border-right: 3px solid var(--black);
+  border-bottom: 3px solid var(--black);
+
+  transform: rotate(45deg);
+}
+
+
+/* FUTURE PEOPLE */
+
+.future-people-grid {
+  margin-top: 42px;
+}
+
+.future-person {
+  overflow: hidden;
+}
+
+.future-person-placeholder {
+  min-height: 260px;
+
+  display: grid;
+  place-items: center;
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(32, 184, 207, .12),
+      rgba(239, 61, 134, .12)
+    );
+
+  border-bottom: 3px solid var(--black);
+}
+
+.future-person-placeholder span {
+  display: grid;
+  place-items: center;
+
+  width: 90px;
+  height: 90px;
+
+  background: var(--paper);
+  border: 3px dashed var(--black);
+  border-radius: 50%;
+
+  font-family: var(--heading);
+  font-size: 4rem;
+}
+
+.person-card-copy {
+  padding: 24px;
+}
+
+
+/* MOBILE */
+
+@media (max-width: 760px) {
+
+  .person-feature,
+  .steve-meet {
+    grid-template-columns: 1fr;
+    padding: 24px;
+  }
+
+  .person-photo-note {
+    right: 10px;
+  }
+
+  .steve-meet-copy {
+    order: 2;
+  }
+
+  .steve-meet-image {
+    order: 1;
+  }
+
+  .steve-speech {
+    top: 10px;
+    right: 10px;
+  }
+
+  .future-people-grid {
+    margin-top: 30px;
+  }
+
+}
+
