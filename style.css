@@ -6810,3 +6810,71 @@ main > .page-section:nth-of-type(4n) {
   color: transparent;
   -webkit-text-fill-color: transparent;
 }
+
+/* =========================================================
+   RESOURCES - CLICKABLE CARD HEADINGS OMBRE
+   ========================================================= */
+
+.resources-page .external-resource h3,
+.external-resource h3 {
+  display: inline-block;
+
+  background: linear-gradient(
+    90deg,
+    var(--pink),
+    var(--orange),
+    var(--purple),
+    var(--blue)
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+}
+
+
+
+/* =========================================================
+   GLOBAL CLICKABLE CARD HEADINGS - OMBRE
+   ========================================================= */
+
+a.card h2,
+a.card h3,
+a.info-card h2,
+a.info-card h3,
+a.support-card h2,
+a.support-card h3,
+a.resource-card h2,
+a.resource-card h3,
+a.event-card h2,
+a.event-card h3,
+a.download-card h2,
+a.download-card h3,
+a.policy-card h2,
+a.policy-card h3,
+a.member-card h2,
+a.member-card h3,
+a.feature-card h2,
+a.feature-card h3,
+a.shit-card h2,
+a.shit-card h3,
+a.external-resource h2,
+a.external-resource h3 {
+  display: inline-block;
+
+  background: linear-gradient(
+    90deg,
+    var(--pink),
+    var(--orange),
+    var(--purple),
+    var(--blue)
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent !important;
+  -webkit-text-fill-color: transparent !important;
+}
