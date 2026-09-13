@@ -3947,3 +3947,598 @@ select:focus-visible {
   }
 
 }
+
+/* =========================================================
+   VETERANS BACKBONE — SUPPORT AREA
+   Shared styling for:
+   support.html
+   referrals-assessment.html
+   what-we-do.html
+   support-pathways.html
+   reality-of-the-journey.html
+   advocacy.html
+   unicorn-system.html
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   SUPPORT HEROES
+   --------------------------------------------------------- */
+
+.support-hero,
+.page-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.support-hero::before,
+.page-hero::before {
+  content: "";
+  position: absolute;
+  width: 260px;
+  height: 260px;
+  border-radius: 50%;
+  background: rgba(239, 61, 134, 0.08);
+  top: -100px;
+  right: -80px;
+  pointer-events: none;
+}
+
+.support-hero::after,
+.page-hero::after {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background: rgba(32, 184, 207, 0.08);
+  bottom: -80px;
+  left: -60px;
+  pointer-events: none;
+}
+
+.page-hero-inner {
+  position: relative;
+  z-index: 1;
+}
+
+
+/* ---------------------------------------------------------
+   HERO IMAGES
+   --------------------------------------------------------- */
+
+.page-hero-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.page-hero-image img {
+  width: 100%;
+  max-width: 620px;
+  max-height: 560px;
+  object-fit: contain;
+  display: block;
+  border-radius: var(--radius-large);
+  border: 3px solid var(--black);
+  box-shadow: 8px 8px 0 rgba(21, 21, 21, 0.12);
+  background: var(--paper);
+}
+
+
+/* ---------------------------------------------------------
+   SPLIT SECTION IMAGES
+   --------------------------------------------------------- */
+
+.split-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.split-image img {
+  width: 100%;
+  max-width: 620px;
+  max-height: 560px;
+  object-fit: contain;
+  display: block;
+  border-radius: var(--radius-large);
+  border: 3px solid var(--black);
+  box-shadow: 7px 7px 0 rgba(21, 21, 21, 0.1);
+  background: var(--paper);
+}
+
+
+/* ---------------------------------------------------------
+   SUPPORT PROCESS — MAIN HUB
+   --------------------------------------------------------- */
+
+.support-process {
+  margin-top: 38px;
+}
+
+.support-step {
+  position: relative;
+  padding-top: 68px;
+  overflow: visible;
+}
+
+.support-step-number {
+  position: absolute;
+  top: -20px;
+  left: 24px;
+
+  width: 58px;
+  height: 58px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+  border: 3px solid var(--black);
+  background: var(--paper);
+
+  font-family: var(--heading);
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1;
+
+  box-shadow: 4px 4px 0 var(--black);
+  transform: rotate(-4deg);
+}
+
+.support-step:nth-child(even) .support-step-number {
+  transform: rotate(4deg);
+}
+
+
+/* ---------------------------------------------------------
+   SUPPORT ROUTE GRID
+   --------------------------------------------------------- */
+
+.support-route-grid {
+  margin-top: 42px;
+}
+
+.support-route-grid .support-card {
+  position: relative;
+  min-height: 265px;
+
+  display: flex;
+  flex-direction: column;
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.support-route-grid .support-card:hover {
+  transform: translateY(-6px) rotate(-0.3deg);
+  box-shadow: 9px 9px 0 rgba(21, 21, 21, 0.15);
+}
+
+.support-route-grid .support-card:nth-child(even):hover {
+  transform: translateY(-6px) rotate(0.3deg);
+}
+
+.support-route-grid .card-link {
+  margin-top: auto;
+  padding-top: 22px;
+}
+
+
+/* ---------------------------------------------------------
+   UNICORN CARD
+   --------------------------------------------------------- */
+
+.unicorn-route {
+  overflow: hidden;
+}
+
+.unicorn-route::after {
+  content: "🦄";
+  position: absolute;
+  right: 16px;
+  bottom: 6px;
+
+  font-size: 4.7rem;
+  opacity: 0.12;
+
+  transform: rotate(-12deg);
+  pointer-events: none;
+}
+
+
+/* ---------------------------------------------------------
+   BIG CALLOUTS
+   --------------------------------------------------------- */
+
+.support-big-callout,
+.support-final,
+.callout-box {
+  position: relative;
+  overflow: hidden;
+}
+
+.support-big-callout::after,
+.support-final::after {
+  content: "";
+  position: absolute;
+
+  width: 130px;
+  height: 130px;
+
+  right: -45px;
+  bottom: -55px;
+
+  border: 4px solid rgba(21, 21, 21, 0.08);
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+
+/* ---------------------------------------------------------
+   UNICORN SYSTEM
+   --------------------------------------------------------- */
+
+body:has(h1:nth-child(1)) {
+  --dummy-support-var: 1;
+}
+
+/* Make the three unicorn level cards feel slightly different */
+
+.content-grid-3 .support-card .big-handwritten,
+.content-grid-3 .card .big-handwritten {
+  margin-top: 20px;
+}
+
+.card:has(.card-label:first-child) {
+  position: relative;
+}
+
+/* Green / Amber / Red unicorn cards */
+
+.card .card-label {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+}
+
+.card .card-label::before {
+  margin-right: 6px;
+}
+
+
+/* ---------------------------------------------------------
+   PAGE LABELS
+   --------------------------------------------------------- */
+
+.eyebrow-pink {
+  background: rgba(239, 61, 134, 0.14);
+}
+
+.eyebrow-blue {
+  background: rgba(32, 184, 207, 0.14);
+}
+
+.eyebrow-orange {
+  background: rgba(242, 139, 48, 0.16);
+}
+
+.eyebrow-purple {
+  background: rgba(155, 89, 182, 0.14);
+}
+
+
+/* ---------------------------------------------------------
+   HANDWRITTEN SUPPORT LINES
+   --------------------------------------------------------- */
+
+.page-section .big-handwritten,
+.page-hero .big-handwritten {
+  max-width: 720px;
+  margin-top: 20px;
+}
+
+.callout-box .big-handwritten {
+  margin-bottom: 0;
+}
+
+
+/* ---------------------------------------------------------
+   COLOURED CALLOUTS
+   --------------------------------------------------------- */
+
+.callout-pink {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(239, 61, 134, 0.12),
+      rgba(255, 250, 240, 0.95)
+    );
+}
+
+.callout-blue {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(32, 184, 207, 0.12),
+      rgba(255, 250, 240, 0.95)
+    );
+}
+
+.callout-orange {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(242, 139, 48, 0.14),
+      rgba(255, 250, 240, 0.95)
+    );
+}
+
+.callout-purple {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(155, 89, 182, 0.12),
+      rgba(255, 250, 240, 0.95)
+    );
+}
+
+
+/* ---------------------------------------------------------
+   SUPPORT PAGE CARDS
+   --------------------------------------------------------- */
+
+.support-card,
+.support-step {
+  border-width: 3px;
+}
+
+.support-card h3,
+.support-step h3 {
+  margin-top: 10px;
+}
+
+.support-card p:last-of-type,
+.support-step p:last-of-type {
+  margin-bottom: 0;
+}
+
+
+/* ---------------------------------------------------------
+   IMAGE TREATMENT VARIETY
+   Stops every illustration looking like the exact same box
+   --------------------------------------------------------- */
+
+.page-section:nth-of-type(odd) .split-image img {
+  transform: rotate(-0.6deg);
+}
+
+.page-section:nth-of-type(even) .split-image img {
+  transform: rotate(0.6deg);
+}
+
+.page-section .split-image:hover img {
+  transform: rotate(0deg) scale(1.01);
+}
+
+.split-image img {
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+
+/* ---------------------------------------------------------
+   FLAMINGO RISE — SUPPORT PATHWAYS
+   --------------------------------------------------------- */
+
+img[src$="rise.png"] {
+  object-fit: contain;
+  padding: 24px;
+  background:
+    linear-gradient(
+      145deg,
+      #fffaf7,
+      #f7e9ec
+    );
+}
+
+.split-section:has(img[src$="rise.png"]) {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(244, 217, 224, 0.55),
+      rgba(255, 250, 240, 0.92)
+    );
+
+  padding: 34px;
+  border: 3px solid var(--black);
+  border-radius: var(--radius-large);
+  box-shadow: 8px 8px 0 rgba(21, 21, 21, 0.08);
+}
+
+
+/* ---------------------------------------------------------
+   STEVE / UNICORN IMAGES
+   --------------------------------------------------------- */
+
+img[src$="steve.png"],
+img[src$="uni.png"],
+img[src$="lolunicorn.png"] {
+  object-fit: contain;
+}
+
+
+/* ---------------------------------------------------------
+   REVOLVING DOOR ART
+   --------------------------------------------------------- */
+
+img[src$="revolving.png"] {
+  object-fit: contain;
+}
+
+
+/* ---------------------------------------------------------
+   BUTTON ROWS IN SUPPORT PAGES
+   --------------------------------------------------------- */
+
+.page-hero .button-row,
+.page-section .button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 28px;
+}
+
+
+/* ---------------------------------------------------------
+   INTERNAL SUPPORT PAGE CARDS
+   --------------------------------------------------------- */
+
+.page-section .content-grid .card {
+  height: 100%;
+}
+
+.page-section .content-grid a.card {
+  text-decoration: none;
+  color: inherit;
+}
+
+
+/* ---------------------------------------------------------
+   SUPPORT CARDS — SMALL SCRIBBLE FEEL
+   --------------------------------------------------------- */
+
+.support-card:nth-child(3n + 1) {
+  transform: rotate(-0.25deg);
+}
+
+.support-card:nth-child(3n + 2) {
+  transform: rotate(0.2deg);
+}
+
+.support-card:nth-child(3n + 3) {
+  transform: rotate(-0.1deg);
+}
+
+.support-card:hover {
+  transform: translateY(-5px) rotate(0deg);
+}
+
+
+/* ---------------------------------------------------------
+   TABLET
+   --------------------------------------------------------- */
+
+@media (max-width: 980px) {
+
+  .support-step {
+    padding-top: 62px;
+  }
+
+  .support-route-grid .support-card {
+    min-height: auto;
+  }
+
+  .split-section:has(img[src$="rise.png"]) {
+    padding: 26px;
+  }
+
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 760px) {
+
+  .support-process {
+    gap: 34px;
+  }
+
+  .support-step {
+    padding-top: 58px;
+  }
+
+  .support-step-number {
+    width: 52px;
+    height: 52px;
+    font-size: 1.7rem;
+    top: -16px;
+  }
+
+  .support-route-grid {
+    margin-top: 30px;
+  }
+
+  .support-route-grid .support-card {
+    min-height: 0;
+  }
+
+  .support-card,
+  .support-card:nth-child(3n + 1),
+  .support-card:nth-child(3n + 2),
+  .support-card:nth-child(3n + 3) {
+    transform: none;
+  }
+
+  .page-hero-image img,
+  .split-image img {
+    max-height: none;
+    width: 100%;
+  }
+
+  .page-section:nth-of-type(odd) .split-image img,
+  .page-section:nth-of-type(even) .split-image img {
+    transform: none;
+  }
+
+  .split-section:has(img[src$="rise.png"]) {
+    padding: 20px;
+  }
+
+  img[src$="rise.png"] {
+    padding: 16px;
+  }
+
+  .page-hero .button-row,
+  .page-section .button-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .page-hero .button-row .btn,
+  .page-section .button-row .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+}
+
+
+/* ---------------------------------------------------------
+   VERY SMALL SCREENS
+   --------------------------------------------------------- */
+
+@media (max-width: 480px) {
+
+  .support-step-number {
+    left: 18px;
+  }
+
+  .unicorn-route::after {
+    font-size: 3.8rem;
+  }
+
+  .split-section:has(img[src$="rise.png"]) {
+    padding: 16px;
+  }
+
+}
+
+
