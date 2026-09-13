@@ -5710,3 +5710,117 @@ img[src$="revolving.png"] {
 }
 
 
+/* =========================================================
+   WE SPEAK FLUENT VETERAN
+   ========================================================= */
+
+.fluent-section {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: clamp(3rem, 7vw, 6rem) clamp(1.25rem, 4vw, 3rem);
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: clamp(2rem, 5vw, 5rem);
+
+  background:
+    linear-gradient(
+      135deg,
+      rgba(239, 61, 134, 0.08),
+      rgba(32, 184, 207, 0.09),
+      rgba(242, 139, 48, 0.07)
+    );
+
+  border: 3px solid var(--black);
+  border-radius: var(--radius-large);
+}
+
+.fluent-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fluent-image img {
+  display: block;
+  width: 100%;
+  max-width: 560px;
+  height: auto;
+  object-fit: contain;
+
+  background: var(--paper);
+  border: 3px solid var(--black);
+  border-radius: var(--radius-large);
+
+  box-shadow: -10px 10px 0 rgba(32, 184, 207, 0.14);
+  transform: rotate(-1deg);
+}
+
+.fluent-copy h2 {
+  margin-bottom: 1rem;
+}
+
+.fluent-copy .lead {
+  font-weight: 700;
+  font-size: 1.08rem;
+}
+
+.fluent-copy .big-handwritten {
+  margin: 1.5rem 0;
+}
+
+
+/* Ombre wording - reusable across the whole site */
+
+.logo-ombre {
+  background: linear-gradient(
+    90deg,
+    var(--pink),
+    var(--orange),
+    var(--purple),
+    var(--blue)
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* Tablet */
+
+@media (max-width: 900px) {
+
+  .fluent-section {
+    grid-template-columns: 1fr;
+  }
+
+  .fluent-image {
+    order: 1;
+  }
+
+  .fluent-copy {
+    order: 2;
+  }
+
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+  .fluent-section {
+    padding: 2rem 1.25rem;
+  }
+
+  .fluent-image img {
+    transform: none;
+    box-shadow: 6px 7px 0 rgba(32, 184, 207, 0.10);
+  }
+
+}
+
