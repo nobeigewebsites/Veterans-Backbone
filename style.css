@@ -3359,3 +3359,39 @@ select:focus-visible {
   }
 
 }
+
+
+/* =========================================================
+   GET INVOLVED PAGE
+   ========================================================= */
+
+.involvement-grid {
+  margin-top: 42px;
+}
+
+.future-partnerships {
+  background:
+    radial-gradient(
+      circle at 15% 25%,
+      rgba(32, 184, 207, .12),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 85% 75%,
+      rgba(241, 200, 76, .12),
+      transparent 30%
+    ),
+    var(--cream);
+}
+
+.future-partnerships .split-section {
+  border-radius: var(--radius-large);
+}
+
+@media (max-width: 760px) {
+
+  .involvement-grid {
+    margin-top: 30px;
+  }
+
+}
