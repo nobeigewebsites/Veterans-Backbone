@@ -6624,3 +6624,189 @@ main > .page-section:nth-of-type(4n) {
   color: transparent !important;
   -webkit-text-fill-color: transparent !important;
 }
+
+
+/* =========================================================
+   GLOBAL FOOTER LOGO FIX
+   ========================================================= */
+
+.site-footer .footer-logo,
+.site-footer .footer-brand img {
+  display: block;
+  width: auto;
+  height: 70px;
+  max-width: 90px;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+
+  .site-footer .footer-logo,
+  .site-footer .footer-brand img {
+    height: 58px;
+    max-width: 76px;
+  }
+
+}
+
+/* =========================================================
+   INTERNAL PAGE OMBRE PASS
+   ========================================================= */
+
+/* BLOG */
+
+.blog-hero h1 span,
+.blog-page h2 span,
+.blog-page h3 span {
+  background: linear-gradient(
+    90deg,
+    var(--pink),
+    var(--orange),
+    var(--purple),
+    var(--blue)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* RESOURCES */
+
+.resources-hero h1 span,
+.resources-page h2 span,
+.resources-page h3 span {
+  background: linear-gradient(
+    90deg,
+    var(--pink),
+    var(--orange),
+    var(--purple),
+    var(--blue)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* FAQ */
+
+.faq-hero h1 span,
+.faq-page h2 span,
+.faq-page h3 span {
+  background: linear-gradient(
+    90deg,
+    var(--pink),
+    var(--orange),
+    var(--purple),
+    var(--blue)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* LICENSED SITES */
+
+.licensed-hero h1 span,
+.licensed-page h2 span,
+.licensed-page h3 span {
+  background: linear-gradient(
+    90deg,
+    var(--pink),
+    var(--orange),
+    var(--purple),
+    var(--blue)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+
+
+
+
+/* =========================================================
+   INTERNAL PAGE OMBRE PASS
+   ========================================================= */
+
+/* BLOG */
+
+.blog-hero h1 span,
+.blog-page h2 span,
+.blog-page h3 span {
+  background: linear-gradient(
+    90deg,
+    var(--pink),
+    var(--orange),
+    var(--purple),
+    var(--blue)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* RESOURCES */
+
+.resources-hero h1 span,
+.resources-page h2 span,
+.resources-page h3 span {
+  background: linear-gradient(
+    90deg,
+    var(--pink),
+    var(--orange),
+    var(--purple),
+    var(--blue)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* FAQ */
+
+.faq-hero h1 span,
+.faq-page h2 span,
+.faq-page h3 span {
+  background: linear-gradient(
+    90deg,
+    var(--pink),
+    var(--orange),
+    var(--purple),
+    var(--blue)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* LICENSED SITES */
+
+.licensed-hero h1 span,
+.licensed-page h2 span,
+.licensed-page h3 span {
+  background: linear-gradient(
+    90deg,
+    var(--pink),
+    var(--orange),
+    var(--purple),
+    var(--blue)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
