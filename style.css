@@ -5184,3 +5184,464 @@ img[src$="revolving.png"] {
 
 }
 
+/* =========================================================
+   RESOURCES PAGE
+   ========================================================= */
+
+
+/* ---------------------------------------------------------
+   HERO
+   --------------------------------------------------------- */
+
+.resources-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.resources-hero::before {
+  content: "";
+  position: absolute;
+  width: 240px;
+  height: 240px;
+  border: 4px solid var(--blue);
+  border-radius: 50%;
+  top: -120px;
+  left: -60px;
+  opacity: 0.16;
+  pointer-events: none;
+}
+
+.resources-hero::after {
+  content: "";
+  position: absolute;
+  width: 180px;
+  height: 180px;
+  border: 4px solid var(--pink);
+  border-radius: 50%;
+  right: 4%;
+  bottom: -100px;
+  opacity: 0.12;
+  pointer-events: none;
+}
+
+.resources-hero .page-hero-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.resources-hero .page-hero-image img {
+  width: 100%;
+  max-width: 620px;
+  max-height: 560px;
+  object-fit: contain;
+  background: var(--paper);
+  border: 3px solid var(--black);
+  border-radius: var(--radius-large);
+  box-shadow: 10px 10px 0 rgba(32, 184, 207, 0.14);
+  transform: rotate(1deg);
+}
+
+
+/* ---------------------------------------------------------
+   URGENT HELP
+   --------------------------------------------------------- */
+
+.urgent-help-box {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(2rem, 5vw, 4rem);
+  border: 4px solid var(--black);
+  border-radius: var(--radius-large);
+}
+
+.urgent-help-box::before {
+  content: "!";
+  position: absolute;
+  right: 4%;
+  top: 50%;
+  transform: translateY(-50%) rotate(-7deg);
+  font-family: var(--heading);
+  font-size: clamp(8rem, 15vw, 15rem);
+  line-height: 1;
+  opacity: 0.05;
+  pointer-events: none;
+}
+
+.urgent-help-box h2 {
+  max-width: 820px;
+}
+
+.urgent-help-box strong {
+  font-weight: 800;
+}
+
+.urgent-help-box .button-row {
+  margin-top: 1.5rem;
+}
+
+
+/* ---------------------------------------------------------
+   VB HELPS AREA
+   --------------------------------------------------------- */
+
+.resources-hero ~ .page-section .resource-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.resources-hero ~ .page-section .resource-card h3 {
+  margin-top: 0.45rem;
+}
+
+.resources-hero ~ .page-section .resource-card .small-note {
+  opacity: 0.78;
+}
+
+
+/* Keep VB's own cards a bit more handmade */
+
+.resources-hero ~ .page-section .content-grid-3 .resource-card:nth-child(1) {
+  transform: rotate(-0.8deg);
+}
+
+.resources-hero ~ .page-section .content-grid-3 .resource-card:nth-child(2) {
+  transform: rotate(0.7deg);
+}
+
+.resources-hero ~ .page-section .content-grid-3 .resource-card:nth-child(3) {
+  transform: rotate(-0.5deg);
+}
+
+.resources-hero ~ .page-section .content-grid-3 .resource-card:nth-child(4) {
+  transform: rotate(0.7deg);
+}
+
+.resources-hero ~ .page-section .content-grid-3 .resource-card:nth-child(5) {
+  transform: rotate(-0.7deg);
+}
+
+.resources-hero ~ .page-section .content-grid-3 .resource-card:nth-child(6) {
+  transform: rotate(0.5deg);
+}
+
+.resources-hero ~ .page-section .content-grid-3 .resource-card:hover {
+  transform: translateY(-6px) rotate(0);
+}
+
+
+/* ---------------------------------------------------------
+   COMING SOON BADGES
+   --------------------------------------------------------- */
+
+.resource-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  width: fit-content;
+  margin-top: auto;
+  padding: 0.45rem 0.8rem;
+  border: 2px dashed var(--black);
+  border-radius: 999px;
+  background: var(--paper);
+  font-family: var(--scribble);
+  font-weight: 700;
+  font-size: 0.95rem;
+  transform: rotate(-1deg);
+}
+
+.resource-status::before {
+  content: "✦";
+  font-size: 0.8rem;
+}
+
+
+/* ---------------------------------------------------------
+   EXTERNAL RESOURCE CARDS
+   --------------------------------------------------------- */
+
+.external-resource {
+  text-decoration: none;
+  color: var(--black);
+  min-height: 280px;
+  display: flex;
+  flex-direction: column;
+  border: 3px solid var(--black);
+  border-radius: var(--radius-medium);
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.external-resource .card-link {
+  margin-top: auto;
+  padding-top: 1.25rem;
+  font-weight: 800;
+}
+
+.external-resource:hover,
+.external-resource:focus-visible {
+  transform: translateY(-6px) rotate(0);
+  box-shadow: 8px 10px 0 rgba(21, 21, 21, 0.12);
+}
+
+.external-resource:focus-visible {
+  outline: 4px solid var(--yellow);
+  outline-offset: 4px;
+}
+
+
+/* Tiny external-link cue */
+
+.external-resource::after {
+  content: "↗";
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 1.1rem;
+  font-weight: 800;
+  opacity: 0.35;
+}
+
+
+/* ---------------------------------------------------------
+   MAKE EXTERNAL SECTIONS FEEL LIKE GROUPS
+   --------------------------------------------------------- */
+
+.resources-hero ~ .page-section .section-heading {
+  position: relative;
+}
+
+.resources-hero ~ .page-section .section-heading::after {
+  content: "";
+  display: block;
+  width: 70px;
+  height: 4px;
+  margin-top: 0.8rem;
+  border-radius: 999px;
+  background: var(--blue);
+  transform: rotate(-1deg);
+}
+
+
+/* Alternate the little underline colour through sections */
+
+.resources-hero ~ .page-section:nth-of-type(4n) .section-heading::after {
+  background: var(--pink);
+}
+
+.resources-hero ~ .page-section:nth-of-type(4n + 1) .section-heading::after {
+  background: var(--orange);
+}
+
+.resources-hero ~ .page-section:nth-of-type(4n + 2) .section-heading::after {
+  background: var(--purple);
+}
+
+
+/* ---------------------------------------------------------
+   OUTSIDE HELP CALLOUT
+   --------------------------------------------------------- */
+
+.resources-hero ~ .page-section .callout-orange .big-handwritten {
+  max-width: 800px;
+}
+
+.resources-hero ~ .page-section .callout-orange .big-handwritten::after {
+  content: "";
+  display: block;
+  width: 80px;
+  height: 4px;
+  margin-top: 0.4rem;
+  background: var(--orange);
+  border-radius: 999px;
+  transform: rotate(-2deg);
+}
+
+
+/* ---------------------------------------------------------
+   RESOURCE DISCLAIMER
+   --------------------------------------------------------- */
+
+.resource-disclaimer {
+  position: relative;
+  padding: clamp(2rem, 5vw, 3.5rem);
+}
+
+.resource-disclaimer::before {
+  content: "small print, but human";
+  position: absolute;
+  top: 1rem;
+  right: 1.5rem;
+  font-family: var(--scribble);
+  font-size: 0.95rem;
+  opacity: 0.45;
+  transform: rotate(3deg);
+}
+
+
+/* ---------------------------------------------------------
+   SECTION SPACING
+   --------------------------------------------------------- */
+
+.resources-hero ~ .page-section .content-grid-3 {
+  align-items: stretch;
+}
+
+.resources-hero ~ .page-section .resource-card {
+  height: 100%;
+}
+
+.resources-hero ~ .page-section .resource-card p {
+  margin-bottom: 0.8rem;
+}
+
+
+/* ---------------------------------------------------------
+   BUTTON ROWS
+   --------------------------------------------------------- */
+
+.resources-hero .button-row,
+.urgent-help-box .button-row,
+.resource-disclaimer .button-row,
+.resources-hero ~ .page-section .button-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+  align-items: center;
+}
+
+
+/* ---------------------------------------------------------
+   RESOURCE CARD LINK
+   --------------------------------------------------------- */
+
+.resource-card .card-link {
+  display: inline-block;
+  margin-top: auto;
+  font-weight: 800;
+  text-decoration: none;
+  color: var(--black);
+}
+
+.resource-card .card-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+
+/* ---------------------------------------------------------
+   ROUNDING
+   --------------------------------------------------------- */
+
+.resources-hero,
+.resources-hero .page-hero-image,
+.resources-hero .page-hero-image img,
+.urgent-help-box,
+.resource-card,
+.external-resource,
+.resource-disclaimer {
+  border-radius: var(--radius-large);
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE / TABLET
+   --------------------------------------------------------- */
+
+@media (max-width: 980px) {
+
+  .resources-hero .page-hero-image img {
+    max-width: 540px;
+  }
+
+  .urgent-help-box {
+    padding: 2rem;
+  }
+
+  .resource-disclaimer::before {
+    position: static;
+    display: block;
+    margin-bottom: 0.75rem;
+    transform: rotate(-1deg);
+  }
+
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 768px) {
+
+  .resources-hero::before {
+    width: 160px;
+    height: 160px;
+    top: -95px;
+    left: -50px;
+  }
+
+  .resources-hero::after {
+    width: 110px;
+    height: 110px;
+    right: -30px;
+    bottom: -60px;
+  }
+
+  .resources-hero .page-hero-image img {
+    transform: none;
+    max-width: 100%;
+    max-height: none;
+    box-shadow: 6px 7px 0 rgba(32, 184, 207, 0.10);
+  }
+
+  .urgent-help-box::before {
+    font-size: 9rem;
+    right: -1rem;
+  }
+
+  .resources-hero ~ .page-section .content-grid-3 .resource-card,
+  .external-resource {
+    transform: none;
+  }
+
+  .external-resource:hover,
+  .external-resource:focus-visible {
+    transform: translateY(-4px);
+  }
+
+}
+
+
+/* ---------------------------------------------------------
+   SMALL PHONES
+   --------------------------------------------------------- */
+
+@media (max-width: 480px) {
+
+  .urgent-help-box,
+  .resource-disclaimer {
+    padding: 1.25rem;
+  }
+
+  .resources-hero .button-row,
+  .urgent-help-box .button-row,
+  .resources-hero ~ .page-section .button-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .resources-hero .button-row .btn,
+  .urgent-help-box .button-row .btn,
+  .resources-hero ~ .page-section .button-row .btn {
+    width: 100%;
+    text-align: center;
+  }
+
+  .resource-status {
+    font-size: 0.9rem;
+  }
+
+}
+
