@@ -3440,27 +3440,35 @@ select:focus-visible {
 }
 
 /* =========================================================
-   MEET THE PEOPLE
+   MEET THE PEOPLE PAGE
    ========================================================= */
+
+
+/* ---------------------------------------------------------
+   FEATURED PEOPLE LAYOUT
+   --------------------------------------------------------- */
 
 .person-feature,
 .steve-meet {
   display: grid;
-  grid-template-columns: minmax(280px, .85fr) minmax(0, 1.15fr);
+  grid-template-columns: minmax(280px, 0.85fr) minmax(0, 1.15fr);
   gap: clamp(32px, 6vw, 80px);
   align-items: center;
 
   padding: clamp(28px, 5vw, 60px);
 
   background: var(--paper);
+
   border: 3px solid var(--black);
   border-radius: var(--radius-large);
 
-  box-shadow: 8px 8px 0 rgba(0, 0, 0, .08);
+  box-shadow: 8px 8px 0 rgba(0, 0, 0, 0.08);
 }
 
 
-/* SHELLEY */
+/* =========================================================
+   SHELLEY / FOUNDER
+   ========================================================= */
 
 .person-feature-image {
   position: relative;
@@ -3468,6 +3476,7 @@ select:focus-visible {
 
 .person-feature-image img {
   display: block;
+
   width: 100%;
   aspect-ratio: 4 / 5;
 
@@ -3477,14 +3486,19 @@ select:focus-visible {
   border-radius: var(--radius-large);
 }
 
+
+/* little note over Shelley's photo */
+
 .person-photo-note {
   position: absolute;
+
   right: -15px;
   bottom: 22px;
 
   padding: 10px 16px;
 
   background: var(--yellow);
+
   border: 2px solid var(--black);
   border-radius: var(--radius-small);
 
@@ -3492,13 +3506,20 @@ select:focus-visible {
   font-size: 1.05rem;
 
   transform: rotate(-3deg);
+
+  box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.08);
 }
+
+
+/* founder quote */
 
 .person-quote {
   margin-top: 28px;
+
   padding: 20px 24px;
 
-  background: rgba(239, 61, 134, .1);
+  background: rgba(239, 61, 134, 0.1);
+
   border-left: 5px solid var(--pink);
   border-radius: var(--radius-small);
 }
@@ -3511,84 +3532,127 @@ select:focus-visible {
 }
 
 
-/* STEVE */
+/* =========================================================
+   STEVE INTRODUCTION SECTION
+   ========================================================= */
 
 .steve-introduction {
   position: relative;
+
   overflow: hidden;
 }
+
+
+/* soft decorative background blob */
 
 .steve-introduction::before {
   content: "";
 
   position: absolute;
-  width: 300px;
-  height: 300px;
-  top: 5%;
-  right: -100px;
 
-  background: rgba(155, 89, 182, .1);
+  width: 320px;
+  height: 320px;
+
+  top: 5%;
+  right: -110px;
+
+  background: rgba(155, 89, 182, 0.1);
+
   border-radius: 50%;
 
   pointer-events: none;
 }
 
+
+/* Steve panel */
+
 .steve-meet {
-  grid-template-columns: minmax(0, 1.15fr) minmax(280px, .85fr);
+  grid-template-columns: minmax(0, 1.15fr) minmax(280px, 0.85fr);
 
   background:
     radial-gradient(
       circle at 85% 20%,
-      rgba(239, 61, 134, .13),
+      rgba(239, 61, 134, 0.13),
       transparent 30%
     ),
     radial-gradient(
       circle at 70% 80%,
-      rgba(32, 184, 207, .12),
+      rgba(32, 184, 207, 0.12),
       transparent 32%
     ),
     var(--paper);
 }
 
+
+/* Steve image area */
+
 .steve-meet-image {
   position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
+
+
+/* actual Steve portrait */
 
 .steve-meet-image img {
   display: block;
+
   width: 100%;
+  max-width: 480px;
+
+  aspect-ratio: 4 / 5;
+
+  object-fit: cover;
+
+  background: var(--cream);
 
   border: 3px solid var(--black);
   border-radius: var(--radius-large);
+
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.08);
 }
+
+
+/* Steve speech bubble */
 
 .steve-speech {
   position: absolute;
-  top: -20px;
-  right: -20px;
 
-  max-width: 180px;
+  top: -18px;
+  right: -18px;
+
+  max-width: 190px;
+
   padding: 16px 20px;
 
   background: var(--paper);
+
   border: 3px solid var(--black);
-  border-radius: 50%;
+  border-radius: 48% 52% 46% 54%;
 
   text-align: center;
 
   font-family: var(--scribble);
   font-size: 1.05rem;
+  line-height: 1.3;
 
   transform: rotate(4deg);
 
-  box-shadow: 4px 4px 0 rgba(0, 0, 0, .08);
+  box-shadow: 4px 4px 0 rgba(0, 0, 0, 0.08);
 }
+
+
+/* speech bubble tail */
 
 .steve-speech::after {
   content: "";
 
   position: absolute;
-  left: 22px;
+
+  left: 28px;
   bottom: -13px;
 
   width: 22px;
@@ -3603,15 +3667,82 @@ select:focus-visible {
 }
 
 
-/* FUTURE PEOPLE */
+/* =========================================================
+   STEVE IMAGE PLACEHOLDER
+   ========================================================= */
+
+/*
+   This lets the layout still look intentional
+   before steve-portrait.png exists.
+
+   If you temporarily remove the <img> in HTML,
+   you can use:
+
+   <div class="steve-image-placeholder">
+      <span>Steve goes here</span>
+   </div>
+*/
+
+.steve-image-placeholder {
+  width: 100%;
+  max-width: 480px;
+
+  aspect-ratio: 4 / 5;
+
+  display: grid;
+  place-items: center;
+
+  padding: 30px;
+
+  background:
+    radial-gradient(
+      circle at 20% 20%,
+      rgba(239, 61, 134, 0.18),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 80% 70%,
+      rgba(32, 184, 207, 0.18),
+      transparent 28%
+    ),
+    var(--cream);
+
+  border: 3px dashed var(--black);
+  border-radius: var(--radius-large);
+
+  text-align: center;
+
+  box-shadow: 6px 6px 0 rgba(0, 0, 0, 0.08);
+}
+
+.steve-image-placeholder span {
+  max-width: 220px;
+
+  font-family: var(--heading);
+  font-size: clamp(2rem, 5vw, 3.4rem);
+  line-height: 1;
+
+  transform: rotate(-3deg);
+}
+
+
+/* =========================================================
+   FUTURE TEAM MEMBERS
+   ========================================================= */
 
 .future-people-grid {
   margin-top: 42px;
 }
 
+
+/* future team cards */
+
 .future-person {
   overflow: hidden;
 }
+
+
+/* placeholder photo */
 
 .future-person-placeholder {
   min-height: 260px;
@@ -3622,12 +3753,15 @@ select:focus-visible {
   background:
     linear-gradient(
       135deg,
-      rgba(32, 184, 207, .12),
-      rgba(239, 61, 134, .12)
+      rgba(32, 184, 207, 0.12),
+      rgba(239, 61, 134, 0.12)
     );
 
   border-bottom: 3px solid var(--black);
 }
+
+
+/* question mark circle */
 
 .future-person-placeholder span {
   display: grid;
@@ -3637,48 +3771,179 @@ select:focus-visible {
   height: 90px;
 
   background: var(--paper);
+
   border: 3px dashed var(--black);
   border-radius: 50%;
 
   font-family: var(--heading);
   font-size: 4rem;
+  line-height: 1;
 }
+
+
+/* future card text */
 
 .person-card-copy {
   padding: 24px;
 }
 
 
-/* MOBILE */
+/* =========================================================
+   PERSON CARD IMAGE SUPPORT
+   ========================================================= */
+
+/*
+   For later when Johnnie or anyone else joins.
+   This keeps their photo cards consistent.
+*/
+
+.person-card-image {
+  overflow: hidden;
+
+  border-bottom: 3px solid var(--black);
+}
+
+.person-card-image img {
+  display: block;
+
+  width: 100%;
+  aspect-ratio: 4 / 5;
+
+  object-fit: cover;
+}
+
+
+/* =========================================================
+   SMALL EXTRA DETAILS
+   ========================================================= */
+
+.person-feature-copy h2,
+.steve-meet-copy h2 {
+  margin-top: 10px;
+}
+
+.person-feature-copy p,
+.steve-meet-copy p {
+  max-width: 720px;
+}
+
+.steve-meet-copy .big-handwritten {
+  margin-top: 24px;
+}
+
+
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 980px) {
+
+  .person-feature,
+  .steve-meet {
+    gap: 36px;
+
+    padding: 32px;
+  }
+
+  .steve-speech {
+    right: 5px;
+  }
+
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
 
 @media (max-width: 760px) {
 
   .person-feature,
   .steve-meet {
     grid-template-columns: 1fr;
+
     padding: 24px;
+  }
+
+
+  /* Shelley photo */
+
+  .person-feature-image img {
+    aspect-ratio: 4 / 5;
   }
 
   .person-photo-note {
     right: 10px;
+    bottom: 16px;
+  }
+
+
+  /* Steve image first */
+
+  .steve-meet-image {
+    order: 1;
   }
 
   .steve-meet-copy {
     order: 2;
   }
 
-  .steve-meet-image {
-    order: 1;
-  }
+
+  /* Steve speech bubble */
 
   .steve-speech {
-    top: 10px;
-    right: 10px;
+    top: 12px;
+    right: 12px;
+
+    max-width: 160px;
+
+    padding: 13px 16px;
+
+    font-size: 0.95rem;
   }
+
+
+  /* placeholders */
 
   .future-people-grid {
     margin-top: 30px;
   }
 
+  .future-person-placeholder {
+    min-height: 220px;
+  }
+
 }
 
+
+/* =========================================================
+   VERY SMALL SCREENS
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  .person-feature,
+  .steve-meet {
+    padding: 18px;
+  }
+
+  .person-photo-note {
+    font-size: 0.95rem;
+
+    padding: 8px 12px;
+  }
+
+  .steve-speech {
+    max-width: 145px;
+
+    font-size: 0.9rem;
+  }
+
+  .future-person-placeholder span {
+    width: 72px;
+    height: 72px;
+
+    font-size: 3rem;
+  }
+
+}
