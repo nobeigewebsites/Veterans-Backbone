@@ -1337,3 +1337,216 @@ p {
   }
 
 }
+
+
+/* =========================================================
+   VB STYLE REFINEMENTS
+   ROUNDED CARDS + SOFTER FRAMES + FONT UPDATE
+   ========================================================= */
+
+
+/* ---------- UPDATED FONT DIRECTION ---------- */
+
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Kalam:wght@400;700&family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+
+:root {
+  --heading: 'Bebas Neue', sans-serif;
+  --body: 'Montserrat', sans-serif;
+  --scribble: 'Kalam', cursive;
+
+  --radius-small: 14px;
+  --radius-medium: 22px;
+  --radius-large: 30px;
+}
+
+
+/* ---------- GLOBAL ROUNDED SHAPES ---------- */
+
+.btn,
+.route-card,
+.event-panel,
+.rough-image,
+.revolving-image-wrap img,
+.pathways-image img,
+.flamingo-image img,
+.scribble-note,
+.event-label,
+.steve-warning {
+  border-radius: var(--radius-medium);
+}
+
+
+/* ---------- BIGGER CONTENT BOXES ---------- */
+
+.about-preview,
+.pathways-section,
+.resources-preview,
+.licensed-preview,
+.flamingo-preview,
+.rv-preview,
+.events-preview,
+.people-preview,
+.involved-section,
+.final-cta,
+.revolving-section {
+  border-radius: var(--radius-large);
+}
+
+
+/* ---------- IMAGE WRAPPERS ---------- */
+
+.about-image-wrap,
+.pathways-image,
+.revolving-image-wrap,
+.flamingo-image,
+.resources-art,
+.licensed-map,
+.rv-steve {
+  border-radius: var(--radius-large);
+  overflow: hidden;
+}
+
+
+/* ---------- HERO ---------- */
+
+.hero {
+  border-radius: 0 0 var(--radius-large) var(--radius-large);
+}
+
+
+/* ---------- ROUTE CARDS ---------- */
+
+.route-card {
+  overflow: hidden;
+}
+
+
+/* ---------- BUTTONS ---------- */
+
+.btn {
+  border-radius: 999px;
+}
+
+
+/* ---------- NAV / HEADER ---------- */
+
+.site-header {
+  border-radius: 0 0 var(--radius-small) var(--radius-small);
+}
+
+
+/* =========================================================
+   FLAMINGO RISE HOMEPAGE SECTION
+   ========================================================= */
+
+.flamingo-preview {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(225, 160, 175, 0.20),
+      rgba(196, 155, 188, 0.18),
+      rgba(241, 214, 190, 0.30)
+    ),
+    var(--paper);
+
+  border: 3px solid rgba(187, 122, 135, 0.35);
+
+  box-shadow:
+    0 18px 45px rgba(135, 85, 95, 0.12);
+}
+
+
+/* logo card */
+
+.flamingo-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 2rem;
+
+  background:
+    radial-gradient(
+      circle at center,
+      rgba(255,255,255,0.95),
+      rgba(250,240,236,0.85)
+    );
+
+  border: 3px solid rgba(187, 122, 135, 0.30);
+
+  border-radius: var(--radius-large);
+}
+
+
+/* new logo */
+
+.flamingo-image img {
+  width: min(100%, 520px);
+  max-height: 520px;
+
+  object-fit: contain;
+
+  border: 0;
+  outline: 0;
+
+  box-shadow: none;
+
+  transform: none;
+
+  border-radius: var(--radius-medium);
+}
+
+
+/* flamingo heading colour tweak */
+
+.flamingo-copy h2 span {
+  color: #b97886;
+}
+
+.flamingo-copy .eyebrow {
+  color: #9e6675;
+}
+
+
+/* flamingo button gets a softer branded treatment */
+
+.flamingo-copy .btn-dark {
+  background: #b97886;
+  border-color: #7f4f5b;
+  color: white;
+}
+
+.flamingo-copy .btn-dark:hover {
+  box-shadow: 6px 6px 0 #7f4f5b;
+}
+
+
+/* =========================================================
+   MOBILE REFINEMENTS
+   ========================================================= */
+
+@media (max-width: 760px) {
+
+  .hero,
+  .about-preview,
+  .pathways-section,
+  .resources-preview,
+  .licensed-preview,
+  .flamingo-preview,
+  .rv-preview,
+  .events-preview,
+  .people-preview,
+  .involved-section,
+  .final-cta,
+  .revolving-section {
+    border-radius: 22px;
+  }
+
+  .route-card,
+  .event-panel,
+  .flamingo-image,
+  .scribble-note {
+    border-radius: 18px;
+  }
+
+}
