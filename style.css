@@ -6574,3 +6574,33 @@ main > .page-section:nth-of-type(4n) {
   }
 
 }
+
+/* =========================================================
+   FLAMINGO RISE IMAGE FIX
+   ========================================================= */
+
+.flamingo-preview .flamingo-image {
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: 300px;
+  overflow: visible;
+}
+
+.flamingo-preview .flamingo-image img {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  max-height: 520px;
+
+  object-fit: contain;
+
+  position: relative;
+  z-index: 2;
+}
+
