@@ -6215,3 +6215,161 @@ main > .page-section:nth-of-type(4n) {
 
 }
 
+/* =========================================================
+   COLOUR THE INTERNAL PAGE CARDS
+   ========================================================= */
+
+/* General reusable card colour cycle */
+
+.content-grid > *:nth-child(4n + 1),
+.support-route-grid > *:nth-child(4n + 1),
+.rv-grid > *:nth-child(4n + 1) {
+  background:
+    linear-gradient(
+      135deg,
+      var(--pink-soft),
+      rgba(255, 250, 240, 0.96)
+    );
+}
+
+.content-grid > *:nth-child(4n + 2),
+.support-route-grid > *:nth-child(4n + 2),
+.rv-grid > *:nth-child(4n + 2) {
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue-soft),
+      rgba(255, 250, 240, 0.96)
+    );
+}
+
+.content-grid > *:nth-child(4n + 3),
+.support-route-grid > *:nth-child(4n + 3),
+.rv-grid > *:nth-child(4n + 3) {
+  background:
+    linear-gradient(
+      135deg,
+      var(--orange-soft),
+      rgba(255, 250, 240, 0.96)
+    );
+}
+
+.content-grid > *:nth-child(4n),
+.support-route-grid > *:nth-child(4n),
+.rv-grid > *:nth-child(4n) {
+  background:
+    linear-gradient(
+      135deg,
+      var(--purple-soft),
+      rgba(255, 250, 240, 0.96)
+    );
+}
+
+
+/* ---------------------------------------------------------
+   SUPPORT PAGE CARDS
+   --------------------------------------------------------- */
+
+.support-card:nth-child(4n + 1) {
+  background: linear-gradient(135deg, var(--pink-soft), var(--paper));
+}
+
+.support-card:nth-child(4n + 2) {
+  background: linear-gradient(135deg, var(--blue-soft), var(--paper));
+}
+
+.support-card:nth-child(4n + 3) {
+  background: linear-gradient(135deg, var(--orange-soft), var(--paper));
+}
+
+.support-card:nth-child(4n) {
+  background: linear-gradient(135deg, var(--purple-soft), var(--paper));
+}
+
+
+/* ---------------------------------------------------------
+   RV CREW "WHAT YOU WON'T FIND" CARDS
+   --------------------------------------------------------- */
+
+.rv-cards .card:nth-child(1),
+.content-grid-4 .card:nth-child(1) {
+  background: linear-gradient(135deg, var(--pink-soft), var(--paper));
+}
+
+.rv-cards .card:nth-child(2),
+.content-grid-4 .card:nth-child(2) {
+  background: linear-gradient(135deg, var(--blue-soft), var(--paper));
+}
+
+.rv-cards .card:nth-child(3),
+.content-grid-4 .card:nth-child(3) {
+  background: linear-gradient(135deg, var(--orange-soft), var(--paper));
+}
+
+.rv-cards .card:nth-child(4),
+.content-grid-4 .card:nth-child(4) {
+  background: linear-gradient(135deg, var(--purple-soft), var(--paper));
+}
+
+
+/* ---------------------------------------------------------
+   GIVE CARD HEADINGS A LITTLE VB COLOUR
+   --------------------------------------------------------- */
+
+.support-card:nth-child(4n + 1) h3,
+.content-grid-4 .card:nth-child(4n + 1) h3 {
+  color: var(--pink);
+}
+
+.support-card:nth-child(4n + 2) h3,
+.content-grid-4 .card:nth-child(4n + 2) h3 {
+  color: var(--blue);
+}
+
+.support-card:nth-child(4n + 3) h3,
+.content-grid-4 .card:nth-child(4n + 3) h3 {
+  color: var(--orange);
+}
+
+.support-card:nth-child(4n) h3,
+.content-grid-4 .card:nth-child(4n) h3 {
+  color: var(--purple);
+}
+
+
+/* ---------------------------------------------------------
+   KEEP TEXT READABLE
+   --------------------------------------------------------- */
+
+.support-card p,
+.content-grid-4 .card p,
+.content-grid .card p {
+  color: var(--black);
+}
+
+
+/* ---------------------------------------------------------
+   HOVER - SLIGHTLY MORE LIFE
+   --------------------------------------------------------- */
+
+.support-card:hover,
+.content-grid-4 .card:hover,
+.content-grid .card:hover {
+  transform: translateY(-4px) rotate(-0.4deg);
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 768px) {
+
+  .support-card,
+  .content-grid-4 .card,
+  .content-grid .card {
+    transform: none;
+  }
+
+}
+
