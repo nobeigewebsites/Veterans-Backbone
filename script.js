@@ -83,3 +83,28 @@ if ("IntersectionObserver" in window) {
     item.classList.add("revealed");
   });
 }
+
+
+/* =========================================================
+   FAQ ACCORDION
+   ========================================================= */
+
+const faqQuestions = document.querySelectorAll(".faq-question");
+
+faqQuestions.forEach((question) => {
+
+  question.addEventListener("click", () => {
+
+    const faqItem = question.closest(".faq-item");
+    const isOpen = faqItem.classList.contains("active");
+
+    faqItem.classList.toggle("active");
+
+    question.setAttribute(
+      "aria-expanded",
+      isOpen ? "false" : "true"
+    );
+
+  });
+
+});
