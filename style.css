@@ -6,8 +6,7 @@
 
 /* ---------- FONTS ---------- */
 
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Permanent+Marker&family=Inter:wght@400;500;600;700;800;900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Handlee&family=Shadows+Into+Light&family=Sofia&family=Zeyada&display=swap');
 
 /* ---------- VARIABLES ---------- */
 
@@ -1347,13 +1346,13 @@ p {
 
 /* ---------- UPDATED FONT DIRECTION ---------- */
 
-@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Kalam:wght@400;700&family=Montserrat:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Handlee&family=Shadows+Into+Light&family=Sofia&family=Zeyada&display=swap');
 
 :root {
-  --heading: 'Bebas Neue', sans-serif;
-  --body: 'Montserrat', sans-serif;
-  --scribble: 'Kalam', cursive;
-
+  --heading: 'Shadows Into Light', cursive;
+  --body: 'DM Sans', sans-serif;
+  --scribble: 'Handlee', cursive;
+   
   --radius-small: 14px;
   --radius-medium: 22px;
   --radius-large: 30px;
