@@ -5824,3 +5824,394 @@ img[src$="revolving.png"] {
 
 }
 
+
+/* =========================================================
+   GLOBAL VB COLOUR PASS
+   ========================================================= */
+
+:root {
+  --pink-soft: #fde4ef;
+  --blue-soft: #ddf6fa;
+  --orange-soft: #ffead6;
+  --purple-soft: #eee3f6;
+  --yellow-soft: #fff4c9;
+}
+
+
+/* ---------------------------------------------------------
+   SOFTER PAGE SECTIONS
+   --------------------------------------------------------- */
+
+main > .page-section:nth-of-type(4n + 1) {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(253, 228, 239, 0.7),
+      rgba(255, 250, 240, 0.92)
+    );
+}
+
+main > .page-section:nth-of-type(4n + 2) {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(221, 246, 250, 0.72),
+      rgba(255, 250, 240, 0.92)
+    );
+}
+
+main > .page-section:nth-of-type(4n + 3) {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 234, 214, 0.72),
+      rgba(255, 250, 240, 0.92)
+    );
+}
+
+main > .page-section:nth-of-type(4n) {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(238, 227, 246, 0.72),
+      rgba(255, 250, 240, 0.92)
+    );
+}
+
+
+/* Keep sections visually separated */
+
+.page-section {
+  position: relative;
+}
+
+.page-section + .page-section {
+  border-top: 1px solid rgba(21, 21, 21, 0.06);
+}
+
+
+/* ---------------------------------------------------------
+   PAGE HERO COLOUR
+   --------------------------------------------------------- */
+
+.page-hero {
+  background:
+    radial-gradient(
+      circle at 15% 20%,
+      rgba(239, 61, 134, 0.10),
+      transparent 28%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(32, 184, 207, 0.11),
+      transparent 30%
+    ),
+    linear-gradient(
+      135deg,
+      var(--cream),
+      var(--paper)
+    );
+}
+
+
+/* ---------------------------------------------------------
+   LOGO OMBRE TEXT
+   --------------------------------------------------------- */
+
+.logo-ombre {
+  background: linear-gradient(
+    90deg,
+    var(--pink),
+    var(--orange),
+    var(--purple),
+    var(--blue)
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* Handy alternate ombre direction */
+
+.logo-ombre-alt {
+  background: linear-gradient(
+    90deg,
+    var(--blue),
+    var(--purple),
+    var(--pink),
+    var(--orange)
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* ---------------------------------------------------------
+   HEADING ACCENTS
+   --------------------------------------------------------- */
+
+.page-section h2,
+.page-hero h1 {
+  position: relative;
+}
+
+.page-section h2::after {
+  content: "";
+  display: block;
+  width: 68px;
+  height: 4px;
+  margin-top: 0.5rem;
+  border-radius: 999px;
+
+  background: linear-gradient(
+    90deg,
+    var(--pink),
+    var(--orange),
+    var(--purple),
+    var(--blue)
+  );
+
+  transform: rotate(-1deg);
+}
+
+
+/* Don't do this on centred headings unless centred properly */
+
+.section-heading.centred h2::after,
+.section-heading.centered h2::after {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+/* ---------------------------------------------------------
+   COLOURED CARDS
+   --------------------------------------------------------- */
+
+.pink-card {
+  background:
+    linear-gradient(
+      135deg,
+      var(--pink-soft),
+      var(--paper)
+    );
+}
+
+.blue-card {
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue-soft),
+      var(--paper)
+    );
+}
+
+.orange-card {
+  background:
+    linear-gradient(
+      135deg,
+      var(--orange-soft),
+      var(--paper)
+    );
+}
+
+.purple-card {
+  background:
+    linear-gradient(
+      135deg,
+      var(--purple-soft),
+      var(--paper)
+    );
+}
+
+
+/* ---------------------------------------------------------
+   COLOURED CALLOUTS
+   --------------------------------------------------------- */
+
+.callout-pink {
+  background:
+    linear-gradient(
+      135deg,
+      var(--pink-soft),
+      rgba(255, 250, 240, 0.96)
+    );
+}
+
+.callout-blue {
+  background:
+    linear-gradient(
+      135deg,
+      var(--blue-soft),
+      rgba(255, 250, 240, 0.96)
+    );
+}
+
+.callout-orange {
+  background:
+    linear-gradient(
+      135deg,
+      var(--orange-soft),
+      rgba(255, 250, 240, 0.96)
+    );
+}
+
+.callout-purple {
+  background:
+    linear-gradient(
+      135deg,
+      var(--purple-soft),
+      rgba(255, 250, 240, 0.96)
+    );
+}
+
+
+/* ---------------------------------------------------------
+   LABELS / TAGS
+   --------------------------------------------------------- */
+
+.eyebrow-pink,
+.tag-pink {
+  background: var(--pink-soft);
+  color: var(--black);
+}
+
+.eyebrow-blue,
+.tag-blue {
+  background: var(--blue-soft);
+  color: var(--black);
+}
+
+.eyebrow-orange,
+.tag-orange {
+  background: var(--orange-soft);
+  color: var(--black);
+}
+
+.eyebrow-purple,
+.tag-purple {
+  background: var(--purple-soft);
+  color: var(--black);
+}
+
+
+/* ---------------------------------------------------------
+   SPLIT SECTIONS
+   --------------------------------------------------------- */
+
+.split-section {
+  background: rgba(255, 250, 240, 0.72);
+  border: 2px solid rgba(21, 21, 21, 0.12);
+  border-radius: var(--radius-large);
+  padding: clamp(1.5rem, 4vw, 3rem);
+}
+
+
+/* Alternate subtle colour washes */
+
+.page-section:nth-of-type(4n + 1) .split-section {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(253, 228, 239, 0.5),
+      rgba(255, 250, 240, 0.9)
+    );
+}
+
+.page-section:nth-of-type(4n + 2) .split-section {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(221, 246, 250, 0.5),
+      rgba(255, 250, 240, 0.9)
+    );
+}
+
+.page-section:nth-of-type(4n + 3) .split-section {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 234, 214, 0.5),
+      rgba(255, 250, 240, 0.9)
+    );
+}
+
+.page-section:nth-of-type(4n) .split-section {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(238, 227, 246, 0.5),
+      rgba(255, 250, 240, 0.9)
+    );
+}
+
+
+/* ---------------------------------------------------------
+   HANDWRITTEN TEXT GETS A LITTLE COLOUR
+   --------------------------------------------------------- */
+
+.big-handwritten:nth-of-type(4n + 1) {
+  color: var(--pink);
+}
+
+.big-handwritten:nth-of-type(4n + 2) {
+  color: var(--blue);
+}
+
+.big-handwritten:nth-of-type(4n + 3) {
+  color: var(--orange);
+}
+
+.big-handwritten:nth-of-type(4n) {
+  color: var(--purple);
+}
+
+
+/* ---------------------------------------------------------
+   BUTTON POLISH
+   --------------------------------------------------------- */
+
+.btn-colour {
+  background:
+    linear-gradient(
+      90deg,
+      var(--pink),
+      var(--orange),
+      var(--purple),
+      var(--blue)
+    );
+
+  color: white;
+  border-color: var(--black);
+}
+
+.btn-colour:hover {
+  filter: brightness(1.03);
+  transform: translateY(-2px);
+}
+
+
+/* ---------------------------------------------------------
+   MOBILE
+   --------------------------------------------------------- */
+
+@media (max-width: 768px) {
+
+  .page-section h2::after {
+    width: 54px;
+  }
+
+  .split-section {
+    padding: 1.25rem;
+  }
+
+}
+
