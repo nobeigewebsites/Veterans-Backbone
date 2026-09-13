@@ -5645,3 +5645,28 @@ img[src$="revolving.png"] {
 
 }
 
+/* =========================================================
+   GLOBAL HEADER LOGO FIX
+   ========================================================= */
+
+.site-header .logo-link {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.site-header .site-logo {
+  display: block;
+  width: auto;
+  height: 54px;
+  max-width: 72px;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .site-header .site-logo {
+    height: 46px;
+    max-width: 62px;
+  }
+}
+
