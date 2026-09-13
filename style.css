@@ -2671,3 +2671,86 @@ select:focus-visible {
   }
 
 }
+
+
+/* =========================================================
+   ABOUT PAGE - FOUNDER HANDWRITTEN NOTE
+   ========================================================= */
+
+.founder-note-section {
+  padding: 90px 0;
+}
+
+.founder-note {
+  width: min(860px, 100%);
+  margin: 0 auto;
+  padding: 55px 60px;
+
+  background:
+    linear-gradient(rgba(255,255,255,.74), rgba(255,255,255,.74)),
+    var(--cream);
+
+  border: 3px solid var(--black);
+  border-radius: var(--radius-large);
+
+  box-shadow: 10px 10px 0 rgba(0,0,0,.10);
+
+  transform: rotate(-0.5deg);
+}
+
+.founder-note-text {
+  font-family: 'Zeyada', cursive;
+  font-size: clamp(1.7rem, 3vw, 2.25rem);
+  line-height: 1.35;
+  margin-bottom: 24px;
+  color: var(--black);
+}
+
+.founder-note-highlight {
+  font-family: 'Zeyada', cursive;
+  font-size: clamp(2.5rem, 5vw, 4.5rem);
+  line-height: 1;
+  margin: 34px 0;
+
+  color: var(--pink);
+  text-align: center;
+
+  transform: rotate(-1deg);
+}
+
+.founder-signature {
+  margin-top: 34px;
+  text-align: right;
+
+  font-family: 'Zeyada', cursive;
+  font-size: clamp(2.2rem, 4vw, 3.6rem);
+
+  color: var(--black);
+}
+
+.signature-heart {
+  display: inline-block;
+  color: var(--pink);
+  margin-right: 6px;
+  transform: rotate(-8deg);
+}
+
+
+/* mobile */
+
+@media (max-width: 760px) {
+
+  .founder-note-section {
+    padding: 60px 0;
+  }
+
+  .founder-note {
+    padding: 34px 26px;
+    transform: rotate(0);
+  }
+
+  .founder-note-text {
+    font-size: 1.65rem;
+  }
+
+}
