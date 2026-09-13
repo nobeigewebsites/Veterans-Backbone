@@ -6454,3 +6454,123 @@ main > .page-section:nth-of-type(4n) {
 }
 
 
+
+/* =========================================================
+   HOW WE KEEP OUR SHIT TOGETHER
+   ========================================================= */
+
+.shit-together-section {
+  padding: clamp(4rem, 8vw, 7rem) 1.5rem;
+
+  background:
+    radial-gradient(
+      circle at 10% 20%,
+      rgba(239, 61, 134, .12),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 90% 80%,
+      rgba(32, 184, 207, .12),
+      transparent 25%
+    ),
+    var(--cream);
+}
+
+.shit-together-heading {
+  max-width: 850px;
+  margin-bottom: 3rem;
+}
+
+.shit-together-heading h2 {
+  margin: 1rem 0;
+}
+
+.shit-together-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 18px;
+}
+
+.shit-card {
+  display: block;
+  padding: 24px 20px;
+  min-height: 220px;
+
+  color: var(--black);
+  text-decoration: none;
+
+  border: 2px solid var(--black);
+  border-radius: var(--radius-medium);
+
+  transition:
+    transform .2s ease,
+    box-shadow .2s ease;
+}
+
+.shit-card:nth-child(1) {
+  background: var(--pink-soft);
+}
+
+.shit-card:nth-child(2) {
+  background: var(--blue-soft);
+}
+
+.shit-card:nth-child(3) {
+  background: var(--orange-soft);
+}
+
+.shit-card:nth-child(4) {
+  background: var(--purple-soft);
+}
+
+.shit-card:nth-child(5) {
+  background: var(--yellow-soft);
+}
+
+.shit-card > span {
+  font-family: var(--scribble);
+  font-weight: 800;
+  font-size: .9rem;
+}
+
+.shit-card h3 {
+  margin: 16px 0 10px;
+  font-family: var(--heading);
+  font-size: clamp(1.5rem, 2vw, 2rem);
+  line-height: 1;
+}
+
+.shit-card p {
+  margin: 0;
+}
+
+.shit-card:hover {
+  transform: translateY(-5px) rotate(-1deg);
+  box-shadow: 5px 6px 0 rgba(21, 21, 21, .12);
+}
+
+.shit-card:nth-child(even):hover {
+  transform: translateY(-5px) rotate(1deg);
+}
+
+
+@media (max-width: 1000px) {
+
+  .shit-together-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .shit-together-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .shit-card {
+    min-height: auto;
+  }
+
+}
