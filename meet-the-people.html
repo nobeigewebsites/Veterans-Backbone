@@ -1,42 +1,467 @@
-/* =========================================================
-   LICENSED SITES PAGE
-   ========================================================= */
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-.licensed-grid {
-  margin-top: 42px;
-}
+  <title>Meet the People | Veterans Backbone</title>
 
-.licensed-empty {
-  max-width: 900px;
-  margin: 0 auto;
-}
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="images/vblogo.png">
+</head>
 
-.simple-list {
-  display: grid;
-  gap: 12px;
-  margin: 24px 0;
-}
+<body>
 
-.simple-list p {
-  margin: 0;
-  padding: 14px 18px;
+<a class="skip-link" href="#main-content">Skip to content</a>
 
-  background: rgba(255, 255, 255, .6);
+<header class="site-header">
+  <div class="header-inner">
 
-  border: 2px solid var(--black);
-  border-radius: var(--radius-small);
-}
+    <a href="index.html" class="logo-link" aria-label="Veterans Backbone home">
+      <img
+        src="images/vblogo.png"
+        alt="Veterans Backbone"
+        class="site-logo"
+      >
+    </a>
 
-.simple-list p::before {
-  content: "→";
-  margin-right: 10px;
-  font-weight: 800;
-}
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+      aria-label="Open navigation"
+      aria-expanded="false"
+      aria-controls="mainNav"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
-@media (max-width: 760px) {
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About VB</a>
+      <a href="meet-the-people.html" class="active">Meet the People</a>
+      <a href="support.html">Getting Support</a>
+      <a href="rv-crew.html">The RV Crew</a>
+      <a href="events.html">Events</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="blog.html">Blog</a>
+      <a href="resources.html">Resources</a>
+      <a href="licensed-sites.html">Licensed Sites</a>
+      <a href="faq.html">FAQs</a>
+    </nav>
 
-  .licensed-grid {
-    margin-top: 30px;
-  }
+    <div class="header-actions">
+      <a href="login.html" class="header-login">Member Login</a>
+      <a href="contact.html" class="btn btn-dark">Get Support</a>
+      <a href="donate.html" class="btn btn-colour">Donate</a>
+    </div>
 
-}
+  </div>
+</header>
+
+
+<main id="main-content">
+
+  <!-- HERO -->
+  <section class="page-hero people-hero reveal">
+    <div class="page-hero-inner">
+
+      <div class="page-hero-copy">
+
+        <span class="eyebrow eyebrow-pink">
+          Meet the People
+        </span>
+
+        <h1>
+          Actual humans.<br>
+          <span class="logo-ombre">Imagine that.</span>
+        </h1>
+
+        <p class="page-hero-lead">
+          Different backgrounds.
+          Different experiences.
+          Different journeys.
+        </p>
+
+        <p>
+          Same basic belief:
+          people deserve to be treated like people.
+        </p>
+
+        <p class="big-handwritten">
+          No faceless organisation nonsense.
+        </p>
+
+      </div>
+
+      <div class="page-hero-image">
+        <img
+          src="images/about-veterans-backbone.png"
+          alt="Veterans Backbone community"
+        >
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- SHELLEY -->
+  <section class="page-section page-section-lg reveal">
+    <div class="section-inner">
+
+      <div class="split-section">
+
+        <div class="split-image">
+          <img
+            src="images/flamingome.jpg"
+            alt="Shelley, founder of Veterans Backbone"
+          >
+        </div>
+
+        <div class="split-copy">
+
+          <span class="section-label">
+            Founder
+          </span>
+
+          <h2>
+            Shelley
+          </h2>
+
+          <p>
+            Veterans Backbone exists because support systems too often
+            forget there is an actual human being standing in front of them.
+          </p>
+
+          <p>
+            Shelley founded VB around a simple idea:
+            support should fit the person,
+            not force the person to fit the system.
+          </p>
+
+          <p>
+            That means listening properly,
+            being honest about what can and cannot be done,
+            challenging nonsense when necessary
+            and staying human while doing it.
+          </p>
+
+          <p class="big-handwritten">
+            Different people. Same backbone.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- FOUNDER NOTE -->
+  <section class="page-section reveal">
+    <div class="section-inner">
+
+      <div class="callout-box callout-pink founder-note">
+
+        <span class="section-label">
+          A note from the founder
+        </span>
+
+        <p class="founder-handwriting">
+          Veterans Backbone was never meant to become another organisation
+          that looks impressive on paper and forgets why it exists.
+        </p>
+
+        <p class="founder-handwriting">
+          If we ever become more interested in process than people,
+          somebody please give us a very firm kick up the arse.
+        </p>
+
+        <p class="founder-handwriting">
+          — Shelley
+        </p>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- STEVE -->
+  <section class="page-section reveal">
+    <div class="section-inner">
+
+      <div class="split-section split-section-reverse">
+
+        <div class="split-copy">
+
+          <span class="section-label">
+            Chief unicorn-related nuisance
+          </span>
+
+          <h2>
+            Steve
+          </h2>
+
+          <p>
+            Steve does not technically have a job title.
+          </p>
+
+          <p>
+            That has never stopped him from appearing everywhere,
+            wearing sunglasses,
+            stealing attention
+            and somehow becoming part of the furniture.
+          </p>
+
+          <p>
+            Somewhere along the way,
+            he also became a reminder that recovery is allowed to include
+            humour,
+            ridiculousness
+            and things that have absolutely nothing to do with surviving.
+          </p>
+
+          <p class="big-handwritten">
+            He is not available for meetings.
+          </p>
+
+        </div>
+
+        <div class="split-image">
+          <img
+            src="images/steve.png"
+            alt="Steve the Veterans Backbone unicorn"
+          >
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- FUTURE TEAM -->
+  <section class="page-section page-section-lg reveal">
+    <div class="section-inner">
+
+      <div class="section-heading centred">
+
+        <span class="section-label">
+          The team will grow
+        </span>
+
+        <h2>
+          More humans will appear here.
+        </h2>
+
+        <p>
+          VB is still growing,
+          and we're not filling this page with invented job titles
+          just to make ourselves look bigger than we are.
+        </p>
+
+      </div>
+
+      <div class="content-grid content-grid-3">
+
+
+        <article class="card person-card pink-card">
+
+          <span class="card-label">
+            Future human
+          </span>
+
+          <h3>
+            Support Team
+          </h3>
+
+          <p>
+            People who understand that support is not a conveyor belt.
+          </p>
+
+        </article>
+
+
+        <article class="card person-card blue-card">
+
+          <span class="card-label">
+            Future human
+          </span>
+
+          <h3>
+            Community Team
+          </h3>
+
+          <p>
+            People helping build connection,
+            belonging
+            and the RV Crew.
+          </p>
+
+        </article>
+
+
+        <article class="card person-card orange-card">
+
+          <span class="card-label">
+            Future human
+          </span>
+
+          <h3>
+            Specialist Roles
+          </h3>
+
+          <p>
+            Added when there is a real role,
+            a real person
+            and an actual reason for them to be here.
+          </p>
+
+        </article>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- HOW WE WORK -->
+  <section class="page-section reveal">
+    <div class="section-inner">
+
+      <div class="callout-box callout-blue">
+
+        <span class="section-label">
+          The important bit
+        </span>
+
+        <h2>
+          Titles matter less than how people behave.
+        </h2>
+
+        <p>
+          Whoever joins Veterans Backbone,
+          the expectation is the same:
+          listen,
+          communicate,
+          respect boundaries,
+          treat people properly
+          and don't disappear when things become inconvenient.
+        </p>
+
+        <p class="big-handwritten">
+          Human first. Always.
+        </p>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- CTA -->
+  <section class="page-section page-section-lg reveal">
+    <div class="section-inner">
+
+      <div class="callout-box callout-orange">
+
+        <span class="section-label">
+          Need us?
+        </span>
+
+        <h2>
+          Enough about us.
+        </h2>
+
+        <p>
+          If you're here because something isn't working,
+          let's talk about that instead.
+        </p>
+
+        <div class="button-row">
+
+          <a href="contact.html" class="btn btn-colour">
+            Get In Touch
+          </a>
+
+          <a href="support.html" class="btn btn-dark">
+            Getting Support
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+</main>
+
+
+<footer class="site-footer">
+
+  <div class="footer-inner">
+
+    <div class="footer-brand">
+      <img src="images/vblogo.png" alt="Veterans Backbone">
+      <p>Same scars. Different battlefield.</p>
+    </div>
+
+    <div class="footer-links">
+
+      <div>
+        <h3>Explore</h3>
+        <a href="about.html">About VB</a>
+        <a href="meet-the-people.html">Meet the People</a>
+        <a href="support.html">Getting Support</a>
+        <a href="rv-crew.html">The RV Crew</a>
+        <a href="events.html">Events</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="blog.html">Blog</a>
+      </div>
+
+      <div>
+        <h3>Useful Stuff</h3>
+        <a href="resources.html">Resources</a>
+        <a href="licensed-sites.html">Licensed Sites</a>
+        <a href="faq.html">FAQs</a>
+        <a href="contact.html">Contact</a>
+        <a href="get-involved.html">Get Involved</a>
+        <a href="donate.html">Donate</a>
+      </div>
+
+      <div>
+        <h3>How We Keep Our Shit Together</h3>
+        <a href="legal/safeguarding.html">Safeguarding</a>
+        <a href="legal/privacy.html">Privacy</a>
+        <a href="legal/cookies.html">Cookies</a>
+        <a href="legal/accessibility.html">Accessibility</a>
+        <a href="legal/complaints.html">Complaints</a>
+      </div>
+
+      <div>
+        <h3>Members</h3>
+        <a href="login.html">Member Login</a>
+        <a href="members.html">Members Area</a>
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="footer-bottom">
+    <p>
+      © <span id="currentYear"></span> Veterans Backbone.
+      Built for humans, not algorithms.
+    </p>
+  </div>
+
+</footer>
+
+<script src="script.js"></script>
+
+</body>
+</html>
