@@ -258,13 +258,18 @@ p {
 }
 
 .logo-link {
+  display: flex;
+  align-items: center;
   flex-shrink: 0;
 }
 
 .site-logo {
-  width: 78px;
-  height: 70px;
+  display: block;
+  width: auto;
+  height: 54px;
+  max-width: 72px;
   object-fit: contain;
+}ject-fit: contain;
 }
 
 .main-nav {
@@ -961,8 +966,19 @@ p {
 }
 
 .footer-logo {
-  width: 120px;
+  display: block;
+  width: auto;
+  height: 70px;
+  max-width: 90px;
   margin-bottom: 1.2rem;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .footer-logo {
+    height: 58px;
+    max-width: 76px;
+  }
 }
 
 .footer-brand p {
@@ -1104,10 +1120,11 @@ p {
     min-height: 72px;
   }
 
-  .site-logo {
-    width: 65px;
-    height: 58px;
-  }
+ .site-logo {
+  width: auto;
+  height: 46px;
+  max-width: 62px;
+}
 
   .main-nav {
     top: 72px;
@@ -2261,21 +2278,6 @@ select:focus {
   background: var(--paper);
 }
 
-.callout-pink {
-  background: rgba(239, 61, 134, .10);
-}
-
-.callout-blue {
-  background: rgba(32, 184, 207, .11);
-}
-
-.callout-orange {
-  background: rgba(242, 139, 48, .11);
-}
-
-.callout-purple {
-  background: rgba(155, 89, 182, .11);
-}
 
 
 /* =========================================================
@@ -4114,21 +4116,6 @@ select:focus-visible {
    PAGE LABELS
    --------------------------------------------------------- */
 
-.eyebrow-pink {
-  background: rgba(239, 61, 134, 0.14);
-}
-
-.eyebrow-blue {
-  background: rgba(32, 184, 207, 0.14);
-}
-
-.eyebrow-orange {
-  background: rgba(242, 139, 48, 0.16);
-}
-
-.eyebrow-purple {
-  background: rgba(155, 89, 182, 0.14);
-}
 
 
 /* ---------------------------------------------------------
@@ -4149,42 +4136,6 @@ select:focus-visible {
 /* ---------------------------------------------------------
    COLOURED CALLOUTS
    --------------------------------------------------------- */
-
-.callout-pink {
-  background:
-    linear-gradient(
-      135deg,
-      rgba(239, 61, 134, 0.12),
-      rgba(255, 250, 240, 0.95)
-    );
-}
-
-.callout-blue {
-  background:
-    linear-gradient(
-      135deg,
-      rgba(32, 184, 207, 0.12),
-      rgba(255, 250, 240, 0.95)
-    );
-}
-
-.callout-orange {
-  background:
-    linear-gradient(
-      135deg,
-      rgba(242, 139, 48, 0.14),
-      rgba(255, 250, 240, 0.95)
-    );
-}
-
-.callout-purple {
-  background:
-    linear-gradient(
-      135deg,
-      rgba(155, 89, 182, 0.12),
-      rgba(255, 250, 240, 0.95)
-    );
-}
 
 
 /* ---------------------------------------------------------
@@ -5544,30 +5495,6 @@ img[src$="revolving.png"] {
 
 }
 
-/* =========================================================
-   GLOBAL HEADER LOGO FIX
-   ========================================================= */
-
-.site-header .logo-link {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-}
-
-.site-header .site-logo {
-  display: block;
-  width: auto;
-  height: 54px;
-  max-width: 72px;
-  object-fit: contain;
-}
-
-@media (max-width: 768px) {
-  .site-header .site-logo {
-    height: 46px;
-    max-width: 62px;
-  }
-}
 
 
 
@@ -6423,28 +6350,6 @@ main > .page-section:nth-of-type(4n) {
 }
 
 
-/* =========================================================
-   GLOBAL FOOTER LOGO FIX
-   ========================================================= */
-
-.site-footer .footer-logo,
-.site-footer .footer-brand img {
-  display: block;
-  width: auto;
-  height: 70px;
-  max-width: 90px;
-  object-fit: contain;
-}
-
-@media (max-width: 768px) {
-
-  .site-footer .footer-logo,
-  .site-footer .footer-brand img {
-    height: 58px;
-    max-width: 76px;
-  }
-
-}
 
 /* =========================================================
    INTERNAL PAGE OMBRE PASS
