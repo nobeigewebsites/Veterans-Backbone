@@ -269,7 +269,6 @@ p {
   height: 54px;
   max-width: 72px;
   object-fit: contain;
-}ject-fit: contain;
 }
 
 .main-nav {
@@ -1732,21 +1731,6 @@ p {
   background: var(--paper);
 }
 
-.tag-pink {
-  background: rgba(239, 61, 134, .16);
-}
-
-.tag-blue {
-  background: rgba(32, 184, 207, .16);
-}
-
-.tag-orange {
-  background: rgba(242, 139, 48, .16);
-}
-
-.tag-purple {
-  background: rgba(155, 89, 182, .16);
-}
 
 
 /* =========================================================
@@ -2364,7 +2348,7 @@ select:focus {
   flex-wrap: wrap;
   gap: 14px;
   align-items: center;
-  margin-top: 24px;
+  margin-top: 28px;
 }
 
 
@@ -4232,17 +4216,6 @@ img[src$="revolving.png"] {
 }
 
 
-/* ---------------------------------------------------------
-   BUTTON ROWS IN SUPPORT PAGES
-   --------------------------------------------------------- */
-
-.page-hero .button-row,
-.page-section .button-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 14px;
-  margin-top: 28px;
-}
 
 
 /* ---------------------------------------------------------
@@ -4764,18 +4737,6 @@ img[src$="revolving.png"] {
 }
 
 
-/* ---------------------------------------------------------
-   BUTTONS
-   --------------------------------------------------------- */
-
-.rv-hero .button-row,
-.rv-charter-section .button-row,
-.rv-members-callout .button-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.85rem;
-  align-items: center;
-}
 
 
 /* ---------------------------------------------------------
@@ -5347,19 +5308,6 @@ img[src$="revolving.png"] {
 }
 
 
-/* ---------------------------------------------------------
-   BUTTON ROWS
-   --------------------------------------------------------- */
-
-.resources-hero .button-row,
-.urgent-help-box .button-row,
-.resource-disclaimer .button-row,
-.resources-hero ~ .page-section .button-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.85rem;
-  align-items: center;
-}
 
 
 /* ---------------------------------------------------------
@@ -5684,12 +5632,29 @@ main > .page-section:nth-of-type(4n) {
    --------------------------------------------------------- */
 
 .logo-ombre {
- 
+  display: inline-block;
+
+  background: linear-gradient(
+    90deg,
+    var(--pink),
+    var(--orange),
+    var(--purple),
+    var(--blue)
+  );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  color: transparent;
+  -webkit-text-fill-color: transparent;
+}
 
 
 /* Handy alternate ombre direction */
 
 .logo-ombre-alt {
+  display: inline-block;
+
   background: linear-gradient(
     90deg,
     var(--blue),
@@ -5704,7 +5669,6 @@ main > .page-section:nth-of-type(4n) {
   color: transparent;
   -webkit-text-fill-color: transparent;
 }
-
 
 /* ---------------------------------------------------------
    HEADING ACCENTS
@@ -6417,21 +6381,13 @@ main > .page-section:nth-of-type(4n) {
 .licensed-hero h1 span,
 .licensed-page h2 span,
 .licensed-page h3 span {
-  background: linear-gradient(
-    90deg,
-    var(--pink),
-    var(--orange),
-    var(--purple),
-    var(--blue)
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
+   ...
 }
 
 
-
+/* =========================================================
+   GLOBAL CLICKABLE CARD HEADINGS - OMBRE
+   ========================================================= */
 
 
 
