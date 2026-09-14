@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -17,49 +18,75 @@
 
 <body>
 
-<a href="#main-content" class="skip-link">Skip to content</a>
+<a href="#main-content" class="skip-link">
+  Skip to content
+</a>
 
 
-<!-- =====================================================
+<!-- =========================================================
      HEADER
-     ===================================================== -->
+========================================================= -->
 
 <header class="site-header">
 
-  <a href="index.html" class="site-logo" aria-label="Veterans Backbone home">
-    <img src="images/vblogo.png" alt="Veterans Backbone">
-  </a>
+  <div class="header-inner">
 
-  <button
-    class="menu-toggle"
-    id="menuToggle"
-    aria-label="Open navigation"
-    aria-expanded="false"
-    aria-controls="mainNav"
-  >
-    ☰
-  </button>
+    <a
+      href="index.html"
+      class="logo-link"
+      aria-label="Veterans Backbone home"
+    >
+      <img
+        src="images/vblogo.png"
+        alt="Veterans Backbone"
+        class="site-logo"
+      >
+    </a>
 
-  <nav class="main-nav" id="mainNav">
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+      aria-label="Open navigation"
+      aria-expanded="false"
+      aria-controls="mainNav"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
-    <a href="index.html">Home</a>
-    <a href="about.html">About VB</a>
-    <a href="meet-the-people.html">Meet the People</a>
-    <a href="support.html">Getting Support</a>
-    <a href="rv-crew.html">The RV Crew</a>
-    <a href="events.html">Events</a>
-    <a href="gallery.html">Gallery</a>
-    <a href="blog.html">Blog</a>
-    <a href="resources.html">Resources</a>
-    <a href="licensed-sites.html" class="active">Licensed Sites</a>
-    <a href="faq.html">FAQs</a>
+    <nav class="main-nav" id="mainNav">
 
-  </nav>
+      <a href="index.html">Home</a>
+      <a href="about.html">About VB</a>
+      <a href="meet-the-people.html">Meet the People</a>
+      <a href="support.html">Getting Support</a>
+      <a href="rv-crew.html">The RV Crew</a>
+      <a href="events.html">Events</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="blog.html">Blog</a>
+      <a href="resources.html">Resources</a>
+      <a href="licensed-sites.html" class="active">Licensed Sites</a>
+      <a href="faq.html">FAQs</a>
 
-  <div class="header-actions">
-    <a href="login.html" class="btn btn-outline">Member Login</a>
-    <a href="support.html" class="btn btn-dark">Get Support</a>
-    <a href="donate.html" class="btn btn-pink">Donate</a>
+    </nav>
+
+    <div class="header-actions">
+
+      <a href="login.html" class="header-login">
+        Member Login
+      </a>
+
+      <a href="support.html" class="btn btn-dark">
+        Get Support
+      </a>
+
+      <a href="donate.html" class="btn btn-colour">
+        Donate
+      </a>
+
+    </div>
+
   </div>
 
 </header>
@@ -68,20 +95,24 @@
 <main id="main-content">
 
 
-<!-- =====================================================
+<!-- =========================================================
      HERO
-     ===================================================== -->
+========================================================= -->
 
-<section class="page-hero">
+<section class="page-hero licensed-hero">
 
   <div class="page-hero-inner">
 
     <div class="page-hero-copy">
 
-      <span class="eyebrow">Licensed Veterans Backbone Sites</span>
+      <span class="eyebrow">
+        Licensed Veterans Backbone Sites
+      </span>
 
       <h1>
-        Same backbone. Local people. Local decisions.
+        Same backbone.<br>
+        Local people.<br>
+        <span class="logo-ombre">Local decisions.</span>
       </h1>
 
       <p>
@@ -101,7 +132,6 @@
 
     </div>
 
-
     <div class="page-hero-image">
 
       <img
@@ -116,12 +146,11 @@
 </section>
 
 
+<!-- =========================================================
+     CURRENT LICENSED SITES
+========================================================= -->
 
-<!-- =====================================================
-     NONE YET
-     ===================================================== -->
-
-<section class="page-section-sm">
+<section class="page-section-sm licensed-page">
 
   <div class="section-inner">
 
@@ -132,7 +161,8 @@
       </span>
 
       <h2>
-        We're starting with one.
+        We're starting<br>
+        <span class="logo-ombre">with one.</span>
       </h2>
 
       <p>
@@ -157,12 +187,11 @@
 </section>
 
 
-
-<!-- =====================================================
+<!-- =========================================================
      WHAT IS A LICENSED SITE?
-     ===================================================== -->
+========================================================= -->
 
-<section class="page-section">
+<section class="page-section licensed-page">
 
   <div class="section-inner">
 
@@ -175,7 +204,8 @@
         </span>
 
         <h2>
-          A local organisation under the VB umbrella.
+          A local organisation under<br>
+          <span class="logo-ombre">the VB umbrella.</span>
         </h2>
 
         <p>
@@ -199,7 +229,6 @@
 
       </div>
 
-
       <div class="split-image">
 
         <img
@@ -216,12 +245,11 @@
 </section>
 
 
-
-<!-- =====================================================
+<!-- =========================================================
      LOCAL AUTONOMY
-     ===================================================== -->
+========================================================= -->
 
-<section class="page-section">
+<section class="page-section licensed-page">
 
   <div class="section-inner">
 
@@ -232,7 +260,8 @@
       </span>
 
       <h2>
-        The site runs the site.
+        The site runs<br>
+        <span class="logo-ombre">the site.</span>
       </h2>
 
       <p>
@@ -246,74 +275,51 @@
     <div class="content-grid-3 licensed-grid">
 
       <article class="info-card card-blue">
-
         <h3>Local Leadership</h3>
-
         <p>
           Each site has its own local leadership
           and management structure.
         </p>
-
       </article>
 
-
       <article class="info-card card-pink">
-
         <h3>Local Staff</h3>
-
         <p>
           Sites choose and manage their own staff
           within agreed standards.
         </p>
-
       </article>
 
-
       <article class="info-card card-orange">
-
         <h3>Local Services</h3>
-
         <p>
           Sites decide how services are delivered
           and what works best for their local community.
         </p>
-
       </article>
 
-
       <article class="info-card card-purple">
-
         <h3>Local Budgets</h3>
-
         <p>
           Sites manage their own budgets,
           suppliers and routine spending.
         </p>
-
       </article>
 
-
       <article class="info-card card-blue">
-
         <h3>Local Partnerships</h3>
-
         <p>
           Sites build their own relationships
           with organisations in their area.
         </p>
-
       </article>
 
-
       <article class="info-card card-pink">
-
         <h3>Local Culture</h3>
-
         <p>
           Every site can have its own personality,
           provided it stays inside the shared VB standards.
         </p>
-
       </article>
 
     </div>
@@ -323,12 +329,11 @@
 </section>
 
 
+<!-- =========================================================
+     WHAT VB PROTECTS
+========================================================= -->
 
-<!-- =====================================================
-     WHAT VB HOLDS
-     ===================================================== -->
-
-<section class="page-section">
+<section class="page-section licensed-page">
 
   <div class="section-inner">
 
@@ -339,7 +344,8 @@
       </span>
 
       <h2>
-        Freedom doesn't mean free-for-all.
+        Freedom doesn't mean<br>
+        <span class="logo-ombre">free-for-all.</span>
       </h2>
 
       <p>
@@ -353,73 +359,50 @@
     <div class="content-grid-3">
 
       <article class="info-card card-purple">
-
         <h3>Safeguarding</h3>
-
         <p>
           Safe practice isn't optional.
         </p>
-
       </article>
 
-
       <article class="info-card card-blue">
-
         <h3>Ethical Standards</h3>
-
         <p>
           People come before ego,
           reputation theatre or convenience.
         </p>
-
       </article>
 
-
       <article class="info-card card-orange">
-
         <h3>Framework Standards</h3>
-
         <p>
           Sites have room to work differently
           without drifting away from what VB is.
         </p>
-
       </article>
 
-
       <article class="info-card card-pink">
-
         <h3>Integrity</h3>
-
         <p>
           The name means something.
           We intend to keep it that way.
         </p>
-
       </article>
 
-
       <article class="info-card card-blue">
-
         <h3>Continuity</h3>
-
         <p>
           If something threatens safe or stable delivery,
           it needs dealing with early.
         </p>
-
       </article>
 
-
       <article class="info-card card-purple">
-
         <h3>Accountability</h3>
-
         <p>
           Problems don't disappear because
           everybody would rather not talk about them.
         </p>
-
       </article>
 
     </div>
@@ -429,12 +412,11 @@
 </section>
 
 
-
-<!-- =====================================================
+<!-- =========================================================
      WHAT VB DOES NOT DO
-     ===================================================== -->
+========================================================= -->
 
-<section class="page-section-sm">
+<section class="page-section-sm licensed-page">
 
   <div class="section-inner">
 
@@ -445,7 +427,8 @@
       </span>
 
       <h2>
-        We don't run your site for you.
+        We don't run your site<br>
+        <span class="logo-ombre">for you.</span>
       </h2>
 
       <p>
@@ -474,12 +457,11 @@
 </section>
 
 
-
-<!-- =====================================================
+<!-- =========================================================
      WHEN VB STEPS IN
-     ===================================================== -->
+========================================================= -->
 
-<section class="page-section">
+<section class="page-section licensed-page">
 
   <div class="section-inner">
 
@@ -492,7 +474,8 @@
         </span>
 
         <h2>
-          When something actually matters.
+          When something<br>
+          <span class="logo-ombre">actually matters.</span>
         </h2>
 
         <p>
@@ -523,7 +506,6 @@
 
       </div>
 
-
       <div class="split-image">
 
         <img
@@ -540,12 +522,11 @@
 </section>
 
 
+<!-- =========================================================
+     HOW AFFILIATION WORKS
+========================================================= -->
 
-<!-- =====================================================
-     HOW THE RELATIONSHIP WORKS
-     ===================================================== -->
-
-<section class="page-section">
+<section class="page-section licensed-page">
 
   <div class="section-inner">
 
@@ -556,7 +537,8 @@
       </span>
 
       <h2>
-        Clear expectations. Both ways.
+        Clear expectations.<br>
+        <span class="logo-ombre">Both ways.</span>
       </h2>
 
       <p>
@@ -639,12 +621,11 @@
 </section>
 
 
-
-<!-- =====================================================
+<!-- =========================================================
      FINANCIAL INDEPENDENCE
-     ===================================================== -->
+========================================================= -->
 
-<section class="page-section-sm">
+<section class="page-section-sm licensed-page">
 
   <div class="section-inner">
 
@@ -655,7 +636,8 @@
       </span>
 
       <h2>
-        Your money stays your responsibility.
+        Your money stays<br>
+        <span class="logo-ombre">your responsibility.</span>
       </h2>
 
       <p>
@@ -681,12 +663,11 @@
 </section>
 
 
-
-<!-- =====================================================
+<!-- =========================================================
      WANT TO USE THE NAME?
-     ===================================================== -->
+========================================================= -->
 
-<section class="page-section">
+<section class="page-section licensed-page">
 
   <div class="section-inner">
 
@@ -699,7 +680,8 @@
         </span>
 
         <h2>
-          Want to use the Veterans Backbone name?
+          Want to use the<br>
+          <span class="logo-ombre">Veterans Backbone name?</span>
         </h2>
 
         <p>
@@ -708,10 +690,10 @@
         </p>
 
         <p>
-          local support,
-          human delivery,
-          strong safeguarding,
-          honest governance
+          local support,<br>
+          human delivery,<br>
+          strong safeguarding,<br>
+          honest governance<br>
           and no unnecessary bullshit.
         </p>
 
@@ -731,7 +713,6 @@
 
       </div>
 
-
       <div class="split-image">
 
         <img
@@ -748,12 +729,11 @@
 </section>
 
 
+<!-- =========================================================
+     WHO MIGHT FIT?
+========================================================= -->
 
-<!-- =====================================================
-     WHO MIGHT FIT
-     ===================================================== -->
-
-<section class="page-section">
+<section class="page-section licensed-page">
 
   <div class="section-inner">
 
@@ -764,7 +744,8 @@
       </span>
 
       <h2>
-        We care more about fit than labels.
+        We care more about fit<br>
+        <span class="logo-ombre">than labels.</span>
       </h2>
 
       <p>
@@ -818,12 +799,11 @@
 </section>
 
 
+<!-- =========================================================
+     MINIMUM EXPECTATIONS
+========================================================= -->
 
-<!-- =====================================================
-     WHAT WE'D EXPECT
-     ===================================================== -->
-
-<section class="page-section">
+<section class="page-section licensed-page">
 
   <div class="section-inner">
 
@@ -834,7 +814,8 @@
       </span>
 
       <h2>
-        The name comes with responsibilities.
+        The name comes with<br>
+        <span class="logo-ombre">responsibilities.</span>
       </h2>
 
     </div>
@@ -842,7 +823,7 @@
 
     <div class="content-grid-3">
 
-      <article class="info-card">
+      <article class="info-card card-purple">
 
         <h3>Safeguarding First</h3>
 
@@ -854,7 +835,7 @@
       </article>
 
 
-      <article class="info-card">
+      <article class="info-card card-blue">
 
         <h3>Transparent Governance</h3>
 
@@ -866,7 +847,7 @@
       </article>
 
 
-      <article class="info-card">
+      <article class="info-card card-orange">
 
         <h3>Financial Controls</h3>
 
@@ -878,7 +859,7 @@
       </article>
 
 
-      <article class="info-card">
+      <article class="info-card card-pink">
 
         <h3>Respectful Culture</h3>
 
@@ -890,7 +871,7 @@
       </article>
 
 
-      <article class="info-card">
+      <article class="info-card card-blue">
 
         <h3>Honest Communication</h3>
 
@@ -902,7 +883,7 @@
       </article>
 
 
-      <article class="info-card">
+      <article class="info-card card-purple">
 
         <h3>Shared Purpose</h3>
 
@@ -920,12 +901,11 @@
 </section>
 
 
-
-<!-- =====================================================
+<!-- =========================================================
      EXIT / FAIRNESS
-     ===================================================== -->
+========================================================= -->
 
-<section class="page-section-sm">
+<section class="page-section-sm licensed-page">
 
   <div class="section-inner">
 
@@ -936,7 +916,8 @@
       </span>
 
       <h2>
-        Nobody is chained to the furniture.
+        Nobody is chained<br>
+        <span class="logo-ombre">to the furniture.</span>
       </h2>
 
       <p>
@@ -961,12 +942,11 @@
 </section>
 
 
-
-<!-- =====================================================
+<!-- =========================================================
      FUTURE DIRECTORY
-     ===================================================== -->
+========================================================= -->
 
-<section class="page-section">
+<section class="page-section licensed-page">
 
   <div class="section-inner">
 
@@ -979,7 +959,8 @@
         </span>
 
         <h2>
-          This bit will grow with us.
+          This bit will<br>
+          <span class="logo-ombre">grow with us.</span>
         </h2>
 
         <p>
@@ -1006,12 +987,11 @@
 </section>
 
 
+<!-- =========================================================
+     FINAL CTA
+========================================================= -->
 
-<!-- =====================================================
-     CTA
-     ===================================================== -->
-
-<section class="page-section">
+<section class="page-section licensed-page">
 
   <div class="section-inner">
 
@@ -1022,7 +1002,8 @@
       </span>
 
       <h2>
-        Start with a conversation.
+        Start with<br>
+        <span class="logo-ombre">a conversation.</span>
       </h2>
 
       <p>
@@ -1044,13 +1025,6 @@
           Talk to Veterans Backbone
         </a>
 
-        <a
-          href="partnerships.html"
-          class="btn btn-outline"
-        >
-          Partnerships
-        </a>
-
       </div>
 
     </div>
@@ -1063,34 +1037,37 @@
 </main>
 
 
-
-<!-- =====================================================
+<!-- =========================================================
      FOOTER
-     ===================================================== -->
+========================================================= -->
 
 <footer class="site-footer">
 
-  <div class="footer-inner">
+  <div class="footer-main">
+
 
     <div class="footer-brand">
 
       <img
         src="images/vblogo.png"
         alt="Veterans Backbone"
+        class="footer-logo"
       >
 
       <p>
-        Same scars. Different battlefield.
+        Different journeys.<br>
+        Same direction.
       </p>
 
     </div>
 
 
-    <div class="footer-links">
+    <div class="footer-column">
 
-      <h3>Veterans Backbone</h3>
+      <h3>
+        Find Your Way
+      </h3>
 
-      <a href="about.html">About VB</a>
       <a href="support.html">Getting Support</a>
       <a href="rv-crew.html">The RV Crew</a>
       <a href="events.html">Events</a>
@@ -1098,35 +1075,76 @@
       <a href="blog.html">Blog</a>
       <a href="resources.html">Resources</a>
       <a href="licensed-sites.html">Licensed Sites</a>
-      <a href="get-involved.html">Get Involved</a>
-      <a href="contact.html">Contact Us</a>
+      <a href="faq.html">FAQs</a>
 
     </div>
 
 
-    <div class="footer-links">
+    <div class="footer-column">
+
+      <h3>
+        Know Us
+      </h3>
+
+      <a href="about.html">About VB</a>
+      <a href="meet-the-people.html">Meet the People</a>
+      <a href="flamingo-rise.html">Flamingo Rise</a>
+      <a href="get-involved.html">Get Involved</a>
+      <a href="donate.html">Donate</a>
+      <a href="contact.html">Talk to Us</a>
+
+    </div>
+
+
+    <div class="footer-column">
 
       <h3>
         How We Keep Our Shit Together
       </h3>
 
-      <a href="legal/safeguarding.html">Safeguarding</a>
-      <a href="legal/privacy.html">Privacy</a>
-      <a href="legal/cookies.html">Cookies</a>
-      <a href="legal/accessibility.html">Accessibility</a>
-      <a href="legal/complaints.html">Complaints</a>
+      <a href="legal/safeguarding.html">
+        Safeguarding & Standards
+      </a>
+
+      <a href="legal/privacy.html">
+        Privacy & Data
+      </a>
+
+      <a href="legal/cookies.html">
+        Cookies
+      </a>
+
+      <a href="legal/accessibility.html">
+        Accessibility
+      </a>
+
+      <a href="legal/complaints.html">
+        Complaints & Concerns
+      </a>
 
     </div>
 
 
-    <div class="footer-links">
+    <div class="footer-column">
 
-      <h3>Members</h3>
+      <h3>
+        RV Members
+      </h3>
 
-      <a href="login.html">Member Login</a>
-      <a href="members.html">Members Area</a>
+      <a href="login.html">
+        Member Login
+      </a>
+
+      <a href="members.html">
+        Members Area
+      </a>
+
+      <p class="small-note">
+        Members-only content requires an approved account.
+      </p>
 
     </div>
+
 
   </div>
 
@@ -1134,8 +1152,11 @@
   <div class="footer-bottom">
 
     <p>
-      © <span id="currentYear"></span>
-      Veterans Backbone.
+      © <span id="currentYear"></span> Veterans Backbone.
+    </p>
+
+    <p class="footer-signoff">
+      Built for humans. Beige avoided successfully.
     </p>
 
   </div>
@@ -1145,5 +1166,7 @@
 
 <script src="script.js"></script>
 
+
 </body>
+
 </html>
