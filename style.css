@@ -4096,11 +4096,6 @@ select:focus-visible {
 }
 
 
-/* ---------------------------------------------------------
-   PAGE LABELS
-   --------------------------------------------------------- */
-
-
 
 /* ---------------------------------------------------------
    HANDWRITTEN SUPPORT LINES
@@ -4115,11 +4110,6 @@ select:focus-visible {
 .callout-box .big-handwritten {
   margin-bottom: 0;
 }
-
-
-/* ---------------------------------------------------------
-   COLOURED CALLOUTS
-   --------------------------------------------------------- */
 
 
 /* ---------------------------------------------------------
@@ -6383,28 +6373,6 @@ main > .page-section:nth-of-type(4n) {
 .licensed-page h3 span {
    ...
 }
-
-
-/* =========================================================
-   GLOBAL CLICKABLE CARD HEADINGS - OMBRE
-   ========================================================= */
-
-
-
-  background: linear-gradient(
-    90deg,
-    var(--pink),
-    var(--orange),
-    var(--purple),
-    var(--blue)
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-}
-
-
 
 
 /* =========================================================
