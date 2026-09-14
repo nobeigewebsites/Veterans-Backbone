@@ -5569,44 +5569,6 @@ img[src$="revolving.png"] {
   }
 }
 
-/* =========================================================
-   LICENSED SITES PAGE
-   ========================================================= */
-
-.licensed-grid {
-  margin-top: 42px;
-}
-
-.licensed-empty {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.simple-list {
-  display: grid;
-  gap: 12px;
-  margin: 24px 0;
-}
-
-.simple-list p {
-  margin: 0;
-  padding: 14px 18px;
-  background: rgba(255, 255, 255, .6);
-  border: 2px solid var(--black);
-  border-radius: var(--radius-small);
-}
-
-.simple-list p::before {
-  content: "→";
-  margin-right: 10px;
-  font-weight: 800;
-}
-
-@media (max-width: 760px) {
-  .licensed-grid {
-    margin-top: 30px;
-  }
-}
 
 
 /* =========================================================
@@ -5795,20 +5757,7 @@ main > .page-section:nth-of-type(4n) {
    --------------------------------------------------------- */
 
 .logo-ombre {
-  background: linear-gradient(
-    90deg,
-    var(--pink),
-    var(--orange),
-    var(--purple),
-    var(--blue)
-  );
-
-  -webkit-background-clip: text;
-  background-clip: text;
-
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-}
+ 
 
 
 /* Handy alternate ombre direction */
