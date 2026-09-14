@@ -1,1 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Veterans Backbone member login."
+  >
+
+  <title>Member Login | Veterans Backbone</title>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+  <a href="#main-content" class="skip-link">
+    Skip to main content
+  </a>
+
+
+  <!-- =========================================================
+       HEADER
+  ========================================================= -->
+
+  <header class="site-header">
+
+    <div class="header-inner">
+
+      <a
+        href="index.html"
+        class="logo-link"
+        aria-label="Veterans Backbone home"
+      >
+        <img
+          src="images/vblogo.png"
+          alt="Veterans Backbone"
+          class="site-logo"
+        >
+      </a>
+
+      <button
+        class="menu-toggle"
+        id="menuToggle"
+        aria-label="Open navigation"
+        aria-expanded="false"
+        aria-controls="mainNav"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <nav class="main-nav" id="mainNav">
+        <a href="index.html">Home</a>
+        <a href="about.html">About VB</a>
+        <a href="meet-the-people.html">Meet the People</a>
+        <a href="support.html">Getting Support</a>
+        <a href="rv-crew.html">The RV Crew</a>
+        <a href="events.html">Events</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="blog.html">Blog</a>
+        <a href="resources.html">Resources</a>
+        <a href="licensed-sites.html">Licensed Sites</a>
+        <a href="faq.html">FAQs</a>
+      </nav>
+
+      <div class="header-actions">
+        <a href="login.html" class="header-login">Member Login</a>
+        <a href="support.html" class="btn btn-dark">Get Support</a>
+        <a href="donate.html" class="btn btn-colour">Donate</a>
+      </div>
+
+    </div>
+
+  </header>
+
+
+  <!-- =========================================================
+       MAIN
+  ========================================================= -->
+
+  <main id="main-content">
+
+    <section class="auth-page">
+
+      <div class="auth-card">
+
+        <p class="eyebrow eyebrow-purple">
+          RV Crew / VB Members
+        </p>
+
+        <h1>
+          MEMBER
+          <span class="logo-ombre">LOGIN</span>
+        </h1>
+
+        <p class="lead">
+          This is the door to the private side of Veterans Backbone.
+        </p>
+
+        <p>
+          Approved members will be able to access member-only resources,
+          private updates, member events and useful VB downloads from here.
+        </p>
+
+        <div class="callout callout-blue">
+          <p class="big-handwritten">
+            Not everything needs to live on the public internet.
+          </p>
+
+          <p>
+            Member access is intended for approved Veterans Backbone and RV Crew
+            members only.
+          </p>
+        </div>
+
+
+        <!-- =====================================================
+             LOGIN FORM
+             Visual shell only for now.
+             Authentication gets wired in later.
+        ====================================================== -->
+
+        <form class="login-form" action="#" method="post">
+
+          <div class="form-group">
+            <label for="memberEmail">
+              Email address
+            </label>
+
+            <input
+              type="email"
+              id="memberEmail"
+              name="email"
+              autocomplete="email"
+              placeholder="you@example.com"
+              required
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="memberPassword">
+              Password
+            </label>
+
+            <input
+              type="password"
+              id="memberPassword"
+              name="password"
+              autocomplete="current-password"
+              placeholder="Your password"
+              required
+            >
+          </div>
+
+          <div class="button-row">
+
+            <button
+              type="submit"
+              class="btn btn-colour"
+              disabled
+              aria-disabled="true"
+            >
+              Login Coming Soon
+            </button>
+
+          </div>
+
+        </form>
+
+
+        <div class="callout callout-orange">
+
+          <h2>
+            CAN'T GET
+            <span class="logo-ombre">IN?</span>
+          </h2>
+
+          <p>
+            The member system is still being connected.
+            If you need support from VB, you do not need to wait for member access.
+          </p>
+
+          <div class="button-row">
+
+            <a href="support.html" class="btn btn-dark">
+              Get Support
+            </a>
+
+            <a href="contact.html" class="btn btn-paper">
+              Talk to Us
+            </a>
+
+          </div>
+
+        </div>
+
+        <p class="small-note">
+          This page is currently the visual login shell only.
+          Authentication will be connected before private member content goes live.
+        </p>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!-- =========================================================
+       FOOTER
+  ========================================================= -->
+
+  <footer class="site-footer">
+
+    <div class="footer-main">
+
+      <div class="footer-brand">
+
+        <img
+          src="images/vblogo.png"
+          alt="Veterans Backbone"
+          class="footer-logo"
+        >
+
+        <p>
+          Different journeys.<br>
+          Same direction.
+        </p>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h3>Find Your Way</h3>
+
+        <a href="support.html">Getting Support</a>
+        <a href="rv-crew.html">The RV Crew</a>
+        <a href="events.html">Events</a>
+        <a href="gallery.html">Gallery</a>
+        <a href="blog.html">Blog</a>
+        <a href="resources.html">Resources</a>
+        <a href="licensed-sites.html">Licensed Sites</a>
+        <a href="faq.html">FAQs</a>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h3>Know Us</h3>
+
+        <a href="about.html">About VB</a>
+        <a href="meet-the-people.html">Meet the People</a>
+        <a href="flamingo-rise.html">Flamingo Rise</a>
+        <a href="get-involved.html">Get Involved</a>
+        <a href="donate.html">Donate</a>
+        <a href="contact.html">Talk to Us</a>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h3>How We Keep Our Shit Together</h3>
+
+        <a href="legal/safeguarding.html">
+          Safeguarding & Standards
+        </a>
+
+        <a href="legal/privacy.html">
+          Privacy & Data
+        </a>
+
+        <a href="legal/cookies.html">
+          Cookies
+        </a>
+
+        <a href="legal/accessibility.html">
+          Accessibility
+        </a>
+
+        <a href="legal/complaints.html">
+          Complaints & Concerns
+        </a>
+
+      </div>
+
+
+      <div class="footer-column">
+
+        <h3>RV Members</h3>
+
+        <a href="login.html">
+          Member Login
+        </a>
+
+        <a href="members.html">
+          Members Area
+        </a>
+
+        <p class="small-note">
+          Members-only content requires an approved account.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+      <p>
+        © <span id="currentYear"></span> Veterans Backbone.
+      </p>
+
+      <p class="footer-signoff">
+        Built on backbone, banter and giving a shit.
+      </p>
+
+    </div>
+
+  </footer>
+
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
