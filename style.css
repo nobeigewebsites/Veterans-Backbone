@@ -24,15 +24,24 @@
   --purple: #9b59b6;
   --yellow: #f1c84c;
 
-  --heading: 'Anton', sans-serif;
-  --body: 'Inter', sans-serif;
-  --scribble: 'Permanent Marker', cursive;
+  --pink-soft: #fde4ef;
+  --blue-soft: #ddf6fa;
+  --orange-soft: #ffead6;
+  --purple-soft: #eee3f6;
+  --yellow-soft: #fff4c9;
+
+  --heading: 'Shadows Into Light', cursive;
+  --body: 'DM Sans', sans-serif;
+  --scribble: 'Handlee', cursive;
 
   --max-width: 1380px;
 
+  --radius-small: 14px;
+  --radius-medium: 22px;
+  --radius-large: 30px;
+
   --shadow: 8px 8px 0 rgba(21, 21, 21, 0.14);
 }
-
 
 /* =========================================================
    RESET
@@ -1338,25 +1347,6 @@ p {
 }
 
 
-/* =========================================================
-   VB STYLE REFINEMENTS
-   ROUNDED CARDS + SOFTER FRAMES + FONT UPDATE
-   ========================================================= */
-
-
-/* ---------- UPDATED FONT DIRECTION ---------- */
-
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Handlee&family=Shadows+Into+Light&family=Sofia&family=Zeyada&display=swap');
-
-:root {
-  --heading: 'Shadows Into Light', cursive;
-  --body: 'DM Sans', sans-serif;
-  --scribble: 'Handlee', cursive;
-   
-  --radius-small: 14px;
-  --radius-medium: 22px;
-  --radius-large: 30px;
-}
 
 
 /* ---------- GLOBAL ROUNDED SHAPES ---------- */
@@ -2078,53 +2068,6 @@ p {
   margin-bottom: 8px;
 }
 
-
-/* =========================================================
-   FAQ
-   ========================================================= */
-
-.faq-list {
-  display: grid;
-  gap: 18px;
-}
-
-.faq-item {
-  background: var(--paper);
-  border: 3px solid var(--black);
-  border-radius: var(--radius-medium);
-  overflow: hidden;
-}
-
-.faq-question {
-  width: 100%;
-  border: 0;
-  background: transparent;
-  display: flex;
-  justify-content: space-between;
-  gap: 20px;
-  align-items: center;
-  text-align: left;
-  padding: 24px 26px;
-  font-family: var(--heading);
-  font-size: 1.8rem;
-  cursor: pointer;
-  color: var(--black);
-}
-
-.faq-icon {
-  font-family: var(--body);
-  font-size: 1.8rem;
-  line-height: 1;
-}
-
-.faq-answer {
-  display: none;
-  padding: 0 26px 26px;
-}
-
-.faq-item.active .faq-answer {
-  display: block;
-}
 
 
 /* =========================================================
@@ -3396,48 +3339,7 @@ select:focus-visible {
 
 }
 
-/* =========================================================
-   LICENSED SITES PAGE
-   ========================================================= */
 
-.licensed-grid {
-  margin-top: 42px;
-}
-
-.licensed-empty {
-  max-width: 900px;
-  margin: 0 auto;
-}
-
-.simple-list {
-  display: grid;
-  gap: 12px;
-  margin: 24px 0;
-}
-
-.simple-list p {
-  margin: 0;
-  padding: 14px 18px;
-
-  background: rgba(255, 255, 255, .6);
-
-  border: 2px solid var(--black);
-  border-radius: var(--radius-small);
-}
-
-.simple-list p::before {
-  content: "→";
-  margin-right: 10px;
-  font-weight: 800;
-}
-
-@media (max-width: 760px) {
-
-  .licensed-grid {
-    margin-top: 30px;
-  }
-
-}
 
 /* =========================================================
    MEET THE PEOPLE PAGE
@@ -4183,9 +4085,6 @@ select:focus-visible {
    UNICORN SYSTEM
    --------------------------------------------------------- */
 
-body:has(h1:nth-child(1)) {
-  --dummy-support-var: 1;
-}
 
 /* Make the three unicorn level cards feel slightly different */
 
@@ -5771,23 +5670,6 @@ img[src$="revolving.png"] {
 }
 
 
-/* Ombre wording - reusable across the whole site */
-
-.logo-ombre {
-  background: linear-gradient(
-    90deg,
-    var(--pink),
-    var(--orange),
-    var(--purple),
-    var(--blue)
-  );
-
-  -webkit-background-clip: text;
-  background-clip: text;
-
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-}
 
 
 /* Tablet */
@@ -5829,13 +5711,7 @@ img[src$="revolving.png"] {
    GLOBAL VB COLOUR PASS
    ========================================================= */
 
-:root {
-  --pink-soft: #fde4ef;
-  --blue-soft: #ddf6fa;
-  --orange-soft: #ffead6;
-  --purple-soft: #eee3f6;
-  --yellow-soft: #fff4c9;
-}
+
 
 
 /* ---------------------------------------------------------
@@ -6374,34 +6250,6 @@ main > .page-section:nth-of-type(4n) {
 }
 
 
-/* =========================================================
-   HOMEPAGE HERO - FILL THE FULL AREA
-   ========================================================= */
-
-.hero {
-  width: 100%;
-  max-width: none;
-  overflow: hidden;
-}
-
-.hero-inner {
-  width: 100%;
-  max-width: none;
-}
-
-.hero-image,
-.hero-image-wrap {
-  width: 100%;
-  max-width: none;
-}
-
-.hero-image img,
-.hero-image-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center;
-}
 
 
 /* =========================================================
@@ -6732,15 +6580,7 @@ main > .page-section:nth-of-type(4n) {
 
 
 
-/* =========================================================
-   INTERNAL PAGE OMBRE PASS
-   ========================================================= */
 
-/* BLOG */
-
-.blog-hero h1 span,
-.blog-page h2 span,
-.blog-page h3 span {
   background: linear-gradient(
     90deg,
     var(--pink),
@@ -6754,85 +6594,6 @@ main > .page-section:nth-of-type(4n) {
   -webkit-text-fill-color: transparent;
 }
 
-
-/* RESOURCES */
-
-.resources-hero h1 span,
-.resources-page h2 span,
-.resources-page h3 span {
-  background: linear-gradient(
-    90deg,
-    var(--pink),
-    var(--orange),
-    var(--purple),
-    var(--blue)
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-}
-
-
-/* FAQ */
-
-.faq-hero h1 span,
-.faq-page h2 span,
-.faq-page h3 span {
-  background: linear-gradient(
-    90deg,
-    var(--pink),
-    var(--orange),
-    var(--purple),
-    var(--blue)
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-}
-
-
-/* LICENSED SITES */
-
-.licensed-hero h1 span,
-.licensed-page h2 span,
-.licensed-page h3 span {
-  background: linear-gradient(
-    90deg,
-    var(--pink),
-    var(--orange),
-    var(--purple),
-    var(--blue)
-  );
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-  -webkit-text-fill-color: transparent;
-}
-
-/* =========================================================
-   RESOURCES - CLICKABLE CARD HEADINGS OMBRE
-   ========================================================= */
-
-.resources-page .external-resource h3,
-.external-resource h3 {
-  display: inline-block;
-
-  background: linear-gradient(
-    90deg,
-    var(--pink),
-    var(--orange),
-    var(--purple),
-    var(--blue)
-  );
-
-  -webkit-background-clip: text;
-  background-clip: text;
-
-  color: transparent !important;
-  -webkit-text-fill-color: transparent !important;
-}
 
 
 
