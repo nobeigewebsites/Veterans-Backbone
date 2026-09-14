@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -13,53 +15,97 @@
 
   <link rel="icon" type="image/png" href="images/vblogo.png">
   <link rel="stylesheet" href="style.css">
+
 </head>
+
 
 <body>
 
-<a href="#main-content" class="skip-link">Skip to content</a>
+
+<a href="#main-content" class="skip-link">
+  Skip to content
+</a>
 
 
-<!-- =====================================================
+<!-- =========================================================
      HEADER
-     ===================================================== -->
+========================================================= -->
 
 <header class="site-header">
 
-  <a href="index.html" class="site-logo" aria-label="Veterans Backbone home">
-    <img src="images/vblogo.png" alt="Veterans Backbone">
-  </a>
+  <div class="header-inner">
 
-  <button
-    class="menu-toggle"
-    id="menuToggle"
-    aria-label="Open navigation"
-    aria-expanded="false"
-    aria-controls="mainNav"
-  >
-    ☰
-  </button>
+    <a
+      href="index.html"
+      class="logo-link"
+      aria-label="Veterans Backbone home"
+    >
+      <img
+        src="images/vblogo.png"
+        alt="Veterans Backbone"
+        class="site-logo"
+      >
+    </a>
 
-  <nav class="main-nav" id="mainNav">
 
-    <a href="index.html">Home</a>
-    <a href="about.html">About VB</a>
-    <a href="meet-the-people.html">Meet the People</a>
-    <a href="support.html">Getting Support</a>
-    <a href="rv-crew.html">The RV Crew</a>
-    <a href="events.html">Events</a>
-    <a href="gallery.html" class="active">Gallery</a>
-    <a href="blog.html">Blog</a>
-    <a href="resources.html">Resources</a>
-    <a href="licensed-sites.html">Licensed Sites</a>
-    <a href="faq.html">FAQs</a>
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+      aria-label="Open navigation"
+      aria-expanded="false"
+      aria-controls="mainNav"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
-  </nav>
 
-  <div class="header-actions">
-    <a href="login.html" class="btn btn-outline">Member Login</a>
-    <a href="support.html" class="btn btn-dark">Get Support</a>
-    <a href="donate.html" class="btn btn-pink">Donate</a>
+    <nav
+      class="main-nav"
+      id="mainNav"
+    >
+
+      <a href="index.html">Home</a>
+      <a href="about.html">About VB</a>
+      <a href="meet-the-people.html">Meet the People</a>
+      <a href="support.html">Getting Support</a>
+      <a href="rv-crew.html">The RV Crew</a>
+      <a href="events.html">Events</a>
+      <a href="gallery.html" class="active">Gallery</a>
+      <a href="blog.html">Blog</a>
+      <a href="resources.html">Resources</a>
+      <a href="licensed-sites.html">Licensed Sites</a>
+      <a href="faq.html">FAQs</a>
+
+    </nav>
+
+
+    <div class="header-actions">
+
+      <a
+        href="login.html"
+        class="header-login"
+      >
+        Member Login
+      </a>
+
+      <a
+        href="support.html"
+        class="btn btn-dark"
+      >
+        Get Support
+      </a>
+
+      <a
+        href="donate.html"
+        class="btn btn-colour"
+      >
+        Donate
+      </a>
+
+    </div>
+
   </div>
 
 </header>
@@ -68,9 +114,9 @@
 <main id="main-content">
 
 
-<!-- =====================================================
+<!-- =========================================================
      HERO
-     ===================================================== -->
+========================================================= -->
 
 <section class="page-hero">
 
@@ -78,10 +124,13 @@
 
     <div class="page-hero-copy">
 
-      <span class="eyebrow">The Gallery</span>
+      <span class="eyebrow">
+        The Gallery
+      </span>
 
       <h1>
-        Evidence it actually happened.
+        Evidence it actually<br>
+        <span class="logo-ombre">happened.</span>
       </h1>
 
       <p>
@@ -111,10 +160,9 @@
 </section>
 
 
-
-<!-- =====================================================
+<!-- =========================================================
      LATEST ALBUM
-     ===================================================== -->
+========================================================= -->
 
 <section class="page-section">
 
@@ -127,7 +175,8 @@
       </span>
 
       <h2>
-        What we've been up to.
+        What we've been<br>
+        <span class="logo-ombre">up to.</span>
       </h2>
 
       <p>
@@ -157,7 +206,8 @@
         </span>
 
         <h2>
-          First proper album coming soon.
+          First proper album<br>
+          <span class="logo-ombre">coming soon.</span>
         </h2>
 
         <p>
@@ -170,9 +220,13 @@
           and a link to all the photos.
         </p>
 
+
         <div class="button-row">
 
-          <a href="events.html" class="btn btn-dark">
+          <a
+            href="events.html"
+            class="btn btn-dark"
+          >
             See Upcoming Events
           </a>
 
@@ -187,10 +241,9 @@
 </section>
 
 
-
-<!-- =====================================================
+<!-- =========================================================
      PHOTO GRID
-     ===================================================== -->
+========================================================= -->
 
 <section class="page-section-sm">
 
@@ -203,7 +256,8 @@
       </span>
 
       <h2>
-        A bit of VB life.
+        A bit of<br>
+        <span class="logo-ombre">VB life.</span>
       </h2>
 
       <p>
@@ -216,52 +270,66 @@
 
     <div class="gallery-grid">
 
+
       <figure class="gallery-item gallery-tall">
+
         <img
           src="images/steve.png"
           alt="Steve the Veterans Backbone unicorn"
         >
+
       </figure>
 
 
       <figure class="gallery-item">
+
         <img
           src="images/banter.png"
           alt="Veterans Backbone community and banter"
         >
+
       </figure>
 
 
       <figure class="gallery-item gallery-wide">
+
         <img
           src="images/bridges.png"
           alt="Veterans Backbone community support"
         >
+
       </figure>
 
 
       <figure class="gallery-item">
+
         <img
           src="images/about-veterans-backbone.png"
           alt="Veterans Backbone community"
         >
+
       </figure>
 
 
       <figure class="gallery-item">
+
         <img
           src="images/support-pathways.png"
           alt="Veterans Backbone support"
         >
+
       </figure>
 
 
       <figure class="gallery-item gallery-wide">
+
         <img
           src="images/pulling.png"
           alt="Veterans Backbone working together"
         >
+
       </figure>
+
 
     </div>
 
@@ -270,10 +338,9 @@
 </section>
 
 
-
-<!-- =====================================================
+<!-- =========================================================
      ALBUMS
-     ===================================================== -->
+========================================================= -->
 
 <section class="page-section">
 
@@ -286,7 +353,8 @@
       </span>
 
       <h2>
-        Pick your chaos.
+        Pick your<br>
+        <span class="logo-ombre">chaos.</span>
       </h2>
 
       <p>
@@ -314,6 +382,7 @@
 
         </div>
 
+
         <div class="gallery-album-copy">
 
           <span class="card-label tag-pink">
@@ -338,7 +407,6 @@
       </article>
 
 
-
       <!-- RV CREW -->
 
       <article class="gallery-album card-blue">
@@ -351,6 +419,7 @@
           >
 
         </div>
+
 
         <div class="gallery-album-copy">
 
@@ -376,7 +445,6 @@
       </article>
 
 
-
       <!-- COMMUNITY -->
 
       <article class="gallery-album card-orange">
@@ -389,6 +457,7 @@
           >
 
         </div>
+
 
         <div class="gallery-album-copy">
 
@@ -421,10 +490,9 @@
 </section>
 
 
-
-<!-- =====================================================
+<!-- =========================================================
      PHOTO PERMISSIONS
-     ===================================================== -->
+========================================================= -->
 
 <section class="page-section-sm">
 
@@ -453,10 +521,9 @@
 </section>
 
 
-
-<!-- =====================================================
+<!-- =========================================================
      SEND US PHOTOS
-     ===================================================== -->
+========================================================= -->
 
 <section class="page-section">
 
@@ -471,7 +538,8 @@
         </span>
 
         <h2>
-          Send us your photos.
+          Send us your<br>
+          <span class="logo-ombre">photos.</span>
         </h2>
 
         <p>
@@ -482,6 +550,7 @@
         <p>
           Send it over and we'll have a look.
         </p>
+
 
         <div class="button-row">
 
@@ -494,7 +563,7 @@
 
           <a
             href="contact.html"
-            class="btn btn-outline"
+            class="btn btn-colour"
           >
             Contact Veterans Backbone
           </a>
@@ -510,10 +579,9 @@
 </section>
 
 
-
-<!-- =====================================================
+<!-- =========================================================
      BLOG CROSS-LINK
-     ===================================================== -->
+========================================================= -->
 
 <section class="page-section-sm">
 
@@ -530,7 +598,8 @@
           </span>
 
           <h2>
-            Pictures only tell half of it.
+            Pictures only tell<br>
+            <span class="logo-ombre">half of it.</span>
           </h2>
 
           <p>
@@ -538,6 +607,7 @@
             and whatever else we've got to say
             will live over on the blog.
           </p>
+
 
           <div class="button-row">
 
@@ -574,68 +644,114 @@
 </main>
 
 
-
-<!-- =====================================================
+<!-- =========================================================
      FOOTER
-     ===================================================== -->
+========================================================= -->
 
 <footer class="site-footer">
 
-  <div class="footer-inner">
+  <div class="footer-main">
+
 
     <div class="footer-brand">
 
       <img
         src="images/vblogo.png"
         alt="Veterans Backbone"
+        class="footer-logo"
       >
 
       <p>
-        Same scars. Different battlefield.
+        Different journeys.<br>
+        Same direction.
       </p>
 
     </div>
 
 
-    <div class="footer-links">
+    <div class="footer-column">
 
-      <h3>Veterans Backbone</h3>
+      <h3>
+        Find Your Way
+      </h3>
 
-      <a href="about.html">About VB</a>
       <a href="support.html">Getting Support</a>
       <a href="rv-crew.html">The RV Crew</a>
       <a href="events.html">Events</a>
       <a href="gallery.html">Gallery</a>
       <a href="blog.html">Blog</a>
       <a href="resources.html">Resources</a>
-      <a href="contact.html">Contact Us</a>
+      <a href="licensed-sites.html">Licensed Sites</a>
+      <a href="faq.html">FAQs</a>
 
     </div>
 
 
-    <div class="footer-links">
+    <div class="footer-column">
+
+      <h3>
+        Know Us
+      </h3>
+
+      <a href="about.html">About VB</a>
+      <a href="meet-the-people.html">Meet the People</a>
+      <a href="flamingo-rise.html">Flamingo Rise</a>
+      <a href="get-involved.html">Get Involved</a>
+      <a href="donate.html">Donate</a>
+      <a href="contact.html">Talk to Us</a>
+
+    </div>
+
+
+    <div class="footer-column">
 
       <h3>
         How We Keep Our Shit Together
       </h3>
 
-      <a href="legal/safeguarding.html">Safeguarding</a>
-      <a href="legal/privacy.html">Privacy</a>
-      <a href="legal/cookies.html">Cookies</a>
-      <a href="legal/accessibility.html">Accessibility</a>
-      <a href="legal/complaints.html">Complaints</a>
+      <a href="legal/safeguarding.html">
+        Safeguarding & Standards
+      </a>
+
+      <a href="legal/privacy.html">
+        Privacy & Data
+      </a>
+
+      <a href="legal/cookies.html">
+        Cookies
+      </a>
+
+      <a href="legal/accessibility.html">
+        Accessibility
+      </a>
+
+      <a href="legal/complaints.html">
+        Complaints & Concerns
+      </a>
 
     </div>
 
 
-    <div class="footer-links">
+    <div class="footer-column">
 
-      <h3>Members</h3>
+      <h3>
+        RV Members
+      </h3>
 
-      <a href="login.html">Member Login</a>
-      <a href="members.html">Members Area</a>
+      <a href="login.html">
+        Member Login
+      </a>
+
+      <a href="members.html">
+        Members Area
+      </a>
+
+      <p class="small-note">
+        Members-only content requires an approved account.
+      </p>
 
     </div>
+
 
   </div>
 
@@ -643,8 +759,11 @@
   <div class="footer-bottom">
 
     <p>
-      © <span id="currentYear"></span>
-      Veterans Backbone.
+      © <span id="currentYear"></span> Veterans Backbone.
+    </p>
+
+    <p class="footer-signoff">
+      Built for humans. Beige avoided successfully.
     </p>
 
   </div>
@@ -654,5 +773,7 @@
 
 <script src="script.js"></script>
 
+
 </body>
+
 </html>
