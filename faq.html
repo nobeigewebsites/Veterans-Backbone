@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,46 +21,64 @@
 <a href="#main-content" class="skip-link">Skip to content</a>
 
 
-<!-- =====================================================
+<!-- =========================================================
      HEADER
-     ===================================================== -->
+========================================================= -->
 
 <header class="site-header">
 
-  <a href="index.html" class="site-logo" aria-label="Veterans Backbone home">
-    <img src="images/vblogo.png" alt="Veterans Backbone">
-  </a>
+  <div class="header-inner">
 
-  <button
-    class="menu-toggle"
-    id="menuToggle"
-    aria-label="Open navigation"
-    aria-expanded="false"
-    aria-controls="mainNav"
-  >
-    ☰
-  </button>
+    <a href="index.html" class="logo-link" aria-label="Veterans Backbone home">
+      <img
+        src="images/vblogo.png"
+        alt="Veterans Backbone"
+        class="site-logo"
+      >
+    </a>
 
-  <nav class="main-nav" id="mainNav">
+    <button
+      class="menu-toggle"
+      id="menuToggle"
+      aria-label="Open navigation"
+      aria-expanded="false"
+      aria-controls="mainNav"
+    >
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
-    <a href="index.html">Home</a>
-    <a href="about.html">About VB</a>
-    <a href="meet-the-people.html">Meet the People</a>
-    <a href="support.html">Getting Support</a>
-    <a href="rv-crew.html">The RV Crew</a>
-    <a href="events.html">Events</a>
-    <a href="gallery.html">Gallery</a>
-    <a href="blog.html">Blog</a>
-    <a href="resources.html">Resources</a>
-    <a href="licensed-sites.html">Licensed Sites</a>
-    <a href="faq.html" class="active">FAQs</a>
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About VB</a>
+      <a href="meet-the-people.html">Meet the People</a>
+      <a href="support.html">Getting Support</a>
+      <a href="rv-crew.html">The RV Crew</a>
+      <a href="events.html">Events</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="blog.html">Blog</a>
+      <a href="resources.html">Resources</a>
+      <a href="licensed-sites.html">Licensed Sites</a>
+      <a href="faq.html" class="active">FAQs</a>
+    </nav>
 
-  </nav>
+    <div class="header-actions">
 
-  <div class="header-actions">
-    <a href="login.html" class="btn btn-outline">Member Login</a>
-    <a href="support.html" class="btn btn-dark">Get Support</a>
-    <a href="donate.html" class="btn btn-pink">Donate</a>
+      <a href="login.html" class="header-login">
+        Member Login
+      </a>
+
+      <a href="support.html" class="btn btn-dark">
+        Get Support
+      </a>
+
+      <a href="donate.html" class="btn btn-colour">
+        Donate
+      </a>
+
+    </div>
+
   </div>
 
 </header>
@@ -68,20 +87,23 @@
 <main id="main-content">
 
 
-<!-- =====================================================
+<!-- =========================================================
      HERO
-     ===================================================== -->
+========================================================= -->
 
-<section class="page-hero">
+<section class="page-hero faq-hero">
 
   <div class="page-hero-inner">
 
     <div class="page-hero-copy">
 
-      <span class="eyebrow">Frequently Asked Questions</span>
+      <span class="eyebrow">
+        Frequently Asked Questions
+      </span>
 
       <h1>
-        What does this actually mean for me?
+        What does this actually<br>
+        <span class="logo-ombre">mean for me?</span>
       </h1>
 
       <p>
@@ -112,12 +134,11 @@
 </section>
 
 
+<!-- =========================================================
+     INTRO
+========================================================= -->
 
-<!-- =====================================================
-     FAQ INTRO
-     ===================================================== -->
-
-<section class="page-section-sm">
+<section class="page-section-sm faq-page">
 
   <div class="section-inner">
 
@@ -130,7 +151,8 @@
         </span>
 
         <h2>
-          Have a nosey.
+          Have a<br>
+          <span class="logo-ombre">nosey.</span>
         </h2>
 
         <p>
@@ -151,12 +173,11 @@
 </section>
 
 
-
-<!-- =====================================================
+<!-- =========================================================
      FAQ LIST
-     ===================================================== -->
+========================================================= -->
 
-<section class="page-section">
+<section class="page-section faq-page">
 
   <div class="section-inner">
 
@@ -248,11 +269,8 @@
         <div class="faq-answer">
 
           <p>No.</p>
-
           <p>We're not therapists.</p>
-
           <p>We're not counsellors.</p>
-
           <p>We're not psychiatrists.</p>
 
         </div>
@@ -275,7 +293,9 @@
 
         <div class="faq-answer">
 
-          <p>Absolutely not.</p>
+          <p>
+            Absolutely not.
+          </p>
 
           <p>
             You don't get bonus points for suffering in silence.
@@ -316,9 +336,7 @@
           </p>
 
           <p>Some people talk.</p>
-
           <p>Some people walk.</p>
-
           <p>Some people build things.</p>
 
           <p>
@@ -326,7 +344,9 @@
             before saying anything meaningful.
           </p>
 
-          <p>All acceptable.</p>
+          <p>
+            All acceptable.
+          </p>
 
         </div>
 
@@ -373,9 +393,7 @@
         <div class="faq-answer">
 
           <p>Because humans swear.</p>
-
           <p>Veterans swear.</p>
-
           <p>Life swears at people regularly.</p>
 
           <p>
@@ -404,9 +422,7 @@
         <div class="faq-answer">
 
           <p>No.</p>
-
           <p>We've all got a history.</p>
-
           <p>We've all made mistakes.</p>
 
           <p>
@@ -688,12 +704,11 @@
 </section>
 
 
+<!-- =========================================================
+     FINAL CTA
+========================================================= -->
 
-<!-- =====================================================
-     STILL GOT A QUESTION?
-     ===================================================== -->
-
-<section class="page-section">
+<section class="page-section faq-page">
 
   <div class="section-inner">
 
@@ -704,7 +719,7 @@
       </span>
 
       <h2>
-        Ask us.
+        <span class="logo-ombre">Ask us.</span>
       </h2>
 
       <p>
@@ -727,7 +742,7 @@
 
         <a
           href="support.html"
-          class="btn btn-pink"
+          class="btn btn-colour"
         >
           Get Support
         </a>
@@ -744,68 +759,106 @@
 </main>
 
 
-
-<!-- =====================================================
+<!-- =========================================================
      FOOTER
-     ===================================================== -->
+========================================================= -->
 
 <footer class="site-footer">
 
-  <div class="footer-inner">
+  <div class="footer-main">
+
 
     <div class="footer-brand">
 
       <img
         src="images/vblogo.png"
         alt="Veterans Backbone"
+        class="footer-logo"
       >
 
       <p>
-        Same scars. Different battlefield.
+        Different journeys.<br>
+        Same direction.
       </p>
 
     </div>
 
 
-    <div class="footer-links">
+    <div class="footer-column">
 
-      <h3>Veterans Backbone</h3>
+      <h3>Find Your Way</h3>
 
-      <a href="about.html">About VB</a>
       <a href="support.html">Getting Support</a>
       <a href="rv-crew.html">The RV Crew</a>
       <a href="events.html">Events</a>
       <a href="gallery.html">Gallery</a>
       <a href="blog.html">Blog</a>
       <a href="resources.html">Resources</a>
-      <a href="contact.html">Contact Us</a>
+      <a href="licensed-sites.html">Licensed Sites</a>
+      <a href="faq.html">FAQs</a>
 
     </div>
 
 
-    <div class="footer-links">
+    <div class="footer-column">
 
-      <h3>
-        How We Keep Our Shit Together
-      </h3>
+      <h3>Know Us</h3>
 
-      <a href="legal/safeguarding.html">Safeguarding</a>
-      <a href="legal/privacy.html">Privacy</a>
-      <a href="legal/cookies.html">Cookies</a>
-      <a href="legal/accessibility.html">Accessibility</a>
-      <a href="legal/complaints.html">Complaints</a>
+      <a href="about.html">About VB</a>
+      <a href="meet-the-people.html">Meet the People</a>
+      <a href="flamingo-rise.html">Flamingo Rise</a>
+      <a href="get-involved.html">Get Involved</a>
+      <a href="donate.html">Donate</a>
+      <a href="contact.html">Talk to Us</a>
+
+    </div>
+
+
+    <div class="footer-column">
+
+      <h3>How We Keep Our Shit Together</h3>
+
+      <a href="legal/safeguarding.html">
+        Safeguarding & Standards
+      </a>
+
+      <a href="legal/privacy.html">
+        Privacy & Data
+      </a>
+
+      <a href="legal/cookies.html">
+        Cookies
+      </a>
+
+      <a href="legal/accessibility.html">
+        Accessibility
+      </a>
+
+      <a href="legal/complaints.html">
+        Complaints & Concerns
+      </a>
 
     </div>
 
 
-    <div class="footer-links">
+    <div class="footer-column">
 
-      <h3>Members</h3>
+      <h3>RV Members</h3>
 
-      <a href="login.html">Member Login</a>
-      <a href="members.html">Members Area</a>
+      <a href="login.html">
+        Member Login
+      </a>
+
+      <a href="members.html">
+        Members Area
+      </a>
+
+      <p class="small-note">
+        Members-only content requires an approved account.
+      </p>
 
     </div>
+
 
   </div>
 
@@ -813,8 +866,11 @@
   <div class="footer-bottom">
 
     <p>
-      © <span id="currentYear"></span>
-      Veterans Backbone.
+      © <span id="currentYear"></span> Veterans Backbone.
+    </p>
+
+    <p class="footer-signoff">
+      Built for humans. Beige avoided successfully.
     </p>
 
   </div>
