@@ -123,57 +123,32 @@
         </div>
 
 
-        <!-- =====================================================
-             LOGIN FORM
-             Visual shell only for now.
-             Authentication gets wired in later.
-        ====================================================== -->
+       <!-- =====================================================
+     CLERK MEMBER LOGIN
+====================================================== -->
 
-        <form class="login-form" action="members.html" method="get">
+<div class="login-form">
 
-          <div class="form-group">
-            <label for="memberEmail">
-              Email address
-            </label>
+  <div id="clerk-sign-in"></div>
 
-            <<input
-  type="email"
-  id="memberEmail"
-  name="email"
-  autocomplete="email"
-  placeholder="you@example.com"
->
-            >
-          </div>
+  <div
+    id="clerk-signed-in"
+    style="display: none;"
+  >
+    <p class="big-handwritten">
+      You're already in.
+    </p>
 
-          <div class="form-group">
-            <label for="memberPassword">
-              Password
-            </label>
+    <div class="button-row">
+      <a href="members.html" class="btn btn-colour">
+        Enter Members Area
+      </a>
 
-            <input
-  type="password"
-  id="memberPassword"
-  name="password"
-  autocomplete="current-password"
-  placeholder="Your password"
->
-            >
-          </div>
+      <div id="clerk-user-button"></div>
+    </div>
+  </div>
 
-          <div class="button-row">
-
- <button
-  type="submit"
-  class="btn btn-colour"
->
-  Let Me In
-</button>
-
-          </div>
-
-        </form>
-
+</div>
 
         <div class="callout callout-orange">
 
@@ -330,7 +305,58 @@
   </footer>
 
 
-  <script src="script.js"></script>
+  <!-- Clerk UI bundle -->
+<script
+  defer
+  crossorigin="anonymous"
+  src="https://helped-mite-2212.clerk.accounts.dev/npm/@clerk/ui@1/dist/ui.browser.js"
+  type="text/javascript"
+></script>
+
+<!-- Clerk JavaScript SDK -->
+<script
+  defer
+  crossorigin="anonymous"
+  data-clerk-publishable-key="pk_test_aGVscGVkLW1pdGUtMjIxMi5jbGVyay5hY2NvdW50cy5kZXYk"
+  src="https://helped-mite-2212.clerk.accounts.dev/npm/@clerk/clerk-js@6/dist/clerk.browser.js"
+  type="text/javascript"
+></script>
+
+<!-- Veterans Backbone Clerk login -->
+<script>
+  window.addEventListener('load', async function () {
+
+    await Clerk.load({
+      ui: {
+        ClerkUI: window.__internal_ClerkUICtor
+      }
+    });
+
+    const signInDiv = document.getElementById('clerk-sign-in');
+    const signedInDiv = document.getElementById('clerk-signed-in');
+    const userButtonDiv = document.getElementById('clerk-user-button');
+
+    if (Clerk.isSignedIn) {
+
+      signInDiv.style.display = 'none';
+      signedInDiv.style.display = 'block';
+
+      Clerk.mountUserButton(userButtonDiv);
+
+    } else {
+
+      signedInDiv.style.display = 'none';
+
+      Clerk.mountSignIn(signInDiv, {
+        forceRedirectUrl: 'members.html'
+      });
+
+    }
+
+  });
+</script>
+
+<script src="script.js"></script>
 
 </body>
 
