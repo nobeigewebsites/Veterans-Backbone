@@ -107,48 +107,70 @@
         </p>
 
         <p>
-          Approved members will be able to access member-only resources,
+          Approved members can access member-only resources,
           private updates, member events and useful VB downloads from here.
         </p>
 
+
         <div class="callout callout-blue">
+
           <p class="big-handwritten">
             Not everything needs to live on the public internet.
           </p>
 
           <p>
-            Member access is intended for approved Veterans Backbone and RV Crew
-            members only.
+            Member access is intended for approved Veterans Backbone
+            and RV Crew members only.
           </p>
+
         </div>
 
 
-       <!-- =====================================================
-     CLERK MEMBER LOGIN
-====================================================== -->
+        <!-- =====================================================
+             CLERK LOGIN
+        ====================================================== -->
 
-<div class="login-form">
+        <div class="login-form">
 
-  <div id="clerk-sign-in"></div>
+          <!-- Clerk places the sign-in screen here -->
+          <div id="clerk-sign-in"></div>
 
-  <div
-    id="clerk-signed-in"
-    style="display: none;"
-  >
-    <p class="big-handwritten">
-      You're already in.
-    </p>
 
-    <div class="button-row">
-      <a href="members.html" class="btn btn-colour">
-        Enter Members Area
-      </a>
+          <!-- Shown if the visitor is already signed in -->
+          <div
+            id="clerk-signed-in"
+            style="display: none;"
+          >
 
-      <div id="clerk-user-button"></div>
-    </div>
-  </div>
+            <p class="big-handwritten">
+              Well look at you. You're already in.
+            </p>
 
-</div>
+            <p>
+              Your member account is signed in and ready to go.
+            </p>
+
+            <div class="button-row">
+
+              <a
+                href="members.html"
+                class="btn btn-colour"
+              >
+                Enter Members Area
+              </a>
+
+              <div id="clerk-user-button"></div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- =====================================================
+             LOGIN HELP
+        ====================================================== -->
 
         <div class="callout callout-orange">
 
@@ -158,17 +180,28 @@
           </h2>
 
           <p>
-            The member system is still being connected.
-            If you need support from VB, you do not need to wait for member access.
+            If you're having trouble with your member account,
+            get in touch with Veterans Backbone.
+          </p>
+
+          <p>
+            If you need support from VB, you do not need to wait
+            for member access.
           </p>
 
           <div class="button-row">
 
-            <a href="support.html" class="btn btn-dark">
+            <a
+              href="support.html"
+              class="btn btn-dark"
+            >
               Get Support
             </a>
 
-            <a href="contact.html" class="btn btn-paper">
+            <a
+              href="contact.html"
+              class="btn btn-paper"
+            >
               Talk to Us
             </a>
 
@@ -176,9 +209,9 @@
 
         </div>
 
+
         <p class="small-note">
-          This page is currently the visual login shell only.
-          Authentication will be connected before private member content goes live.
+          Member access is managed securely through our authentication provider.
         </p>
 
       </div>
@@ -305,58 +338,111 @@
   </footer>
 
 
-  <!-- Clerk UI bundle -->
-<script
-  defer
-  crossorigin="anonymous"
-  src="https://helped-mite-2212.clerk.accounts.dev/npm/@clerk/ui@1/dist/ui.browser.js"
-  type="text/javascript"
-></script>
+  <!-- =========================================================
+       CLERK
+       UI bundle must load before ClerkJS
+  ========================================================= -->
 
-<!-- Clerk JavaScript SDK -->
-<script
-  defer
-  crossorigin="anonymous"
-  data-clerk-publishable-key="pk_test_aGVscGVkLW1pdGUtMjIxMi5jbGVyay5hY2NvdW50cy5kZXYk"
-  src="https://helped-mite-2212.clerk.accounts.dev/npm/@clerk/clerk-js@6/dist/clerk.browser.js"
-  type="text/javascript"
-></script>
+  <script
+    defer
+    crossorigin="anonymous"
+    src="https://helped-mite-2212.clerk.accounts.dev/npm/@clerk/ui@1/dist/ui.browser.js"
+    type="text/javascript"
+  ></script>
 
-<!-- Veterans Backbone Clerk login -->
-<script>
-  window.addEventListener('load', async function () {
+  <script
+    defer
+    crossorigin="anonymous"
+    data-clerk-publishable-key="pk_test_aGVscGVkLW1pdGUtMjIxMi5jbGVyay5hY2NvdW50cy5kZXYk"
+    src="https://helped-mite-2212.clerk.accounts.dev/npm/@clerk/clerk-js@6/dist/clerk.browser.js"
+    type="text/javascript"
+  ></script>
 
-    await Clerk.load({
-      ui: {
-        ClerkUI: window.__internal_ClerkUICtor
+
+  <!-- =========================================================
+       CLERK LOGIN LOGIC
+  ========================================================= -->
+
+  <script>
+
+    window.addEventListener('load', async function () {
+
+      try {
+
+        await Clerk.load({
+          ui: {
+            ClerkUI: window.__internal_ClerkUICtor
+          }
+        });
+
+
+        const signInDiv =
+          document.getElementById('clerk-sign-in');
+
+        const signedInDiv =
+          document.getElementById('clerk-signed-in');
+
+        const userButtonDiv =
+          document.getElementById('clerk-user-button');
+
+
+        if (Clerk.isSignedIn) {
+
+          signInDiv.style.display = 'none';
+          signedInDiv.style.display = 'block';
+
+          Clerk.mountUserButton(userButtonDiv);
+
+        } else {
+
+          signInDiv.style.display = 'block';
+          signedInDiv.style.display = 'none';
+
+          Clerk.mountSignIn(signInDiv, {
+            forceRedirectUrl: 'members.html'
+          });
+
+        }
+
+      } catch (error) {
+
+        console.error(
+          'Veterans Backbone member login failed to load:',
+          error
+        );
+
+        const signInDiv =
+          document.getElementById('clerk-sign-in');
+
+        if (signInDiv) {
+
+          signInDiv.innerHTML = `
+            <div class="callout callout-orange">
+              <p class="big-handwritten">
+                Well, that's being a knob.
+              </p>
+
+              <p>
+                The member login couldn't load properly.
+                Please refresh the page or try again shortly.
+              </p>
+            </div>
+          `;
+
+        }
+
       }
+
     });
 
-    const signInDiv = document.getElementById('clerk-sign-in');
-    const signedInDiv = document.getElementById('clerk-signed-in');
-    const userButtonDiv = document.getElementById('clerk-user-button');
+  </script>
 
-    if (Clerk.isSignedIn) {
 
-      signInDiv.style.display = 'none';
-      signedInDiv.style.display = 'block';
+  <!-- =========================================================
+       MAIN SITE JAVASCRIPT
+  ========================================================= -->
 
-      Clerk.mountUserButton(userButtonDiv);
-
-    } else {
-
-      signedInDiv.style.display = 'none';
-
-      Clerk.mountSignIn(signInDiv, {
-        forceRedirectUrl: 'members.html'
-      });
-
-    }
-
-  });
-</script>
-
-<script src="script.js"></script>
+  <script src="script.js"></script>
 
 </body>
 
