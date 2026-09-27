@@ -5855,13 +5855,14 @@ img[src$="rise.png"] {
 }
 
 /* =========================================================
-   MEMBERS AREA — HERO FIX
-   ========================================================= */
+   MEMBERS AREA — WELCOME HERO
+========================================================= */
 
-.member-dashboard {
-  position: relative;
+.members-welcome-hero {
+  width: 100%;
+  padding: 70px 5%;
   overflow: hidden;
-  padding: clamp(3.5rem, 6vw, 6.5rem) 5%;
+
   background:
     radial-gradient(circle at 15% 20%, var(--pink-soft), transparent 32%),
     radial-gradient(circle at 85% 75%, var(--blue-soft), transparent 34%),
@@ -5869,99 +5870,142 @@ img[src$="rise.png"] {
 }
 
 
-/* Main hero layout */
+/* TWO-COLUMN HERO */
 
-.member-dashboard .member-hero-inner {
-  width: min(1400px, 100%);
+.members-welcome-hero .member-hero-inner {
+  width: min(1200px, 100%);
   margin: 0 auto;
 
   display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(420px, 1.1fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   align-items: center;
-
-  gap: clamp(2.5rem, 5vw, 5rem);
+  gap: clamp(40px, 6vw, 90px);
 }
 
 
-/* Left-hand welcome copy */
+/* LEFT — WELCOME COPY */
 
-.member-dashboard .member-welcome {
-  position: relative;
-  z-index: 2;
-
+.members-welcome-hero .member-welcome {
   width: 100%;
-  max-width: 680px;
+  max-width: 600px;
+  min-width: 0;
 }
 
 
-.member-dashboard .member-welcome h1 {
-  margin: 0.6rem 0 1.5rem;
+.members-welcome-hero .member-welcome h1 {
+  width: 100%;
+  margin: 10px 0 24px;
 
   font-family: var(--heading);
-  font-size: clamp(4.5rem, 7vw, 7.5rem);
-  line-height: 0.82;
+  font-size: clamp(4.5rem, 7vw, 7rem);
+  line-height: 0.85;
   letter-spacing: -0.03em;
 }
 
 
-.member-dashboard .member-welcome .lead {
+.members-welcome-hero .member-welcome .lead {
   width: 100%;
-  max-width: 600px;
+  max-width: 540px;
 
-  margin-bottom: 1rem;
+  margin: 0 0 18px;
 
-  font-size: clamp(1.3rem, 2vw, 1.7rem);
+  font-size: clamp(1.3rem, 2vw, 1.65rem);
+  line-height: 1.4;
   font-weight: 800;
-  line-height: 1.35;
 }
 
 
-.member-dashboard .member-welcome > p:not(.eyebrow):not(.lead):not(.big-handwritten) {
+.members-welcome-hero .member-welcome > p:not(.eyebrow):not(.lead):not(.big-handwritten) {
   width: 100%;
-  max-width: 620px;
+  max-width: 560px;
+
+  margin: 0;
 
   font-size: 1.08rem;
   line-height: 1.75;
 }
 
 
-.member-dashboard .member-welcome .big-handwritten {
+.members-welcome-hero .member-welcome .big-handwritten {
   width: 100%;
-  max-width: none;
 
-  margin-top: 1.75rem;
+  margin: 28px 0 0;
 
   font-size: clamp(2rem, 3vw, 3rem);
-  line-height: 1.15;
+  line-height: 1.2;
 
   transform: rotate(-1deg);
 }
 
 
-/* Steve welcoming everyone home */
+/* RIGHT — STEVE + VETERANS */
 
-.member-dashboard .member-home-image {
-  position: relative;
-
+.members-welcome-hero .member-home-image {
   width: 100%;
   min-width: 0;
 
   display: flex;
-  align-items: flex-end;
+  align-items: center;
   justify-content: center;
 }
 
 
-.member-dashboard .member-home-image img {
+.members-welcome-hero .member-home-image img {
   display: block;
 
-  width: min(100%, 760px);
-  max-width: 760px;
+  width: 100%;
+  max-width: 650px;
   height: auto;
 
   object-fit: contain;
 }
 
+
+/* TABLET */
+
+@media (max-width: 900px) {
+
+  .members-welcome-hero {
+    padding: 55px 6% 0;
+  }
+
+  .members-welcome-hero .member-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 35px;
+  }
+
+  .members-welcome-hero .member-welcome {
+    max-width: 700px;
+  }
+
+  .members-welcome-hero .member-home-image img {
+    max-width: 600px;
+  }
+
+}
+
+
+/* MOBILE */
+
+@media (max-width: 600px) {
+
+  .members-welcome-hero {
+    padding: 45px 5% 0;
+  }
+
+  .members-welcome-hero .member-welcome h1 {
+    font-size: clamp(3.4rem, 17vw, 5rem);
+  }
+
+  .members-welcome-hero .member-welcome .lead {
+    font-size: 1.25rem;
+  }
+
+  .members-welcome-hero .member-welcome .big-handwritten {
+    font-size: 2rem;
+  }
+
+}
 
 /* =========================================================
    MEMBERS HERO — TABLET
