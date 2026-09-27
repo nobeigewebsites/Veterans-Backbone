@@ -5740,3 +5740,189 @@ img[src$="rise.png"] {
     padding: 30px 22px;
   }
 }
+
+/* =========================================================
+   MEMBERS AREA — HERO FIX
+   ========================================================= */
+
+.member-dashboard {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(3.5rem, 6vw, 6.5rem) 5%;
+  background:
+    radial-gradient(circle at 15% 20%, var(--pink-soft), transparent 32%),
+    radial-gradient(circle at 85% 75%, var(--blue-soft), transparent 34%),
+    var(--paper);
+}
+
+
+/* Main hero layout */
+
+.member-dashboard .member-hero-inner {
+  width: min(1400px, 100%);
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(420px, 1.1fr);
+  align-items: center;
+
+  gap: clamp(2.5rem, 5vw, 5rem);
+}
+
+
+/* Left-hand welcome copy */
+
+.member-dashboard .member-welcome {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: 680px;
+}
+
+
+.member-dashboard .member-welcome h1 {
+  margin: 0.6rem 0 1.5rem;
+
+  font-family: var(--heading);
+  font-size: clamp(4.5rem, 7vw, 7.5rem);
+  line-height: 0.82;
+  letter-spacing: -0.03em;
+}
+
+
+.member-dashboard .member-welcome .lead {
+  width: 100%;
+  max-width: 600px;
+
+  margin-bottom: 1rem;
+
+  font-size: clamp(1.3rem, 2vw, 1.7rem);
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+
+.member-dashboard .member-welcome > p:not(.eyebrow):not(.lead):not(.big-handwritten) {
+  width: 100%;
+  max-width: 620px;
+
+  font-size: 1.08rem;
+  line-height: 1.75;
+}
+
+
+.member-dashboard .member-welcome .big-handwritten {
+  width: 100%;
+  max-width: none;
+
+  margin-top: 1.75rem;
+
+  font-size: clamp(2rem, 3vw, 3rem);
+  line-height: 1.15;
+
+  transform: rotate(-1deg);
+}
+
+
+/* Steve welcoming everyone home */
+
+.member-dashboard .member-home-image {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+
+.member-dashboard .member-home-image img {
+  display: block;
+
+  width: min(100%, 760px);
+  max-width: 760px;
+  height: auto;
+
+  object-fit: contain;
+}
+
+
+/* =========================================================
+   MEMBERS HERO — TABLET
+   ========================================================= */
+
+@media (max-width: 1000px) {
+
+  .member-dashboard .member-hero-inner {
+    grid-template-columns: minmax(0, 1fr) minmax(340px, 0.9fr);
+    gap: 2rem;
+  }
+
+  .member-dashboard .member-welcome h1 {
+    font-size: clamp(4rem, 8vw, 6rem);
+  }
+
+}
+
+
+/* =========================================================
+   MEMBERS HERO — MOBILE
+   ========================================================= */
+
+@media (max-width: 800px) {
+
+  .member-dashboard {
+    padding: 3rem 6% 0;
+  }
+
+  .member-dashboard .member-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+
+  .member-dashboard .member-welcome {
+    max-width: 100%;
+  }
+
+  .member-dashboard .member-welcome h1 {
+    font-size: clamp(3.7rem, 15vw, 6rem);
+  }
+
+  .member-dashboard .member-home-image {
+    margin-top: 0.5rem;
+  }
+
+  .member-dashboard .member-home-image img {
+    width: min(100%, 650px);
+  }
+
+}
+
+
+/* =========================================================
+   MEMBERS HERO — SMALL MOBILE
+   ========================================================= */
+
+@media (max-width: 520px) {
+
+  .member-dashboard {
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  .member-dashboard .member-welcome h1 {
+    font-size: clamp(3.2rem, 17vw, 5rem);
+  }
+
+  .member-dashboard .member-welcome > p:not(.eyebrow):not(.lead):not(.big-handwritten) {
+    font-size: 1rem;
+  }
+
+  .member-dashboard .member-welcome .big-handwritten {
+    font-size: clamp(1.8rem, 9vw, 2.5rem);
+  }
+
+}
