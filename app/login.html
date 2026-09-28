@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Staff Login | Veterans Backbone Core</title>
+
+  <meta
+    name="description"
+    content="Secure staff access to Veterans Backbone Core."
+  >
+
+  <link rel="stylesheet" href="css/app.css">
+
+  <style>
+    /* Temporary login-only layout.
+       We can move this into app.css once auth is working. */
+
+    body {
+      min-height: 100vh;
+      background:
+        radial-gradient(
+          circle at 15% 20%,
+          rgba(35, 136, 255, 0.18),
+          transparent 28%
+        ),
+        radial-gradient(
+          circle at 85% 75%,
+          rgba(255, 20, 120, 0.16),
+          transparent 30%
+        ),
+        #08172d;
+    }
+
+    .login-page {
+      position: relative;
+
+      min-height: 100vh;
+
+      display: grid;
+      grid-template-columns:
+        minmax(300px, 0.9fr)
+        minmax(420px, 1.1fr);
+
+      overflow: hidden;
+    }
+
+    .login-page::before {
+      content: "";
+
+      position: fixed;
+
+      top: 0;
+      left: 0;
+      right: 0;
+
+      height: 6px;
+
+      background: var(--rainbow);
+
+      z-index: 10;
+    }
+
+    /* ========================================
+       BRAND SIDE
+       ======================================== */
+
+    .login-brand-panel {
+      position: relative;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      padding: 60px;
+
+      overflow: hidden;
+
+      color: white;
+    }
+
+    .login-brand-panel::before {
+      content: "";
+
+      position: absolute;
+
+      left: -80px;
+      top: 40px;
+
+      width: 400px;
+      height: 300px;
+
+      background:
+        radial-gradient(
+          ellipse,
+          rgba(35, 136, 255, 0.5),
+          transparent 68%
+        );
+
+      transform: rotate(-12deg);
+
+      pointer-events: none;
+    }
+
+    .login-brand-panel::after {
+      content: "";
+
+      position: absolute;
+
+      right: -100px;
+      bottom: -60px;
+
+      width: 500px;
+      height: 620px;
+
+      background-image:
+        url("../images/watermark.png");
+
+      background-repeat: no-repeat;
+      background-position: right bottom;
+      background-size: contain;
+
+      opacity: 0.18;
+
+      pointer-events: none;
+    }
+
+    .login-brand {
+      position: relative;
+      z-index: 2;
+    }
+
+    .login-vb {
+      display: inline-block;
+
+      color: transparent;
+
+      background:
+        linear-gradient(
+          115deg,
+          #ff1478,
+          #ff7a18 32%,
+          #ffc928 48%,
+          #2388ff 70%,
+          #8a3ffc 92%
+        );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+
+      font-family:
+        "Trebuchet MS",
+        "Arial Black",
+        sans-serif;
+
+      font-size: clamp(80px, 9vw, 145px);
+      font-weight: 1000;
+
+      line-height: 0.85;
+
+      letter-spacing: -12px;
+
+      transform:
+        rotate(-6deg)
+        skewX(-7deg);
+
+      filter:
+        drop-shadow(
+          5px 6px 0 rgba(0, 0, 0, 0.15)
+        );
+    }
+
+    .login-brand h1 {
+      margin:
+        28px
+        0
+        4px;
+
+      font-size: 30px;
+      font-weight: 950;
+
+      letter-spacing: -1px;
+
+      text-transform: uppercase;
+    }
+
+    .login-brand h1 span {
+      color: #ff2a88;
+    }
+
+    .login-brand p {
+      max-width: 430px;
+
+      margin:
+        18px
+        0
+        0;
+
+      color: #aebbd0;
+
+      font-size: 14px;
+
+      line-height: 1.7;
+    }
+
+    .login-principles {
+      position: relative;
+      z-index: 2;
+
+      max-width: 450px;
+    }
+
+    .login-principles strong {
+      display: block;
+
+      margin-bottom: 10px;
+
+      color: white;
+
+      font-size: 13px;
+    }
+
+    .login-principles span {
+      display: block;
+
+      margin-bottom: 5px;
+
+      color: #91a1b8;
+
+      font-size: 11px;
+    }
+
+    /* ========================================
+       LOGIN SIDE
+       ======================================== */
+
+    .login-form-side {
+      position: relative;
+
+      display: grid;
+      place-items: center;
+
+      padding: 50px;
+
+      background:
+        rgba(251, 250, 247, 0.98);
+    }
+
+    .login-form-side::before {
+      content: "SUPPORT WITHOUT CONTROL ♡";
+
+      position: absolute;
+
+      top: 70px;
+      right: -35px;
+
+      color:
+        rgba(138, 63, 252, 0.055);
+
+      font-size: 30px;
+      font-weight: 950;
+
+      font-style: italic;
+
+      transform: rotate(-7deg);
+
+      pointer-events: none;
+    }
+
+    .login-card {
+      position: relative;
+
+      width: min(100%, 470px);
+
+      padding:
+        38px
+        40px;
+
+      overflow: hidden;
+
+      border:
+        1px solid rgba(15, 30, 50, 0.08);
+
+      border-radius: 16px;
+
+      background:
+        rgba(255, 255, 255, 0.93);
+
+      box-shadow:
+        0 20px 60px rgba(8, 23, 45, 0.12);
+    }
+
+    .login-card::before {
+      content: "";
+
+      position: absolute;
+
+      top: 0;
+      left: 0;
+      right: 0;
+
+      height: 6px;
+
+      background: var(--rainbow);
+    }
+
+    .login-card .eyebrow {
+      margin-bottom: 8px;
+    }
+
+    .login-card h2 {
+      margin:
+        0
+        0
+        8px;
+
+      color: var(--ink);
+
+      font-family:
+        "Trebuchet MS",
+        "Segoe UI",
+        sans-serif;
+
+      font-size: 34px;
+      font-weight: 1000;
+
+      letter-spacing: -1.5px;
+    }
+
+    .login-intro {
+      margin:
+        0
+        0
+        28px;
+
+      color: var(--muted);
+
+      font-size: 13px;
+    }
+
+    /* ========================================
+       FORM
+       ======================================== */
+
+    .login-form {
+      display: flex;
+      flex-direction: column;
+
+      gap: 18px;
+    }
+
+    .login-field {
+      display: flex;
+      flex-direction: column;
+
+      gap: 7px;
+    }
+
+    .login-field label {
+      color: #526174;
+
+      font-size: 10px;
+      font-weight: 900;
+
+      letter-spacing: 0.7px;
+
+      text-transform: uppercase;
+    }
+
+    .login-field input {
+      width: 100%;
+      min-height: 50px;
+
+      padding:
+        0
+        15px;
+
+      border:
+        1px solid #d8dfe7;
+
+      border-radius: 10px;
+
+      background: white;
+
+      color: var(--ink);
+
+      font-size: 14px;
+
+      outline: none;
+
+      transition:
+        border-color 0.16s ease,
+        box-shadow 0.16s ease;
+    }
+
+    .login-field input:focus {
+      border-color:
+        rgba(255, 20, 120, 0.55);
+
+      box-shadow:
+        0 0 0 4px rgba(255, 20, 120, 0.08);
+    }
+
+    .password-wrap {
+      position: relative;
+    }
+
+    .password-wrap input {
+      padding-right: 70px;
+    }
+
+    .password-toggle {
+      position: absolute;
+
+      top: 50%;
+      right: 10px;
+
+      transform: translateY(-50%);
+
+      padding:
+        6px
+        8px;
+
+      border: 0;
+
+      background: transparent;
+
+      color: var(--pink);
+
+      font-size: 10px;
+      font-weight: 850;
+    }
+
+    .login-submit {
+      width: 100%;
+      min-height: 50px;
+
+      margin-top: 4px;
+
+      border: 0;
+
+      border-radius: 10px;
+
+      background:
+        linear-gradient(
+          100deg,
+          #ff1478,
+          #ff7a18
+        );
+
+      color: white;
+
+      font-size: 13px;
+      font-weight: 900;
+
+      box-shadow:
+        0 8px 22px rgba(255, 20, 120, 0.25);
+
+      transition:
+        transform 0.16s ease,
+        box-shadow 0.16s ease,
+        opacity 0.16s ease;
+    }
+
+    .login-submit:hover:not(:disabled) {
+      transform: translateY(-2px);
+
+      box-shadow:
+        0 12px 28px rgba(255, 20, 120, 0.31);
+    }
+
+    .login-submit:disabled {
+      cursor: wait;
+
+      opacity: 0.65;
+    }
+
+    /* ========================================
+       MESSAGES
+       ======================================== */
+
+    .login-message {
+      display: none;
+
+      padding:
+        12px
+        14px;
+
+      border-radius: 9px;
+
+      font-size: 11px;
+
+      line-height: 1.5;
+    }
+
+    .login-message.show {
+      display: block;
+    }
+
+    .login-message.error {
+      border:
+        1px solid rgba(200, 60, 80, 0.25);
+
+      background:
+        rgba(200, 60, 80, 0.08);
+
+      color: #a22e43;
+    }
+
+    .login-message.success {
+      border:
+        1px solid rgba(52, 199, 123, 0.28);
+
+      background:
+        rgba(52, 199, 123, 0.09);
+
+      color: #167447;
+    }
+
+    .login-security {
+      display: flex;
+
+      gap: 11px;
+
+      margin-top: 25px;
+
+      padding:
+        14px;
+
+      border:
+        1px solid rgba(35, 136, 255, 0.14);
+
+      border-radius: 10px;
+
+      background:
+        rgba(35, 136, 255, 0.045);
+    }
+
+    .login-security-icon {
+      width: 31px;
+      height: 31px;
+
+      flex: 0 0 31px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 8px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #2388ff,
+          #8a3ffc
+        );
+
+      color: white;
+
+      font-size: 14px;
+    }
+
+    .login-security strong {
+      display: block;
+
+      color: var(--ink);
+
+      font-size: 10px;
+    }
+
+    .login-security p {
+      margin:
+        3px
+        0
+        0;
+
+      color: var(--muted);
+
+      font-size: 9px;
+
+      line-height: 1.5;
+    }
+
+    .login-footer {
+      margin-top: 22px;
+
+      color: #8c98a8;
+
+      text-align: center;
+
+      font-size: 9px;
+    }
+
+    /* ========================================
+       MOBILE
+       ======================================== */
+
+    @media (max-width: 850px) {
+      .login-page {
+        grid-template-columns: 1fr;
+      }
+
+      .login-brand-panel {
+        min-height: 260px;
+
+        padding:
+          40px
+          30px;
+      }
+
+      .login-brand-panel::after {
+        width: 320px;
+        height: 320px;
+
+        opacity: 0.12;
+      }
+
+      .login-vb {
+        font-size: 70px;
+      }
+
+      .login-brand h1 {
+        margin-top: 18px;
+
+        font-size: 22px;
+      }
+
+      .login-brand p {
+        display: none;
+      }
+
+      .login-principles {
+        display: none;
+      }
+
+      .login-form-side {
+        padding:
+          35px
+          20px
+          50px;
+      }
+
+      .login-card {
+        padding:
+          32px
+          25px;
+      }
+
+      .login-form-side::before {
+        display: none;
+      }
+    }
+  </style>
+</head>
+
+
+<body>
+
+  <main class="login-page">
+
+
+    <!-- ============================================
+         BRAND SIDE
+    ============================================= -->
+
+    <section class="login-brand-panel">
+
+      <div class="login-brand">
+
+        <div class="login-vb">
+          VB
+        </div>
+
+        <h1>
+          Veterans Backbone
+          <span>Core</span>
+        </h1>
+
+        <p>
+          The operational backbone behind Veterans Backbone.
+          Casework, referrals, workflow, assurance and accountability
+          without turning support into surveillance.
+        </p>
+
+      </div>
+
+
+      <div class="login-principles">
+
+        <strong>
+          Built differently. On purpose.
+        </strong>
+
+        <span>
+          Support without control.
+        </span>
+
+        <span>
+          Accountability without blame.
+        </span>
+
+        <span>
+          Safety without surveillance.
+        </span>
+
+        <span>
+          Structure without rigidity.
+        </span>
+
+      </div>
+
+    </section>
+
+
+    <!-- ============================================
+         LOGIN
+    ============================================= -->
+
+    <section class="login-form-side">
+
+      <div class="login-card">
+
+        <p class="eyebrow">
+          STAFF ACCESS
+        </p>
+
+        <h2>
+          Welcome back.
+        </h2>
+
+        <p class="login-intro">
+          Sign in to Veterans Backbone Core.
+        </p>
+
+
+        <form
+          id="staff-login-form"
+          class="login-form"
+          novalidate
+        >
+
+          <div class="login-field">
+
+            <label for="email">
+              Email address
+            </label>
+
+            <input
+              type="email"
+              id="email"
+              name="email"
+              autocomplete="username"
+              placeholder="you@veteransbackbone.org"
+              required
+            >
+
+          </div>
+
+
+          <div class="login-field">
+
+            <label for="password">
+              Password
+            </label>
+
+            <div class="password-wrap">
+
+              <input
+                type="password"
+                id="password"
+                name="password"
+                autocomplete="current-password"
+                placeholder="Enter your password"
+                required
+              >
+
+              <button
+                type="button"
+                id="password-toggle"
+                class="password-toggle"
+                aria-label="Show password"
+              >
+                Show
+              </button>
+
+            </div>
+
+          </div>
+
+
+          <div
+            id="login-message"
+            class="login-message"
+            role="alert"
+            aria-live="polite"
+          ></div>
+
+
+          <button
+            type="submit"
+            id="login-submit"
+            class="login-submit"
+          >
+            Sign in to VB Core
+          </button>
+
+        </form>
+
+
+        <div class="login-security">
+
+          <div class="login-security-icon">
+            ◆
+          </div>
+
+          <div>
+
+            <strong>
+              Authorised staff only
+            </strong>
+
+            <p>
+              Access is permission-controlled and attributable.
+              Do not share login credentials or attempt to access
+              information outside your authorised role.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="login-footer">
+          Veterans Backbone Core · Development environment
+        </div>
+
+      </div>
+
+    </section>
+
+  </main>
+
+
+  <!--
+    Authentication JavaScript comes next.
+
+    This page deliberately contains NO Supabase URL,
+    anon key, password, service role key or other secret.
+
+    auth.js will handle the real login flow.
+  -->
+
+  <script src="js/auth.js" type="module"></script>
+
+</body>
+</html>
