@@ -1183,3 +1183,589 @@ td strong {
   }
 
 }
+
+
+/* ============================================================
+   VB CORE — PERSONALITY LAYER
+   Added over the original operational UI.
+   Fun baked in. Beige denied entry.
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   VB COLOUR SYSTEM
+   ------------------------------------------------------------ */
+
+:root {
+  --vb-ink: #101827;
+  --vb-pink: #ff3d81;
+  --vb-orange: #ff7a3d;
+  --vb-yellow: #ffc83d;
+  --vb-green: #34c77b;
+  --vb-blue: #4d8dff;
+  --vb-purple: #8b5cf6;
+  --vb-raspberry: #d93664;
+
+  --vb-warm-white: #faf8f4;
+
+  --vb-rainbow:
+    linear-gradient(
+      90deg,
+      #ff3d81 0%,
+      #ff7a3d 18%,
+      #ffc83d 36%,
+      #34c77b 54%,
+      #4d8dff 74%,
+      #8b5cf6 100%
+    );
+}
+
+
+/* ------------------------------------------------------------
+   WARM UP THE APP
+   ------------------------------------------------------------ */
+
+body {
+  background:
+    radial-gradient(
+      circle at 88% 5%,
+      rgba(139, 92, 246, 0.07),
+      transparent 24%
+    ),
+    radial-gradient(
+      circle at 35% 100%,
+      rgba(255, 61, 129, 0.05),
+      transparent 30%
+    ),
+    var(--vb-warm-white);
+}
+
+
+/* ------------------------------------------------------------
+   VB RAINBOW SIGNATURE
+   ------------------------------------------------------------ */
+
+.main-content::before {
+  content: "";
+
+  position: fixed;
+  top: 0;
+  left: var(--sidebar-width);
+  right: 0;
+
+  height: 5px;
+
+  background: var(--vb-rainbow);
+
+  z-index: 50;
+}
+
+
+/* ------------------------------------------------------------
+   SIDEBAR — DARK BUT NOT BORING
+   ------------------------------------------------------------ */
+
+.sidebar {
+  background:
+    radial-gradient(
+      circle at 20% 0%,
+      rgba(77, 141, 255, 0.18),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 100% 45%,
+      rgba(255, 61, 129, 0.11),
+      transparent 30%
+    ),
+    linear-gradient(
+      180deg,
+      #101827 0%,
+      #0b1220 100%
+    );
+}
+
+
+/* VB MARK */
+
+.brand-mark {
+  position: relative;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ff3d81,
+      #ff7a3d 30%,
+      #ffc83d 52%,
+      #4d8dff 75%,
+      #8b5cf6
+    );
+
+  color: white;
+
+  box-shadow:
+    0 5px 18px rgba(255, 61, 129, 0.25);
+}
+
+.brand-text strong {
+  color: white;
+}
+
+.brand-text span {
+  color: #aebcd0;
+}
+
+
+/* ------------------------------------------------------------
+   NAVIGATION PERSONALITY
+   ------------------------------------------------------------ */
+
+.nav-item {
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-item::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 8px;
+  bottom: 8px;
+
+  width: 3px;
+
+  border-radius: 20px;
+
+  background: transparent;
+}
+
+.nav-item:hover {
+  background:
+    rgba(255, 255, 255, 0.08);
+}
+
+.nav-item.active {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 1),
+      rgba(255, 255, 255, 0.93)
+    );
+
+  color: var(--vb-ink);
+
+  box-shadow:
+    0 5px 18px rgba(0, 0, 0, 0.12);
+}
+
+.nav-item.active::before {
+  background:
+    linear-gradient(
+      180deg,
+      var(--vb-pink),
+      var(--vb-orange),
+      var(--vb-purple)
+    );
+}
+
+
+/* ------------------------------------------------------------
+   DASHBOARD TITLE
+   ------------------------------------------------------------ */
+
+.topbar h1 {
+  position: relative;
+  display: inline-block;
+}
+
+.topbar h1::after {
+  content: "";
+
+  display: block;
+
+  width: 55px;
+  height: 4px;
+
+  margin-top: 7px;
+
+  border-radius: 99px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--vb-pink),
+      var(--vb-orange),
+      var(--vb-yellow)
+    );
+}
+
+
+/* ------------------------------------------------------------
+   DEVELOPMENT NOTICE
+   ------------------------------------------------------------ */
+
+.dev-notice {
+  border:
+    1px solid rgba(77, 141, 255, 0.28);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(77, 141, 255, 0.09),
+      rgba(139, 92, 246, 0.06),
+      rgba(255, 61, 129, 0.05)
+    );
+}
+
+
+/* ------------------------------------------------------------
+   STAT CARDS
+   ------------------------------------------------------------ */
+
+.stat-card {
+  position: relative;
+  overflow: hidden;
+
+  border:
+    1px solid rgba(17, 29, 47, 0.09);
+
+  transition:
+    transform 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+.stat-card::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 4px;
+}
+
+.stat-card:nth-child(1)::before {
+  background: var(--vb-pink);
+}
+
+.stat-card:nth-child(2)::before {
+  background: var(--vb-yellow);
+}
+
+.stat-card:nth-child(3)::before {
+  background: var(--vb-orange);
+}
+
+.stat-card:nth-child(4)::before {
+  background: var(--vb-purple);
+}
+
+.stat-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 10px 25px rgba(17, 29, 47, 0.11);
+}
+
+
+/* stronger icon colours */
+
+.stat-icon.blue {
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 61, 129, 0.14),
+      rgba(139, 92, 246, 0.12)
+    );
+
+  color: var(--vb-pink);
+}
+
+.stat-icon.amber {
+  background: rgba(255, 200, 61, 0.18);
+  color: #c88200;
+}
+
+.stat-icon.green {
+  background: rgba(255, 122, 61, 0.14);
+  color: var(--vb-orange);
+}
+
+.stat-icon.purple {
+  background: rgba(139, 92, 246, 0.14);
+  color: var(--vb-purple);
+}
+
+
+/* ------------------------------------------------------------
+   PANELS
+   ------------------------------------------------------------ */
+
+.panel {
+  border:
+    1px solid rgba(17, 29, 47, 0.09);
+
+  box-shadow:
+    0 6px 20px rgba(16, 24, 39, 0.06);
+}
+
+.dashboard-grid .panel:first-child {
+  border-top:
+    3px solid var(--vb-pink);
+}
+
+.assurance-panel {
+  border-top:
+    3px solid var(--vb-yellow);
+}
+
+.wide-panel {
+  border-top:
+    3px solid var(--vb-blue);
+}
+
+
+/* ------------------------------------------------------------
+   WORKFLOW
+   ------------------------------------------------------------ */
+
+.priority-bar.urgent {
+  background:
+    linear-gradient(
+      180deg,
+      var(--vb-pink),
+      var(--vb-raspberry)
+    );
+}
+
+.priority-bar.normal {
+  background:
+    linear-gradient(
+      180deg,
+      var(--vb-blue),
+      var(--vb-purple)
+    );
+}
+
+
+/* ------------------------------------------------------------
+   ASSURANCE
+   Keep serious information calm.
+   ------------------------------------------------------------ */
+
+.assurance-message {
+  border:
+    1px solid rgba(255, 200, 61, 0.38);
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 200, 61, 0.17),
+      rgba(255, 122, 61, 0.08)
+    );
+}
+
+.assurance-symbol {
+  background:
+    linear-gradient(
+      135deg,
+      var(--vb-yellow),
+      var(--vb-orange)
+    );
+
+  box-shadow:
+    0 4px 12px rgba(255, 122, 61, 0.18);
+}
+
+
+/* ------------------------------------------------------------
+   PRIMARY ACTIONS
+   ------------------------------------------------------------ */
+
+.primary-button {
+  position: relative;
+
+  border: 0;
+
+  background:
+    linear-gradient(
+      100deg,
+      var(--vb-pink),
+      var(--vb-orange)
+    );
+
+  color: white;
+
+  box-shadow:
+    0 5px 14px rgba(255, 61, 129, 0.20);
+}
+
+.primary-button:hover {
+  background:
+    linear-gradient(
+      100deg,
+      #ef2d70,
+      #f26c30
+    );
+
+  box-shadow:
+    0 7px 18px rgba(255, 61, 129, 0.28);
+}
+
+
+/* ------------------------------------------------------------
+   TEXT LINKS
+   ------------------------------------------------------------ */
+
+.text-button,
+.row-button {
+  color: var(--vb-pink);
+}
+
+
+/* ------------------------------------------------------------
+   STATUS PILLS
+   ------------------------------------------------------------ */
+
+.status-pill.active {
+  background:
+    rgba(52, 199, 123, 0.14);
+
+  color: #16814b;
+}
+
+.status-pill.review {
+  background:
+    rgba(255, 200, 61, 0.18);
+
+  color: #a56800;
+}
+
+
+/* ------------------------------------------------------------
+   TABLE PERSONALITY
+   ------------------------------------------------------------ */
+
+th {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(77, 141, 255, 0.045),
+      rgba(139, 92, 246, 0.035)
+    );
+}
+
+tbody tr {
+  transition:
+    background 0.15s ease;
+}
+
+tbody tr:hover {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 61, 129, 0.035),
+      rgba(77, 141, 255, 0.035)
+    );
+}
+
+
+/* ------------------------------------------------------------
+   SYSTEM STATUS
+   ------------------------------------------------------------ */
+
+.status-dot {
+  background: var(--vb-green);
+
+  box-shadow:
+    0 0 0 4px rgba(52, 199, 123, 0.13),
+    0 0 12px rgba(52, 199, 123, 0.32);
+}
+
+
+/* ------------------------------------------------------------
+   STAFF AVATAR
+   ------------------------------------------------------------ */
+
+.staff-avatar {
+  background:
+    linear-gradient(
+      135deg,
+      var(--vb-pink),
+      var(--vb-purple)
+    );
+
+  box-shadow:
+    0 4px 12px rgba(139, 92, 246, 0.18);
+}
+
+
+/* ------------------------------------------------------------
+   FOOTER / STEVE ZONE
+   ------------------------------------------------------------ */
+
+.app-footer {
+  position: relative;
+
+  margin-top: 25px;
+
+  padding:
+    18px
+    15px
+    5px;
+
+  border-top: 0;
+}
+
+.app-footer::before {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
+
+  height: 2px;
+
+  border-radius: 99px;
+
+  background: var(--vb-rainbow);
+}
+
+.footer-mark {
+  filter:
+    drop-shadow(
+      0 3px 4px rgba(139, 92, 246, 0.18)
+    );
+
+  transform: rotate(-7deg);
+}
+
+
+/* ------------------------------------------------------------
+   LITTLE BIT OF VB MISCHIEF
+   ------------------------------------------------------------ */
+
+.section-heading h2::selection,
+.panel-header h2::selection,
+.topbar h1::selection {
+  background: var(--vb-pink);
+  color: white;
+}
+
+
+/* ------------------------------------------------------------
+   MOBILE RAINBOW FIX
+   ------------------------------------------------------------ */
+
+@media (max-width: 760px) {
+
+  .main-content::before {
+    left: 0;
+  }
+
+}
