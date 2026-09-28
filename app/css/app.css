@@ -1769,3 +1769,712 @@ tbody tr:hover {
   }
 
 }
+
+/* ============================================================
+   VB CORE — MASTER VISUAL LAYER
+   Steve has entered the building.
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   MAIN WORKSPACE + STEVE WATERMARK
+   ------------------------------------------------------------ */
+
+.main-content {
+  position: relative;
+  isolation: isolate;
+
+  background:
+    radial-gradient(
+      circle at 85% 18%,
+      rgba(255, 61, 129, 0.08),
+      transparent 25%
+    ),
+    radial-gradient(
+      circle at 55% 80%,
+      rgba(77, 141, 255, 0.07),
+      transparent 30%
+    ),
+    #faf8f4;
+}
+
+
+/* Steve himself */
+
+.main-content::after {
+  content: "";
+
+  position: fixed;
+
+  right: -70px;
+  bottom: -110px;
+
+  width: min(47vw, 720px);
+  height: 82vh;
+
+  background-image:
+    url("../../images/watermark.png");
+
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-size: contain;
+
+  opacity: 0.055;
+
+  filter:
+    grayscale(25%)
+    saturate(80%);
+
+  pointer-events: none;
+
+  z-index: -1;
+}
+
+
+/* ------------------------------------------------------------
+   TOP RAINBOW
+   ------------------------------------------------------------ */
+
+.main-content::before {
+  height: 6px;
+
+  background:
+    linear-gradient(
+      90deg,
+      #ff3d81 0%,
+      #ff7a3d 18%,
+      #ffc83d 36%,
+      #34c77b 54%,
+      #4d8dff 74%,
+      #8b5cf6 100%
+    );
+
+  box-shadow:
+    0 2px 12px rgba(139, 92, 246, 0.16);
+}
+
+
+/* ------------------------------------------------------------
+   SIDEBAR — MORE VB
+   ------------------------------------------------------------ */
+
+.sidebar {
+  background:
+    radial-gradient(
+      circle at -10% 12%,
+      rgba(255, 61, 129, 0.22),
+      transparent 20%
+    ),
+    radial-gradient(
+      circle at 110% 42%,
+      rgba(139, 92, 246, 0.18),
+      transparent 26%
+    ),
+    radial-gradient(
+      circle at 30% 90%,
+      rgba(77, 141, 255, 0.12),
+      transparent 24%
+    ),
+    linear-gradient(
+      180deg,
+      #111827 0%,
+      #090f1a 100%
+    );
+}
+
+
+/* little colour slash behind branding */
+
+.brand {
+  position: relative;
+  overflow: hidden;
+}
+
+.brand::after {
+  content: "";
+
+  position: absolute;
+
+  width: 120px;
+  height: 35px;
+
+  left: -25px;
+  bottom: -25px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 61, 129, 0.32),
+      rgba(139, 92, 246, 0.18)
+    );
+
+  transform: rotate(-8deg);
+
+  filter: blur(12px);
+
+  pointer-events: none;
+}
+
+
+/* ------------------------------------------------------------
+   VB BRAND MARK
+   Uses the existing VB lettering but gives it more presence.
+   ------------------------------------------------------------ */
+
+.brand-mark {
+  width: 46px;
+  height: 46px;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ff3d81,
+      #ff7a3d 28%,
+      #ffc83d 48%,
+      #4d8dff 72%,
+      #8b5cf6
+    );
+
+  border:
+    1px solid rgba(255, 255, 255, 0.24);
+
+  box-shadow:
+    0 0 0 3px rgba(255, 255, 255, 0.04),
+    0 8px 22px rgba(255, 61, 129, 0.26);
+
+  font-size: 15px;
+  font-weight: 950;
+
+  transform: rotate(-2deg);
+}
+
+.brand-text strong {
+  font-size: 13px;
+  letter-spacing: 0.1px;
+}
+
+.brand-text span {
+  margin-top: 2px;
+
+  color: #ff5b96;
+
+  font-size: 11px;
+  font-weight: 800;
+
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+}
+
+
+/* ------------------------------------------------------------
+   NAV — COLOUR-CODED PERSONALITY
+   ------------------------------------------------------------ */
+
+.main-nav .nav-item:nth-of-type(1)::before {
+  background: var(--vb-pink);
+}
+
+.main-nav .nav-item:nth-of-type(2):hover {
+  color: #ff6aa0;
+}
+
+.main-nav .nav-item:nth-of-type(3):hover {
+  color: #72a7ff;
+}
+
+.main-nav .nav-item:nth-of-type(4):hover {
+  color: #ff9867;
+}
+
+.main-nav .nav-item:nth-of-type(5):hover {
+  color: #ff5b96;
+}
+
+.nav-label {
+  color: #8291a7;
+
+  letter-spacing: 1.6px;
+}
+
+
+/* ------------------------------------------------------------
+   TOPBAR
+   ------------------------------------------------------------ */
+
+.topbar {
+  position: relative;
+
+  background:
+    rgba(250, 248, 244, 0.70);
+
+  backdrop-filter: blur(6px);
+}
+
+.topbar .eyebrow {
+  color: var(--vb-purple);
+
+  font-weight: 900;
+}
+
+.topbar h1 {
+  font-weight: 850;
+}
+
+
+/* colourful underline */
+
+.topbar h1::after {
+  width: 72px;
+  height: 5px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--vb-pink),
+      var(--vb-orange),
+      var(--vb-yellow)
+    );
+
+  transform: rotate(-1deg);
+
+  box-shadow:
+    0 2px 5px rgba(255, 61, 129, 0.12);
+}
+
+
+/* ------------------------------------------------------------
+   STAFF PROFILE
+   ------------------------------------------------------------ */
+
+.staff-avatar {
+  border:
+    2px solid rgba(255, 255, 255, 0.85);
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--vb-pink),
+      var(--vb-purple)
+    );
+
+  box-shadow:
+    0 5px 16px rgba(139, 92, 246, 0.25);
+}
+
+
+/* ------------------------------------------------------------
+   DEVELOPMENT BAR
+   ------------------------------------------------------------ */
+
+.dev-notice {
+  position: relative;
+  overflow: hidden;
+
+  border:
+    1px solid rgba(139, 92, 246, 0.22);
+
+  background:
+    linear-gradient(
+      100deg,
+      rgba(77, 141, 255, 0.10),
+      rgba(139, 92, 246, 0.08),
+      rgba(255, 61, 129, 0.07)
+    );
+
+  backdrop-filter: blur(8px);
+}
+
+.dev-notice::before {
+  content: "";
+
+  width: 4px;
+
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+
+  background:
+    linear-gradient(
+      180deg,
+      var(--vb-blue),
+      var(--vb-purple),
+      var(--vb-pink)
+    );
+}
+
+
+/* ------------------------------------------------------------
+   SECTION HEADINGS
+   ------------------------------------------------------------ */
+
+.section-heading h2,
+.panel-header h2 {
+  font-weight: 850;
+}
+
+.section-heading h2 {
+  position: relative;
+  display: inline-block;
+}
+
+.section-heading h2::after {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  bottom: -7px;
+
+  width: 38px;
+  height: 3px;
+
+  border-radius: 20px;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--vb-pink),
+      var(--vb-orange)
+    );
+}
+
+
+/* ------------------------------------------------------------
+   GLASSY CARDS
+   Steve can faintly show through without ruining readability.
+   ------------------------------------------------------------ */
+
+.stat-card,
+.panel {
+  background:
+    rgba(255, 255, 255, 0.91);
+
+  backdrop-filter:
+    blur(8px);
+
+  -webkit-backdrop-filter:
+    blur(8px);
+}
+
+.stat-card {
+  box-shadow:
+    0 7px 22px rgba(16, 24, 39, 0.07);
+}
+
+.stat-card:hover {
+  transform:
+    translateY(-4px)
+    rotate(-0.2deg);
+
+  box-shadow:
+    0 12px 30px rgba(16, 24, 39, 0.12);
+}
+
+
+/* ------------------------------------------------------------
+   DASHBOARD CARD ACCENTS
+   ------------------------------------------------------------ */
+
+.stat-card:nth-child(1)::before {
+  background:
+    linear-gradient(
+      90deg,
+      var(--vb-pink),
+      #ff6d9f
+    );
+}
+
+.stat-card:nth-child(2)::before {
+  background:
+    linear-gradient(
+      90deg,
+      var(--vb-yellow),
+      var(--vb-orange)
+    );
+}
+
+.stat-card:nth-child(3)::before {
+  background:
+    linear-gradient(
+      90deg,
+      var(--vb-orange),
+      var(--vb-pink)
+    );
+}
+
+.stat-card:nth-child(4)::before {
+  background:
+    linear-gradient(
+      90deg,
+      var(--vb-blue),
+      var(--vb-purple)
+    );
+}
+
+
+/* ------------------------------------------------------------
+   PANEL ACCENTS
+   ------------------------------------------------------------ */
+
+.dashboard-grid .panel:first-child {
+  border-top:
+    4px solid transparent;
+
+  border-image:
+    linear-gradient(
+      90deg,
+      var(--vb-pink),
+      var(--vb-purple)
+    ) 1;
+}
+
+.assurance-panel {
+  border-top:
+    4px solid transparent;
+
+  border-image:
+    linear-gradient(
+      90deg,
+      var(--vb-yellow),
+      var(--vb-orange)
+    ) 1;
+}
+
+.wide-panel {
+  border-top:
+    4px solid transparent;
+
+  border-image:
+    linear-gradient(
+      90deg,
+      var(--vb-blue),
+      var(--vb-purple)
+    ) 1;
+}
+
+
+/* ------------------------------------------------------------
+   ASSURANCE — COLOURFUL, BUT NOT SILLY
+   ------------------------------------------------------------ */
+
+.assurance-message {
+  background:
+    linear-gradient(
+      105deg,
+      rgba(255, 200, 61, 0.18),
+      rgba(255, 122, 61, 0.09),
+      rgba(255, 255, 255, 0.5)
+    );
+
+  border:
+    1px solid rgba(255, 166, 50, 0.40);
+}
+
+.assurance-symbol {
+  background:
+    linear-gradient(
+      135deg,
+      var(--vb-yellow),
+      var(--vb-orange)
+    );
+
+  color: #fff;
+
+  box-shadow:
+    0 5px 14px rgba(255, 122, 61, 0.25);
+}
+
+
+/* ------------------------------------------------------------
+   BUTTONS
+   ------------------------------------------------------------ */
+
+.primary-button {
+  background:
+    linear-gradient(
+      100deg,
+      var(--vb-pink),
+      var(--vb-orange)
+    );
+
+  box-shadow:
+    0 6px 18px rgba(255, 61, 129, 0.24);
+}
+
+.primary-button:hover {
+  transform:
+    translateY(-2px)
+    rotate(-0.5deg);
+}
+
+.secondary-button,
+.row-button {
+  transition:
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
+}
+
+.secondary-button:hover,
+.row-button:hover {
+  transform: translateY(-1px);
+
+  border-color:
+    rgba(255, 61, 129, 0.35);
+
+  box-shadow:
+    0 5px 12px rgba(255, 61, 129, 0.09);
+}
+
+
+/* ------------------------------------------------------------
+   TASKS
+   ------------------------------------------------------------ */
+
+.task-item {
+  position: relative;
+
+  transition:
+    background 0.15s ease,
+    padding-left 0.15s ease;
+}
+
+.task-item:hover {
+  padding-left: 5px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 61, 129, 0.035),
+      transparent
+    );
+}
+
+
+/* ------------------------------------------------------------
+   TABLE
+   ------------------------------------------------------------ */
+
+.table-wrap {
+  background:
+    rgba(255, 255, 255, 0.70);
+}
+
+tbody tr:hover {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(77, 141, 255, 0.06),
+      rgba(255, 61, 129, 0.035),
+      transparent
+    );
+}
+
+
+/* ------------------------------------------------------------
+   STEVE EASTER-EGG FOOTER
+   ------------------------------------------------------------ */
+
+.footer-mark {
+  position: relative;
+
+  font-size: 29px;
+
+  animation:
+    steveWobble 7s ease-in-out infinite;
+}
+
+@keyframes steveWobble {
+
+  0%,
+  90%,
+  100% {
+    transform: rotate(-7deg);
+  }
+
+  94% {
+    transform: rotate(4deg);
+  }
+
+  97% {
+    transform: rotate(-2deg);
+  }
+
+}
+
+
+/* ------------------------------------------------------------
+   EXTRA VB GRAFFITI-ISH DETAIL
+   ------------------------------------------------------------ */
+
+.panel-header .eyebrow,
+.section-heading .eyebrow {
+  font-weight: 900;
+
+  letter-spacing: 1.7px;
+}
+
+.panel-header .eyebrow {
+  color: var(--vb-purple);
+}
+
+.dashboard-grid .panel:first-child
+.panel-header .eyebrow {
+  color: var(--vb-pink);
+}
+
+.assurance-panel
+.panel-header .eyebrow {
+  color: #d98b00;
+}
+
+.wide-panel
+.panel-header .eyebrow {
+  color: var(--vb-blue);
+}
+
+
+/* ------------------------------------------------------------
+   MOBILE STEVE
+   Don't let the daft bastard consume the entire phone screen.
+   ------------------------------------------------------------ */
+
+@media (max-width: 760px) {
+
+  .main-content::after {
+    width: 430px;
+    height: 55vh;
+
+    right: -180px;
+    bottom: -60px;
+
+    opacity: 0.035;
+  }
+
+}
+
+
+/* ------------------------------------------------------------
+   ACCESSIBILITY
+   Respect users who request reduced motion.
+   ------------------------------------------------------------ */
+
+@media (prefers-reduced-motion: reduce) {
+
+  .footer-mark {
+    animation: none;
+  }
+
+  .stat-card,
+  .nav-item,
+  .primary-button,
+  .secondary-button,
+  .row-button,
+  .task-item {
+    transition: none;
+  }
+
+}
