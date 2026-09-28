@@ -23,7 +23,7 @@ import { createClient } from
    ============================================================ */
 
 const SUPABASE_URL =
-  "https://jygyriqtiuxjlcltpks.supabase.co";
+  "https://jygyirqtiuxjllcltpks.supabase.co";
 
 const SUPABASE_PUBLISHABLE_KEY =
   "sb_publishable_36yMEHR4-bWypaun6X2oNw_fTaoOt9p";
