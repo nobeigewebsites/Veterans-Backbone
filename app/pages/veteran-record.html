@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Veteran Record | Veterans Backbone Core</title>
+
+  <meta
+    name="description"
+    content="Veterans Backbone Core operational veteran record."
+  >
+
+  <link rel="stylesheet" href="../css/app.css">
+</head>
+
+<body>
+
+<div class="app-shell">
+
+  <!-- =====================================================
+       SIDEBAR
+  ====================================================== -->
+
+  <aside class="sidebar">
+
+    <div class="brand">
+
+      <div class="brand-mark">
+        VB
+      </div>
+
+      <div class="brand-text">
+        <strong>Veterans Backbone</strong>
+        <span>Core</span>
+      </div>
+
+    </div>
+
+
+    <nav class="main-nav" aria-label="Main navigation">
+
+      <p class="nav-label">WORKSPACE</p>
+
+      <a href="../index.html" class="nav-item">
+        <span class="nav-icon">⌂</span>
+        <span>Dashboard</span>
+      </a>
+
+      <a href="veterans.html" class="nav-item active">
+        <span class="nav-icon">★</span>
+        <span>Veterans</span>
+      </a>
+
+      <a href="casework.html" class="nav-item">
+        <span class="nav-icon">▣</span>
+        <span>Casework</span>
+      </a>
+
+      <a href="referrals.html" class="nav-item">
+        <span class="nav-icon">↗</span>
+        <span>Referrals</span>
+      </a>
+
+      <a href="workflow-tasks.html" class="nav-item">
+        <span class="nav-icon">✓</span>
+        <span>Workflow Tasks</span>
+
+        <span class="nav-count">
+          6
+        </span>
+      </a>
+
+
+      <p class="nav-label">ASSURANCE</p>
+
+      <a href="assurance.html" class="nav-item">
+        <span class="nav-icon">!</span>
+        <span>Assurance Queue</span>
+
+        <span class="nav-count warning">
+          2
+        </span>
+      </a>
+
+      <a href="safeguarding.html" class="nav-item">
+        <span class="nav-icon">◆</span>
+        <span>Safeguarding</span>
+      </a>
+
+
+      <p class="nav-label">SERVICES</p>
+
+      <a href="programmes.html" class="nav-item">
+        <span class="nav-icon">◈</span>
+        <span>Programmes</span>
+      </a>
+
+      <a href="partners.html" class="nav-item">
+        <span class="nav-icon">◎</span>
+        <span>Partners</span>
+      </a>
+
+
+      <p class="nav-label">ORGANISATION</p>
+
+      <a href="workforce.html" class="nav-item">
+        <span class="nav-icon">♟</span>
+        <span>Workforce</span>
+      </a>
+
+      <a href="governance.html" class="nav-item">
+        <span class="nav-icon">§</span>
+        <span>Governance</span>
+      </a>
+
+      <a href="policy-brain.html" class="nav-item">
+        <span class="nav-icon">▤</span>
+        <span>Policy Brain</span>
+      </a>
+
+      <a href="reporting.html" class="nav-item">
+        <span class="nav-icon">▥</span>
+        <span>Reporting</span>
+      </a>
+
+    </nav>
+
+
+    <div class="sidebar-footer">
+
+      <div class="system-status">
+
+        <span class="status-dot"></span>
+
+        <div>
+          <strong>System operational</strong>
+          <span>Development environment</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </aside>
+
+
+  <!-- =====================================================
+       MAIN CONTENT
+  ====================================================== -->
+
+  <main class="main-content veteran-record-page">
+
+
+    <!-- =====================================================
+         TOP BAR
+    ====================================================== -->
+
+    <header class="topbar">
+
+      <div>
+
+        <p class="eyebrow">
+          VETERANS BACKBONE CORE
+        </p>
+
+        <h1>
+          Veteran record
+        </h1>
+
+      </div>
+
+
+      <div class="topbar-actions">
+
+        <button
+          class="search-button"
+          type="button"
+        >
+          Search veterans...
+        </button>
+
+
+        <div class="staff-profile">
+
+          <div class="staff-avatar">
+            SW
+          </div>
+
+          <div>
+            <strong>Support Worker</strong>
+            <span>Site 1 · DEV</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         DEVELOPMENT NOTICE
+    ====================================================== -->
+
+    <section class="dev-notice">
+
+      <strong>
+        Development environment
+      </strong>
+
+      <span>
+        Fictional data only. No real veteran information is stored here.
+      </span>
+
+    </section>
+
+
+    <!-- =====================================================
+         BREADCRUMB
+    ====================================================== -->
+
+    <nav class="record-breadcrumb" aria-label="Breadcrumb">
+
+      <a href="veterans.html">
+        Veterans
+      </a>
+
+      <span>›</span>
+
+      <strong>
+        VB-000001
+      </strong>
+
+    </nav>
+
+
+    <!-- =====================================================
+         RECORD HERO
+    ====================================================== -->
+
+    <section class="record-hero">
+
+      <div class="record-hero-main">
+
+        <div class="veteran-avatar">
+          VB
+        </div>
+
+        <div>
+
+          <p class="eyebrow">
+            VETERAN CORE RECORD
+          </p>
+
+          <h2>
+            VB-000001
+          </h2>
+
+          <div class="record-hero-meta">
+
+            <span class="status-pill active">
+              Active
+            </span>
+
+            <span>
+              CASE-000001
+            </span>
+
+            <span>
+              Site 1
+            </span>
+
+            <span>
+              Assigned: Support Worker
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <div class="record-hero-actions">
+
+        <button
+          class="secondary-button"
+          type="button"
+        >
+          View identity
+        </button>
+
+        <button
+          class="primary-button"
+          type="button"
+        >
+          + Record activity
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         IDENTITY CONTROL NOTICE
+    ====================================================== -->
+
+    <section class="identity-control-notice">
+
+      <div class="privacy-icon">
+        ◈
+      </div>
+
+      <div>
+
+        <strong>
+          Operational record
+        </strong>
+
+        <p>
+          This workspace uses the veteran's VB identifier by default.
+          Identity information is held separately and access is
+          permission-controlled.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         RECORD NAVIGATION
+    ====================================================== -->
+
+    <nav class="record-tabs" aria-label="Veteran record sections">
+
+      <a href="#overview" class="record-tab active">
+        Overview
+      </a>
+
+      <a href="#timeline" class="record-tab">
+        Timeline
+      </a>
+
+      <a href="#casework" class="record-tab">
+        Casework
+      </a>
+
+      <a href="#referrals" class="record-tab">
+        Referrals
+      </a>
+
+      <a href="#workflow" class="record-tab">
+        Workflow
+      </a>
+
+      <a href="#assurance" class="record-tab">
+        Assurance
+      </a>
+
+    </nav>
+
+
+    <!-- =====================================================
+         OVERVIEW
+    ====================================================== -->
+
+    <section id="overview" class="record-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            TODAY
+          </p>
+
+          <h2>
+            What matters now
+          </h2>
+
+        </div>
+
+        <span class="section-note">
+          The system surfaces work. People make decisions.
+        </span>
+
+      </div>
+
+
+      <div class="record-attention-grid">
+
+
+        <!-- NEXT ACTION -->
+
+        <article class="record-summary-card next-action-card">
+
+          <div class="record-card-heading">
+
+            <span class="summary-icon pink">
+              →
+            </span>
+
+            <div>
+
+              <p class="eyebrow">
+                NEXT ACTION
+              </p>
+
+              <h3>
+                Review referral progress
+              </h3>
+
+            </div>
+
+          </div>
+
+          <p>
+            Follow-up information is available and requires
+            human review before the next action is recorded.
+          </p>
+
+          <div class="summary-card-footer">
+
+            <span class="tag action">
+              Due today
+            </span>
+
+            <button
+              class="row-button"
+              type="button"
+            >
+              Open task
+            </button>
+
+          </div>
+
+        </article>
+
+
+        <!-- WORKFLOW -->
+
+        <article class="record-summary-card">
+
+          <div class="record-card-heading">
+
+            <span class="summary-icon purple">
+              ✓
+            </span>
+
+            <div>
+
+              <p class="eyebrow">
+                WORKFLOW
+              </p>
+
+              <h3>
+                2 open tasks
+              </h3>
+
+            </div>
+
+          </div>
+
+          <p>
+            One task is due today. One further workflow step
+            remains open.
+          </p>
+
+          <div class="summary-card-footer">
+
+            <span>
+              Human action required
+            </span>
+
+            <a href="#workflow" class="text-button">
+              View tasks
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- ASSURANCE -->
+
+        <article class="record-summary-card assurance-summary-card">
+
+          <div class="record-card-heading">
+
+            <span class="summary-icon orange">
+              !
+            </span>
+
+            <div>
+
+              <p class="eyebrow">
+                ASSURANCE
+              </p>
+
+              <h3>
+                1 item needs assessment
+              </h3>
+
+            </div>
+
+          </div>
+
+          <p>
+            The system has identified something requiring attention.
+            No decision has been made.
+          </p>
+
+          <div class="summary-card-footer">
+
+            <span class="tag warning">
+              Human review
+            </span>
+
+            <a href="#assurance" class="text-button">
+              Assess
+            </a>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CASE OVERVIEW
+    ====================================================== -->
+
+    <section class="record-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            CASE
+          </p>
+
+          <h2>
+            Current case
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="case-overview-panel">
+
+        <div class="case-overview-main">
+
+          <div class="case-reference">
+
+            <span class="record-label">
+              CASE ID
+            </span>
+
+            <strong>
+              CASE-000001
+            </strong>
+
+          </div>
+
+
+          <div>
+
+            <span class="record-label">
+              STATUS
+            </span>
+
+            <span class="status-pill active">
+              Active
+            </span>
+
+          </div>
+
+
+          <div>
+
+            <span class="record-label">
+              SITE
+            </span>
+
+            <strong>
+              Site 1
+            </strong>
+
+          </div>
+
+
+          <div>
+
+            <span class="record-label">
+              ASSIGNED
+            </span>
+
+            <strong>
+              Support Worker
+            </strong>
+
+          </div>
+
+
+          <div>
+
+            <span class="record-label">
+              OPENED
+            </span>
+
+            <strong>
+              20 Sep 2026
+            </strong>
+
+          </div>
+
+        </div>
+
+
+        <div class="case-overview-actions">
+
+          <button
+            class="secondary-button"
+            type="button"
+          >
+            Add note
+          </button>
+
+          <button
+            class="secondary-button"
+            type="button"
+          >
+            Add action
+          </button>
+
+          <button
+            class="row-button"
+            type="button"
+          >
+            Open case
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         TIMELINE
+    ====================================================== -->
+
+    <section id="timeline" class="record-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            ACTIVITY
+          </p>
+
+          <h2>
+            Recent timeline
+          </h2>
+
+        </div>
+
+        <button
+          class="text-button"
+          type="button"
+        >
+          View full timeline
+        </button>
+
+      </div>
+
+
+      <div class="timeline-panel">
+
+
+        <!-- TIMELINE ITEM -->
+
+        <article class="timeline-item">
+
+          <div class="timeline-marker pink"></div>
+
+          <div class="timeline-date">
+
+            <strong>
+              28 Sep
+            </strong>
+
+            <span>
+              10:30
+            </span>
+
+          </div>
+
+          <div class="timeline-content">
+
+            <span class="timeline-type">
+              CASEWORK
+            </span>
+
+            <h3>
+              Contact outcome recorded
+            </h3>
+
+            <p>
+              Follow-up contact completed. Next action recorded
+              for referral review.
+            </p>
+
+            <span class="timeline-owner">
+              Support Worker
+            </span>
+
+          </div>
+
+        </article>
+
+
+        <!-- TIMELINE ITEM -->
+
+        <article class="timeline-item">
+
+          <div class="timeline-marker orange"></div>
+
+          <div class="timeline-date">
+
+            <strong>
+              27 Sep
+            </strong>
+
+            <span>
+              15:10
+            </span>
+
+          </div>
+
+          <div class="timeline-content">
+
+            <span class="timeline-type">
+              REFERRAL
+            </span>
+
+            <h3>
+              Referral follow-up recorded
+            </h3>
+
+            <p>
+              External referral progress checked and a further
+              review step created.
+            </p>
+
+            <span class="timeline-owner">
+              Support Worker
+            </span>
+
+          </div>
+
+        </article>
+
+
+        <!-- TIMELINE ITEM -->
+
+        <article class="timeline-item">
+
+          <div class="timeline-marker purple"></div>
+
+          <div class="timeline-date">
+
+            <strong>
+              26 Sep
+            </strong>
+
+            <span>
+              09:15
+            </span>
+
+          </div>
+
+          <div class="timeline-content">
+
+            <span class="timeline-type">
+              WORKFLOW
+            </span>
+
+            <h3>
+              Workflow step completed
+            </h3>
+
+            <p>
+              Required operational step recorded and the next
+              workflow step became available.
+            </p>
+
+            <span class="timeline-owner">
+              Support Worker
+            </span>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CASEWORK
+    ====================================================== -->
+
+    <section id="casework" class="record-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            CASEWORK
+          </p>
+
+          <h2>
+            Notes & actions
+          </h2>
+
+        </div>
+
+        <div class="section-actions">
+
+          <button
+            class="secondary-button"
+            type="button"
+          >
+            + Note
+          </button>
+
+          <button
+            class="secondary-button"
+            type="button"
+          >
+            + Action
+          </button>
+
+        </div>
+
+      </div>
+
+
+      <div class="record-two-column">
+
+
+        <article class="record-panel">
+
+          <div class="record-panel-header">
+
+            <div>
+
+              <p class="eyebrow">
+                RECENT NOTE
+              </p>
+
+              <h3>
+                Follow-up contact
+              </h3>
+
+            </div>
+
+            <span>
+              28 Sep 2026
+            </span>
+
+          </div>
+
+          <p>
+            Contact completed and next steps recorded.
+            Further referral review required.
+          </p>
+
+          <div class="record-panel-meta">
+            Recorded by Support Worker
+          </div>
+
+        </article>
+
+
+        <article class="record-panel">
+
+          <div class="record-panel-header">
+
+            <div>
+
+              <p class="eyebrow">
+                OPEN ACTION
+              </p>
+
+              <h3>
+                Review referral progress
+              </h3>
+
+            </div>
+
+            <span class="tag action">
+              Due today
+            </span>
+
+          </div>
+
+          <p>
+            Review available referral information and record
+            the appropriate human-led next step.
+          </p>
+
+          <div class="record-panel-meta">
+            Assigned to Support Worker
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         REFERRALS
+    ====================================================== -->
+
+    <section id="referrals" class="record-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            REFERRAL BRIDGE
+          </p>
+
+          <h2>
+            Referrals
+          </h2>
+
+        </div>
+
+        <button
+          class="primary-button"
+          type="button"
+        >
+          + New referral
+        </button>
+
+      </div>
+
+
+      <div class="referral-record-panel">
+
+        <div>
+
+          <span class="record-label">
+            REFERRAL
+          </span>
+
+          <strong>
+            REF-000001
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span class="record-label">
+            DESTINATION
+          </span>
+
+          <strong>
+            Fictional Partner Service
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span class="record-label">
+            STATUS
+          </span>
+
+          <span class="status-pill review">
+            Review required
+          </span>
+
+        </div>
+
+
+        <div>
+
+          <span class="record-label">
+            NEXT STEP
+          </span>
+
+          <strong>
+            Review progress
+          </strong>
+
+        </div>
+
+
+        <div>
+
+          <span class="record-label">
+            FOLLOW-UP
+          </span>
+
+          <strong>
+            Due
+          </strong>
+
+        </div>
+
+
+        <button
+          class="row-button"
+          type="button"
+        >
+          Open referral
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         WORKFLOW
+    ====================================================== -->
+
+    <section id="workflow" class="record-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            WORKFLOW
+          </p>
+
+          <h2>
+            Open workflow
+          </h2>
+
+        </div>
+
+        <a href="workflow-tasks.html" class="text-button">
+          View all tasks
+        </a>
+
+      </div>
+
+
+      <div class="workflow-record-panel">
+
+
+        <article class="workflow-record-step available">
+
+          <div class="workflow-step-number">
+            1
+          </div>
+
+          <div class="workflow-step-content">
+
+            <span class="record-label">
+              CURRENT STEP
+            </span>
+
+            <h3>
+              Review referral progress
+            </h3>
+
+            <p>
+              Human review required before the workflow can progress.
+            </p>
+
+          </div>
+
+          <span class="tag action">
+            Due today
+          </span>
+
+          <button
+            class="row-button"
+            type="button"
+          >
+            Open
+          </button>
+
+        </article>
+
+
+        <article class="workflow-record-step pending">
+
+          <div class="workflow-step-number">
+            2
+          </div>
+
+          <div class="workflow-step-content">
+
+            <span class="record-label">
+              NEXT STEP
+            </span>
+
+            <h3>
+              Record review outcome
+            </h3>
+
+            <p>
+              Available after the current step has been completed.
+            </p>
+
+          </div>
+
+          <span class="tag">
+            Pending
+          </span>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         ASSURANCE
+    ====================================================== -->
+
+    <section id="assurance" class="record-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            ASSURANCE
+          </p>
+
+          <h2>
+            Needs a human
+          </h2>
+
+        </div>
+
+        <a href="assurance.html" class="text-button">
+          Open assurance queue
+        </a>
+
+      </div>
+
+
+      <div class="record-assurance-panel">
+
+        <div class="assurance-symbol">
+          !
+        </div>
+
+
+        <div class="record-assurance-content">
+
+          <span class="tag warning">
+            WARNING
+          </span>
+
+          <h3>
+            Referral review required
+          </h3>
+
+          <p>
+            The system has identified that referral progress requires
+            assessment. No decision has been made.
+          </p>
+
+          <div class="assurance-source">
+            Source: deterministic system rule
+          </div>
+
+        </div>
+
+
+        <button
+          class="primary-button"
+          type="button"
+        >
+          Assess
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         RECORD PRINCIPLE
+    ====================================================== -->
+
+    <section class="human-decision-notice">
+
+      <div>
+        🦄
+      </div>
+
+      <div>
+
+        <strong>
+          Human first. Always.
+        </strong>
+
+        <p>
+          VB Core can surface information, required work and
+          assurance concerns. Significant decisions remain with
+          authorised people and must be attributable and recorded.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="app-footer">
+
+      <div class="footer-mark">
+        🦄
+      </div>
+
+      <div>
+
+        <strong>
+          Veterans Backbone
+        </strong>
+
+        <span>
+          Human first · Support without control ·
+          Safety without surveillance
+        </span>
+
+      </div>
+
+    </footer>
+
+  </main>
+
+</div>
+
+</body>
+</html>
