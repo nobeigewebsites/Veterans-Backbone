@@ -1,0 +1,1075 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Casework | Veterans Backbone Core</title>
+
+  <meta
+    name="description"
+    content="Veterans Backbone Core casework workspace."
+  >
+
+  <link rel="stylesheet" href="../css/app.css">
+</head>
+
+<body>
+
+<div class="app-shell">
+
+  <!-- =====================================================
+       SIDEBAR
+  ====================================================== -->
+
+  <aside class="sidebar">
+
+    <div class="brand">
+
+      <div class="brand-mark">VB</div>
+
+      <div class="brand-text">
+        <strong>Veterans Backbone</strong>
+        <span>Core</span>
+      </div>
+
+    </div>
+
+
+    <nav class="main-nav" aria-label="Main navigation">
+
+      <p class="nav-label">WORKSPACE</p>
+
+      <a href="../index.html" class="nav-item">
+        <span class="nav-icon">⌂</span>
+        <span>Dashboard</span>
+      </a>
+
+      <a href="veterans.html" class="nav-item">
+        <span class="nav-icon">★</span>
+        <span>Veterans</span>
+      </a>
+
+      <a href="casework.html" class="nav-item active">
+        <span class="nav-icon">▣</span>
+        <span>Casework</span>
+      </a>
+
+      <a href="referrals.html" class="nav-item">
+        <span class="nav-icon">↗</span>
+        <span>Referrals</span>
+      </a>
+
+      <a href="workflow-tasks.html" class="nav-item">
+        <span class="nav-icon">✓</span>
+        <span>Workflow Tasks</span>
+        <span class="nav-count">6</span>
+      </a>
+
+
+      <p class="nav-label">ASSURANCE</p>
+
+      <a href="assurance.html" class="nav-item">
+        <span class="nav-icon">!</span>
+        <span>Assurance Queue</span>
+        <span class="nav-count warning">2</span>
+      </a>
+
+      <a href="safeguarding.html" class="nav-item">
+        <span class="nav-icon">◆</span>
+        <span>Safeguarding</span>
+      </a>
+
+
+      <p class="nav-label">SERVICES</p>
+
+      <a href="programmes.html" class="nav-item">
+        <span class="nav-icon">◈</span>
+        <span>Programmes</span>
+      </a>
+
+      <a href="partners.html" class="nav-item">
+        <span class="nav-icon">◎</span>
+        <span>Partners</span>
+      </a>
+
+
+      <p class="nav-label">ORGANISATION</p>
+
+      <a href="workforce.html" class="nav-item">
+        <span class="nav-icon">♟</span>
+        <span>Workforce</span>
+      </a>
+
+      <a href="governance.html" class="nav-item">
+        <span class="nav-icon">§</span>
+        <span>Governance</span>
+      </a>
+
+      <a href="policy-brain.html" class="nav-item">
+        <span class="nav-icon">▤</span>
+        <span>Policy Brain</span>
+      </a>
+
+      <a href="reporting.html" class="nav-item">
+        <span class="nav-icon">▥</span>
+        <span>Reporting</span>
+      </a>
+
+    </nav>
+
+
+    <div class="sidebar-footer">
+
+      <div class="system-status">
+
+        <span class="status-dot"></span>
+
+        <div>
+          <strong>System operational</strong>
+          <span>Development environment</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </aside>
+
+
+  <!-- =====================================================
+       MAIN
+  ====================================================== -->
+
+  <main class="main-content casework-page">
+
+
+    <!-- TOP BAR -->
+
+    <header class="topbar">
+
+      <div>
+
+        <p class="eyebrow">
+          VETERANS BACKBONE CORE
+        </p>
+
+        <h1>
+          Casework
+        </h1>
+
+      </div>
+
+
+      <div class="topbar-actions">
+
+        <button class="search-button" type="button">
+          Search casework...
+        </button>
+
+
+        <div class="staff-profile">
+
+          <div class="staff-avatar">
+            SW
+          </div>
+
+          <div>
+            <strong>Support Worker</strong>
+            <span>Site 1 · DEV</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- DEV NOTICE -->
+
+    <section class="dev-notice">
+
+      <strong>
+        Development environment
+      </strong>
+
+      <span>
+        Fictional data only. No real veteran information is stored here.
+      </span>
+
+    </section>
+
+
+    <!-- =====================================================
+         PAGE INTRO
+    ====================================================== -->
+
+    <section class="workspace-intro">
+
+      <div>
+
+        <p class="eyebrow">
+          CASEWORK
+        </p>
+
+        <h2>
+          Work that needs doing.
+        </h2>
+
+        <p>
+          Record support, actions, reviews and next steps without
+          turning a veteran's life into a checklist.
+        </p>
+
+      </div>
+
+
+      <div class="workspace-intro-actions">
+
+        <button class="secondary-button" type="button">
+          + Add note
+        </button>
+
+        <button class="primary-button" type="button">
+          + Create action
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         SUMMARY
+    ====================================================== -->
+
+    <section class="casework-summary-grid">
+
+      <article class="workspace-stat pink">
+
+        <span class="workspace-stat-number">
+          6
+        </span>
+
+        <div>
+          <strong>Active cases</strong>
+          <span>Within your access</span>
+        </div>
+
+      </article>
+
+
+      <article class="workspace-stat orange">
+
+        <span class="workspace-stat-number">
+          4
+        </span>
+
+        <div>
+          <strong>Open actions</strong>
+          <span>Work still outstanding</span>
+        </div>
+
+      </article>
+
+
+      <article class="workspace-stat yellow">
+
+        <span class="workspace-stat-number">
+          2
+        </span>
+
+        <div>
+          <strong>Due today</strong>
+          <span>Needs attention</span>
+        </div>
+
+      </article>
+
+
+      <article class="workspace-stat purple">
+
+        <span class="workspace-stat-number">
+          1
+        </span>
+
+        <div>
+          <strong>Review due</strong>
+          <span>Human review required</span>
+        </div>
+
+      </article>
+
+    </section>
+
+
+    <!-- =====================================================
+         FILTERS
+    ====================================================== -->
+
+    <section class="workspace-filter-panel">
+
+      <div class="workspace-search-field">
+
+        <label for="case-search">
+          Search
+        </label>
+
+        <input
+          id="case-search"
+          type="search"
+          placeholder="Search by case or VB ID..."
+        >
+
+      </div>
+
+
+      <div class="filter-field">
+
+        <label for="case-status">
+          Status
+        </label>
+
+        <select id="case-status">
+
+          <option>All active</option>
+          <option>Active</option>
+          <option>Review</option>
+          <option>Closed</option>
+
+        </select>
+
+      </div>
+
+
+      <div class="filter-field">
+
+        <label for="case-owner">
+          Assigned
+        </label>
+
+        <select id="case-owner">
+
+          <option>Anyone</option>
+          <option>Assigned to me</option>
+          <option>Unassigned</option>
+
+        </select>
+
+      </div>
+
+
+      <div class="filter-field">
+
+        <label for="case-site">
+          Site
+        </label>
+
+        <select id="case-site">
+
+          <option>All permitted sites</option>
+          <option>Site 1</option>
+
+        </select>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         MY WORK
+    ====================================================== -->
+
+    <section class="workspace-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            MY WORK
+          </p>
+
+          <h2>
+            Actions needing attention
+          </h2>
+
+        </div>
+
+        <span class="section-note">
+          Prioritised by due date — not by judgement about the veteran.
+        </span>
+
+      </div>
+
+
+      <div class="casework-action-list">
+
+
+        <!-- ACTION 1 -->
+
+        <article class="casework-action-item urgent">
+
+          <div class="action-priority-marker"></div>
+
+          <div class="action-main">
+
+            <div class="action-heading">
+
+              <div>
+
+                <span class="record-label">
+                  CASE-000001 · VB-000001
+                </span>
+
+                <h3>
+                  Review referral progress
+                </h3>
+
+              </div>
+
+              <span class="tag urgent">
+                DUE TODAY
+              </span>
+
+            </div>
+
+            <p>
+              Review the latest referral follow-up and record
+              the appropriate next step.
+            </p>
+
+            <div class="action-meta">
+
+              <span>
+                Assigned: Support Worker
+              </span>
+
+              <span>
+                Review required
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="action-buttons">
+
+            <a
+              href="veteran-record.html#casework"
+              class="row-button"
+            >
+              Open
+            </a>
+
+          </div>
+
+        </article>
+
+
+        <!-- ACTION 2 -->
+
+        <article class="casework-action-item">
+
+          <div class="action-priority-marker normal"></div>
+
+          <div class="action-main">
+
+            <div class="action-heading">
+
+              <div>
+
+                <span class="record-label">
+                  CASE-000004 · VB-000004
+                </span>
+
+                <h3>
+                  Record contact outcome
+                </h3>
+
+              </div>
+
+              <span class="tag action">
+                TOMORROW
+              </span>
+
+            </div>
+
+            <p>
+              Contact has taken place. Record the factual outcome
+              and any agreed next step.
+            </p>
+
+            <div class="action-meta">
+
+              <span>
+                Assigned: Support Worker
+              </span>
+
+              <span>
+                Case action
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="action-buttons">
+
+            <button class="row-button" type="button">
+              Open
+            </button>
+
+          </div>
+
+        </article>
+
+
+        <!-- ACTION 3 -->
+
+        <article class="casework-action-item">
+
+          <div class="action-priority-marker normal"></div>
+
+          <div class="action-main">
+
+            <div class="action-heading">
+
+              <div>
+
+                <span class="record-label">
+                  CASE-000006 · VB-000006
+                </span>
+
+                <h3>
+                  Partner follow-up
+                </h3>
+
+              </div>
+
+              <span class="tag">
+                SCHEDULED
+              </span>
+
+            </div>
+
+            <p>
+              Check whether the fictional partner service has
+              provided the expected response.
+            </p>
+
+            <div class="action-meta">
+
+              <span>
+                Assigned: Support Worker
+              </span>
+
+              <span>
+                Follow-up
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <div class="action-buttons">
+
+            <button class="row-button" type="button">
+              Open
+            </button>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         ACTIVE CASES
+    ====================================================== -->
+
+    <section class="workspace-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            CASES
+          </p>
+
+          <h2>
+            Active casework
+          </h2>
+
+        </div>
+
+        <button class="text-button" type="button">
+          View all
+        </button>
+
+      </div>
+
+
+      <div class="workspace-table-panel">
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+
+              <tr>
+                <th>Case</th>
+                <th>Veteran</th>
+                <th>Status</th>
+                <th>Assigned</th>
+                <th>Last activity</th>
+                <th>Next step</th>
+                <th>Open actions</th>
+                <th></th>
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+              <tr>
+
+                <td>
+                  <strong>CASE-000001</strong>
+                </td>
+
+                <td>
+                  VB-000001
+                </td>
+
+                <td>
+                  <span class="status-pill active">
+                    Active
+                  </span>
+                </td>
+
+                <td>
+                  Support Worker
+                </td>
+
+                <td>
+                  28 Sep 2026
+                </td>
+
+                <td>
+                  Referral review
+                </td>
+
+                <td>
+                  <span class="tag urgent">
+                    2
+                  </span>
+                </td>
+
+                <td>
+
+                  <a
+                    href="veteran-record.html#casework"
+                    class="row-button"
+                  >
+                    Open
+                  </a>
+
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+                  <strong>CASE-000004</strong>
+                </td>
+
+                <td>
+                  VB-000004
+                </td>
+
+                <td>
+                  <span class="status-pill active">
+                    Active
+                  </span>
+                </td>
+
+                <td>
+                  Support Worker
+                </td>
+
+                <td>
+                  28 Sep 2026
+                </td>
+
+                <td>
+                  Record outcome
+                </td>
+
+                <td>
+                  <span class="tag action">
+                    1
+                  </span>
+                </td>
+
+                <td>
+
+                  <button class="row-button" type="button">
+                    Open
+                  </button>
+
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+                  <strong>CASE-000006</strong>
+                </td>
+
+                <td>
+                  VB-000006
+                </td>
+
+                <td>
+                  <span class="status-pill review">
+                    Review
+                  </span>
+                </td>
+
+                <td>
+                  Support Worker
+                </td>
+
+                <td>
+                  25 Sep 2026
+                </td>
+
+                <td>
+                  Partner response
+                </td>
+
+                <td>
+                  <span class="tag">
+                    1
+                  </span>
+                </td>
+
+                <td>
+
+                  <button class="row-button" type="button">
+                    Open
+                  </button>
+
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         RECENT NOTES
+    ====================================================== -->
+
+    <section class="workspace-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            RECORD
+          </p>
+
+          <h2>
+            Recent case notes
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="case-note-grid">
+
+
+        <!-- NOTE 1 -->
+
+        <article class="case-note-card">
+
+          <div class="case-note-header">
+
+            <div>
+
+              <span class="record-label">
+                VB-000001 · CASE-000001
+              </span>
+
+              <h3>
+                Follow-up contact
+              </h3>
+
+            </div>
+
+            <span>
+              28 Sep
+            </span>
+
+          </div>
+
+          <p>
+            Contact completed and next steps recorded.
+            Referral progress requires review.
+          </p>
+
+          <div class="case-note-footer">
+
+            <span>
+              Support Worker
+            </span>
+
+            <span>
+              Contact outcome
+            </span>
+
+          </div>
+
+        </article>
+
+
+        <!-- NOTE 2 -->
+
+        <article class="case-note-card">
+
+          <div class="case-note-header">
+
+            <div>
+
+              <span class="record-label">
+                VB-000004 · CASE-000004
+              </span>
+
+              <h3>
+                Support contact
+              </h3>
+
+            </div>
+
+            <span>
+              28 Sep
+            </span>
+
+          </div>
+
+          <p>
+            Planned support contact completed. A factual outcome
+            remains to be recorded.
+          </p>
+
+          <div class="case-note-footer">
+
+            <span>
+              Support Worker
+            </span>
+
+            <span>
+              Contact
+            </span>
+
+          </div>
+
+        </article>
+
+
+        <!-- NOTE 3 -->
+
+        <article class="case-note-card">
+
+          <div class="case-note-header">
+
+            <div>
+
+              <span class="record-label">
+                VB-000006 · CASE-000006
+              </span>
+
+              <h3>
+                Partner contact
+              </h3>
+
+            </div>
+
+            <span>
+              25 Sep
+            </span>
+
+          </div>
+
+          <p>
+            Partner contact recorded. Follow-up has been scheduled
+            pending their response.
+          </p>
+
+          <div class="case-note-footer">
+
+            <span>
+              Support Worker
+            </span>
+
+            <span>
+              Partner contact
+            </span>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         REVIEWS
+    ====================================================== -->
+
+    <section class="workspace-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            HUMAN REVIEW
+          </p>
+
+          <h2>
+            Case reviews
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="case-review-panel">
+
+        <div class="case-review-icon">
+          ◇
+        </div>
+
+
+        <div class="case-review-content">
+
+          <span class="tag warning">
+            REVIEW DUE
+          </span>
+
+          <h3>
+            CASE-000006
+          </h3>
+
+          <p>
+            Review current progress, record any changes identified,
+            the decision rationale and appropriate next steps.
+          </p>
+
+          <div class="case-review-meta">
+            VB-000006 · Assigned to Support Worker
+          </div>
+
+        </div>
+
+
+        <button class="primary-button" type="button">
+          Start review
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         RECORDING STANDARD
+    ====================================================== -->
+
+    <section class="recording-standard">
+
+      <div class="privacy-icon">
+        ◈
+      </div>
+
+      <div>
+
+        <strong>
+          Record what happened — not who you think someone is.
+        </strong>
+
+        <p>
+          Case records should be factual, proportionate, respectful,
+          dated and attributable. Record relevant observations,
+          actions, outcomes and rationale rather than labels,
+          assumptions or unsupported judgements.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="app-footer">
+
+      <div class="footer-mark">
+        🦄
+      </div>
+
+      <div>
+
+        <strong>
+          Veterans Backbone
+        </strong>
+
+        <span>
+          Human first · Support without control ·
+          Safety without surveillance
+        </span>
+
+      </div>
+
+    </footer>
+
+  </main>
+
+</div>
+
+</body>
+</html>
