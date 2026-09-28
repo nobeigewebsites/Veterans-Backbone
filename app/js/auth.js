@@ -21,9 +21,10 @@ import { createClient } from
    public browser-safe values in the next step.
    ============================================================ */
 
-const SUPABASE_URL = "YOUR_SUPABASE_URL";
-const SUPABASE_PUBLISHABLE_KEY = "YOUR_SUPABASE_PUBLISHABLE_KEY";
+const SUPABASE_URL = "https://jygyriqtiuxjlcltpks.supabase.co";
 
+const SUPABASE_PUBLISHABLE_KEY =
+  "sb_publishable_36yMEHR4-bWypaun6X2oNw_fTaoOt9p";
 
 /* ============================================================
    2. CREATE CLIENT
