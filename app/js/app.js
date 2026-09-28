@@ -3,15 +3,11 @@
    PROTECTED APPLICATION SHELL
 
    Responsibilities:
-   - Connect to Supabase
-   - Require an authenticated session
-   - Load the authenticated VB staff profile
+   - Require authenticated Supabase user
+   - Require active VB staff profile
    - Provide staff identity to the interface
    - Handle sign out
-
-   IMPORTANT:
-   Browser-safe publishable key only.
-   NEVER use the service_role / secret key here.
+   - Expose authenticated application context
    ============================================================ */
 
 import { createClient } from
@@ -30,7 +26,7 @@ const SUPABASE_PUBLISHABLE_KEY =
 
 
 /* ============================================================
-   2. CREATE CLIENT
+   2. SUPABASE CLIENT
    ============================================================ */
 
 const supabase = createClient(
@@ -47,12 +43,7 @@ const supabase = createClient(
 
 
 /* ============================================================
-   3. WORK OUT WHERE WE ARE
-
-   Pages inside /app/pages/ need to travel up one level to
-   reach login.html.
-
-   Dashboard /app/index.html does not.
+   3. APPLICATION PATHS
    ============================================================ */
 
 const isInsidePagesFolder =
@@ -68,27 +59,37 @@ const LOGIN_URL =
    4. REDIRECT TO LOGIN
    ============================================================ */
 
+let redirectingToLogin = false;
+
+
 function redirectToLogin() {
+
+  if (redirectingToLogin) {
+    return;
+  }
+
+  redirectingToLogin = true;
+
   window.location.replace(LOGIN_URL);
 }
 
 
 /* ============================================================
-   5. LOAD CURRENT AUTHENTICATED USER
+   5. GET AUTHENTICATED USER
 
-   getUser() validates the current user with Supabase Auth.
-
-   We do not rely purely on information sitting in browser
-   storage when deciding who the current user is.
+   getUser() validates the stored session with Supabase Auth.
    ============================================================ */
 
 async function getAuthenticatedUser() {
+
   const {
     data,
     error
   } = await supabase.auth.getUser();
 
+
   if (error) {
+
     console.error(
       "VB Core authentication check failed:",
       error
@@ -97,22 +98,22 @@ async function getAuthenticatedUser() {
     return null;
   }
 
+
   return data?.user ?? null;
 }
 
 
 /* ============================================================
-   6. LOAD VB STAFF PROFILE
+   6. LOAD ACTIVE VB STAFF PROFILE
 
-   RLS remains the security boundary.
+   RLS remains the actual security boundary.
 
-   This query asks the database for the staff profile attached
-   to the authenticated Supabase Auth identity.
-
-   It does NOT accept a staff ID from the browser.
+   The browser supplies the authenticated Auth UID only.
+   Database policies determine what may be returned.
    ============================================================ */
 
 async function getStaffProfile(authUserId) {
+
   const {
     data,
     error
@@ -129,11 +130,19 @@ async function getStaffProfile(authUserId) {
       employment_type,
       is_active
     `)
-    .eq("auth_user_id", authUserId)
-    .eq("is_active", true)
+    .eq(
+      "auth_user_id",
+      authUserId
+    )
+    .eq(
+      "is_active",
+      true
+    )
     .maybeSingle();
 
+
   if (error) {
+
     console.error(
       "Unable to load VB staff profile:",
       error
@@ -142,24 +151,20 @@ async function getStaffProfile(authUserId) {
     throw error;
   }
 
+
   return data;
 }
 
 
 /* ============================================================
-   7. STAFF IDENTITY IN THE UI
-
-   Existing pages currently contain fictional/static staff
-   labels.
-
-   When elements with these data attributes exist, we replace
-   them with authenticated values.
-
-   This means we can update the HTML progressively instead of
-   ripping all fourteen screens apart today.
+   7. APPLY STAFF IDENTITY
    ============================================================ */
 
-function applyStaffIdentity(user, staffProfile) {
+function applyStaffIdentity(
+  user,
+  staffProfile
+) {
+
   const nameTargets =
     document.querySelectorAll(
       "[data-current-staff-name]"
@@ -176,31 +181,39 @@ function applyStaffIdentity(user, staffProfile) {
     );
 
 
-  nameTargets.forEach((element) => {
-    element.textContent =
-      staffProfile.display_name;
-  });
+  nameTargets.forEach(
+    (element) => {
+
+      element.textContent =
+        staffProfile.display_name;
+    }
+  );
 
 
-  codeTargets.forEach((element) => {
-    element.textContent =
-      staffProfile.staff_code;
-  });
+  codeTargets.forEach(
+    (element) => {
+
+      element.textContent =
+        staffProfile.staff_code;
+    }
+  );
 
 
-  emailTargets.forEach((element) => {
-    element.textContent =
-      user.email ?? "";
-  });
+  emailTargets.forEach(
+    (element) => {
+
+      element.textContent =
+        user.email ?? "";
+    }
+  );
 
 
   /*
-    Useful for later module scripts.
+    These values are useful to the interface.
 
-    This is convenience information only.
+    They are NOT permission controls.
 
-    It is NOT an authorisation mechanism.
-    Database permissions must still be enforced by RLS.
+    RLS remains responsible for authorisation.
   */
 
   document.documentElement.dataset.authenticated =
@@ -219,77 +232,96 @@ function applyStaffIdentity(user, staffProfile) {
    ============================================================ */
 
 async function signOut() {
+
   try {
+
     const {
       error
     } = await supabase.auth.signOut();
+
 
     if (error) {
       throw error;
     }
 
+
   } catch (error) {
+
     console.error(
       "VB Core sign-out failed:",
       error
     );
 
+
   } finally {
+
     redirectToLogin();
   }
 }
 
 
 /* ============================================================
-   9. ATTACH SIGN-OUT BUTTONS
+   9. SIGN-OUT CONTROLS
 
-   Any button/link on any page can become a logout control by
-   adding:
+   Any element containing:
 
        data-vb-sign-out
 
-   Example:
-
-       <button type="button" data-vb-sign-out>
-         Sign out
-       </button>
+   becomes a sign-out control.
    ============================================================ */
 
 function initialiseSignOutControls() {
+
   const signOutControls =
     document.querySelectorAll(
       "[data-vb-sign-out]"
     );
 
-  signOutControls.forEach((control) => {
-    control.addEventListener(
-      "click",
-      async (event) => {
-        event.preventDefault();
 
-        control.disabled = true;
+  signOutControls.forEach(
+    (control) => {
 
-        await signOut();
-      }
-    );
-  });
+      control.addEventListener(
+        "click",
+        async (event) => {
+
+          event.preventDefault();
+
+          control.disabled = true;
+
+          await signOut();
+        }
+      );
+    }
+  );
 }
 
 
 /* ============================================================
-   10. AUTH STATE CHANGES
+   10. AUTH STATE WATCHER
 
-   If the session disappears while VB Core is open, return the
-   user to the login page.
+   IMPORTANT:
+
+   We redirect ONLY on an explicit SIGNED_OUT event.
+
+   We do NOT redirect merely because an auth event temporarily
+   contains no session.
+
+   This prevents login.html and index.html fighting each other
+   during Supabase initialisation/token refresh.
    ============================================================ */
 
 function watchAuthentication() {
+
   supabase.auth.onAuthStateChange(
-    (event, session) => {
-      if (
-        event === "SIGNED_OUT" ||
-        !session
-      ) {
+    (event) => {
+
+      if (event === "SIGNED_OUT") {
+
+        console.info(
+          "VB Core session ended."
+        );
+
         redirectToLogin();
       }
     }
@@ -299,57 +331,72 @@ function watchAuthentication() {
 
 /* ============================================================
    11. PROTECT APPLICATION
-
-   Sequence:
-
-   1. Validate Supabase Auth user
-   2. Require active VB staff profile
-   3. Apply identity
-   4. Enable sign-out
-   5. Watch session
-
-   A valid Supabase login WITHOUT an active VB staff profile
-   does not get application access.
    ============================================================ */
 
 async function protectApplication() {
+
   try {
 
     /* --------------------------------------------------------
-       Authentication
+       STEP 1
+       Validate authenticated Supabase user
        -------------------------------------------------------- */
 
     const user =
       await getAuthenticatedUser();
 
+
     if (!user) {
+
+      console.info(
+        "No authenticated VB Core user."
+      );
+
       redirectToLogin();
+
       return;
     }
 
 
+    console.info(
+      "Supabase user authenticated:",
+      user.id
+    );
+
+
     /* --------------------------------------------------------
-       VB staff identity
+       STEP 2
+       Find active VB staff profile
        -------------------------------------------------------- */
 
     const staffProfile =
-      await getStaffProfile(user.id);
+      await getStaffProfile(
+        user.id
+      );
+
 
     if (!staffProfile) {
+
       console.error(
         "Authenticated user has no active VB staff profile."
       );
 
-      await supabase.auth.signOut();
 
-      redirectToLogin();
+      /*
+        Authentication alone does not grant VB Core access.
+
+        A person must also have an active staff profile.
+      */
+
+      await supabase.auth.signOut();
 
       return;
     }
 
 
     /* --------------------------------------------------------
-       Application ready
+       STEP 3
+       Apply authenticated staff identity
        -------------------------------------------------------- */
 
     applyStaffIdentity(
@@ -357,10 +404,21 @@ async function protectApplication() {
       staffProfile
     );
 
+
+    /* --------------------------------------------------------
+       STEP 4
+       Enable application controls
+       -------------------------------------------------------- */
+
     initialiseSignOutControls();
 
     watchAuthentication();
 
+
+    /* --------------------------------------------------------
+       STEP 5
+       Application ready
+       -------------------------------------------------------- */
 
     console.info(
       `VB Core access established for ${staffProfile.staff_code}.`
@@ -368,17 +426,14 @@ async function protectApplication() {
 
 
     /*
-      Tell future module scripts that authentication and
-      staff-profile loading have completed.
+      Other VB Core modules can listen for this event.
 
-      Example:
+      This allows future module scripts to wait until both:
 
-      document.addEventListener(
-        "vb:ready",
-        (event) => {
-          console.log(event.detail.staffProfile);
-        }
-      );
+      - Supabase authentication
+      - VB staff-profile validation
+
+      have completed.
     */
 
     document.dispatchEvent(
@@ -394,6 +449,7 @@ async function protectApplication() {
       )
     );
 
+
   } catch (error) {
 
     console.error(
@@ -401,11 +457,12 @@ async function protectApplication() {
       error
     );
 
+
     /*
       Fail closed.
 
-      If we cannot establish who this person is and whether
-      they have an active VB staff profile, they do not enter.
+      If identity / staff access cannot be established,
+      application access is not granted.
     */
 
     redirectToLogin();
@@ -414,7 +471,7 @@ async function protectApplication() {
 
 
 /* ============================================================
-   12. START
+   12. START VB CORE
    ============================================================ */
 
 protectApplication();
@@ -422,9 +479,6 @@ protectApplication();
 
 /* ============================================================
    13. EXPORTS
-
-   Later scripts can import the same client rather than create
-   their own Supabase connection.
    ============================================================ */
 
 export {
