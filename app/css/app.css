@@ -3584,3 +3584,762 @@ td {
   }
 
 }
+
+/* ============================================================
+   VB CORE — VETERANS WORKSPACE
+   ============================================================ */
+
+
+/* ------------------------------------------------------------
+   PAGE INTRO
+   ------------------------------------------------------------ */
+
+.veterans-intro {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 30px;
+
+  padding:
+    32px
+    0
+    23px;
+}
+
+.veterans-intro h2 {
+  margin: 0;
+
+  color: var(--master-ink);
+
+  font-size: 28px;
+  font-weight: 950;
+
+  letter-spacing: -1px;
+}
+
+.veterans-intro p:not(.eyebrow) {
+  max-width: 650px;
+
+  margin:
+    7px
+    0
+    0;
+
+  color: var(--muted);
+
+  font-size: 13px;
+}
+
+
+/* ------------------------------------------------------------
+   SEARCH / FILTER PANEL
+   ------------------------------------------------------------ */
+
+.veteran-search-panel {
+  display: grid;
+
+  grid-template-columns:
+    minmax(300px, 2fr)
+    repeat(3, minmax(145px, 0.7fr));
+
+  gap: 14px;
+
+  padding: 18px;
+
+  background:
+    rgba(255, 255, 255, 0.88);
+
+  border:
+    1px solid rgba(15, 30, 50, 0.08);
+
+  border-top:
+    4px solid transparent;
+
+  border-image:
+    var(--master-rainbow) 1;
+
+  box-shadow:
+    0 8px 24px rgba(15, 30, 50, 0.07);
+}
+
+.veteran-search-main,
+.filter-field {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.veteran-search-panel label {
+  color: #59687b;
+
+  font-size: 10px;
+  font-weight: 900;
+
+  letter-spacing: 0.7px;
+
+  text-transform: uppercase;
+}
+
+.veteran-search-box {
+  position: relative;
+}
+
+.search-symbol {
+  position: absolute;
+
+  left: 14px;
+  top: 50%;
+
+  transform: translateY(-50%);
+
+  color: var(--master-pink);
+
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.veteran-search-box input,
+.filter-field select {
+  width: 100%;
+  height: 44px;
+
+  border:
+    1px solid #dbe1e8;
+
+  border-radius: 9px;
+
+  background:
+    rgba(255, 255, 255, 0.94);
+
+  color: var(--master-ink);
+
+  outline: none;
+}
+
+.veteran-search-box input {
+  padding:
+    0
+    15px
+    0
+    43px;
+}
+
+.filter-field select {
+  padding:
+    0
+    12px;
+}
+
+.veteran-search-box input:focus,
+.filter-field select:focus {
+  border-color:
+    rgba(255, 20, 120, 0.55);
+
+  box-shadow:
+    0 0 0 3px rgba(255, 20, 120, 0.08);
+}
+
+
+/* ------------------------------------------------------------
+   MINI SUMMARY
+   ------------------------------------------------------------ */
+
+.veteran-summary-grid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 14px;
+
+  margin-top: 17px;
+}
+
+.mini-stat {
+  position: relative;
+  overflow: hidden;
+
+  display: flex;
+  align-items: center;
+  gap: 13px;
+
+  min-height: 76px;
+
+  padding:
+    13px
+    16px;
+
+  background:
+    rgba(255, 255, 255, 0.86);
+
+  border:
+    1px solid rgba(15, 30, 50, 0.07);
+
+  border-radius: 11px;
+
+  box-shadow:
+    0 5px 16px rgba(15, 30, 50, 0.05);
+}
+
+.mini-stat::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 0;
+  bottom: 0;
+
+  width: 5px;
+}
+
+.mini-stat.pink::before {
+  background: var(--master-pink);
+}
+
+.mini-stat.blue::before {
+  background: var(--master-blue);
+}
+
+.mini-stat.orange::before {
+  background: var(--master-orange);
+}
+
+.mini-stat-number {
+  min-width: 46px;
+
+  color: var(--master-ink);
+
+  font-size: 27px;
+  font-weight: 950;
+}
+
+.mini-stat > div {
+  display: flex;
+  flex-direction: column;
+}
+
+.mini-stat strong {
+  color: var(--master-ink);
+
+  font-size: 12px;
+}
+
+.mini-stat div span {
+  margin-top: 2px;
+
+  color: var(--muted);
+
+  font-size: 10px;
+}
+
+
+/* ------------------------------------------------------------
+   RECORD PANEL
+   ------------------------------------------------------------ */
+
+.veteran-records-panel {
+  margin-top: 19px;
+
+  background:
+    rgba(255, 255, 255, 0.78);
+
+  border:
+    1px solid rgba(15, 30, 50, 0.07);
+
+  border-radius: 13px;
+
+  box-shadow:
+    0 8px 25px rgba(15, 30, 50, 0.07);
+
+  backdrop-filter: blur(5px);
+
+  overflow: hidden;
+}
+
+.records-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+
+  padding:
+    20px
+    23px;
+
+  border-bottom:
+    1px solid #e9edf2;
+}
+
+.records-header h2 {
+  margin: 0;
+
+  color: var(--master-ink);
+
+  font-size: 20px;
+  font-weight: 950;
+}
+
+.records-count {
+  color: var(--muted);
+
+  font-size: 11px;
+}
+
+
+/* ------------------------------------------------------------
+   VETERAN RECORD
+   ------------------------------------------------------------ */
+
+.veteran-record-card {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(190px, 1.25fr)
+    minmax(125px, 0.8fr)
+    minmax(150px, 1fr)
+    minmax(175px, 1.15fr)
+    minmax(110px, 0.7fr)
+    auto;
+
+  gap: 18px;
+
+  align-items: center;
+
+  min-height: 115px;
+
+  padding:
+    17px
+    22px;
+
+  border-bottom:
+    1px solid #e9edf2;
+
+  transition:
+    background 0.16s ease,
+    transform 0.16s ease;
+}
+
+.veteran-record-card:hover {
+  background:
+    linear-gradient(
+      90deg,
+      rgba(255, 20, 120, 0.035),
+      rgba(35, 136, 255, 0.025),
+      rgba(255, 255, 255, 0.30)
+    );
+}
+
+.veteran-record-card.attention::before,
+.veteran-record-card.review::before {
+  content: "";
+
+  position: absolute;
+
+  left: 0;
+  top: 13px;
+  bottom: 13px;
+
+  width: 5px;
+
+  border-radius:
+    0
+    5px
+    5px
+    0;
+}
+
+.veteran-record-card.attention::before {
+  background:
+    linear-gradient(
+      180deg,
+      var(--master-pink),
+      var(--master-orange)
+    );
+}
+
+.veteran-record-card.review::before {
+  background:
+    linear-gradient(
+      180deg,
+      var(--master-yellow),
+      var(--master-orange)
+    );
+}
+
+
+/* ------------------------------------------------------------
+   IDENTITY BLOCK
+   ------------------------------------------------------------ */
+
+.veteran-id-block {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.veteran-avatar {
+  width: 48px;
+  height: 48px;
+
+  flex: 0 0 48px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--master-pink),
+      var(--master-orange)
+    );
+
+  color: white;
+
+  font-size: 13px;
+  font-weight: 950;
+
+  box-shadow:
+    0 5px 14px rgba(255, 20, 120, 0.17);
+}
+
+.veteran-avatar.blue {
+  background:
+    linear-gradient(
+      135deg,
+      var(--master-blue),
+      var(--master-purple)
+    );
+}
+
+.veteran-avatar.purple {
+  background:
+    linear-gradient(
+      135deg,
+      var(--master-purple),
+      var(--master-pink)
+    );
+}
+
+.veteran-id-block h3 {
+  margin:
+    1px
+    0
+    2px;
+
+  color: var(--master-ink);
+
+  font-size: 16px;
+  font-weight: 950;
+}
+
+.record-label {
+  display: block;
+
+  color: #8a96a7;
+
+  font-size: 9px;
+  font-weight: 900;
+
+  letter-spacing: 0.9px;
+}
+
+.site-label {
+  color: var(--muted);
+
+  font-size: 10px;
+}
+
+
+/* ------------------------------------------------------------
+   RECORD DETAILS
+   ------------------------------------------------------------ */
+
+.record-detail {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
+}
+
+.record-detail strong {
+  color: var(--master-ink);
+
+  font-size: 11px;
+}
+
+.record-detail > span:last-child:not(.status-pill) {
+  color: var(--muted);
+
+  font-size: 10px;
+}
+
+.record-detail .record-attention {
+  color: #d44b6e !important;
+
+  font-weight: 750;
+}
+
+
+/* ------------------------------------------------------------
+   SIGNALS
+   ------------------------------------------------------------ */
+
+.record-signals {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 5px;
+}
+
+.signal {
+  display: inline-block;
+
+  padding:
+    4px
+    8px;
+
+  border-radius: 999px;
+
+  white-space: nowrap;
+
+  font-size: 9px;
+  font-weight: 850;
+}
+
+.signal.workflow {
+  background:
+    rgba(138, 63, 252, 0.11);
+
+  color: #7130da;
+}
+
+.signal.assurance {
+  background:
+    rgba(255, 201, 40, 0.20);
+
+  color: #9b6900;
+}
+
+
+/* ------------------------------------------------------------
+   OPEN RECORD
+   ------------------------------------------------------------ */
+
+.record-action {
+  text-align: right;
+}
+
+.open-record-button {
+  display: inline-block;
+
+  padding:
+    8px
+    11px;
+
+  border:
+    1px solid rgba(255, 20, 120, 0.55);
+
+  border-radius: 8px;
+
+  background:
+    rgba(255, 255, 255, 0.78);
+
+  color: var(--master-pink);
+
+  text-decoration: none;
+
+  white-space: nowrap;
+
+  font-size: 10px;
+  font-weight: 850;
+
+  transition:
+    background 0.16s ease,
+    color 0.16s ease,
+    transform 0.16s ease,
+    box-shadow 0.16s ease;
+}
+
+.open-record-button:hover {
+  transform: translateY(-1px);
+
+  background:
+    linear-gradient(
+      100deg,
+      var(--master-pink),
+      var(--master-orange)
+    );
+
+  border-color: transparent;
+
+  color: white;
+
+  box-shadow:
+    0 5px 14px rgba(255, 20, 120, 0.18);
+}
+
+
+/* ------------------------------------------------------------
+   PRIVACY REMINDER
+   ------------------------------------------------------------ */
+
+.privacy-reminder {
+  display: flex;
+  gap: 13px;
+
+  margin:
+    17px
+    20px
+    20px;
+
+  padding:
+    14px
+    16px;
+
+  border:
+    1px solid rgba(138, 63, 252, 0.16);
+
+  border-radius: 10px;
+
+  background:
+    linear-gradient(
+      90deg,
+      rgba(138, 63, 252, 0.055),
+      rgba(35, 136, 255, 0.04),
+      rgba(255, 255, 255, 0.40)
+    );
+}
+
+.privacy-icon {
+  width: 32px;
+  height: 32px;
+
+  flex: 0 0 32px;
+
+  display: grid;
+  place-items: center;
+
+  border-radius: 8px;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--master-purple),
+      var(--master-blue)
+    );
+
+  color: white;
+}
+
+.privacy-reminder strong {
+  color: var(--master-ink);
+
+  font-size: 11px;
+}
+
+.privacy-reminder p {
+  margin:
+    3px
+    0
+    0;
+
+  color: var(--muted);
+
+  font-size: 10px;
+}
+
+
+/* ------------------------------------------------------------
+   RESPONSIVE
+   ------------------------------------------------------------ */
+
+@media (max-width: 1250px) {
+
+  .veteran-search-panel {
+    grid-template-columns:
+      1fr
+      1fr;
+
+  }
+
+  .veteran-search-main {
+    grid-column: 1 / -1;
+  }
+
+  .veteran-record-card {
+    grid-template-columns:
+      1.2fr
+      0.8fr
+      1fr
+      1fr;
+
+  }
+
+  .record-signals {
+    grid-column: 1 / 3;
+
+    flex-direction: row;
+  }
+
+  .record-action {
+    grid-column: 4;
+
+    align-self: end;
+  }
+
+}
+
+
+@media (max-width: 760px) {
+
+  .veterans-intro {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .veteran-search-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .veteran-search-main {
+    grid-column: auto;
+  }
+
+  .veteran-summary-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .records-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .veteran-record-card {
+    grid-template-columns: 1fr;
+
+    gap: 14px;
+
+    padding:
+      20px
+      18px;
+  }
+
+  .record-signals,
+  .record-action {
+    grid-column: auto;
+  }
+
+  .record-signals {
+    flex-direction: row;
+  }
+
+  .record-action {
+    text-align: left;
+  }
+
+}
