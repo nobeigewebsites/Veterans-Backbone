@@ -1,12 +1,6 @@
 /* ============================================================
    VETERANS BACKBONE CORE
    STAFF AUTHENTICATION
-
-   Browser-side Supabase Auth only.
-
-   IMPORTANT:
-   - Publishable key only.
-   - NEVER put a secret/service_role key in this file.
    ============================================================ */
 
 import { createClient } from
@@ -15,10 +9,6 @@ import { createClient } from
 
 /* ============================================================
    1. SUPABASE CONFIGURATION
-   ============================================================
-
-   We will replace these two placeholders with the project's
-   public browser-safe values in the next step.
    ============================================================ */
 
 const SUPABASE_URL =
@@ -27,8 +17,9 @@ const SUPABASE_URL =
 const SUPABASE_PUBLISHABLE_KEY =
   "sb_publishable_36yMEHR4-bWypaun6X2oNw_fTaoOt9p";
 
+
 /* ============================================================
-   2. CREATE CLIENT
+   2. SUPABASE CLIENT
    ============================================================ */
 
 const supabase = createClient(
@@ -68,22 +59,7 @@ const messageBox =
 
 
 /* ============================================================
-   4. CONFIG CHECK
-   ============================================================ */
-
-function configurationIsReady() {
-  return (
-    SUPABASE_URL &&
-    SUPABASE_PUBLISHABLE_KEY &&
-    SUPABASE_URL !== "YOUR_SUPABASE_URL" &&
-    SUPABASE_PUBLISHABLE_KEY !==
-      "YOUR_SUPABASE_PUBLISHABLE_KEY"
-  );
-}
-
-
-/* ============================================================
-   5. MESSAGE HANDLING
+   4. MESSAGE HANDLING
    ============================================================ */
 
 function showMessage(message, type = "error") {
@@ -105,12 +81,13 @@ function clearMessage() {
 
   messageBox.textContent = "";
 
-  messageBox.className = "login-message";
+  messageBox.className =
+    "login-message";
 }
 
 
 /* ============================================================
-   6. LOADING STATE
+   5. LOADING STATE
    ============================================================ */
 
 function setLoading(isLoading) {
@@ -128,13 +105,15 @@ function setLoading(isLoading) {
 
 
 /* ============================================================
-   7. PASSWORD SHOW / HIDE
+   6. PASSWORD SHOW / HIDE
    ============================================================ */
 
 if (passwordToggle && passwordInput) {
+
   passwordToggle.addEventListener(
     "click",
     () => {
+
       const passwordIsHidden =
         passwordInput.type === "password";
 
@@ -160,7 +139,7 @@ if (passwordToggle && passwordInput) {
 
 
 /* ============================================================
-   8. REDIRECT
+   7. DASHBOARD REDIRECT
    ============================================================ */
 
 function goToDashboard() {
@@ -169,35 +148,49 @@ function goToDashboard() {
 
 
 /* ============================================================
-   9. CHECK FOR EXISTING SESSION
+   8. EXISTING SESSION CHECK
+
+   If somebody already has a valid Supabase session and visits
+   login.html, send them into VB Core.
+
+   IMPORTANT:
+   We only redirect when a real session exists.
    ============================================================ */
 
 async function checkExistingSession() {
-  if (!configurationIsReady()) {
-    return;
-  }
 
   try {
+
     const {
       data,
       error
     } = await supabase.auth.getSession();
 
+
     if (error) {
+
       console.error(
-        "Unable to check existing session:",
+        "VB Core session check failed:",
         error
       );
 
       return;
     }
 
-    if (data.session) {
+
+    if (data?.session) {
+
+      console.info(
+        "Existing VB Core session found."
+      );
+
       goToDashboard();
     }
+
   } catch (error) {
+
     console.error(
-      "Unexpected session check error:",
+      "Unexpected VB Core session error:",
       error
     );
   }
@@ -205,10 +198,14 @@ async function checkExistingSession() {
 
 
 /* ============================================================
-   10. LOGIN
+   9. STAFF SIGN IN
    ============================================================ */
 
-async function signInStaff(email, password) {
+async function signInStaff(
+  email,
+  password
+) {
+
   const {
     data,
     error
@@ -217,58 +214,59 @@ async function signInStaff(email, password) {
     password
   });
 
+
   if (error) {
     throw error;
   }
 
-  if (!data.session || !data.user) {
+
+  if (
+    !data?.session ||
+    !data?.user
+  ) {
+
     throw new Error(
-      "No authenticated session was returned."
+      "Supabase did not return an authenticated session."
     );
   }
+
 
   return data;
 }
 
 
 /* ============================================================
-   11. FORM SUBMISSION
+   10. LOGIN FORM
    ============================================================ */
 
 if (loginForm) {
+
   loginForm.addEventListener(
     "submit",
     async (event) => {
+
       event.preventDefault();
 
       clearMessage();
 
 
-      /* ----------------------------------------
-         Configuration
-         ---------------------------------------- */
-
-      if (!configurationIsReady()) {
-        showMessage(
-          "VB Core authentication has not been connected yet."
-        );
-
-        return;
-      }
-
-
-      /* ----------------------------------------
-         Input
-         ---------------------------------------- */
-
       const email =
-        emailInput?.value.trim();
+        emailInput?.value
+          .trim();
 
       const password =
         passwordInput?.value;
 
 
-      if (!email || !password) {
+      /* ------------------------------------------------------
+         Validate input
+         ------------------------------------------------------ */
+
+      if (
+        !email ||
+        !password
+      ) {
+
         showMessage(
           "Enter your email address and password."
         );
@@ -277,51 +275,72 @@ if (loginForm) {
       }
 
 
-      /* ----------------------------------------
-         Authenticate
-         ---------------------------------------- */
+      /* ------------------------------------------------------
+         Sign in
+         ------------------------------------------------------ */
 
       setLoading(true);
 
+
       try {
-        await signInStaff(
-          email,
-          password
+
+        const authData =
+          await signInStaff(
+            email,
+            password
+          );
+
+
+        console.info(
+          "VB Core authentication successful:",
+          authData.user.id
         );
+
 
         showMessage(
           "Signed in. Opening VB Core...",
           "success"
         );
 
+
         /*
-          Small pause purely so the success state
-          doesn't disappear instantly.
+          Redirect directly after authentication.
+
+          The dashboard's app.js is responsible for validating
+          the authenticated staff profile and deciding whether
+          application access is permitted.
         */
 
         window.setTimeout(
-          goToDashboard,
-          350
+          () => {
+            goToDashboard();
+          },
+          300
         );
 
+
       } catch (error) {
+
         console.error(
           "VB Core sign-in failed:",
           error
         );
 
-        /*
-          Deliberately generic.
 
-          We do not tell somebody whether an
-          account exists.
+        /*
+          Keep the visible message deliberately generic.
+
+          We don't reveal whether a particular staff account
+          exists.
         */
 
         showMessage(
           "Unable to sign in. Check your details and try again."
         );
 
+
       } finally {
+
         setLoading(false);
       }
     }
@@ -330,43 +349,47 @@ if (loginForm) {
 
 
 /* ============================================================
-   12. AUTH STATE LISTENER
+   11. AUTH EVENT LOGGING
+
+   Login page does NOT perform redirects from auth events.
+
+   Redirect decisions are made explicitly by:
+   - successful login
+   - existing-session check
+
+   This prevents auth-state events fighting with app.js.
    ============================================================ */
 
-if (configurationIsReady()) {
-  supabase.auth.onAuthStateChange(
-    (event, session) => {
-      if (
-        event === "SIGNED_IN" &&
-        session
-      ) {
-        console.info(
-          "VB Core authenticated session established."
-        );
-      }
+supabase.auth.onAuthStateChange(
+  (event) => {
 
-      if (event === "SIGNED_OUT") {
-        console.info(
-          "VB Core session ended."
-        );
-      }
+    if (event === "SIGNED_IN") {
+
+      console.info(
+        "VB Core auth event: SIGNED_IN"
+      );
     }
-  );
-}
+
+
+    if (event === "SIGNED_OUT") {
+
+      console.info(
+        "VB Core auth event: SIGNED_OUT"
+      );
+    }
+  }
+);
 
 
 /* ============================================================
-   13. INITIALISE
+   12. INITIALISE LOGIN PAGE
    ============================================================ */
 
 checkExistingSession();
 
 
 /* ============================================================
-   14. EXPORT CLIENT
-
-   Other VB Core modules will eventually import this client
-   rather than creating duplicate Supabase clients everywhere.
+   13. EXPORT
    ============================================================ */
 
 export { supabase };
