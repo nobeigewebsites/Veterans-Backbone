@@ -1,13 +1,6 @@
 /* ============================================================
    VETERANS BACKBONE CORE
-   PROTECTED APPLICATION SHELL
-
-   Responsibilities:
-   - Require authenticated Supabase user
-   - Require active VB staff profile
-   - Provide staff identity to the interface
-   - Handle sign out
-   - Expose authenticated application context
+   PROTECTED APPLICATION SHELL — DEBUG BUILD
    ============================================================ */
 
 import { createClient } from
@@ -43,7 +36,7 @@ const supabase = createClient(
 
 
 /* ============================================================
-   3. APPLICATION PATHS
+   3. PATHS
    ============================================================ */
 
 const isInsidePagesFolder =
@@ -56,7 +49,7 @@ const LOGIN_URL =
 
 
 /* ============================================================
-   4. REDIRECT TO LOGIN
+   4. REDIRECT
    ============================================================ */
 
 let redirectingToLogin = false;
@@ -76,11 +69,14 @@ function redirectToLogin() {
 
 /* ============================================================
    5. GET AUTHENTICATED USER
-
-   getUser() validates the stored session with Supabase Auth.
    ============================================================ */
 
 async function getAuthenticatedUser() {
+
+  console.info(
+    "VB DEBUG: Checking authenticated Supabase user..."
+  );
+
 
   const {
     data,
@@ -91,7 +87,7 @@ async function getAuthenticatedUser() {
   if (error) {
 
     console.error(
-      "VB Core authentication check failed:",
+      "VB DEBUG: Authentication check failed:",
       error
     );
 
@@ -99,24 +95,46 @@ async function getAuthenticatedUser() {
   }
 
 
-  return data?.user ?? null;
+  if (!data?.user) {
+
+    console.warn(
+      "VB DEBUG: No authenticated user found."
+    );
+
+    return null;
+  }
+
+
+  console.info(
+    "VB DEBUG: Authenticated user found:",
+    {
+      id: data.user.id,
+      email: data.user.email
+    }
+  );
+
+
+  return data.user;
 }
 
 
 /* ============================================================
-   6. LOAD ACTIVE VB STAFF PROFILE
-
-   RLS remains the actual security boundary.
-
-   The browser supplies the authenticated Auth UID only.
-   Database policies determine what may be returned.
+   6. GET STAFF PROFILE
    ============================================================ */
 
 async function getStaffProfile(authUserId) {
 
+  console.info(
+    "VB DEBUG: Requesting staff profile for:",
+    authUserId
+  );
+
+
   const {
     data,
-    error
+    error,
+    status,
+    statusText
   } = await supabase
     .from("staff_profiles")
     .select(`
@@ -141,11 +159,27 @@ async function getStaffProfile(authUserId) {
     .maybeSingle();
 
 
+  console.info(
+    "VB DEBUG: staff_profiles response:",
+    {
+      data,
+      error,
+      status,
+      statusText
+    }
+  );
+
+
   if (error) {
 
     console.error(
-      "Unable to load VB staff profile:",
-      error
+      "VB DEBUG: staff_profiles query failed:",
+      {
+        message: error.message,
+        details: error.details,
+        hint: error.hint,
+        code: error.code
+      }
     );
 
     throw error;
@@ -208,14 +242,6 @@ function applyStaffIdentity(
   );
 
 
-  /*
-    These values are useful to the interface.
-
-    They are NOT permission controls.
-
-    RLS remains responsible for authorisation.
-  */
-
   document.documentElement.dataset.authenticated =
     "true";
 
@@ -232,6 +258,11 @@ function applyStaffIdentity(
    ============================================================ */
 
 async function signOut() {
+
+  console.info(
+    "VB DEBUG: Signing out..."
+  );
+
 
   try {
 
@@ -261,24 +292,18 @@ async function signOut() {
 
 
 /* ============================================================
-   9. SIGN-OUT CONTROLS
-
-   Any element containing:
-
-       data-vb-sign-out
-
-   becomes a sign-out control.
+   9. SIGN OUT CONTROLS
    ============================================================ */
 
 function initialiseSignOutControls() {
 
-  const signOutControls =
+  const controls =
     document.querySelectorAll(
       "[data-vb-sign-out]"
     );
 
 
-  signOutControls.forEach(
+  controls.forEach(
     (control) => {
 
       control.addEventListener(
@@ -300,30 +325,25 @@ function initialiseSignOutControls() {
 /* ============================================================
    10. AUTH STATE WATCHER
 
-   IMPORTANT:
+   DEBUG BUILD:
 
-   We redirect ONLY on an explicit SIGNED_OUT event.
+   We log auth events but DO NOT redirect from them.
 
-   We do NOT redirect merely because an auth event temporarily
-   contains no session.
-
-   This prevents login.html and index.html fighting each other
-   during Supabase initialisation/token refresh.
+   This prevents the page disappearing while we're diagnosing
+   the staff-profile/RLS stage.
    ============================================================ */
 
 function watchAuthentication() {
 
   supabase.auth.onAuthStateChange(
-    (event) => {
+    (event, session) => {
 
-      if (event === "SIGNED_OUT") {
+      console.info(
+        "VB DEBUG: Auth state event:",
+        event,
+        session ? "session present" : "no session"
+      );
 
-        console.info(
-          "VB Core session ended."
-        );
-
-        redirectToLogin();
-      }
     }
   );
 }
@@ -335,21 +355,40 @@ function watchAuthentication() {
 
 async function protectApplication() {
 
+  console.info(
+    "============================================"
+  );
+
+  console.info(
+    "VB DEBUG: Starting application protection"
+  );
+
+  console.info(
+    "============================================"
+  );
+
+
   try {
 
     /* --------------------------------------------------------
-       STEP 1
-       Validate authenticated Supabase user
+       AUTHENTICATION
        -------------------------------------------------------- */
 
     const user =
       await getAuthenticatedUser();
 
 
+    /*
+      This redirect stays enabled.
+
+      A genuinely logged-out person still does not belong on
+      the protected application.
+    */
+
     if (!user) {
 
-      console.info(
-        "No authenticated VB Core user."
+      console.warn(
+        "VB DEBUG: No authenticated user — redirecting to login."
       );
 
       redirectToLogin();
@@ -358,46 +397,94 @@ async function protectApplication() {
     }
 
 
-    console.info(
-      "Supabase user authenticated:",
-      user.id
-    );
-
-
     /* --------------------------------------------------------
-       STEP 2
-       Find active VB staff profile
+       STAFF PROFILE
        -------------------------------------------------------- */
 
-    const staffProfile =
-      await getStaffProfile(
-        user.id
-      );
+    let staffProfile;
 
 
-    if (!staffProfile) {
+    try {
 
-      console.error(
-        "Authenticated user has no active VB staff profile."
-      );
+      staffProfile =
+        await getStaffProfile(
+          user.id
+        );
 
+
+    } catch (profileError) {
 
       /*
-        Authentication alone does not grant VB Core access.
+        DEBUG ONLY.
 
-        A person must also have an active staff profile.
+        Normally we would fail closed here.
+
+        For this diagnostic build we deliberately leave the
+        dashboard visible so the Console remains available.
       */
 
-      await supabase.auth.signOut();
+      console.error(
+        "VB DEBUG: Staff profile lookup threw an error."
+      );
+
+      console.error(
+        profileError
+      );
+
+      console.error(
+        "VB DEBUG: Redirect suppressed for diagnosis."
+      );
 
       return;
     }
 
 
     /* --------------------------------------------------------
-       STEP 3
-       Apply authenticated staff identity
+       NO PROFILE RETURNED
        -------------------------------------------------------- */
+
+    if (!staffProfile) {
+
+      /*
+        DEBUG ONLY.
+
+        Do NOT sign the user out.
+
+        We need the authenticated session to remain alive while
+        we inspect why RLS returned no staff record.
+      */
+
+      console.error(
+        "VB DEBUG: Auth succeeded but no active staff profile was returned."
+      );
+
+      console.error(
+        "VB DEBUG: Expected Auth UID:",
+        user.id
+      );
+
+      console.error(
+        "VB DEBUG: Auth email:",
+        user.email
+      );
+
+      console.error(
+        "VB DEBUG: Redirect and sign-out suppressed for diagnosis."
+      );
+
+      return;
+    }
+
+
+    /* --------------------------------------------------------
+       SUCCESS
+       -------------------------------------------------------- */
+
+    console.info(
+      "VB DEBUG: Staff profile found:",
+      staffProfile
+    );
+
 
     applyStaffIdentity(
       user,
@@ -405,36 +492,23 @@ async function protectApplication() {
     );
 
 
-    /* --------------------------------------------------------
-       STEP 4
-       Enable application controls
-       -------------------------------------------------------- */
-
     initialiseSignOutControls();
 
     watchAuthentication();
 
 
-    /* --------------------------------------------------------
-       STEP 5
-       Application ready
-       -------------------------------------------------------- */
-
     console.info(
-      `VB Core access established for ${staffProfile.staff_code}.`
+      "============================================"
     );
 
+    console.info(
+      `VB CORE ACCESS GRANTED: ${staffProfile.staff_code}`
+    );
 
-    /*
-      Other VB Core modules can listen for this event.
+    console.info(
+      "============================================"
+    );
 
-      This allows future module scripts to wait until both:
-
-      - Supabase authentication
-      - VB staff-profile validation
-
-      have completed.
-    */
 
     document.dispatchEvent(
       new CustomEvent(
@@ -452,26 +526,26 @@ async function protectApplication() {
 
   } catch (error) {
 
+    /*
+      DEBUG ONLY.
+
+      Leave the page where it is so we can inspect the error.
+    */
+
     console.error(
-      "VB Core application protection failed:",
+      "VB DEBUG: Unexpected application protection failure:",
       error
     );
 
-
-    /*
-      Fail closed.
-
-      If identity / staff access cannot be established,
-      application access is not granted.
-    */
-
-    redirectToLogin();
+    console.error(
+      "VB DEBUG: Redirect suppressed for diagnosis."
+    );
   }
 }
 
 
 /* ============================================================
-   12. START VB CORE
+   12. START
    ============================================================ */
 
 protectApplication();
