@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Veterans Backbone Core</title>
+
+  <meta
+    name="description"
+    content="Veterans Backbone operational system."
+  >
+
+  <link rel="stylesheet" href="css/app.css">
+</head>
+
+<body>
+
+  <div class="app-shell">
+
+    <!-- =====================================================
+         SIDEBAR
+    ====================================================== -->
+
+    <aside class="sidebar">
+
+      <div class="brand">
+        <div class="brand-mark">VB</div>
+
+        <div class="brand-text">
+          <strong>Veterans Backbone</strong>
+          <span>Core</span>
+        </div>
+      </div>
+
+
+      <nav class="main-nav" aria-label="Main navigation">
+
+        <p class="nav-label">WORKSPACE</p>
+
+        <a href="index.html" class="nav-item active">
+          <span class="nav-icon">⌂</span>
+          <span>Dashboard</span>
+        </a>
+
+        <a href="#" class="nav-item">
+          <span class="nav-icon">★</span>
+          <span>Veterans</span>
+        </a>
+
+        <a href="#" class="nav-item">
+          <span class="nav-icon">▣</span>
+          <span>Casework</span>
+        </a>
+
+        <a href="#" class="nav-item">
+          <span class="nav-icon">↗</span>
+          <span>Referrals</span>
+        </a>
+
+        <a href="#" class="nav-item">
+          <span class="nav-icon">✓</span>
+          <span>Workflow Tasks</span>
+
+          <span class="nav-count">
+            6
+          </span>
+        </a>
+
+
+        <p class="nav-label">ASSURANCE</p>
+
+        <a href="#" class="nav-item">
+          <span class="nav-icon">!</span>
+          <span>Assurance Queue</span>
+
+          <span class="nav-count warning">
+            2
+          </span>
+        </a>
+
+        <a href="#" class="nav-item">
+          <span class="nav-icon">◆</span>
+          <span>Safeguarding</span>
+        </a>
+
+
+        <p class="nav-label">SERVICES</p>
+
+        <a href="#" class="nav-item">
+          <span class="nav-icon">◈</span>
+          <span>Programmes</span>
+        </a>
+
+        <a href="#" class="nav-item">
+          <span class="nav-icon">◎</span>
+          <span>Partners</span>
+        </a>
+
+
+        <p class="nav-label">ORGANISATION</p>
+
+        <a href="#" class="nav-item">
+          <span class="nav-icon">♟</span>
+          <span>Workforce</span>
+        </a>
+
+        <a href="#" class="nav-item">
+          <span class="nav-icon">§</span>
+          <span>Governance</span>
+        </a>
+
+        <a href="#" class="nav-item">
+          <span class="nav-icon">▤</span>
+          <span>Policy Brain</span>
+        </a>
+
+        <a href="#" class="nav-item">
+          <span class="nav-icon">▥</span>
+          <span>Reporting</span>
+        </a>
+
+      </nav>
+
+
+      <div class="sidebar-footer">
+
+        <div class="system-status">
+          <span class="status-dot"></span>
+
+          <div>
+            <strong>System operational</strong>
+            <span>Development environment</span>
+          </div>
+        </div>
+
+      </div>
+
+    </aside>
+
+
+
+    <!-- =====================================================
+         MAIN AREA
+    ====================================================== -->
+
+    <main class="main-content">
+
+      <!-- TOP BAR -->
+
+      <header class="topbar">
+
+        <div>
+          <p class="eyebrow">
+            VETERANS BACKBONE CORE
+          </p>
+
+          <h1>
+            Good evening
+          </h1>
+        </div>
+
+
+        <div class="topbar-actions">
+
+          <button class="search-button" type="button">
+            Search veterans
+          </button>
+
+          <div class="staff-profile">
+
+            <div class="staff-avatar">
+              SW
+            </div>
+
+            <div>
+              <strong>Support Worker</strong>
+              <span>Site 1 · DEV</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </header>
+
+
+
+      <!-- DEVELOPMENT NOTICE -->
+
+      <section class="dev-notice">
+
+        <strong>Development environment</strong>
+
+        <span>
+          Fictional data only. No real veteran information is stored here.
+        </span>
+
+      </section>
+
+
+
+      <!-- =====================================================
+           OVERVIEW
+      ====================================================== -->
+
+      <section class="dashboard-section">
+
+        <div class="section-heading">
+
+          <div>
+            <p class="eyebrow">
+              TODAY
+            </p>
+
+            <h2>
+              What needs attention
+            </h2>
+          </div>
+
+          <p class="section-note">
+            The system surfaces work. People make decisions.
+          </p>
+
+        </div>
+
+
+        <div class="stat-grid">
+
+          <article class="stat-card">
+
+            <div class="stat-icon blue">
+              ✓
+            </div>
+
+            <div>
+              <span class="stat-number">
+                6
+              </span>
+
+              <span class="stat-label">
+                Workflow tasks
+              </span>
+            </div>
+
+            <span class="stat-detail">
+              2 due today
+            </span>
+
+          </article>
+
+
+          <article class="stat-card">
+
+            <div class="stat-icon amber">
+              !
+            </div>
+
+            <div>
+              <span class="stat-number">
+                2
+              </span>
+
+              <span class="stat-label">
+                Assurance items
+              </span>
+            </div>
+
+            <span class="stat-detail">
+              Human review required
+            </span>
+
+          </article>
+
+
+          <article class="stat-card">
+
+            <div class="stat-icon green">
+              ↗
+            </div>
+
+            <div>
+              <span class="stat-number">
+                4
+              </span>
+
+              <span class="stat-label">
+                Active referrals
+              </span>
+            </div>
+
+            <span class="stat-detail">
+              1 follow-up due
+            </span>
+
+          </article>
+
+
+          <article class="stat-card">
+
+            <div class="stat-icon purple">
+              ★
+            </div>
+
+            <div>
+              <span class="stat-number">
+                8
+              </span>
+
+              <span class="stat-label">
+                Open cases
+              </span>
+            </div>
+
+            <span class="stat-detail">
+              Site 1
+            </span>
+
+          </article>
+
+        </div>
+
+      </section>
+
+
+
+      <!-- =====================================================
+           DASHBOARD GRID
+      ====================================================== -->
+
+      <section class="dashboard-grid">
+
+
+        <!-- WORKFLOW TASKS -->
+
+        <article class="panel">
+
+          <div class="panel-header">
+
+            <div>
+              <p class="eyebrow">
+                WORKFLOW
+              </p>
+
+              <h2>
+                Your tasks
+              </h2>
+            </div>
+
+            <button class="text-button" type="button">
+              View all
+            </button>
+
+          </div>
+
+
+          <div class="task-list">
+
+            <div class="task-item">
+
+              <div class="priority-bar urgent"></div>
+
+              <div class="task-content">
+
+                <div class="task-topline">
+                  <strong>
+                    Review referral progress
+                  </strong>
+
+                  <span class="tag urgent">
+                    Due today
+                  </span>
+                </div>
+
+                <p>
+                  VB-000001 · Referral follow-up
+                </p>
+
+                <span class="task-meta">
+                  Human review required
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="task-item">
+
+              <div class="priority-bar normal"></div>
+
+              <div class="task-content">
+
+                <div class="task-topline">
+                  <strong>
+                    Record contact outcome
+                  </strong>
+
+                  <span class="tag">
+                    Tomorrow
+                  </span>
+                </div>
+
+                <p>
+                  VB-000004 · Casework
+                </p>
+
+                <span class="task-meta">
+                  Assigned to you
+                </span>
+
+              </div>
+
+            </div>
+
+
+            <div class="task-item">
+
+              <div class="priority-bar normal"></div>
+
+              <div class="task-content">
+
+                <div class="task-topline">
+                  <strong>
+                    Confirm partner response
+                  </strong>
+
+                  <span class="tag">
+                    30 Sep
+                  </span>
+                </div>
+
+                <p>
+                  VB-000006 · External referral
+                </p>
+
+                <span class="task-meta">
+                  Follow-up
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+
+        <!-- ASSURANCE QUEUE -->
+
+        <article class="panel assurance-panel">
+
+          <div class="panel-header">
+
+            <div>
+              <p class="eyebrow">
+                ASSURANCE
+              </p>
+
+              <h2>
+                Needs a human
+              </h2>
+            </div>
+
+            <button class="text-button" type="button">
+              Open queue
+            </button>
+
+          </div>
+
+
+          <div class="assurance-message">
+
+            <div class="assurance-symbol">
+              !
+            </div>
+
+            <div>
+              <strong>
+                2 items require assessment
+              </strong>
+
+              <p>
+                The system has identified something that
+                needs attention. No decision has been made.
+              </p>
+            </div>
+
+          </div>
+
+
+          <div class="assurance-item">
+
+            <div>
+
+              <span class="tag warning">
+                WARNING
+              </span>
+
+              <h3>
+                Referral review required
+              </h3>
+
+              <p>
+                VB-000001 · Referral progress requires
+                human review.
+              </p>
+
+            </div>
+
+            <button class="secondary-button" type="button">
+              Assess
+            </button>
+
+          </div>
+
+
+          <div class="assurance-item">
+
+            <div>
+
+              <span class="tag action">
+                ACTION
+              </span>
+
+              <h3>
+                Follow-up due
+              </h3>
+
+              <p>
+                VB-000003 · Scheduled referral follow-up
+                has become due.
+              </p>
+
+            </div>
+
+            <button class="secondary-button" type="button">
+              Review
+            </button>
+
+          </div>
+
+        </article>
+
+
+
+        <!-- RECENT CASES -->
+
+        <article class="panel wide-panel">
+
+          <div class="panel-header">
+
+            <div>
+              <p class="eyebrow">
+                CASEWORK
+              </p>
+
+              <h2>
+                Recent cases
+              </h2>
+            </div>
+
+            <button class="primary-button" type="button">
+              + New case
+            </button>
+
+          </div>
+
+
+          <div class="table-wrap">
+
+            <table>
+
+              <thead>
+
+                <tr>
+                  <th>Veteran</th>
+                  <th>Case</th>
+                  <th>Status</th>
+                  <th>Next step</th>
+                  <th>Assigned</th>
+                  <th></th>
+                </tr>
+
+              </thead>
+
+
+              <tbody>
+
+                <tr>
+
+                  <td>
+                    <strong>VB-000001</strong>
+                  </td>
+
+                  <td>
+                    CASE-000001
+                  </td>
+
+                  <td>
+                    <span class="status-pill active">
+                      Active
+                    </span>
+                  </td>
+
+                  <td>
+                    Referral review
+                  </td>
+
+                  <td>
+                    Support Worker
+                  </td>
+
+                  <td>
+                    <button class="row-button" type="button">
+                      Open
+                    </button>
+                  </td>
+
+                </tr>
+
+
+                <tr>
+
+                  <td>
+                    <strong>VB-000004</strong>
+                  </td>
+
+                  <td>
+                    CASE-000004
+                  </td>
+
+                  <td>
+                    <span class="status-pill active">
+                      Active
+                    </span>
+                  </td>
+
+                  <td>
+                    Record contact
+                  </td>
+
+                  <td>
+                    Support Worker
+                  </td>
+
+                  <td>
+                    <button class="row-button" type="button">
+                      Open
+                    </button>
+                  </td>
+
+                </tr>
+
+
+                <tr>
+
+                  <td>
+                    <strong>VB-000006</strong>
+                  </td>
+
+                  <td>
+                    CASE-000006
+                  </td>
+
+                  <td>
+                    <span class="status-pill review">
+                      Review
+                    </span>
+                  </td>
+
+                  <td>
+                    Partner response
+                  </td>
+
+                  <td>
+                    Support Worker
+                  </td>
+
+                  <td>
+                    <button class="row-button" type="button">
+                      Open
+                    </button>
+                  </td>
+
+                </tr>
+
+              </tbody>
+
+            </table>
+
+          </div>
+
+        </article>
+
+      </section>
+
+
+
+      <!-- =====================================================
+           PRINCIPLE FOOTER
+      ====================================================== -->
+
+      <footer class="app-footer">
+
+        <div class="footer-mark">
+          🦄
+        </div>
+
+        <div>
+          <strong>
+            Veterans Backbone
+          </strong>
+
+          <span>
+            Support without control · Accountability without blame
+            · Safety without surveillance
+          </span>
+        </div>
+
+      </footer>
+
+    </main>
+
+  </div>
+
+
+  <script src="js/app.js"></script>
+
+</body>
+</html>
