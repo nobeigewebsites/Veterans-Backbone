@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Veterans | Veterans Backbone Core</title>
+
+  <meta
+    name="description"
+    content="Veterans Backbone Core veteran workspace."
+  >
+
+  <link rel="stylesheet" href="../css/app.css">
+</head>
+
+<body>
+
+<div class="app-shell">
+
+  <!-- =====================================================
+       SIDEBAR
+  ====================================================== -->
+
+  <aside class="sidebar">
+
+    <div class="brand">
+
+      <div class="brand-mark">
+        VB
+      </div>
+
+      <div class="brand-text">
+        <strong>Veterans Backbone</strong>
+        <span>Core</span>
+      </div>
+
+    </div>
+
+
+    <nav class="main-nav" aria-label="Main navigation">
+
+      <p class="nav-label">WORKSPACE</p>
+
+      <a href="../index.html" class="nav-item">
+        <span class="nav-icon">⌂</span>
+        <span>Dashboard</span>
+      </a>
+
+      <a href="veterans.html" class="nav-item active">
+        <span class="nav-icon">★</span>
+        <span>Veterans</span>
+      </a>
+
+      <a href="#" class="nav-item">
+        <span class="nav-icon">▣</span>
+        <span>Casework</span>
+      </a>
+
+      <a href="#" class="nav-item">
+        <span class="nav-icon">↗</span>
+        <span>Referrals</span>
+      </a>
+
+      <a href="#" class="nav-item">
+        <span class="nav-icon">✓</span>
+        <span>Workflow Tasks</span>
+
+        <span class="nav-count">
+          6
+        </span>
+      </a>
+
+
+      <p class="nav-label">ASSURANCE</p>
+
+      <a href="#" class="nav-item">
+        <span class="nav-icon">!</span>
+        <span>Assurance Queue</span>
+
+        <span class="nav-count warning">
+          2
+        </span>
+      </a>
+
+      <a href="#" class="nav-item">
+        <span class="nav-icon">◆</span>
+        <span>Safeguarding</span>
+      </a>
+
+
+      <p class="nav-label">SERVICES</p>
+
+      <a href="#" class="nav-item">
+        <span class="nav-icon">◈</span>
+        <span>Programmes</span>
+      </a>
+
+      <a href="#" class="nav-item">
+        <span class="nav-icon">◎</span>
+        <span>Partners</span>
+      </a>
+
+
+      <p class="nav-label">ORGANISATION</p>
+
+      <a href="#" class="nav-item">
+        <span class="nav-icon">♟</span>
+        <span>Workforce</span>
+      </a>
+
+      <a href="#" class="nav-item">
+        <span class="nav-icon">§</span>
+        <span>Governance</span>
+      </a>
+
+      <a href="#" class="nav-item">
+        <span class="nav-icon">▤</span>
+        <span>Policy Brain</span>
+      </a>
+
+      <a href="#" class="nav-item">
+        <span class="nav-icon">▥</span>
+        <span>Reporting</span>
+      </a>
+
+    </nav>
+
+
+    <div class="sidebar-footer">
+
+      <div class="system-status">
+
+        <span class="status-dot"></span>
+
+        <div>
+          <strong>System operational</strong>
+          <span>Development environment</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </aside>
+
+
+  <!-- =====================================================
+       MAIN
+  ====================================================== -->
+
+  <main class="main-content veterans-page">
+
+
+    <!-- TOP BAR -->
+
+    <header class="topbar">
+
+      <div>
+
+        <p class="eyebrow">
+          VETERANS BACKBONE CORE
+        </p>
+
+        <h1>
+          Veterans
+        </h1>
+
+      </div>
+
+
+      <div class="topbar-actions">
+
+        <button
+          class="search-button"
+          type="button"
+        >
+          Search veterans...
+        </button>
+
+
+        <div class="staff-profile">
+
+          <div class="staff-avatar">
+            SW
+          </div>
+
+          <div>
+            <strong>Support Worker</strong>
+            <span>Site 1 · DEV</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- DEVELOPMENT NOTICE -->
+
+    <section class="dev-notice">
+
+      <strong>
+        Development environment
+      </strong>
+
+      <span>
+        Fictional data only. No real veteran information is stored here.
+      </span>
+
+    </section>
+
+
+    <!-- =====================================================
+         PAGE INTRO
+    ====================================================== -->
+
+    <section class="veterans-intro">
+
+      <div>
+
+        <p class="eyebrow">
+          VETERAN CORE
+        </p>
+
+        <h2>
+          Find the right record.
+        </h2>
+
+        <p>
+          Operational records use Veterans Backbone IDs.
+          Identity information remains separately controlled.
+        </p>
+
+      </div>
+
+
+      <button
+        class="primary-button"
+        type="button"
+      >
+        + Create veteran record
+      </button>
+
+    </section>
+
+
+    <!-- =====================================================
+         SEARCH + FILTERS
+    ====================================================== -->
+
+    <section class="veteran-search-panel">
+
+      <div class="veteran-search-main">
+
+        <label for="veteran-search">
+          Search records
+        </label>
+
+        <div class="veteran-search-box">
+
+          <span class="search-symbol">
+            ⌕
+          </span>
+
+          <input
+            id="veteran-search"
+            type="search"
+            placeholder="Search by VB ID..."
+            autocomplete="off"
+          >
+
+        </div>
+
+      </div>
+
+
+      <div class="filter-field">
+
+        <label for="site-filter">
+          Site
+        </label>
+
+        <select id="site-filter">
+
+          <option>
+            All permitted sites
+          </option>
+
+          <option>
+            Site 1
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="filter-field">
+
+        <label for="status-filter">
+          Case status
+        </label>
+
+        <select id="status-filter">
+
+          <option>
+            All statuses
+          </option>
+
+          <option>
+            Active
+          </option>
+
+          <option>
+            Review
+          </option>
+
+          <option>
+            Closed
+          </option>
+
+        </select>
+
+      </div>
+
+
+      <div class="filter-field">
+
+        <label for="worker-filter">
+          Assigned
+        </label>
+
+        <select id="worker-filter">
+
+          <option>
+            Anyone
+          </option>
+
+          <option>
+            Assigned to me
+          </option>
+
+        </select>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         SUMMARY
+    ====================================================== -->
+
+    <section class="veteran-summary-grid">
+
+      <article class="mini-stat pink">
+
+        <span class="mini-stat-number">
+          8
+        </span>
+
+        <div>
+          <strong>Visible records</strong>
+          <span>Within your access</span>
+        </div>
+
+      </article>
+
+
+      <article class="mini-stat blue">
+
+        <span class="mini-stat-number">
+          6
+        </span>
+
+        <div>
+          <strong>Active cases</strong>
+          <span>Currently open</span>
+        </div>
+
+      </article>
+
+
+      <article class="mini-stat orange">
+
+        <span class="mini-stat-number">
+          2
+        </span>
+
+        <div>
+          <strong>Need attention</strong>
+          <span>Workflow or assurance</span>
+        </div>
+
+      </article>
+
+    </section>
+
+
+    <!-- =====================================================
+         RECORD LIST
+    ====================================================== -->
+
+    <section class="veteran-records-panel">
+
+      <div class="records-header">
+
+        <div>
+
+          <p class="eyebrow">
+            RECORDS
+          </p>
+
+          <h2>
+            Veterans in your workspace
+          </h2>
+
+        </div>
+
+
+        <div class="records-count">
+          Showing 3 fictional records
+        </div>
+
+      </div>
+
+
+      <!-- RECORD 1 -->
+
+      <article class="veteran-record-card attention">
+
+        <div class="veteran-id-block">
+
+          <div class="veteran-avatar">
+            VB
+          </div>
+
+          <div>
+
+            <span class="record-label">
+              VETERAN ID
+            </span>
+
+            <h3>
+              VB-000001
+            </h3>
+
+            <span class="site-label">
+              Site 1
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="record-detail">
+
+          <span class="record-label">
+            CASE
+          </span>
+
+          <strong>
+            CASE-000001
+          </strong>
+
+          <span class="status-pill active">
+            Active
+          </span>
+
+        </div>
+
+
+        <div class="record-detail">
+
+          <span class="record-label">
+            LAST CONTACT
+          </span>
+
+          <strong>
+            27 Sep 2026
+          </strong>
+
+          <span>
+            Follow-up recorded
+          </span>
+
+        </div>
+
+
+        <div class="record-detail">
+
+          <span class="record-label">
+            NEXT STEP
+          </span>
+
+          <strong>
+            Referral review
+          </strong>
+
+          <span class="record-attention">
+            Human review required
+          </span>
+
+        </div>
+
+
+        <div class="record-signals">
+
+          <span class="signal workflow">
+            2 tasks
+          </span>
+
+          <span class="signal assurance">
+            1 assurance
+          </span>
+
+        </div>
+
+
+        <div class="record-action">
+
+          <a
+            href="veteran-record.html"
+            class="open-record-button"
+          >
+            Open record →
+          </a>
+
+        </div>
+
+      </article>
+
+
+      <!-- RECORD 2 -->
+
+      <article class="veteran-record-card">
+
+        <div class="veteran-id-block">
+
+          <div class="veteran-avatar blue">
+            VB
+          </div>
+
+          <div>
+
+            <span class="record-label">
+              VETERAN ID
+            </span>
+
+            <h3>
+              VB-000004
+            </h3>
+
+            <span class="site-label">
+              Site 1
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="record-detail">
+
+          <span class="record-label">
+            CASE
+          </span>
+
+          <strong>
+            CASE-000004
+          </strong>
+
+          <span class="status-pill active">
+            Active
+          </span>
+
+        </div>
+
+
+        <div class="record-detail">
+
+          <span class="record-label">
+            LAST CONTACT
+          </span>
+
+          <strong>
+            28 Sep 2026
+          </strong>
+
+          <span>
+            Contact completed
+          </span>
+
+        </div>
+
+
+        <div class="record-detail">
+
+          <span class="record-label">
+            NEXT STEP
+          </span>
+
+          <strong>
+            Record outcome
+          </strong>
+
+          <span>
+            Due tomorrow
+          </span>
+
+        </div>
+
+
+        <div class="record-signals">
+
+          <span class="signal workflow">
+            1 task
+          </span>
+
+        </div>
+
+
+        <div class="record-action">
+
+          <a
+            href="veteran-record.html"
+            class="open-record-button"
+          >
+            Open record →
+          </a>
+
+        </div>
+
+      </article>
+
+
+      <!-- RECORD 3 -->
+
+      <article class="veteran-record-card review">
+
+        <div class="veteran-id-block">
+
+          <div class="veteran-avatar purple">
+            VB
+          </div>
+
+          <div>
+
+            <span class="record-label">
+              VETERAN ID
+            </span>
+
+            <h3>
+              VB-000006
+            </h3>
+
+            <span class="site-label">
+              Site 1
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="record-detail">
+
+          <span class="record-label">
+            CASE
+          </span>
+
+          <strong>
+            CASE-000006
+          </strong>
+
+          <span class="status-pill review">
+            Review
+          </span>
+
+        </div>
+
+
+        <div class="record-detail">
+
+          <span class="record-label">
+            LAST CONTACT
+          </span>
+
+          <strong>
+            25 Sep 2026
+          </strong>
+
+          <span>
+            Partner contact
+          </span>
+
+        </div>
+
+
+        <div class="record-detail">
+
+          <span class="record-label">
+            NEXT STEP
+          </span>
+
+          <strong>
+            Partner response
+          </strong>
+
+          <span>
+            Follow-up scheduled
+          </span>
+
+        </div>
+
+
+        <div class="record-signals">
+
+          <span class="signal workflow">
+            1 task
+          </span>
+
+        </div>
+
+
+        <div class="record-action">
+
+          <a
+            href="veteran-record.html"
+            class="open-record-button"
+          >
+            Open record →
+          </a>
+
+        </div>
+
+      </article>
+
+
+      <!-- =================================================
+           PRIVACY REMINDER
+      ================================================== -->
+
+      <div class="privacy-reminder">
+
+        <div class="privacy-icon">
+          ◈
+        </div>
+
+        <div>
+
+          <strong>
+            Minimum information by default
+          </strong>
+
+          <p>
+            This workspace uses operational identifiers.
+            Access to identity information is controlled separately
+            and should only be used where the role and task require it.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- FOOTER -->
+
+    <footer class="app-footer">
+
+      <div class="footer-mark">
+        🦄
+      </div>
+
+      <div>
+
+        <strong>
+          Veterans Backbone
+        </strong>
+
+        <span>
+          Human first · Support without control ·
+          Safety without surveillance
+        </span>
+
+      </div>
+
+    </footer>
+
+  </main>
+
+</div>
+
+</body>
+</html>
