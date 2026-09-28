@@ -1,0 +1,1637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Reporting | Veterans Backbone Core</title>
+
+  <meta
+    name="description"
+    content="Veterans Backbone Core reporting and organisational insight workspace."
+  >
+
+  <link rel="stylesheet" href="../css/app.css">
+</head>
+
+<body>
+
+<div class="app-shell">
+
+  <!-- =====================================================
+       SIDEBAR
+  ====================================================== -->
+
+  <aside class="sidebar">
+
+    <div class="brand">
+
+      <div class="brand-mark">VB</div>
+
+      <div class="brand-text">
+        <strong>Veterans Backbone</strong>
+        <span>Core</span>
+      </div>
+
+    </div>
+
+
+    <nav class="main-nav" aria-label="Main navigation">
+
+      <p class="nav-label">WORKSPACE</p>
+
+      <a href="../index.html" class="nav-item">
+        <span class="nav-icon">⌂</span>
+        <span>Dashboard</span>
+      </a>
+
+      <a href="veterans.html" class="nav-item">
+        <span class="nav-icon">★</span>
+        <span>Veterans</span>
+      </a>
+
+      <a href="casework.html" class="nav-item">
+        <span class="nav-icon">▣</span>
+        <span>Casework</span>
+      </a>
+
+      <a href="referrals.html" class="nav-item">
+        <span class="nav-icon">↗</span>
+        <span>Referrals</span>
+      </a>
+
+      <a href="workflow-tasks.html" class="nav-item">
+        <span class="nav-icon">✓</span>
+        <span>Workflow Tasks</span>
+        <span class="nav-count">6</span>
+      </a>
+
+
+      <p class="nav-label">ASSURANCE</p>
+
+      <a href="assurance.html" class="nav-item">
+        <span class="nav-icon">!</span>
+        <span>Assurance Queue</span>
+        <span class="nav-count warning">2</span>
+      </a>
+
+      <a href="safeguarding.html" class="nav-item">
+        <span class="nav-icon">◆</span>
+        <span>Safeguarding</span>
+      </a>
+
+
+      <p class="nav-label">SERVICES</p>
+
+      <a href="programmes.html" class="nav-item">
+        <span class="nav-icon">◈</span>
+        <span>Programmes</span>
+      </a>
+
+      <a href="partners.html" class="nav-item">
+        <span class="nav-icon">◎</span>
+        <span>Partners</span>
+      </a>
+
+
+      <p class="nav-label">ORGANISATION</p>
+
+      <a href="workforce.html" class="nav-item">
+        <span class="nav-icon">♟</span>
+        <span>Workforce</span>
+      </a>
+
+      <a href="governance.html" class="nav-item">
+        <span class="nav-icon">§</span>
+        <span>Governance</span>
+      </a>
+
+      <a href="policy-brain.html" class="nav-item">
+        <span class="nav-icon">▤</span>
+        <span>Policy Brain</span>
+      </a>
+
+      <a href="reporting.html" class="nav-item active">
+        <span class="nav-icon">▥</span>
+        <span>Reporting</span>
+      </a>
+
+    </nav>
+
+
+    <div class="sidebar-footer">
+
+      <div class="system-status">
+
+        <span class="status-dot"></span>
+
+        <div>
+          <strong>System operational</strong>
+          <span>Development environment</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </aside>
+
+
+  <!-- =====================================================
+       MAIN
+  ====================================================== -->
+
+  <main class="main-content reporting-page">
+
+
+    <!-- =====================================================
+         TOPBAR
+    ====================================================== -->
+
+    <header class="topbar">
+
+      <div>
+
+        <p class="eyebrow">
+          VETERANS BACKBONE CORE
+        </p>
+
+        <h1>
+          Reporting
+        </h1>
+
+      </div>
+
+
+      <div class="topbar-actions">
+
+        <button class="secondary-button" type="button">
+          Export report
+        </button>
+
+
+        <div class="staff-profile">
+
+          <div class="staff-avatar">
+            SW
+          </div>
+
+          <div>
+            <strong>Support Worker</strong>
+            <span>Site 1 · DEV</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- =====================================================
+         DEV NOTICE
+    ====================================================== -->
+
+    <section class="dev-notice">
+
+      <strong>
+        Development environment
+      </strong>
+
+      <span>
+        Fictional data only. Reporting figures shown here are
+        demonstration data.
+      </span>
+
+    </section>
+
+
+    <!-- =====================================================
+         INTRO
+    ====================================================== -->
+
+    <section class="workspace-intro">
+
+      <div>
+
+        <p class="eyebrow">
+          REPORTING &amp; INSIGHT
+        </p>
+
+        <h2>
+          See the system without reducing people to numbers.
+        </h2>
+
+        <p>
+          Understand demand, activity, outcomes, workflow,
+          assurance and organisational health while keeping
+          individual context where it belongs.
+        </p>
+
+      </div>
+
+
+      <button class="primary-button" type="button">
+        + Build report
+      </button>
+
+    </section>
+
+
+    <!-- =====================================================
+         PRINCIPLE
+    ====================================================== -->
+
+    <section class="reporting-principle-bar">
+
+      <div>
+        ▥
+      </div>
+
+      <div>
+
+        <strong>
+          Numbers inform decisions. They do not tell the whole story.
+        </strong>
+
+        <p>
+          Reporting should help Veterans Backbone understand what is
+          happening, where pressure exists and whether systems are
+          working — without turning veterans or staff into league tables.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         REPORT CONTROLS
+    ====================================================== -->
+
+    <section class="report-control-panel">
+
+      <div class="filter-field">
+
+        <label for="report-period">
+          Reporting period
+        </label>
+
+        <select id="report-period">
+
+          <option>September 2026</option>
+          <option>Last 30 days</option>
+          <option>Last 90 days</option>
+          <option>Current quarter</option>
+          <option>Current year</option>
+
+        </select>
+
+      </div>
+
+
+      <div class="filter-field">
+
+        <label for="report-site">
+          Site
+        </label>
+
+        <select id="report-site">
+
+          <option>All permitted sites</option>
+          <option>Site 1</option>
+
+        </select>
+
+      </div>
+
+
+      <div class="filter-field">
+
+        <label for="report-view">
+          View
+        </label>
+
+        <select id="report-view">
+
+          <option>Organisation overview</option>
+          <option>Casework</option>
+          <option>Referrals</option>
+          <option>Programmes</option>
+          <option>Assurance</option>
+          <option>Governance</option>
+
+        </select>
+
+      </div>
+
+
+      <button class="secondary-button" type="button">
+        Apply
+      </button>
+
+    </section>
+
+
+    <!-- =====================================================
+         ORGANISATION SNAPSHOT
+    ====================================================== -->
+
+    <section class="workspace-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            SNAPSHOT
+          </p>
+
+          <h2>
+            Organisation overview
+          </h2>
+
+        </div>
+
+        <span class="section-note">
+          September 2026 · Fictional DEV data
+        </span>
+
+      </div>
+
+
+      <div class="reporting-summary-grid">
+
+
+        <article class="workspace-stat blue">
+
+          <span class="workspace-stat-number">
+            8
+          </span>
+
+          <div>
+            <strong>Open cases</strong>
+            <span>Current casework</span>
+          </div>
+
+        </article>
+
+
+        <article class="workspace-stat orange">
+
+          <span class="workspace-stat-number">
+            4
+          </span>
+
+          <div>
+            <strong>Active referrals</strong>
+            <span>Across partner services</span>
+          </div>
+
+        </article>
+
+
+        <article class="workspace-stat pink">
+
+          <span class="workspace-stat-number">
+            6
+          </span>
+
+          <div>
+            <strong>Workflow tasks</strong>
+            <span>Currently open</span>
+          </div>
+
+        </article>
+
+
+        <article class="workspace-stat yellow">
+
+          <span class="workspace-stat-number">
+            2
+          </span>
+
+          <div>
+            <strong>Assurance items</strong>
+            <span>Human review required</span>
+          </div>
+
+        </article>
+
+
+        <article class="workspace-stat green">
+
+          <span class="workspace-stat-number">
+            4
+          </span>
+
+          <div>
+            <strong>Active programmes</strong>
+            <span>Current delivery</span>
+          </div>
+
+        </article>
+
+
+        <article class="workspace-stat purple">
+
+          <span class="workspace-stat-number">
+            8
+          </span>
+
+          <div>
+            <strong>Active partners</strong>
+            <span>Available services</span>
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CASEWORK
+    ====================================================== -->
+
+    <section class="workspace-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            CASEWORK
+          </p>
+
+          <h2>
+            Current workload
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="report-panel-grid">
+
+
+        <article class="report-panel">
+
+          <div class="report-panel-heading">
+
+            <div>
+
+              <span class="record-label">
+                CASE STATUS
+              </span>
+
+              <h3>
+                Open casework
+              </h3>
+
+            </div>
+
+            <strong class="report-big-number">
+              8
+            </strong>
+
+          </div>
+
+
+          <div class="report-breakdown">
+
+            <div>
+
+              <span>
+                Active
+              </span>
+
+              <strong>
+                6
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                Review
+              </span>
+
+              <strong>
+                2
+              </strong>
+
+            </div>
+
+          </div>
+
+        </article>
+
+
+        <article class="report-panel">
+
+          <div class="report-panel-heading">
+
+            <div>
+
+              <span class="record-label">
+                ACTIONS
+              </span>
+
+              <h3>
+                Case actions
+              </h3>
+
+            </div>
+
+            <strong class="report-big-number">
+              4
+            </strong>
+
+          </div>
+
+
+          <div class="report-breakdown">
+
+            <div>
+
+              <span>
+                Due today
+              </span>
+
+              <strong>
+                2
+              </strong>
+
+            </div>
+
+
+            <div>
+
+              <span>
+                Future
+              </span>
+
+              <strong>
+                2
+              </strong>
+
+            </div>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         REFERRALS
+    ====================================================== -->
+
+    <section class="workspace-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            REFERRAL BRIDGE
+          </p>
+
+          <h2>
+            Referral movement
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="reporting-flow-panel">
+
+        <div class="report-flow-item">
+
+          <strong>
+            6
+          </strong>
+
+          <span>
+            Identified
+          </span>
+
+        </div>
+
+
+        <div class="report-flow-arrow">
+          →
+        </div>
+
+
+        <div class="report-flow-item">
+
+          <strong>
+            5
+          </strong>
+
+          <span>
+            Submitted
+          </span>
+
+        </div>
+
+
+        <div class="report-flow-arrow">
+          →
+        </div>
+
+
+        <div class="report-flow-item">
+
+          <strong>
+            4
+          </strong>
+
+          <span>
+            Progressing
+          </span>
+
+        </div>
+
+
+        <div class="report-flow-arrow">
+          →
+        </div>
+
+
+        <div class="report-flow-item">
+
+          <strong>
+            3
+          </strong>
+
+          <span>
+            Outcomes recorded
+          </span>
+
+        </div>
+
+      </div>
+
+
+      <div class="reporting-alert-row">
+
+        <article class="reporting-alert">
+
+          <span class="tag warning">
+            1 REVIEW DUE
+          </span>
+
+          <p>
+            A referral has reached its scheduled human review point.
+          </p>
+
+        </article>
+
+
+        <article class="reporting-alert">
+
+          <span class="tag action">
+            1 FOLLOW-UP DUE
+          </span>
+
+          <p>
+            A referral requires follow-up activity.
+          </p>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         WORKFLOW
+    ====================================================== -->
+
+    <section class="workspace-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            WORKFLOW
+          </p>
+
+          <h2>
+            Work visibility
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="workflow-report-grid">
+
+
+        <article class="workflow-report-card">
+
+          <strong>
+            6
+          </strong>
+
+          <span>
+            Open tasks
+          </span>
+
+        </article>
+
+
+        <article class="workflow-report-card attention">
+
+          <strong>
+            2
+          </strong>
+
+          <span>
+            Due today
+          </span>
+
+        </article>
+
+
+        <article class="workflow-report-card">
+
+          <strong>
+            2
+          </strong>
+
+          <span>
+            Human decisions
+          </span>
+
+        </article>
+
+
+        <article class="workflow-report-card">
+
+          <strong>
+            1
+          </strong>
+
+          <span>
+            Evidence required
+          </span>
+
+        </article>
+
+
+        <article class="workflow-report-card complete">
+
+          <strong>
+            0
+          </strong>
+
+          <span>
+            Overdue
+          </span>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         ASSURANCE
+    ====================================================== -->
+
+    <section class="workspace-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            ASSURANCE
+          </p>
+
+          <h2>
+            What the system has surfaced
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="assurance-report-panel">
+
+        <div class="assurance-report-total">
+
+          <strong>
+            2
+          </strong>
+
+          <span>
+            Open assurance items
+          </span>
+
+        </div>
+
+
+        <div class="assurance-report-breakdown">
+
+          <div>
+
+            <span class="record-label">
+              REFERRAL
+            </span>
+
+            <strong>
+              1
+            </strong>
+
+            <p>
+              Referral review finding
+            </p>
+
+          </div>
+
+
+          <div>
+
+            <span class="record-label">
+              POLICY
+            </span>
+
+            <strong>
+              1
+            </strong>
+
+            <p>
+              Policy review finding
+            </p>
+
+          </div>
+
+
+          <div>
+
+            <span class="record-label">
+              OVERDUE
+            </span>
+
+            <strong>
+              0
+            </strong>
+
+            <p>
+              Overdue assessments
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="assurance-report-notice">
+
+          <strong>
+            No decision has been made.
+          </strong>
+
+          <p>
+            Assurance findings identify something requiring attention.
+            Human assessment determines what the finding means and what,
+            if anything, should happen next.
+          </p>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         PROGRAMMES
+    ====================================================== -->
+
+    <section class="workspace-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            PROGRAMMES
+          </p>
+
+          <h2>
+            Delivery &amp; participation
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="programme-report-grid">
+
+
+        <article class="programme-report-card">
+
+          <span class="record-label">
+            ACTIVE PROGRAMMES
+          </span>
+
+          <strong>
+            4
+          </strong>
+
+          <p>
+            Current fictional programme delivery.
+          </p>
+
+        </article>
+
+
+        <article class="programme-report-card">
+
+          <span class="record-label">
+            UPCOMING SESSIONS
+          </span>
+
+          <strong>
+            7
+          </strong>
+
+          <p>
+            Scheduled during the next 14 days.
+          </p>
+
+        </article>
+
+
+        <article class="programme-report-card">
+
+          <span class="record-label">
+            PARTICIPANTS
+          </span>
+
+          <strong>
+            12
+          </strong>
+
+          <p>
+            Current fictional participants.
+          </p>
+
+        </article>
+
+
+        <article class="programme-report-card">
+
+          <span class="record-label">
+            CAPACITY
+          </span>
+
+          <strong>
+            85%
+          </strong>
+
+          <p>
+            Current booked capacity across upcoming sessions.
+          </p>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         OUTCOMES
+    ====================================================== -->
+
+    <section class="workspace-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            OUTCOMES
+          </p>
+
+          <h2>
+            What changed?
+          </h2>
+
+        </div>
+
+        <span class="section-note">
+          Context matters more than a pretty percentage.
+        </span>
+
+      </div>
+
+
+      <div class="outcome-report-grid">
+
+
+        <article class="outcome-report-card">
+
+          <div class="outcome-report-icon">
+            ✓
+          </div>
+
+          <div>
+
+            <strong>
+              5 outcomes recorded
+            </strong>
+
+            <p>
+              Veteran-relevant outcomes recorded during the
+              selected reporting period.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <article class="outcome-report-card">
+
+          <div class="outcome-report-icon">
+            ↗
+          </div>
+
+          <div>
+
+            <strong>
+              3 referrals progressed
+            </strong>
+
+            <p>
+              Referrals reached a recorded progressing or
+              outcome stage.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <article class="outcome-report-card">
+
+          <div class="outcome-report-icon">
+            ◈
+          </div>
+
+          <div>
+
+            <strong>
+              4 programme outcomes
+            </strong>
+
+            <p>
+              Outcomes linked to voluntary programme participation.
+            </p>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         POLICY BRAIN
+    ====================================================== -->
+
+    <section class="workspace-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            POLICY BRAIN
+          </p>
+
+          <h2>
+            Policy implementation health
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="policy-report-panel">
+
+        <div class="policy-report-stat">
+
+          <strong>
+            39
+          </strong>
+
+          <span>
+            Active policies
+          </span>
+
+        </div>
+
+
+        <div class="policy-report-stat">
+
+          <strong>
+            38
+          </strong>
+
+          <span>
+            Mapped
+          </span>
+
+        </div>
+
+
+        <div class="policy-report-stat">
+
+          <strong>
+            662
+          </strong>
+
+          <span>
+            Requirements
+          </span>
+
+        </div>
+
+
+        <div class="policy-report-stat">
+
+          <strong>
+            470
+          </strong>
+
+          <span>
+            System-enforceable
+          </span>
+
+        </div>
+
+
+        <div class="policy-report-stat attention">
+
+          <strong>
+            1
+          </strong>
+
+          <span>
+            Source missing
+          </span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         GOVERNANCE
+    ====================================================== -->
+
+    <section class="workspace-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            GOVERNANCE
+          </p>
+
+          <h2>
+            Organisational health
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="governance-report-grid">
+
+
+        <article class="governance-report-card">
+
+          <span class="record-label">
+            ACTIONS
+          </span>
+
+          <strong>
+            4
+          </strong>
+
+          <p>
+            Open governance actions
+          </p>
+
+        </article>
+
+
+        <article class="governance-report-card attention">
+
+          <span class="record-label">
+            REVIEWS
+          </span>
+
+          <strong>
+            2
+          </strong>
+
+          <p>
+            Governance reviews due
+          </p>
+
+        </article>
+
+
+        <article class="governance-report-card">
+
+          <span class="record-label">
+            RISKS
+          </span>
+
+          <strong>
+            3
+          </strong>
+
+          <p>
+            Open organisational risks
+          </p>
+
+        </article>
+
+
+        <article class="governance-report-card complete">
+
+          <span class="record-label">
+            OVERDUE DECISIONS
+          </span>
+
+          <strong>
+            0
+          </strong>
+
+          <p>
+            No overdue decisions
+          </p>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         REPORTING BOUNDARIES
+    ====================================================== -->
+
+    <section class="workspace-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            RESPONSIBLE REPORTING
+          </p>
+
+          <h2>
+            What we deliberately do not do
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="reporting-boundary-grid">
+
+
+        <article class="reporting-boundary-card">
+
+          <span>
+            ×
+          </span>
+
+          <div>
+
+            <strong>
+              No veteran scoring
+            </strong>
+
+            <p>
+              People are not ranked by engagement,
+              complexity or perceived success.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <article class="reporting-boundary-card">
+
+          <span>
+            ×
+          </span>
+
+          <div>
+
+            <strong>
+              No staff league tables
+            </strong>
+
+            <p>
+              Activity data should not become an automated
+              judgement of staff performance.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <article class="reporting-boundary-card">
+
+          <span>
+            ×
+          </span>
+
+          <div>
+
+            <strong>
+              No outcome theatre
+            </strong>
+
+            <p>
+              Reporting should not cherry-pick numbers simply
+              because they look impressive.
+            </p>
+
+          </div>
+
+        </article>
+
+
+        <article class="reporting-boundary-card">
+
+          <span>
+            ×
+          </span>
+
+          <div>
+
+            <strong>
+              No hidden automated decisions
+            </strong>
+
+            <p>
+              Reports can inform people. They do not quietly
+              become decision-making engines.
+            </p>
+
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         REPORT LIBRARY
+    ====================================================== -->
+
+    <section class="workspace-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            REPORT LIBRARY
+          </p>
+
+          <h2>
+            Available reports
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="report-library-grid">
+
+
+        <article class="report-library-card">
+
+          <div class="report-library-icon">
+            ▥
+          </div>
+
+          <div>
+
+            <span class="record-label">
+              OPERATIONS
+            </span>
+
+            <h3>
+              Monthly operational overview
+            </h3>
+
+            <p>
+              Casework, referrals, workflow and programme activity.
+            </p>
+
+          </div>
+
+          <button class="row-button" type="button">
+            Open
+          </button>
+
+        </article>
+
+
+        <article class="report-library-card">
+
+          <div class="report-library-icon">
+            !
+          </div>
+
+          <div>
+
+            <span class="record-label">
+              ASSURANCE
+            </span>
+
+            <h3>
+              Assurance overview
+            </h3>
+
+            <p>
+              Open findings, assessments and assurance activity.
+            </p>
+
+          </div>
+
+          <button class="row-button" type="button">
+            Open
+          </button>
+
+        </article>
+
+
+        <article class="report-library-card">
+
+          <div class="report-library-icon">
+            §
+          </div>
+
+          <div>
+
+            <span class="record-label">
+              GOVERNANCE
+            </span>
+
+            <h3>
+              Governance report
+            </h3>
+
+            <p>
+              Actions, decisions, reviews and organisational risks.
+            </p>
+
+          </div>
+
+          <button class="row-button" type="button">
+            Open
+          </button>
+
+        </article>
+
+
+        <article class="report-library-card">
+
+          <div class="report-library-icon">
+            ▤
+          </div>
+
+          <div>
+
+            <span class="record-label">
+              POLICY
+            </span>
+
+            <h3>
+              Policy implementation report
+            </h3>
+
+            <p>
+              Mapping health, requirements and implementation status.
+            </p>
+
+          </div>
+
+          <button class="row-button" type="button">
+            Open
+          </button>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FINAL PRINCIPLE
+    ====================================================== -->
+
+    <section class="human-decision-notice">
+
+      <div>
+        🦄
+      </div>
+
+      <div>
+
+        <strong>
+          Measure the system. Don't measure someone's worth.
+        </strong>
+
+        <p>
+          Veterans Backbone reporting exists to understand demand,
+          improve services, identify pressure and test whether the
+          organisation is doing what it said it would do.
+          People remain more complicated than a dashboard.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="app-footer">
+
+      <div class="footer-mark">
+        🦄
+      </div>
+
+      <div>
+
+        <strong>
+          Veterans Backbone
+        </strong>
+
+        <span>
+          Understand · Learn · Improve · Never reduce people to numbers
+        </span>
+
+      </div>
+
+    </footer>
+
+  </main>
+
+</div>
+
+</body>
+</html>
