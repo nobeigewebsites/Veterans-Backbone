@@ -2478,3 +2478,1109 @@ tbody tr:hover {
   }
 
 }
+
+/* ============================================================
+   VB CORE — MASTER DESIGN OVERRIDE
+   Target: the approved visual master.
+   ============================================================ */
+
+
+/* ============================================================
+   1. MASTER DIMENSIONS
+   ============================================================ */
+
+:root {
+  --sidebar-width: 285px;
+
+  --master-pink: #ff1478;
+  --master-orange: #ff7a18;
+  --master-yellow: #ffc928;
+  --master-green: #34c77b;
+  --master-blue: #2388ff;
+  --master-purple: #8a3ffc;
+
+  --master-ink: #0b1729;
+
+  --master-rainbow:
+    linear-gradient(
+      90deg,
+      #ff1478 0%,
+      #ff7a18 18%,
+      #ffc928 35%,
+      #34c77b 53%,
+      #2388ff 72%,
+      #8a3ffc 88%,
+      #f027c8 100%
+    );
+}
+
+
+/* ============================================================
+   2. APP BACKGROUND
+   ============================================================ */
+
+body {
+  background: #fbfaf7;
+}
+
+.main-content {
+  position: relative;
+  isolation: isolate;
+
+  padding-left: 46px;
+  padding-right: 48px;
+
+  background:
+    radial-gradient(
+      circle at 86% 12%,
+      rgba(255, 20, 120, 0.09),
+      transparent 24%
+    ),
+    radial-gradient(
+      circle at 57% 92%,
+      rgba(35, 136, 255, 0.06),
+      transparent 30%
+    ),
+    #fbfaf7;
+}
+
+
+/* ============================================================
+   3. MUCH STRONGER STEVE WATERMARK
+   ============================================================ */
+
+.main-content::after {
+  content: "";
+
+  position: fixed;
+
+  z-index: -1;
+
+  right: -40px;
+  bottom: -60px;
+
+  width: min(45vw, 760px);
+  height: 92vh;
+
+  background-image:
+    url("../../images/watermark.png");
+
+  background-repeat: no-repeat;
+  background-position: right bottom;
+  background-size: contain;
+
+  opacity: 0.14;
+
+  filter:
+    saturate(105%)
+    contrast(92%);
+
+  pointer-events: none;
+}
+
+
+/* ============================================================
+   4. RAINBOW TOP STRIP
+   ============================================================ */
+
+.main-content::before {
+  content: "";
+
+  position: fixed;
+
+  top: 0;
+  left: var(--sidebar-width);
+  right: 0;
+
+  height: 6px;
+
+  z-index: 100;
+
+  background: var(--master-rainbow);
+
+  box-shadow:
+    0 2px 12px rgba(138, 63, 252, 0.18);
+}
+
+
+/* ============================================================
+   5. MASTER SIDEBAR
+   ============================================================ */
+
+.sidebar {
+  width: var(--sidebar-width);
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      ellipse at -10% 15%,
+      rgba(20, 100, 255, 0.65),
+      transparent 25%
+    ),
+
+    radial-gradient(
+      ellipse at 115% 65%,
+      rgba(255, 20, 120, 0.48),
+      transparent 24%
+    ),
+
+    radial-gradient(
+      ellipse at 30% 95%,
+      rgba(138, 63, 252, 0.28),
+      transparent 25%
+    ),
+
+    linear-gradient(
+      180deg,
+      #08172d 0%,
+      #071425 45%,
+      #050e1b 100%
+    );
+
+  border-right:
+    1px solid rgba(255,255,255,0.08);
+
+  box-shadow:
+    8px 0 25px rgba(8, 23, 45, 0.10);
+}
+
+
+/* painted edge */
+
+.sidebar::after {
+  content: "";
+
+  position: absolute;
+
+  top: 0;
+  right: -1px;
+  bottom: 0;
+
+  width: 18px;
+
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255,20,120,0.7),
+      rgba(35,136,255,0.45) 20%,
+      rgba(255,122,24,0.5) 44%,
+      rgba(240,39,200,0.55) 67%,
+      rgba(138,63,252,0.45)
+    );
+
+  opacity: 0.48;
+
+  filter: blur(7px);
+
+  transform:
+    skewY(-4deg);
+
+  pointer-events: none;
+}
+
+
+/* ============================================================
+   6. BIG VB CORE BRAND AREA
+   ============================================================ */
+
+.brand {
+  min-height: 190px;
+
+  padding:
+    28px
+    26px
+    25px;
+
+  display: block;
+
+  position: relative;
+
+  border-bottom: 0;
+
+  overflow: visible;
+}
+
+
+/* replace little square feel */
+
+.brand-mark {
+  width: auto;
+  height: auto;
+
+  display: block;
+
+  margin: 0;
+
+  padding: 0;
+
+  background: none;
+
+  border: 0;
+  border-radius: 0;
+
+  box-shadow: none;
+
+  color: transparent;
+
+  font-size: 0;
+
+  transform: none;
+}
+
+
+/* giant painted VB */
+
+.brand-mark::before {
+  content: "VB";
+
+  display: block;
+
+  width: fit-content;
+
+  color: transparent;
+
+  background:
+    linear-gradient(
+      115deg,
+      #ff1478 5%,
+      #ff7a18 36%,
+      #ffc928 50%,
+      #2388ff 73%,
+      #8a3ffc 94%
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  font-family:
+    "Trebuchet MS",
+    "Arial Black",
+    sans-serif;
+
+  font-size: 72px;
+  font-weight: 1000;
+
+  line-height: 0.9;
+
+  letter-spacing: -9px;
+
+  transform:
+    rotate(-6deg)
+    skewX(-7deg);
+
+  filter:
+    drop-shadow(
+      3px 4px 0 rgba(0,0,0,0.14)
+    );
+}
+
+
+/* rewrite brand positioning */
+
+.brand-text {
+  margin-top: 16px;
+
+  display: flex;
+  flex-direction: column;
+
+  position: relative;
+
+  z-index: 2;
+}
+
+.brand-text strong {
+  color: white;
+
+  font-size: 19px;
+  font-weight: 950;
+
+  line-height: 1;
+
+  letter-spacing: -0.4px;
+
+  text-transform: uppercase;
+}
+
+.brand-text span {
+  margin-top: 5px;
+
+  color: #ff2a88;
+
+  font-size: 24px;
+  font-weight: 1000;
+
+  line-height: 1;
+
+  letter-spacing: 0;
+
+  text-transform: uppercase;
+
+  transform: rotate(-2deg);
+
+  transform-origin: left center;
+}
+
+
+/* blue paint splodge behind logo */
+
+.brand::before {
+  content: "";
+
+  position: absolute;
+
+  left: -40px;
+  top: -25px;
+
+  width: 240px;
+  height: 160px;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(0,91,255,0.45),
+      rgba(0,91,255,0.12) 48%,
+      transparent 70%
+    );
+
+  transform: rotate(-13deg);
+
+  filter: blur(4px);
+
+  pointer-events: none;
+}
+
+
+/* ============================================================
+   7. NAVIGATION — BIGGER + MORE MASTER-LIKE
+   ============================================================ */
+
+.main-nav {
+  padding:
+    0
+    18px
+    25px;
+}
+
+.nav-label {
+  margin:
+    19px
+    13px
+    9px;
+
+  color: #8d9bb1;
+
+  font-size: 11px;
+  font-weight: 900;
+
+  letter-spacing: 1.5px;
+}
+
+.nav-item {
+  min-height: 48px;
+
+  margin-bottom: 2px;
+
+  padding:
+    10px
+    15px;
+
+  border-radius: 9px;
+
+  color: #f0f3f7;
+
+  font-size: 15px;
+  font-weight: 650;
+}
+
+.nav-icon {
+  width: 25px;
+
+  color: #ff2b88;
+
+  font-size: 20px;
+}
+
+.nav-item.active {
+  background: #ffffff;
+
+  color: #121c2c;
+
+  box-shadow:
+    0 5px 15px rgba(0,0,0,0.17);
+}
+
+.nav-item.active::before {
+  top: 0;
+  bottom: 0;
+
+  width: 5px;
+
+  background: var(--master-pink);
+}
+
+.nav-item.active .nav-icon {
+  color: var(--master-pink);
+}
+
+
+/* ============================================================
+   8. SIDEBAR STATUS
+   ============================================================ */
+
+.sidebar-footer {
+  padding:
+    16px
+    18px
+    20px;
+}
+
+.system-status {
+  padding: 13px;
+
+  background:
+    linear-gradient(
+      110deg,
+      rgba(18,39,65,0.95),
+      rgba(255,70,70,0.16)
+    );
+
+  border:
+    1px solid rgba(255,255,255,0.05);
+
+  box-shadow:
+    0 8px 20px rgba(0,0,0,0.15);
+}
+
+
+/* ============================================================
+   9. TOPBAR MASTER SCALE
+   ============================================================ */
+
+.topbar {
+  min-height: 130px;
+
+  background: transparent;
+
+  backdrop-filter: none;
+}
+
+.topbar .eyebrow {
+  color: #53627a;
+
+  font-size: 12px;
+  font-weight: 900;
+
+  letter-spacing: 1.7px;
+}
+
+.topbar h1 {
+  margin-top: 4px;
+
+  font-family:
+    "Trebuchet MS",
+    "Segoe UI",
+    sans-serif;
+
+  font-size: 43px;
+  font-weight: 1000;
+
+  line-height: 1;
+
+  letter-spacing: -2px;
+
+  font-style: italic;
+
+  transform: rotate(-1deg);
+
+  transform-origin: left center;
+}
+
+.topbar h1::after {
+  width: 190px;
+  height: 5px;
+
+  margin-top: 10px;
+
+  background: var(--master-rainbow);
+
+  transform: rotate(-2deg);
+}
+
+
+/* faint philosophy scribble */
+
+.topbar > div:first-child::after {
+  content: "SUPPORT WITHOUT CONTROL   ♡";
+
+  position: absolute;
+
+  top: 42px;
+  left: 380px;
+
+  color:
+    rgba(138, 63, 252, 0.07);
+
+  font-size: 26px;
+  font-weight: 950;
+
+  font-style: italic;
+
+  transform: rotate(-8deg);
+
+  pointer-events: none;
+}
+
+
+/* ============================================================
+   10. SEARCH + PROFILE
+   ============================================================ */
+
+.search-button {
+  min-width: 245px;
+
+  padding: 14px 18px;
+
+  border-radius: 11px;
+
+  background:
+    rgba(255,255,255,0.88);
+
+  box-shadow:
+    0 5px 18px rgba(11,23,41,0.05);
+}
+
+.staff-avatar {
+  width: 47px;
+  height: 47px;
+
+  font-size: 14px;
+
+  background:
+    linear-gradient(
+      135deg,
+      #ff1478,
+      #8a3ffc
+    );
+}
+
+.staff-profile strong {
+  font-size: 14px;
+}
+
+.staff-profile span {
+  font-size: 12px;
+}
+
+
+/* ============================================================
+   11. DEV BAR
+   ============================================================ */
+
+.dev-notice {
+  margin-top: 0;
+
+  min-height: 43px;
+
+  padding:
+    10px
+    16px;
+
+  border-radius: 7px;
+
+  font-size: 12px;
+
+  background:
+    rgba(255,255,255,0.43);
+
+  border:
+    1px solid rgba(35,136,255,0.45);
+
+  box-shadow:
+    0 4px 15px rgba(35,136,255,0.04);
+}
+
+
+/* ============================================================
+   12. SECTION HEADING SCALE
+   ============================================================ */
+
+.dashboard-section {
+  padding-top: 28px;
+}
+
+.section-heading {
+  margin-bottom: 22px;
+}
+
+.section-heading .eyebrow {
+  font-size: 12px;
+
+  color: #8c99aa;
+}
+
+.section-heading h2 {
+  font-size: 25px;
+  font-weight: 950;
+
+  letter-spacing: -0.8px;
+}
+
+.section-heading h2::after {
+  width: 52px;
+  height: 4px;
+
+  bottom: -9px;
+
+  background: var(--master-rainbow);
+}
+
+
+/* ============================================================
+   13. MASTER STAT CARDS
+   ============================================================ */
+
+.stat-grid {
+  gap: 20px;
+}
+
+.stat-card {
+  min-height: 130px;
+
+  padding:
+    20px
+    21px;
+
+  border-radius: 13px;
+
+  background:
+    rgba(255,255,255,0.88);
+
+  border:
+    1px solid rgba(15,30,50,0.07);
+
+  box-shadow:
+    0 8px 23px rgba(15,30,50,0.08);
+}
+
+.stat-card::before {
+  height: 5px;
+}
+
+.stat-icon {
+  width: 47px;
+  height: 47px;
+
+  border-radius: 50%;
+
+  font-size: 22px;
+}
+
+.stat-number {
+  font-size: 31px;
+  font-weight: 950;
+}
+
+.stat-label {
+  font-size: 13px;
+}
+
+.stat-detail {
+  font-size: 11px;
+}
+
+
+/* ============================================================
+   14. BIG MASTER PANELS
+   ============================================================ */
+
+.dashboard-grid {
+  gap: 20px;
+
+  margin-top: 20px;
+}
+
+.panel {
+  background:
+    rgba(255,255,255,0.88);
+
+  border-radius: 13px;
+
+  box-shadow:
+    0 8px 25px rgba(15,30,50,0.08);
+}
+
+.panel-header {
+  min-height: 88px;
+
+  padding:
+    20px
+    24px;
+}
+
+.panel-header .eyebrow {
+  font-size: 11px;
+}
+
+.panel-header h2 {
+  margin-top: 2px;
+
+  font-family:
+    "Trebuchet MS",
+    "Segoe UI",
+    sans-serif;
+
+  font-size: 27px;
+  font-weight: 950;
+
+  font-style: italic;
+
+  letter-spacing: -1px;
+
+  transform: rotate(-0.7deg);
+
+  transform-origin: left center;
+}
+
+
+/* rainbow panel tops */
+
+.dashboard-grid .panel:first-child,
+.assurance-panel,
+.wide-panel {
+  border-top:
+    4px solid transparent;
+
+  border-image:
+    var(--master-rainbow) 1;
+}
+
+
+/* ============================================================
+   15. TASKS
+   ============================================================ */
+
+.task-list {
+  padding:
+    6px
+    24px
+    14px;
+}
+
+.task-item {
+  padding:
+    16px
+    0;
+}
+
+.priority-bar {
+  width: 6px;
+
+  margin-right: 18px;
+}
+
+.task-topline strong {
+  font-size: 14px;
+}
+
+.task-content p {
+  font-size: 12px;
+}
+
+.task-meta {
+  font-size: 11px;
+}
+
+
+/* ============================================================
+   16. ASSURANCE MASTER
+   ============================================================ */
+
+.assurance-message {
+  margin:
+    17px
+    24px
+    5px;
+
+  padding: 16px;
+
+  border-radius: 11px;
+}
+
+.assurance-symbol {
+  width: 38px;
+  height: 38px;
+
+  flex-basis: 38px;
+
+  font-size: 19px;
+}
+
+.assurance-message strong {
+  font-size: 13px;
+}
+
+.assurance-message p {
+  font-size: 11px;
+}
+
+.assurance-item {
+  margin:
+    0
+    24px;
+
+  padding:
+    15px
+    0;
+}
+
+.assurance-item h3 {
+  font-size: 13px;
+}
+
+.assurance-item p {
+  font-size: 11px;
+}
+
+
+/* ============================================================
+   17. TAGS
+   ============================================================ */
+
+.tag {
+  padding:
+    4px
+    8px;
+
+  font-size: 10px;
+}
+
+
+/* ============================================================
+   18. BUTTONS
+   ============================================================ */
+
+.primary-button {
+  padding:
+    11px
+    17px;
+
+  border-radius: 9px;
+
+  background:
+    linear-gradient(
+      100deg,
+      #ff1478,
+      #ff7a18
+    );
+
+  font-size: 12px;
+
+  box-shadow:
+    0 6px 18px rgba(255,20,120,0.24);
+}
+
+.text-button {
+  color: #ff1478;
+
+  font-size: 12px;
+}
+
+.row-button {
+  border-color:
+    rgba(255,20,120,0.65);
+
+  color: #ff1478;
+}
+
+
+/* ============================================================
+   19. RECENT CASES
+   ============================================================ */
+
+.wide-panel {
+  margin-top: 0;
+}
+
+th {
+  padding:
+    12px
+    22px;
+
+  font-size: 10px;
+}
+
+td {
+  padding:
+    13px
+    22px;
+
+  font-size: 12px;
+}
+
+
+/* ============================================================
+   20. MAKE STEVE VISIBLE THROUGH PANELS
+   ============================================================ */
+
+.panel,
+.stat-card {
+  backdrop-filter:
+    blur(3px);
+
+  -webkit-backdrop-filter:
+    blur(3px);
+}
+
+.assurance-panel {
+  background:
+    rgba(255,255,255,0.86);
+}
+
+
+/* ============================================================
+   21. FOOTER
+   ============================================================ */
+
+.app-footer {
+  background:
+    rgba(255,255,255,0.38);
+
+  backdrop-filter: blur(5px);
+
+  border-radius: 10px;
+}
+
+
+/* ============================================================
+   22. LARGE SCREEN — MASTER FEEL
+   ============================================================ */
+
+@media (min-width: 1450px) {
+
+  .main-content {
+    padding-left: 48px;
+    padding-right: 52px;
+  }
+
+  .stat-grid {
+    gap: 22px;
+  }
+
+  .dashboard-grid {
+    gap: 22px;
+  }
+
+}
+
+
+/* ============================================================
+   23. TABLET
+   ============================================================ */
+
+@media (max-width: 1100px) {
+
+  :root {
+    --sidebar-width: 235px;
+  }
+
+  .brand {
+    min-height: 165px;
+
+    padding:
+      25px
+      20px;
+  }
+
+  .brand-mark::before {
+    font-size: 59px;
+  }
+
+  .brand-text strong {
+    font-size: 16px;
+  }
+
+  .brand-text span {
+    font-size: 20px;
+  }
+
+  .main-content {
+    padding-left: 28px;
+    padding-right: 28px;
+  }
+
+  .topbar > div:first-child::after {
+    display: none;
+  }
+
+}
+
+
+/* ============================================================
+   24. MOBILE
+   ============================================================ */
+
+@media (max-width: 760px) {
+
+  .sidebar {
+    width: 100%;
+  }
+
+  .brand {
+    min-height: auto;
+
+    padding:
+      16px
+      20px;
+
+    display: flex;
+    align-items: center;
+    gap: 14px;
+  }
+
+  .brand-mark::before {
+    font-size: 42px;
+  }
+
+  .brand-text {
+    margin-top: 0;
+  }
+
+  .brand-text strong {
+    font-size: 13px;
+  }
+
+  .brand-text span {
+    font-size: 16px;
+  }
+
+  .main-content {
+    padding:
+      0
+      16px
+      25px;
+  }
+
+  .main-content::before {
+    left: 0;
+  }
+
+  .main-content::after {
+    width: 430px;
+    height: 60vh;
+
+    right: -180px;
+    bottom: -40px;
+
+    opacity: 0.07;
+  }
+
+  .topbar {
+    min-height: 95px;
+  }
+
+  .topbar h1 {
+    font-size: 30px;
+  }
+
+}
