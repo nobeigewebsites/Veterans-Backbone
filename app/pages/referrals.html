@@ -1,0 +1,1082 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Referrals | Veterans Backbone Core</title>
+
+  <meta
+    name="description"
+    content="Veterans Backbone Core Referral Bridge workspace."
+  >
+
+  <link rel="stylesheet" href="../css/app.css">
+</head>
+
+<body>
+
+<div class="app-shell">
+
+  <!-- =====================================================
+       SIDEBAR
+  ====================================================== -->
+
+  <aside class="sidebar">
+
+    <div class="brand">
+
+      <div class="brand-mark">VB</div>
+
+      <div class="brand-text">
+        <strong>Veterans Backbone</strong>
+        <span>Core</span>
+      </div>
+
+    </div>
+
+
+    <nav class="main-nav" aria-label="Main navigation">
+
+      <p class="nav-label">WORKSPACE</p>
+
+      <a href="../index.html" class="nav-item">
+        <span class="nav-icon">⌂</span>
+        <span>Dashboard</span>
+      </a>
+
+      <a href="veterans.html" class="nav-item">
+        <span class="nav-icon">★</span>
+        <span>Veterans</span>
+      </a>
+
+      <a href="casework.html" class="nav-item">
+        <span class="nav-icon">▣</span>
+        <span>Casework</span>
+      </a>
+
+      <a href="referrals.html" class="nav-item active">
+        <span class="nav-icon">↗</span>
+        <span>Referrals</span>
+      </a>
+
+      <a href="workflow-tasks.html" class="nav-item">
+        <span class="nav-icon">✓</span>
+        <span>Workflow Tasks</span>
+        <span class="nav-count">6</span>
+      </a>
+
+
+      <p class="nav-label">ASSURANCE</p>
+
+      <a href="assurance.html" class="nav-item">
+        <span class="nav-icon">!</span>
+        <span>Assurance Queue</span>
+        <span class="nav-count warning">2</span>
+      </a>
+
+      <a href="safeguarding.html" class="nav-item">
+        <span class="nav-icon">◆</span>
+        <span>Safeguarding</span>
+      </a>
+
+
+      <p class="nav-label">SERVICES</p>
+
+      <a href="programmes.html" class="nav-item">
+        <span class="nav-icon">◈</span>
+        <span>Programmes</span>
+      </a>
+
+      <a href="partners.html" class="nav-item">
+        <span class="nav-icon">◎</span>
+        <span>Partners</span>
+      </a>
+
+
+      <p class="nav-label">ORGANISATION</p>
+
+      <a href="workforce.html" class="nav-item">
+        <span class="nav-icon">♟</span>
+        <span>Workforce</span>
+      </a>
+
+      <a href="governance.html" class="nav-item">
+        <span class="nav-icon">§</span>
+        <span>Governance</span>
+      </a>
+
+      <a href="policy-brain.html" class="nav-item">
+        <span class="nav-icon">▤</span>
+        <span>Policy Brain</span>
+      </a>
+
+      <a href="reporting.html" class="nav-item">
+        <span class="nav-icon">▥</span>
+        <span>Reporting</span>
+      </a>
+
+    </nav>
+
+
+    <div class="sidebar-footer">
+
+      <div class="system-status">
+
+        <span class="status-dot"></span>
+
+        <div>
+          <strong>System operational</strong>
+          <span>Development environment</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </aside>
+
+
+  <!-- =====================================================
+       MAIN
+  ====================================================== -->
+
+  <main class="main-content referrals-page">
+
+
+    <!-- TOPBAR -->
+
+    <header class="topbar">
+
+      <div>
+
+        <p class="eyebrow">
+          VETERANS BACKBONE CORE
+        </p>
+
+        <h1>
+          Referral Bridge
+        </h1>
+
+      </div>
+
+
+      <div class="topbar-actions">
+
+        <button class="search-button" type="button">
+          Search referrals...
+        </button>
+
+
+        <div class="staff-profile">
+
+          <div class="staff-avatar">
+            SW
+          </div>
+
+          <div>
+            <strong>Support Worker</strong>
+            <span>Site 1 · DEV</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </header>
+
+
+    <!-- DEV NOTICE -->
+
+    <section class="dev-notice">
+
+      <strong>
+        Development environment
+      </strong>
+
+      <span>
+        Fictional data only. No real veteran information is stored here.
+      </span>
+
+    </section>
+
+
+    <!-- =====================================================
+         INTRO
+    ====================================================== -->
+
+    <section class="workspace-intro">
+
+      <div>
+
+        <p class="eyebrow">
+          REFERRAL BRIDGE
+        </p>
+
+        <h2>
+          No referral disappears into a void.
+        </h2>
+
+        <p>
+          Track referrals from preparation and consent through
+          submission, follow-up, review, outcome and closure.
+        </p>
+
+      </div>
+
+
+      <button class="primary-button" type="button">
+        + New referral
+      </button>
+
+    </section>
+
+
+    <!-- =====================================================
+         PRINCIPLE BAR
+    ====================================================== -->
+
+    <section class="referral-principle-bar">
+
+      <div>
+        ↗
+      </div>
+
+      <div>
+
+        <strong>
+          Sending is not the end of the job.
+        </strong>
+
+        <p>
+          Referral Bridge keeps the hand-off visible so progress,
+          delays, follow-up and outcomes can be recorded.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         SUMMARY
+    ====================================================== -->
+
+    <section class="referral-summary-grid">
+
+      <article class="workspace-stat blue">
+
+        <span class="workspace-stat-number">
+          5
+        </span>
+
+        <div>
+          <strong>Open referrals</strong>
+          <span>Across visible cases</span>
+        </div>
+
+      </article>
+
+
+      <article class="workspace-stat purple">
+
+        <span class="workspace-stat-number">
+          2
+        </span>
+
+        <div>
+          <strong>Awaiting action</strong>
+          <span>Partner or staff action</span>
+        </div>
+
+      </article>
+
+
+      <article class="workspace-stat orange">
+
+        <span class="workspace-stat-number">
+          1
+        </span>
+
+        <div>
+          <strong>Follow-up due</strong>
+          <span>Needs checking</span>
+        </div>
+
+      </article>
+
+
+      <article class="workspace-stat pink">
+
+        <span class="workspace-stat-number">
+          1
+        </span>
+
+        <div>
+          <strong>Review required</strong>
+          <span>Human assessment</span>
+        </div>
+
+      </article>
+
+    </section>
+
+
+    <!-- =====================================================
+         FILTERS
+    ====================================================== -->
+
+    <section class="workspace-filter-panel">
+
+      <div class="workspace-search-field">
+
+        <label for="referral-search">
+          Search
+        </label>
+
+        <input
+          id="referral-search"
+          type="search"
+          placeholder="Search referral, case or VB ID..."
+        >
+
+      </div>
+
+
+      <div class="filter-field">
+
+        <label for="referral-status">
+          Status
+        </label>
+
+        <select id="referral-status">
+
+          <option>All open statuses</option>
+          <option>Identified</option>
+          <option>Prepared</option>
+          <option>Submitted</option>
+          <option>Awaiting action</option>
+          <option>Accepted / progressing</option>
+          <option>Referral limbo</option>
+          <option>Escalation required</option>
+          <option>Alternative required</option>
+          <option>Outcome achieved</option>
+          <option>Closed</option>
+
+        </select>
+
+      </div>
+
+
+      <div class="filter-field">
+
+        <label for="referral-owner">
+          Assigned
+        </label>
+
+        <select id="referral-owner">
+
+          <option>Anyone</option>
+          <option>Assigned to me</option>
+          <option>Unassigned</option>
+
+        </select>
+
+      </div>
+
+
+      <div class="filter-field">
+
+        <label for="referral-site">
+          Site
+        </label>
+
+        <select id="referral-site">
+
+          <option>All permitted sites</option>
+          <option>Site 1</option>
+
+        </select>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         ATTENTION
+    ====================================================== -->
+
+    <section class="workspace-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            ATTENTION
+          </p>
+
+          <h2>
+            Referrals needing action
+          </h2>
+
+        </div>
+
+        <span class="section-note">
+          System prompts attention. People decide what happens next.
+        </span>
+
+      </div>
+
+
+      <div class="referral-attention-list">
+
+
+        <!-- ITEM 1 -->
+
+        <article class="referral-attention-card warning">
+
+          <div class="referral-attention-icon">
+            !
+          </div>
+
+
+          <div class="referral-attention-content">
+
+            <div class="referral-attention-heading">
+
+              <div>
+
+                <span class="record-label">
+                  REF-000001 · VB-000001
+                </span>
+
+                <h3>
+                  Referral progress requires review
+                </h3>
+
+              </div>
+
+              <span class="tag warning">
+                REVIEW REQUIRED
+              </span>
+
+            </div>
+
+            <p>
+              Follow-up information has been recorded.
+              An authorised person needs to assess the position
+              and record the appropriate next step.
+            </p>
+
+            <div class="referral-attention-meta">
+
+              <span>
+                CASE-000001
+              </span>
+
+              <span>
+                Fictional Partner Service
+              </span>
+
+              <span>
+                Assigned: Support Worker
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <button class="primary-button" type="button">
+            Review
+          </button>
+
+        </article>
+
+
+        <!-- ITEM 2 -->
+
+        <article class="referral-attention-card action">
+
+          <div class="referral-attention-icon">
+            ↗
+          </div>
+
+
+          <div class="referral-attention-content">
+
+            <div class="referral-attention-heading">
+
+              <div>
+
+                <span class="record-label">
+                  REF-000004 · VB-000004
+                </span>
+
+                <h3>
+                  Follow-up due
+                </h3>
+
+              </div>
+
+              <span class="tag action">
+                DUE TODAY
+              </span>
+
+            </div>
+
+            <p>
+              Check the referral's current position and record
+              the factual outcome of the follow-up.
+            </p>
+
+            <div class="referral-attention-meta">
+
+              <span>
+                CASE-000004
+              </span>
+
+              <span>
+                Fictional Housing Service
+              </span>
+
+              <span>
+                Assigned: Support Worker
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <button class="row-button" type="button">
+            Follow up
+          </button>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         ACTIVE REFERRALS
+    ====================================================== -->
+
+    <section class="workspace-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            LIVE REFERRALS
+          </p>
+
+          <h2>
+            Referral pipeline
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="workspace-table-panel">
+
+        <div class="table-wrap">
+
+          <table>
+
+            <thead>
+
+              <tr>
+                <th>Referral</th>
+                <th>Veteran</th>
+                <th>Case</th>
+                <th>Destination</th>
+                <th>Status</th>
+                <th>Follow-up</th>
+                <th>Assigned</th>
+                <th></th>
+              </tr>
+
+            </thead>
+
+
+            <tbody>
+
+              <tr>
+
+                <td>
+                  <strong>REF-000001</strong>
+                </td>
+
+                <td>
+                  VB-000001
+                </td>
+
+                <td>
+                  CASE-000001
+                </td>
+
+                <td>
+                  Fictional Partner Service
+                </td>
+
+                <td>
+                  <span class="status-pill review">
+                    Review required
+                  </span>
+                </td>
+
+                <td>
+                  Due
+                </td>
+
+                <td>
+                  Support Worker
+                </td>
+
+                <td>
+                  <button class="row-button" type="button">
+                    Open
+                  </button>
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+                  <strong>REF-000004</strong>
+                </td>
+
+                <td>
+                  VB-000004
+                </td>
+
+                <td>
+                  CASE-000004
+                </td>
+
+                <td>
+                  Fictional Housing Service
+                </td>
+
+                <td>
+                  <span class="status-pill active">
+                    Submitted
+                  </span>
+                </td>
+
+                <td>
+                  Today
+                </td>
+
+                <td>
+                  Support Worker
+                </td>
+
+                <td>
+                  <button class="row-button" type="button">
+                    Open
+                  </button>
+                </td>
+
+              </tr>
+
+
+              <tr>
+
+                <td>
+                  <strong>REF-000006</strong>
+                </td>
+
+                <td>
+                  VB-000006
+                </td>
+
+                <td>
+                  CASE-000006
+                </td>
+
+                <td>
+                  Fictional Employment Service
+                </td>
+
+                <td>
+                  <span class="status-pill active">
+                    Accepted / progressing
+                  </span>
+                </td>
+
+                <td>
+                  Scheduled
+                </td>
+
+                <td>
+                  Support Worker
+                </td>
+
+                <td>
+                  <button class="row-button" type="button">
+                    Open
+                  </button>
+                </td>
+
+              </tr>
+
+            </tbody>
+
+          </table>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         REFERRAL JOURNEY
+    ====================================================== -->
+
+    <section class="workspace-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            REFERRAL JOURNEY
+          </p>
+
+          <h2>
+            From need to outcome
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="referral-journey">
+
+        <article class="journey-step complete">
+
+          <span class="journey-number">
+            1
+          </span>
+
+          <div>
+            <strong>Identify</strong>
+            <span>Referral need recorded</span>
+          </div>
+
+        </article>
+
+
+        <article class="journey-step complete">
+
+          <span class="journey-number">
+            2
+          </span>
+
+          <div>
+            <strong>Consent</strong>
+            <span>Consent confirmed</span>
+          </div>
+
+        </article>
+
+
+        <article class="journey-step complete">
+
+          <span class="journey-number">
+            3
+          </span>
+
+          <div>
+            <strong>Prepare</strong>
+            <span>Referral prepared</span>
+          </div>
+
+        </article>
+
+
+        <article class="journey-step active">
+
+          <span class="journey-number">
+            4
+          </span>
+
+          <div>
+            <strong>Send</strong>
+            <span>Submission recorded</span>
+          </div>
+
+        </article>
+
+
+        <article class="journey-step">
+
+          <span class="journey-number">
+            5
+          </span>
+
+          <div>
+            <strong>Follow up</strong>
+            <span>Progress stays visible</span>
+          </div>
+
+        </article>
+
+
+        <article class="journey-step">
+
+          <span class="journey-number">
+            6
+          </span>
+
+          <div>
+            <strong>Outcome</strong>
+            <span>Result recorded</span>
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         HUMAN REVIEW
+    ====================================================== -->
+
+    <section class="workspace-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            HUMAN REVIEW
+          </p>
+
+          <h2>
+            Referral reviews
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="referral-review-panel">
+
+        <div class="review-symbol">
+          ◇
+        </div>
+
+
+        <div class="referral-review-content">
+
+          <span class="tag warning">
+            AWAITING HUMAN DECISION
+          </span>
+
+          <h3>
+            REF-000001
+          </h3>
+
+          <p>
+            Review referral progress and determine the appropriate
+            next action. The system has surfaced the review requirement;
+            it has not determined the outcome.
+          </p>
+
+          <div class="review-context">
+
+            <span>
+              VB-000001
+            </span>
+
+            <span>
+              CASE-000001
+            </span>
+
+            <span>
+              Fictional Partner Service
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <button class="primary-button" type="button">
+          Start review
+        </button>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         RECENT FOLLOW-UPS
+    ====================================================== -->
+
+    <section class="workspace-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <p class="eyebrow">
+            FOLLOW-UP
+          </p>
+
+          <h2>
+            Recent referral activity
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="referral-activity-list">
+
+
+        <article class="referral-activity-item">
+
+          <div class="activity-date">
+            <strong>28</strong>
+            <span>SEP</span>
+          </div>
+
+          <div class="activity-content">
+
+            <span class="record-label">
+              REF-000001
+            </span>
+
+            <h3>
+              Follow-up recorded
+            </h3>
+
+            <p>
+              Progress information recorded and referral review
+              identified as the next step.
+            </p>
+
+          </div>
+
+          <div class="activity-owner">
+            Support Worker
+          </div>
+
+        </article>
+
+
+        <article class="referral-activity-item">
+
+          <div class="activity-date">
+            <strong>27</strong>
+            <span>SEP</span>
+          </div>
+
+          <div class="activity-content">
+
+            <span class="record-label">
+              REF-000006
+            </span>
+
+            <h3>
+              Partner response recorded
+            </h3>
+
+            <p>
+              Referral accepted and progressing. Further follow-up
+              scheduled.
+            </p>
+
+          </div>
+
+          <div class="activity-owner">
+            Support Worker
+          </div>
+
+        </article>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         NO LIMBO PRINCIPLE
+    ====================================================== -->
+
+    <section class="human-decision-notice">
+
+      <div>
+        🦄
+      </div>
+
+      <div>
+
+        <strong>
+          No veteran left in referral limbo.
+        </strong>
+
+        <p>
+          VB Core can identify missing follow-up, overdue review
+          and stalled referral activity. It does not decide whether
+          a referral has succeeded, failed or what should happen next.
+          Those decisions remain human-led and attributable.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FOOTER
+    ====================================================== -->
+
+    <footer class="app-footer">
+
+      <div class="footer-mark">
+        🦄
+      </div>
+
+      <div>
+
+        <strong>
+          Veterans Backbone
+        </strong>
+
+        <span>
+          Human first · Support without control ·
+          Safety without surveillance
+        </span>
+
+      </div>
+
+    </footer>
+
+  </main>
+
+</div>
+
+</body>
+</html>
