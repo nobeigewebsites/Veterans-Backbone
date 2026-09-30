@@ -72,7 +72,12 @@
       <a href="assurance.html" class="nav-item active">
         <span class="nav-icon">!</span>
         <span>Assurance Queue</span>
-        <span class="nav-count warning">2</span>
+        <span
+  class="nav-count warning"
+  id="assurance-nav-count"
+>
+  0
+</span>
       </a>
 
       <a href="safeguarding.html" class="nav-item">
@@ -260,401 +265,201 @@
     </section>
 
 
-    <!-- =====================================================
-         SUMMARY
-    ====================================================== -->
+   <!-- =====================================================
+     SUMMARY
+====================================================== -->
 
-    <section class="assurance-summary-grid">
+<section class="assurance-summary-grid">
 
-      <article class="workspace-stat orange">
+  <article class="workspace-stat orange">
 
-        <span class="workspace-stat-number">
-          2
-        </span>
+    <span
+      class="workspace-stat-number"
+      id="assurance-open-count"
+    >
+      0
+    </span>
 
-        <div>
-          <strong>Open items</strong>
-          <span>Awaiting assessment</span>
-        </div>
+    <div>
+      <strong>Open items</strong>
+      <span>Awaiting assessment</span>
+    </div>
 
-      </article>
+  </article>
 
 
-      <article class="workspace-stat pink">
+  <article class="workspace-stat pink">
 
-        <span class="workspace-stat-number">
-          1
-        </span>
+    <span
+      class="workspace-stat-number"
+      id="assurance-review-count"
+    >
+      0
+    </span>
 
-        <div>
-          <strong>Review due</strong>
-          <span>Human attention required</span>
-        </div>
+    <div>
+      <strong>Review due</strong>
+      <span>Human attention required</span>
+    </div>
 
-      </article>
+  </article>
 
 
-      <article class="workspace-stat purple">
+  <article class="workspace-stat purple">
 
-        <span class="workspace-stat-number">
-          1
-        </span>
+    <span
+      class="workspace-stat-number"
+      id="assurance-referral-count"
+    >
+      0
+    </span>
 
-        <div>
-          <strong>Referral finding</strong>
-          <span>Deterministic rule</span>
-        </div>
+    <div>
+      <strong>Referral findings</strong>
+      <span>Open assurance items</span>
+    </div>
 
-      </article>
+  </article>
 
 
-      <article class="workspace-stat green">
+  <article class="workspace-stat green">
 
-        <span class="workspace-stat-number">
-          0
-        </span>
+    <span
+      class="workspace-stat-number"
+      id="assurance-overdue-count"
+    >
+      0
+    </span>
 
-        <div>
-          <strong>Overdue assessments</strong>
-          <span>Nothing overdue</span>
-        </div>
+    <div>
+      <strong>Overdue assessments</strong>
+      <span>No deadline field configured</span>
+    </div>
 
-      </article>
+  </article>
 
-    </section>
+</section>
 
 
-    <!-- =====================================================
-         FILTERS
-    ====================================================== -->
+   <!-- =====================================================
+     FILTERS
+====================================================== -->
 
-    <section class="workspace-filter-panel">
+<section class="workspace-filter-panel">
 
-      <div class="workspace-search-field">
+  <div class="workspace-search-field">
 
-        <label for="assurance-search">
-          Search
-        </label>
+    <label for="assurance-search">
+      Search
+    </label>
 
-        <input
-          id="assurance-search"
-          type="search"
-          placeholder="Search item, VB ID, case or source..."
-        >
+    <input
+      id="assurance-search"
+      type="search"
+      placeholder="Search item, case, referral, rule or source..."
+    >
 
-      </div>
+  </div>
 
 
-      <div class="filter-field">
+  <div class="filter-field">
 
-        <label for="assurance-status">
-          Status
-        </label>
+    <label for="assurance-status">
+      Status
+    </label>
 
-        <select id="assurance-status">
+    <select id="assurance-status">
+      <option value="open-items">
+        Open items
+      </option>
+    </select>
 
-          <option>Open items</option>
-          <option>Open</option>
-          <option>Under review</option>
-          <option>Resolved</option>
-          <option>Closed</option>
+  </div>
 
-        </select>
 
-      </div>
+  <div class="filter-field">
 
+    <label for="assurance-source">
+      Source
+    </label>
 
-      <div class="filter-field">
+    <select id="assurance-source">
+      <option value="all">
+        All sources
+      </option>
+    </select>
 
-        <label for="assurance-source">
-          Source
-        </label>
+  </div>
 
-        <select id="assurance-source">
 
-          <option>All sources</option>
-          <option>Deterministic rule</option>
-          <option>Workflow control</option>
-          <option>Human raised</option>
-          <option>AI assurance</option>
+  <div class="filter-field">
 
-        </select>
+    <label for="assurance-owner">
+      Assigned
+    </label>
 
-      </div>
+    <select id="assurance-owner">
 
+      <option value="anyone">
+        Anyone
+      </option>
 
-      <div class="filter-field">
+      <option value="mine">
+        Assigned to me
+      </option>
 
-        <label for="assurance-owner">
-          Assigned
-        </label>
+      <option value="unassigned">
+        Unassigned
+      </option>
 
-        <select id="assurance-owner">
+    </select>
 
-          <option>Anyone</option>
-          <option>Assigned to me</option>
-          <option>Unassigned</option>
+  </div>
 
-        </select>
+</section>
 
-      </div>
+   <!-- =====================================================
+     NEEDS ATTENTION
+====================================================== -->
 
-    </section>
+<section class="workspace-section">
 
+  <div class="section-heading">
 
-    <!-- =====================================================
-         NEEDS ATTENTION
-    ====================================================== -->
+    <div>
 
-    <section class="workspace-section">
+      <p class="eyebrow">
+        OPEN ASSURANCE
+      </p>
 
-      <div class="section-heading">
+      <h2>
+        Needs assessment
+      </h2>
 
-        <div>
+    </div>
 
-          <p class="eyebrow">
-            OPEN ASSURANCE
-          </p>
+    <span
+      class="section-note"
+      id="assurance-item-note"
+    >
+      Loading…
+    </span>
 
-          <h2>
-            Needs assessment
-          </h2>
+  </div>
 
-        </div>
 
-        <span class="section-note">
-          2 fictional items
-        </span>
+  <div
+    class="assurance-item-list"
+    id="assurance-item-list"
+  >
 
-      </div>
+    <p>
+      Loading assurance queue…
+    </p>
 
+  </div>
 
-      <div class="assurance-item-list">
-
-
-        <!-- =================================================
-             ITEM 1
-        ================================================== -->
-
-        <article class="assurance-item-card warning">
-
-          <div class="assurance-item-symbol">
-            !
-          </div>
-
-
-          <div class="assurance-item-main">
-
-            <div class="assurance-item-heading">
-
-              <div>
-
-                <span class="record-label">
-                  ASSURANCE ITEM · VB-000001
-                </span>
-
-                <h3>
-                  Referral review required
-                </h3>
-
-              </div>
-
-              <span class="tag warning">
-                NEEDS REVIEW
-              </span>
-
-            </div>
-
-
-            <p>
-              Referral progress meets the configured condition
-              for human review.
-            </p>
-
-
-            <div class="assurance-context">
-
-              <span>
-                CASE-000001
-              </span>
-
-              <span>
-                REF-000001
-              </span>
-
-              <span>
-                Site 1
-              </span>
-
-            </div>
-
-
-            <div class="assurance-source-box">
-
-              <span class="record-label">
-                SOURCE
-              </span>
-
-              <strong>
-                Deterministic system rule
-              </strong>
-
-              <span>
-                REFERRAL_REVIEW_DUE
-              </span>
-
-            </div>
-
-          </div>
-
-
-          <div class="assurance-item-side">
-
-            <div>
-
-              <span class="record-label">
-                CREATED
-              </span>
-
-              <strong>
-                28 Sep 2026
-              </strong>
-
-            </div>
-
-            <div>
-
-              <span class="record-label">
-                STATUS
-              </span>
-
-              <strong>
-                Open
-              </strong>
-
-            </div>
-
-          </div>
-
-
-          <button class="primary-button" type="button">
-            Assess
-          </button>
-
-        </article>
-
-
-        <!-- =================================================
-             ITEM 2
-        ================================================== -->
-
-        <article class="assurance-item-card">
-
-          <div class="assurance-item-symbol">
-            !
-          </div>
-
-
-          <div class="assurance-item-main">
-
-            <div class="assurance-item-heading">
-
-              <div>
-
-                <span class="record-label">
-                  ASSURANCE ITEM · VB-000006
-                </span>
-
-                <h3>
-                  Case review due
-                </h3>
-
-              </div>
-
-              <span class="tag action">
-                REVIEW
-              </span>
-
-            </div>
-
-
-            <p>
-              The configured review point has been reached.
-              An authorised person should review the case.
-            </p>
-
-
-            <div class="assurance-context">
-
-              <span>
-                CASE-000006
-              </span>
-
-              <span>
-                Site 1
-              </span>
-
-            </div>
-
-
-            <div class="assurance-source-box">
-
-              <span class="record-label">
-                SOURCE
-              </span>
-
-              <strong>
-                Deterministic system rule
-              </strong>
-
-              <span>
-                REFERRAL_REVIEW_DUE
-              </span>
-
-            </div>
-
-          </div>
-
-
-          <div class="assurance-item-side">
-
-            <div>
-
-              <span class="record-label">
-                CREATED
-              </span>
-
-              <strong>
-                28 Sep 2026
-              </strong>
-
-            </div>
-
-            <div>
-
-              <span class="record-label">
-                STATUS
-              </span>
-
-              <strong>
-                Open
-              </strong>
-
-            </div>
-
-          </div>
-
-
-          <button class="primary-button" type="button">
-            Assess
-          </button>
-
-        </article>
-
-      </div>
-
-    </section>
-
+</section>
 
     <!-- =====================================================
          ASSESSMENT WORKSPACE
@@ -774,174 +579,190 @@
     </section>
 
 
-    <!-- =====================================================
-         FINDING DETAIL
-    ====================================================== -->
+   <!-- =====================================================
+     FINDING DETAIL
+====================================================== -->
 
-    <section class="workspace-section">
+<section
+  class="workspace-section"
+  id="assurance-finding-detail"
+>
 
-      <div class="section-heading">
+  <div class="section-heading">
 
-        <div>
+    <div>
 
-          <p class="eyebrow">
-            EXAMPLE REVIEW
-          </p>
+      <p class="eyebrow">
+        SELECTED FINDING
+      </p>
 
-          <h2>
-            Finding context
-          </h2>
+      <h2>
+        Finding context
+      </h2>
 
-        </div>
+    </div>
+
+  </div>
+
+
+  <div
+    class="assurance-detail-panel"
+    id="assurance-finding-panel"
+    hidden
+  >
+
+
+    <div class="assurance-detail-header">
+
+      <div>
+
+        <span
+          class="record-label"
+          id="assurance-detail-code"
+        >
+          Assurance item
+        </span>
+
+        <h3 id="assurance-detail-title">
+          Select an assurance item
+        </h3>
+
+      </div>
+
+      <span
+        class="tag warning"
+        id="assurance-detail-status"
+      >
+        OPEN
+      </span>
+
+    </div>
+
+
+    <div class="assurance-detail-grid">
+
+
+      <div class="assurance-detail-field">
+
+        <span class="record-label">
+          RULE
+        </span>
+
+        <strong id="assurance-detail-rule">
+          —
+        </strong>
 
       </div>
 
 
-      <div class="assurance-detail-panel">
+      <div class="assurance-detail-field">
 
+        <span class="record-label">
+          SOURCE TYPE
+        </span>
 
-        <div class="assurance-detail-header">
-
-          <div>
-
-            <span class="record-label">
-              VB-000001 · REF-000001
-            </span>
-
-            <h3>
-              Referral review required
-            </h3>
-
-          </div>
-
-          <span class="tag warning">
-            OPEN
-          </span>
-
-        </div>
-
-
-        <div class="assurance-detail-grid">
-
-
-          <div class="assurance-detail-field">
-
-            <span class="record-label">
-              RULE
-            </span>
-
-            <strong>
-              REFERRAL_REVIEW_DUE
-            </strong>
-
-          </div>
-
-
-          <div class="assurance-detail-field">
-
-            <span class="record-label">
-              SOURCE TYPE
-            </span>
-
-            <strong>
-              Deterministic rule
-            </strong>
-
-          </div>
-
-
-          <div class="assurance-detail-field">
-
-            <span class="record-label">
-              CONTEXT
-            </span>
-
-            <strong>
-              Referral
-            </strong>
-
-          </div>
-
-
-          <div class="assurance-detail-field">
-
-            <span class="record-label">
-              CREATED
-            </span>
-
-            <strong>
-              28 Sep 2026
-            </strong>
-
-          </div>
-
-        </div>
-
-
-        <div class="assurance-explanation">
-
-          <span class="record-label">
-            WHY THIS WAS SURFACED
-          </span>
-
-          <p>
-            The configured referral review condition has been met.
-            This creates an assurance item so that a person can
-            review the current position.
-          </p>
-
-        </div>
-
-
-        <div class="assurance-not-conclusion">
-
-          <strong>
-            This finding does not mean:
-          </strong>
-
-          <div class="not-conclusion-grid">
-
-            <span>
-              ✕ that somebody has done something wrong
-            </span>
-
-            <span>
-              ✕ that the referral has failed
-            </span>
-
-            <span>
-              ✕ that escalation is automatically required
-            </span>
-
-            <span>
-              ✕ that a particular outcome should be chosen
-            </span>
-
-          </div>
-
-        </div>
-
-
-        <div class="assurance-detail-actions">
-
-          <a
-            href="veteran-record.html#assurance"
-            class="secondary-button"
-          >
-            View veteran context
-          </a>
-
-          <button class="primary-button" type="button">
-            Begin assessment
-          </button>
-
-        </div>
+        <strong id="assurance-detail-source">
+          —
+        </strong>
 
       </div>
 
-    </section>
+
+      <div class="assurance-detail-field">
+
+        <span class="record-label">
+          CONTEXT
+        </span>
+
+        <strong id="assurance-detail-context">
+          —
+        </strong>
+
+      </div>
 
 
+      <div class="assurance-detail-field">
+
+        <span class="record-label">
+          CREATED
+        </span>
+
+        <strong id="assurance-detail-created">
+          —
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <div class="assurance-explanation">
+
+      <span class="record-label">
+        WHY THIS WAS SURFACED
+      </span>
+
+      <p id="assurance-detail-reason">
+        Select an assurance item to view its recorded detection reason.
+      </p>
+
+    </div>
+
+
+    <div class="assurance-not-conclusion">
+
+      <strong>
+        This finding does not mean:
+      </strong>
+
+      <div class="not-conclusion-grid">
+
+        <span>
+          ✕ that somebody has done something wrong
+        </span>
+
+        <span>
+          ✕ that the referral has failed
+        </span>
+
+        <span>
+          ✕ that escalation is automatically required
+        </span>
+
+        <span>
+          ✕ that a particular outcome should be chosen
+        </span>
+
+      </div>
+
+    </div>
+
+
+    <div class="assurance-detail-actions">
+
+      <a
+        href="veteran-record.html#assurance"
+        class="secondary-button"
+        id="assurance-veteran-link"
+        hidden
+      >
+        View veteran context
+      </a>
+
+      <button
+        class="primary-button"
+        id="assurance-begin-assessment"
+        type="button"
+        disabled
+      >
+        Assessment actions coming next
+      </button>
+
+    </div>
+
+  </div>
+
+</section>
     <!-- =====================================================
          SYSTEM RULES
     ====================================================== -->
@@ -1281,6 +1102,7 @@
 </div>
 
   <script src="../js/app.js" type="module"></script>
+<script src="../js/assurance.js" type="module"></script>
   
 </body>
 </html>
