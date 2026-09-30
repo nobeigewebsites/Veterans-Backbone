@@ -72,7 +72,6 @@ const LOGIN_URL =
 
 let redirectingToLogin = false;
 
-
 function redirectToLogin() {
 
   if (redirectingToLogin) {
@@ -98,7 +97,6 @@ async function getAuthenticatedUser() {
     error
   } = await supabase.auth.getUser();
 
-
   if (error) {
 
     console.error(
@@ -108,7 +106,6 @@ async function getAuthenticatedUser() {
 
     return null;
   }
-
 
   return data?.user ?? null;
 }
@@ -155,7 +152,6 @@ async function getStaffProfile(authUserId) {
     )
     .maybeSingle();
 
-
   if (error) {
 
     console.error(
@@ -165,7 +161,6 @@ async function getStaffProfile(authUserId) {
 
     throw error;
   }
-
 
   return data;
 }
@@ -234,11 +229,11 @@ function applyStaffIdentity(
 
 
   /*
-    Application state exposed to the interface.
+     Application state exposed to the interface.
 
-    These attributes must never be treated as authorisation.
+     These attributes must never be treated as authorisation.
 
-    Database permissions and RLS remain authoritative.
+     Database permissions and RLS remain authoritative.
   */
 
   document.documentElement.dataset.authenticated =
@@ -264,11 +259,9 @@ async function signOut() {
       error
     } = await supabase.auth.signOut();
 
-
     if (error) {
       throw error;
     }
-
 
   } catch (error) {
 
@@ -276,7 +269,6 @@ async function signOut() {
       "VB Core sign-out failed:",
       error
     );
-
 
   } finally {
 
@@ -302,7 +294,6 @@ function initialiseSignOutControls() {
       "[data-vb-sign-out]"
     );
 
-
   signOutControls.forEach(
     (control) => {
 
@@ -324,8 +315,6 @@ function initialiseSignOutControls() {
 
 /* ============================================================
    10. AUTH STATE WATCHER
-
-   IMPORTANT:
 
    Redirect ONLY when Supabase explicitly reports SIGNED_OUT.
 
@@ -367,7 +356,6 @@ async function protectApplication() {
     const user =
       await getAuthenticatedUser();
 
-
     if (!user) {
 
       console.info(
@@ -390,32 +378,14 @@ async function protectApplication() {
         user.id
       );
 
-
     if (!staffProfile) {
 
-  console.error(
-    "VB CORE ACCESS DENIED:",
-    {
-      reason: "No active staff profile returned",
-      authenticatedUserId: user.id,
-      authenticatedEmail: user.email
-    }
-  );
+      console.error(
+        "VB Core access denied: authenticated user has no active staff profile."
+      );
 
-  /*
-    DEV DIAGNOSTIC MODE
+      await supabase.auth.signOut();
 
-    Access still fails closed.
-
-    Do NOT destroy the valid Supabase session here.
-    We need to preserve authentication so we can inspect
-    why the staff-profile lookup returned no row.
-  */
-
-  redirectToLogin();
-
-  return;
-}
       redirectToLogin();
 
       return;
@@ -454,13 +424,13 @@ async function protectApplication() {
 
 
     /*
-      Future module scripts can listen for:
+       Future module scripts can listen for:
 
-          vb:ready
+           vb:ready
 
-      This ensures they do not attempt protected database work
-      until authentication AND staff-profile validation have
-      completed.
+       This ensures they do not attempt protected database work
+       until authentication AND staff-profile validation have
+       completed.
     */
 
     document.dispatchEvent(
@@ -486,10 +456,10 @@ async function protectApplication() {
 
 
     /*
-      FAIL CLOSED
+       FAIL CLOSED
 
-      If authentication or staff identity cannot be safely
-      established, VB Core access is not granted.
+       If authentication or staff identity cannot be safely
+       established, VB Core access is not granted.
     */
 
     try {
@@ -503,7 +473,6 @@ async function protectApplication() {
         signOutError
       );
     }
-
 
     redirectToLogin();
   }
