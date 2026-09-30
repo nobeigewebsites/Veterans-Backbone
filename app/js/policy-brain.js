@@ -1,39 +1,315 @@
 /* ============================================================
    VETERANS BACKBONE CORE
-   POLICY BRAIN MODULE
+   POLICY BRAIN — LIVE DATA MODULE
 
-   Responsibilities:
-   - Wait for authenticated VB Core application context
-   - Use the authenticated Supabase client supplied by app.js
-   - Load Policy Brain data from the database
-   - Update Policy Brain interface values
-   - Surface genuine policy gaps from live DEV data
-
-   Security:
-   - app.js establishes authenticated staff identity
-   - Supabase RLS remains the database security boundary
-   - This module does not determine permissions itself
-   - No service-role credentials belong in browser code
-   ============================================================ */
-
-
-/* ============================================================
-   1. MODULE STATE
+   Reads authenticated Policy Brain data from Supabase.
+   app.js remains responsible for authentication and staff access.
+   Supabase RLS remains the security boundary.
    ============================================================ */
 
 let supabase = null;
-let currentUser = null;
-let currentStaffProfile = null;
 
 
 /* ============================================================
-   2. POLICY BRAIN INITIALISATION
+   HELPERS
+   ============================================================ */
 
-   This function runs only after app.js has:
+function setText(id, value) {
+  const element = document.getElementById(id);
 
-   - validated the Supabase user
-   - confirmed an active VB staff profile
-   - dispatched the vb:ready event
+  if (element) {
+    element.textContent = value;
+  }
+}
+
+
+function setGapVisibility(sourceMissingCount) {
+  const gapSection = document.getElementById("policy-source-gap-section");
+
+  if (!gapSection) {
+    return;
+  }
+
+  gapSection.hidden = sourceMissingCount === 0;
+}
+
+
+/* ============================================================
+   LOAD POLICY MAPPING DATA
+   ============================================================ */
+
+async function loadPolicyMapping() {
+
+  const { data, error } = await supabase
+    .from("policy_mapping_audit")
+    .select(
+      "policy_code, policy_name, mapping_status, requirement_count"
+    );
+
+  if (error) {
+    throw error;
+  }
+
+
+  const policies = data ?? [];
+
+  const statusCounts = {
+    MAPPED: 0,
+    PARTIAL: 0,
+    REVIEW_REQUIRED: 0,
+    SOURCE_MISSING: 0
+  };
+
+
+  for (const policy of policies) {
+
+    if (
+      Object.prototype.hasOwnProperty.call(
+        statusCounts,
+        policy.mapping_status
+      )
+    ) {
+      statusCounts[policy.mapping_status] += 1;
+    }
+  }
+
+
+  const totalPolicies = policies.length;
+
+  const mapped =
+    statusCounts.MAPPED;
+
+  const partial =
+    statusCounts.PARTIAL;
+
+  const reviewRequired =
+    statusCounts.REVIEW_REQUIRED;
+
+  const sourceMissing =
+    statusCounts.SOURCE_MISSING;
+
+
+  setText(
+    "policy-active-count",
+    totalPolicies
+  );
+
+  setText(
+    "policy-mapped-count",
+    mapped
+  );
+
+  setText(
+    "policy-mapped-summary",
+    `${mapped} of ${totalPolicies}`
+  );
+
+  setText(
+    "policy-health-ratio",
+    `${mapped} / ${totalPolicies}`
+  );
+
+  setText(
+    "policy-health-mapped",
+    mapped
+  );
+
+  setText(
+    "policy-health-partial",
+    partial
+  );
+
+  setText(
+    "policy-health-review",
+    reviewRequired
+  );
+
+  setText(
+    "policy-health-source-missing",
+    sourceMissing
+  );
+
+
+  setGapVisibility(
+    sourceMissing
+  );
+
+
+  const welfare = policies.find(
+    policy =>
+      policy.policy_code === "WELFARE_ENGAGEMENT"
+  );
+
+
+  if (welfare) {
+
+    setText(
+      "welfare-mapping-status",
+      welfare.mapping_status
+    );
+
+    setText(
+      "welfare-requirement-count",
+      welfare.requirement_count
+    );
+  }
+
+
+  return policies;
+}
+
+
+/* ============================================================
+   LOAD REQUIREMENT TOTALS
+   ============================================================ */
+
+async function loadRequirementTotals() {
+
+  const { data, error } = await supabase
+    .from("policy_requirements")
+    .select(
+      "system_enforceable"
+    )
+    .eq(
+      "is_active",
+      true
+    );
+
+
+  if (error) {
+    throw error;
+  }
+
+
+  const requirements =
+    data ?? [];
+
+
+  const activeRequirements =
+    requirements.length;
+
+
+  const systemEnforceable =
+    requirements.filter(
+      requirement =>
+        requirement.system_enforceable === true
+    ).length;
+
+
+  const otherRequirements =
+    activeRequirements - systemEnforceable;
+
+
+  setText(
+    "policy-requirement-count",
+    activeRequirements
+  );
+
+  setText(
+    "requirement-inventory-count",
+    `${activeRequirements} active requirements`
+  );
+
+  setText(
+    "requirement-total",
+    activeRequirements
+  );
+
+  setText(
+    "system-enforceable-summary",
+    systemEnforceable
+  );
+
+  setText(
+    "system-enforceable-total",
+    systemEnforceable
+  );
+
+  setText(
+    "system-enforceable-note",
+    `${systemEnforceable} system-enforceable requirements`
+  );
+
+  setText(
+    "human-led-total",
+    otherRequirements
+  );
+}
+
+
+/* ============================================================
+   LOAD IMPLEMENTATION PLAN
+   ============================================================ */
+
+async function loadImplementationPlan() {
+
+  const { data, error } = await supabase
+    .from("policy_implementation_plan")
+    .select(
+      "proposed_implementation_route"
+    );
+
+
+  if (error) {
+    throw error;
+  }
+
+
+  const routeCounts = {
+    access_or_system_control_candidate: 0,
+    deterministic_rule_candidate: 0,
+    assurance_trigger_candidate: 0,
+    workflow_control_candidate: 0,
+    human_led_with_system_support: 0
+  };
+
+
+  for (const requirement of data ?? []) {
+
+    const route =
+      requirement.proposed_implementation_route;
+
+
+    if (
+      Object.prototype.hasOwnProperty.call(
+        routeCounts,
+        route
+      )
+    ) {
+      routeCounts[route] += 1;
+    }
+  }
+
+
+  setText(
+    "implementation-access-count",
+    routeCounts.access_or_system_control_candidate
+  );
+
+  setText(
+    "implementation-rule-count",
+    routeCounts.deterministic_rule_candidate
+  );
+
+  setText(
+    "implementation-assurance-count",
+    routeCounts.assurance_trigger_candidate
+  );
+
+  setText(
+    "implementation-workflow-count",
+    routeCounts.workflow_control_candidate
+  );
+
+  setText(
+    "implementation-human-count",
+    routeCounts.human_led_with_system_support
+  );
+}
+
+
+/* ============================================================
+   INITIALISE POLICY BRAIN
    ============================================================ */
 
 async function initialisePolicyBrain(event) {
@@ -41,20 +317,13 @@ async function initialisePolicyBrain(event) {
   try {
 
     const {
-      user,
-      staffProfile,
       supabase: authenticatedSupabase
     } = event.detail;
 
 
-    if (
-      !user ||
-      !staffProfile ||
-      !authenticatedSupabase
-    ) {
-
+    if (!authenticatedSupabase) {
       throw new Error(
-        "Policy Brain received incomplete VB Core application context."
+        "Authenticated Supabase client was not supplied."
       );
     }
 
@@ -62,38 +331,23 @@ async function initialisePolicyBrain(event) {
     supabase =
       authenticatedSupabase;
 
-    currentUser =
-      user;
 
-    currentStaffProfile =
-      staffProfile;
-
-
-    console.info(
-      `Policy Brain initialising for ${currentStaffProfile.staff_code}.`
-    );
-
-
-    /*
-       LIVE POLICY BRAIN DATABASE READS
-       WILL BE ADDED HERE.
-
-       We deliberately do not invent table/view names,
-       columns or status values.
-
-       Actual schema will be verified first.
-    */
+    await Promise.all([
+      loadPolicyMapping(),
+      loadRequirementTotals(),
+      loadImplementationPlan()
+    ]);
 
 
     console.info(
-      "Policy Brain module ready."
+      "Policy Brain live data loaded."
     );
 
 
   } catch (error) {
 
     console.error(
-      "Policy Brain initialisation failed:",
+      "Policy Brain live data failed:",
       error
     );
   }
@@ -101,10 +355,7 @@ async function initialisePolicyBrain(event) {
 
 
 /* ============================================================
-   3. WAIT FOR VB CORE
-
-   app.js dispatches vb:ready only after authentication
-   and active staff-profile validation succeed.
+   WAIT FOR AUTHENTICATED VB CORE
    ============================================================ */
 
 document.addEventListener(
@@ -114,15 +365,3 @@ document.addEventListener(
     once: true
   }
 );
-
-
-/* ============================================================
-   4. EXPORT MODULE CONTEXT
-
-   These exports are available for future Policy Brain
-   functionality without exposing credentials or bypassing RLS.
-   ============================================================ */
-
-export {
-  initialisePolicyBrain
-};
