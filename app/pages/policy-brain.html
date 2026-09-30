@@ -265,247 +265,254 @@
     </section>
 
 
-    <!-- =====================================================
-         POLICY HEALTH
-    ====================================================== -->
+   <!-- =====================================================
+     POLICY HEALTH — LIVE DATA
+====================================================== -->
 
-    <section class="policy-summary-grid">
+<section class="policy-summary-grid">
 
-      <article class="workspace-stat purple">
+  <article class="workspace-stat purple">
+    <span
+      class="workspace-stat-number"
+      id="policy-active-count"
+    >
+      —
+    </span>
 
-        <span class="workspace-stat-number">
-          39
+    <div>
+      <strong>Active policies</strong>
+      <span>Current policy inventory</span>
+    </div>
+  </article>
+
+
+  <article class="workspace-stat blue">
+    <span
+      class="workspace-stat-number"
+      id="policy-requirement-count"
+    >
+      —
+    </span>
+
+    <div>
+      <strong>Requirements</strong>
+      <span>Active requirements</span>
+    </div>
+  </article>
+
+
+  <article class="workspace-stat green">
+    <span
+      class="workspace-stat-number"
+      id="system-enforceable-summary"
+    >
+      —
+    </span>
+
+    <div>
+      <strong>System-enforceable</strong>
+      <span>Implementation candidates</span>
+    </div>
+  </article>
+
+
+  <article class="workspace-stat orange">
+    <span
+      class="workspace-stat-number"
+      id="policy-mapped-count"
+    >
+      —
+    </span>
+
+    <div>
+      <strong>Mapped policies</strong>
+
+      <span id="policy-mapped-summary">
+        —
+      </span>
+    </div>
+  </article>
+
+</section>
+
+
+<!-- =====================================================
+     MAPPING HEALTH — LIVE DATA
+====================================================== -->
+
+<section class="workspace-section">
+
+  <div class="section-heading">
+
+    <div>
+
+      <p class="eyebrow">
+        IMPLEMENTATION HEALTH
+      </p>
+
+      <h2>
+        Policy mapping status
+      </h2>
+
+    </div>
+
+  </div>
+
+
+  <div class="policy-health-panel">
+
+    <div class="policy-health-primary">
+
+      <div
+        class="policy-health-number"
+        id="policy-health-ratio"
+      >
+        — / —
+      </div>
+
+      <div>
+
+        <strong>
+          Active policies mapped
+        </strong>
+
+        <p>
+          Mapping status is read directly from the
+          Veterans Backbone Policy Brain.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="policy-health-breakdown">
+
+      <div class="policy-health-item">
+
+        <strong id="policy-health-mapped">
+          —
+        </strong>
+
+        <span>
+          Mapped
         </span>
-
-        <div>
-          <strong>Active policies</strong>
-          <span>Current policy inventory</span>
-        </div>
-
-      </article>
-
-
-      <article class="workspace-stat blue">
-
-        <span class="workspace-stat-number">
-          662
-        </span>
-
-        <div>
-          <strong>Requirements</strong>
-          <span>Active requirements</span>
-        </div>
-
-      </article>
-
-
-      <article class="workspace-stat green">
-
-        <span class="workspace-stat-number">
-          470
-        </span>
-
-        <div>
-          <strong>System-enforceable</strong>
-          <span>Implementation candidates</span>
-        </div>
-
-      </article>
-
-
-      <article class="workspace-stat orange">
-
-        <span class="workspace-stat-number">
-          38
-        </span>
-
-        <div>
-          <strong>Mapped policies</strong>
-          <span>38 of 39</span>
-        </div>
-
-      </article>
-
-    </section>
-
-
-    <!-- =====================================================
-         MAPPING HEALTH
-    ====================================================== -->
-
-    <section class="workspace-section">
-
-      <div class="section-heading">
-
-        <div>
-
-          <p class="eyebrow">
-            IMPLEMENTATION HEALTH
-          </p>
-
-          <h2>
-            Policy mapping status
-          </h2>
-
-        </div>
 
       </div>
 
 
-      <div class="policy-health-panel">
+      <div class="policy-health-item">
 
-        <div class="policy-health-primary">
+        <strong id="policy-health-partial">
+          —
+        </strong>
 
-          <div class="policy-health-number">
-            38 / 39
-          </div>
-
-          <div>
-
-            <strong>
-              Active policies mapped
-            </strong>
-
-            <p>
-              No active policies are currently classified as
-              partially mapped or requiring implementation review.
-            </p>
-
-          </div>
-
-        </div>
-
-
-        <div class="policy-health-breakdown">
-
-          <div class="policy-health-item">
-
-            <strong>
-              38
-            </strong>
-
-            <span>
-              Mapped
-            </span>
-
-          </div>
-
-
-          <div class="policy-health-item">
-
-            <strong>
-              0
-            </strong>
-
-            <span>
-              Partial
-            </span>
-
-          </div>
-
-
-          <div class="policy-health-item">
-
-            <strong>
-              0
-            </strong>
-
-            <span>
-              Review required
-            </span>
-
-          </div>
-
-
-          <div class="policy-health-item source-missing">
-
-            <strong>
-              1
-            </strong>
-
-            <span>
-              Source missing
-            </span>
-
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-
-    <!-- =====================================================
-         SOURCE MISSING
-    ====================================================== -->
-
-    <section class="workspace-section">
-
-      <div class="section-heading">
-
-        <div>
-
-          <p class="eyebrow">
-            KNOWN GAP
-          </p>
-
-          <h2>
-            Source document not present
-          </h2>
-
-        </div>
+        <span>
+          Partial
+        </span>
 
       </div>
 
 
-      <article class="policy-gap-card">
+      <div class="policy-health-item">
 
-        <div class="policy-gap-icon">
-          !
-        </div>
+        <strong id="policy-health-review">
+          —
+        </strong>
 
+        <span>
+          Review required
+        </span>
 
-        <div class="policy-gap-main">
-
-          <span class="record-label">
-            WELFARE_ENGAGEMENT
-          </span>
-
-          <h3>
-            Welfare Engagement
-          </h3>
-
-          <p>
-            No standalone source document is currently present for
-            this policy area, so it is deliberately not being
-            represented as mapped.
-          </p>
-
-        </div>
+      </div>
 
 
-        <div class="policy-gap-status">
+      <div class="policy-health-item source-missing">
 
-          <span class="tag warning">
-            SOURCE MISSING
-          </span>
+        <strong id="policy-health-source-missing">
+          —
+        </strong>
 
-          <strong>
-            0 mapped requirements
-          </strong>
+        <span>
+          Source missing
+        </span>
 
-        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
 
 
-        <button class="row-button" type="button">
-          View gap
-        </button>
+<!-- =====================================================
+     SOURCE GAP — ONLY DISPLAYED WHEN DATABASE REPORTS ONE
+====================================================== -->
 
-      </article>
+<section
+  class="workspace-section"
+  id="policy-source-gap-section"
+  hidden
+>
 
-    </section>
+  <div class="section-heading">
 
+    <div>
+
+      <p class="eyebrow">
+        KNOWN GAP
+      </p>
+
+      <h2>
+        Policy source requires attention
+      </h2>
+
+    </div>
+
+  </div>
+
+
+  <article class="policy-gap-card">
+
+    <div class="policy-gap-icon">
+      !
+    </div>
+
+
+    <div class="policy-gap-main">
+
+      <span class="record-label">
+        POLICY SOURCE
+      </span>
+
+      <h3>
+        Source mapping gap detected
+      </h3>
+
+      <p>
+        Policy Brain has identified one or more active
+        policies whose source mapping requires attention.
+      </p>
+
+    </div>
+
+
+    <div class="policy-gap-status">
+
+      <span class="tag warning">
+        SOURCE ATTENTION
+      </span>
+
+      <strong>
+        Human review required
+      </strong>
+
+    </div>
+
+  </article>
+
+</section>
 
     <!-- =====================================================
          FILTERS
