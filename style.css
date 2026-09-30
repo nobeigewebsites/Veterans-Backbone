@@ -6083,3 +6083,9 @@ img[src$="rise.png"] {
   }
 
 }
+
+
+/* Referrals page - smaller four-card headings */
+.content-grid-4 .card h3 {
+  font-size: 1.65rem;
+}
