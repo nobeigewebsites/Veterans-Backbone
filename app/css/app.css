@@ -3495,9 +3495,10 @@ body.safeguarding-page .main-content::after,
       20px;
   }
 
-  .brand-mark::before {
-    font-size: 59px;
-  }
+  .brand-mark {
+  width: 125px;
+  height: 80px;
+}
 
   .brand-text strong {
     font-size: 16px;
@@ -3560,9 +3561,11 @@ body.safeguarding-page .main-content::after,
       20px;
   }
 
-  .brand-mark::before {
-    font-size: 42px;
-  }
+  .brand-mark {
+  width: 90px;
+  height: 58px;
+  flex: 0 0 90px;
+}
 
   .brand-text {
     margin-top: 0;
