@@ -288,25 +288,47 @@ async function signOut() {
    ============================================================ */
 
 function initialiseSignOutControls() {
+  const sidebarFooter = document.querySelector(".sidebar-footer");
 
-  const signOutControls =
-    document.querySelectorAll(
-      "[data-vb-sign-out]"
+  if (
+    sidebarFooter &&
+    !sidebarFooter.querySelector("[data-vb-sign-out]")
+  ) {
+    const signOutButton = document.createElement("button");
+
+    signOutButton.className = "core-sign-out";
+    signOutButton.type = "button";
+    signOutButton.setAttribute("data-vb-sign-out", "");
+
+    const signOutIcon = document.createElement("span");
+    signOutIcon.className = "core-sign-out-icon";
+    signOutIcon.setAttribute("aria-hidden", "true");
+    signOutIcon.textContent = "↪";
+
+    const signOutLabel = document.createElement("span");
+    signOutLabel.textContent = "Log out";
+
+    signOutButton.append(
+      signOutIcon,
+      signOutLabel
     );
 
-  signOutControls.forEach(
-    (control) => {
+    sidebarFooter.prepend(signOutButton);
+  }
 
-      control.addEventListener(
-        "click",
-        async (event) => {
+  const signOutControls =
+    document.querySelectorAll("[data-vb-sign-out]");
 
-          event.preventDefault();
+  signOutControls.forEach(control => {
+    control.addEventListener("click", async event => {
+      event.preventDefault();
 
-          control.disabled = true;
+      control.disabled = true;
 
-          await signOut();
-        }
+      await signOut();
+    });
+  });
+}
       );
     }
   );
