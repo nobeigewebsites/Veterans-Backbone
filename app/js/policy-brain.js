@@ -134,6 +134,122 @@ async function loadPolicyMapping() {
     sourceMissing
   );
 
+   /* ============================================================
+   BUILD LIVE POLICY REGISTER
+   ============================================================ */
+
+const policyRegisterBody =
+  document.getElementById("policy-register-body");
+
+
+setText(
+  "policy-register-count",
+  `${totalPolicies} active policies`
+);
+
+
+if (policyRegisterBody) {
+
+  policyRegisterBody.innerHTML = "";
+
+
+  const sortedPolicies =
+    [...policies].sort(
+      (a, b) =>
+        a.policy_name.localeCompare(
+          b.policy_name
+        )
+    );
+
+
+  for (const policy of sortedPolicies) {
+
+    const row =
+      document.createElement("tr");
+
+
+    const mappingClass =
+      policy.mapping_status === "MAPPED"
+        ? "complete"
+        : "warning";
+
+
+    const displayStatus =
+      policy.mapping_status
+        .replaceAll("_", " ");
+
+
+    row.innerHTML = `
+      <td>
+        <div class="policy-name-cell">
+
+          <strong></strong>
+
+          <span></span>
+
+        </div>
+      </td>
+
+      <td>
+        <span class="status-pill active">
+          Active
+        </span>
+      </td>
+
+      <td>
+        <span class="tag ${mappingClass}">
+        </span>
+      </td>
+
+      <td class="policy-requirement-value">
+      </td>
+
+      <td>
+        Current
+      </td>
+
+      <td>
+        <button
+          class="row-button"
+          type="button"
+          disabled
+          title="Policy detail view not yet connected"
+        >
+          Open
+        </button>
+      </td>
+    `;
+
+
+    row
+      .querySelector(".policy-name-cell strong")
+      .textContent =
+        policy.policy_name;
+
+
+    row
+      .querySelector(".policy-name-cell span")
+      .textContent =
+        policy.policy_code;
+
+
+    row
+      .querySelector(".tag")
+      .textContent =
+        displayStatus;
+
+
+    row
+      .querySelector(".policy-requirement-value")
+      .textContent =
+        policy.requirement_count;
+
+
+    policyRegisterBody.appendChild(
+      row
+    );
+  }
+}
 
   const welfare = policies.find(
     policy =>
