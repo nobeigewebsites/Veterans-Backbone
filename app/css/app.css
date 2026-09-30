@@ -357,66 +357,38 @@ img {
   position: relative;
   z-index: 2;
 
-  width: auto;
-  height: auto;
+  width: 150px;
+  height: 95px;
 
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
 
   margin: 0;
   padding: 0;
 
-  background: none;
+  background-image:
+    url("../../images/vblogo.png");
+
+  background-repeat: no-repeat;
+  background-position: left center;
+  background-size: contain;
+
   border: 0;
 
   color: transparent;
-
   font-size: 0;
-}
-
-.brand-mark::before {
-  content: "VB";
-
-  display: block;
-
-  width: fit-content;
-
-  color: transparent;
-
-  background:
-    linear-gradient(
-      115deg,
-      #ff1478 5%,
-      #ff7a18 36%,
-      #ffc928 50%,
-      #2388ff 73%,
-      #8a3ffc 94%
-    );
-
-  -webkit-background-clip: text;
-  background-clip: text;
-
-  font-family:
-    "Trebuchet MS",
-    "Arial Black",
-    sans-serif;
-
-  font-size: 72px;
-  font-weight: 1000;
-
-  line-height: 0.9;
-
-  letter-spacing: -9px;
-
-  transform:
-    rotate(-6deg)
-    skewX(-7deg);
 
   filter:
     drop-shadow(
-      3px 4px 0 rgba(0, 0, 0, 0.14)
+      3px 4px 5px rgba(0, 0, 0, 0.16)
     );
 }
 
+/* Old generated VB removed */
+.brand-mark::before {
+  content: none;
+}
 .brand-text {
   position: relative;
   z-index: 2;
