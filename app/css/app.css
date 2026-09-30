@@ -661,6 +661,65 @@ img {
   font-size: 10px;
 }
 
+/* ============================================================
+   CORE SIGN OUT
+   ============================================================ */
+
+.core-sign-out {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 10px;
+  padding: 10px 12px;
+
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.82);
+
+  font: inherit;
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 160ms ease,
+    border-color 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.core-sign-out:hover,
+.core-sign-out:focus-visible {
+  background: rgba(255, 20, 120, 0.14);
+  border-color: rgba(255, 20, 120, 0.5);
+  color: #ffffff;
+}
+
+.core-sign-out:active {
+  transform: translateY(1px);
+}
+
+.core-sign-out:focus-visible {
+  outline: 2px solid #ff1478;
+  outline-offset: 2px;
+}
+
+.core-sign-out:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+
+.core-sign-out-icon {
+  color: #ff1478;
+  font-size: 1rem;
+  line-height: 1;
+}
+
 
 /* ============================================================
    8. TOP BAR
