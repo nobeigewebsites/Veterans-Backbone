@@ -1135,7 +1135,7 @@ function showErrorState(error) {
    It then dispatches vb:ready.
    ========================================================= */
 
-window.addEventListener(
+document.addEventListener(
   "vb:ready",
   async (event) => {
     try {
