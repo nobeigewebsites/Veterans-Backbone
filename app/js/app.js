@@ -393,19 +393,29 @@ async function protectApplication() {
 
     if (!staffProfile) {
 
-      console.error(
-        "Authenticated user has no active VB staff profile."
-      );
+  console.error(
+    "VB CORE ACCESS DENIED:",
+    {
+      reason: "No active staff profile returned",
+      authenticatedUserId: user.id,
+      authenticatedEmail: user.email
+    }
+  );
 
+  /*
+    DEV DIAGNOSTIC MODE
 
-      /*
-        Authentication alone does not grant access.
+    Access still fails closed.
 
-        Remove the Supabase session and return to login.
-      */
+    Do NOT destroy the valid Supabase session here.
+    We need to preserve authentication so we can inspect
+    why the staff-profile lookup returned no row.
+  */
 
-      await supabase.auth.signOut();
+  redirectToLogin();
 
+  return;
+}
       redirectToLogin();
 
       return;
