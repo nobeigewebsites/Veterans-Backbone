@@ -131,45 +131,19 @@
       z-index: 2;
     }
 
-    .login-vb {
-      display: inline-block;
+   .login-vb-logo {
+  display: block;
 
-      color: transparent;
+  width: 110px;
+  height: auto;
 
-      background:
-        linear-gradient(
-          115deg,
-          #ff1478,
-          #ff7a18 32%,
-          #ffc928 48%,
-          #2388ff 70%,
-          #8a3ffc 92%
-        );
+  object-fit: contain;
 
-      -webkit-background-clip: text;
-      background-clip: text;
-
-      font-family:
-        "Trebuchet MS",
-        "Arial Black",
-        sans-serif;
-
-      font-size: clamp(80px, 9vw, 145px);
-      font-weight: 1000;
-
-      line-height: 0.85;
-
-      letter-spacing: -12px;
-
-      transform:
-        rotate(-6deg)
-        skewX(-7deg);
-
-      filter:
-        drop-shadow(
-          5px 6px 0 rgba(0, 0, 0, 0.15)
-        );
-    }
+  filter:
+    drop-shadow(
+      5px 6px 0 rgba(0, 0, 0, 0.15)
+    );
+}
 
     .login-brand h1 {
       margin:
@@ -615,9 +589,9 @@
         opacity: 0.12;
       }
 
-      .login-vb {
-        font-size: 70px;
-      }
+      .login-vb-logo {
+  width: 90px;
+}
 
       .login-brand h1 {
         margin-top: 18px;
@@ -667,9 +641,11 @@
 
       <div class="login-brand">
 
-        <div class="login-vb">
-          VB
-        </div>
+       <img
+  class="login-vb-logo"
+  src="../images/vblogo.png"
+  alt="Veterans Backbone"
+>
 
         <h1>
           Veterans Backbone
