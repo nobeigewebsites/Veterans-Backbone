@@ -1084,8 +1084,11 @@ async function runTests() {
   }
 
 
-  // ==========================================================
-  // TEST 21 — CONTROLLED RETIREMENT
+    // ==========================================================
+  // TEST 21 — SUPPORT WORKER CANNOT RETIRE DOCUMENT
+  //
+  // Lifecycle retirement requires DOCUMENT_MANAGE.
+  // The authenticated DEV Support Worker must be blocked.
   // ==========================================================
 
   if (documentId) {
@@ -1105,81 +1108,82 @@ async function runTests() {
           EXPECTED_STAFF,
 
         lifecycle_reason:
-          "DOC-C2 authenticated test fixture retired after successful test."
+          "DOC-C2 attempted Support Worker lifecycle retirement."
       })
       .eq("id", documentId);
 
     addResult(
       21,
-      "DOC-C2 fixture retired through controlled lifecycle",
-      "ARCHIVED",
+      "Support Worker cannot retire document without DOCUMENT_MANAGE",
+      "BLOCKED",
       archiveError
-        ? errorText(archiveError)
-        : "ARCHIVED",
-      !archiveError
+        ? "BLOCKED"
+        : "ALLOWED",
+      !!archiveError
     );
 
   } else {
 
     addResult(
       21,
-      "DOC-C2 fixture retired through controlled lifecycle",
-      "ARCHIVED",
-      "NO FIXTURE CREATED",
-      true
+      "Support Worker cannot retire document without DOCUMENT_MANAGE",
+      "BLOCKED",
+      "NOT TESTED — FIXTURE CREATE FAILED",
+      false
     );
   }
 
 
   // ==========================================================
-  // TEST 22 — RETIRED HISTORY PRESERVED
+  // TEST 22 — BLOCKED RETIREMENT PRESERVES RECORD
+  //
+  // Failed unauthorised lifecycle action must not alter
+  // the document or destroy its history.
   // ==========================================================
 
   if (documentId) {
 
     const {
-      data: archived,
-      error: archivedError
+      data: preserved,
+      error: preservedError
     } = await supabase
       .from("documents")
       .select(`
         id,
         document_status,
         archived_at,
-        archived_by_staff_id,
-        lifecycle_reason
+        archived_by_staff_id
       `)
       .eq("id", documentId)
       .single();
 
     addResult(
       22,
-      "Retired test record preserved with lifecycle evidence",
-      "ARCHIVED + ATTRIBUTED",
-      archivedError
-        ? errorText(archivedError)
-        : archived?.document_status ??
-          "NULL",
-      !archivedError &&
-      archived?.document_status ===
-        "archived" &&
-      !!archived?.archived_at &&
-      archived?.archived_by_staff_id ===
-        EXPECTED_STAFF &&
-      !!archived?.lifecycle_reason
+      "Blocked retirement leaves document active and preserved",
+      "ACTIVE + PRESERVED",
+      preservedError
+        ? errorText(preservedError)
+        : preserved?.document_status === "active" &&
+          !preserved?.archived_at &&
+          !preserved?.archived_by_staff_id
+            ? "ACTIVE + PRESERVED"
+            : `status=${preserved?.document_status ?? "NULL"}`,
+      !preservedError &&
+      preserved?.document_status === "active" &&
+      !preserved?.archived_at &&
+      !preserved?.archived_by_staff_id
     );
 
   } else {
 
     addResult(
       22,
-      "Retired test record preserved with lifecycle evidence",
-      "ARCHIVED + ATTRIBUTED",
-      "NO FIXTURE CREATED",
-      true
+      "Blocked retirement leaves document active and preserved",
+      "ACTIVE + PRESERVED",
+      "NOT TESTED — FIXTURE CREATE FAILED",
+      false
     );
   }
-
 
   renderResults();
 }
