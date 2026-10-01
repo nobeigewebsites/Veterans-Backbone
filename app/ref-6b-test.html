@@ -6,8 +6,6 @@
 
   <title>VB REF-6B Authenticated Test</title>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="./js/supabase-client.js"></script>
 
   <style>
     body {
@@ -103,7 +101,10 @@
 <div id="summary">Not run yet.</div>
 
 
-<script>
+<script type="module">
+
+import { supabase } from "./js/supabase-client.js";
+
 const EXPECTED_AUTH_UID =
   "4f72cbe3-8b73-45c7-a2d7-2d5484bdfb5e";
 
@@ -190,19 +191,21 @@ async function runTests() {
 
   results.length = 0;
 
-  const sb = window.vbSupabase;
+ const sb = supabase;
 
-  if (!sb) {
+addResult(
+  1,
+  "Shared Supabase client loaded",
+  sb ? "PASS" : "FAIL",
+  sb
+    ? "Shared ES-module Supabase client imported successfully"
+    : "Shared Supabase client unavailable"
+);
 
-    addResult(
-      1,
-      "Shared Supabase client loaded",
-      "FAIL",
-      "window.vbSupabase was not found."
-    );
-
-    render();
-
+if (!sb) {
+  render();
+  return;
+}
     return;
 
   }
