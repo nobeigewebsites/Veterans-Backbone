@@ -98,6 +98,10 @@
       RUN RBAC TESTS
     </button>
 
+    <button id="run-write-tests">
+  RUN FORBIDDEN WRITE TESTS 😈
+</button>
+
     <div id="summary" class="waiting">
       Waiting to run.
     </div>
@@ -573,6 +577,420 @@
 
       button.disabled = false;
     }
+
+        /* ========================================================
+       VB RBAC v1 — CHUNK 7E
+       FORBIDDEN WRITE TESTS
+
+       A blocked write = PASS.
+       ======================================================== */
+
+    const writeButton =
+      document.getElementById("run-write-tests");
+
+
+    async function runForbiddenWriteTests() {
+
+      writeButton.disabled = true;
+
+      summary.textContent =
+        "Attacking VB authority controls... 😈";
+
+      summary.className =
+        "waiting";
+
+      tbody.innerHTML = "";
+
+      const results = [];
+
+
+      const VETERAN_SITE_1 =
+        "7e000001-0000-4000-8000-000000000001";
+
+      const VETERAN_SITE_2 =
+        "7e000001-0000-4000-8000-000000000002";
+
+      const CASE_SITE_1 =
+        "7e000002-0000-4000-8000-000000000001";
+
+      const CASE_SITE_2 =
+        "7e000002-0000-4000-8000-000000000002";
+
+      const FAKE_STAFF =
+        "00000000-0000-4000-8000-000000000999";
+
+
+      function blockedResult(
+        test,
+        response
+      ) {
+
+        const blocked =
+          !!response.error;
+
+        addResult(
+          results,
+          test,
+          "BLOCK",
+          blocked
+            ? `BLOCKED: ${response.error.message}`
+            : "WRITE SUCCEEDED",
+          blocked
+        );
+      }
+
+
+      try {
+
+        /* ====================================================
+           1. CROSS-SITE VETERAN UPDATE
+           ==================================================== */
+
+        const crossSiteVeteran =
+          await supabase
+            .from("veterans")
+            .update({
+              record_status: "inactive"
+            })
+            .eq("id", VETERAN_SITE_2)
+            .select("id");
+
+
+        /*
+          RLS can block UPDATE by returning zero rows rather
+          than an explicit error.
+        */
+
+        addResult(
+          results,
+          "Cross-site veteran update blocked",
+          "BLOCK",
+          crossSiteVeteran.error
+            ? `BLOCKED: ${crossSiteVeteran.error.message}`
+            : `${crossSiteVeteran.data.length} changed row(s)`,
+          !!crossSiteVeteran.error ||
+          crossSiteVeteran.data.length === 0
+        );
+
+
+        /* ====================================================
+           2. CROSS-SITE CASE UPDATE
+           ==================================================== */
+
+        const crossSiteCase =
+          await supabase
+            .from("cases")
+            .update({
+              case_status: "transition"
+            })
+            .eq("id", CASE_SITE_2)
+            .select("id");
+
+
+        addResult(
+          results,
+          "Cross-site case update blocked",
+          "BLOCK",
+          crossSiteCase.error
+            ? `BLOCKED: ${crossSiteCase.error.message}`
+            : `${crossSiteCase.data.length} changed row(s)`,
+          !!crossSiteCase.error ||
+          crossSiteCase.data.length === 0
+        );
+
+
+        /* ====================================================
+           3. SUPPORT WORKER CANNOT CLOSE CASE
+           ==================================================== */
+
+        const closeCase =
+          await supabase
+            .from("cases")
+            .update({
+              case_status: "closed",
+              closed_at:
+                new Date().toISOString()
+            })
+            .eq("id", CASE_SITE_1)
+            .select("id");
+
+
+        blockedResult(
+          "Support Worker cannot close case",
+          closeCase
+        );
+
+
+        /* ====================================================
+           4. SUPPORT WORKER CANNOT REASSIGN CASE
+           ==================================================== */
+
+        const assignCase =
+          await supabase
+            .from("cases")
+            .update({
+              assigned_staff_id: null
+            })
+            .eq("id", CASE_SITE_1)
+            .select("id");
+
+
+        blockedResult(
+          "Support Worker cannot reassign case",
+          assignCase
+        );
+
+
+        /* ====================================================
+           5. FAKE CASE NOTE ACTOR
+           ==================================================== */
+
+        const fakeNoteActor =
+          await supabase
+            .from("case_notes")
+            .insert({
+              case_id: CASE_SITE_1,
+              veteran_id: VETERAN_SITE_1,
+              recorded_by_staff_id: FAKE_STAFF,
+              contact_type: "internal",
+              contact_outcome: "not_applicable",
+              note_title:
+                "RBAC 7E ACTOR SPOOF TEST",
+              note_body:
+                "DEV fictional forbidden-write test.",
+              follow_up_required: false
+            })
+            .select("id");
+
+
+        blockedResult(
+          "Fake case-note actor blocked",
+          fakeNoteActor
+        );
+
+
+        /* ====================================================
+           6. FAKE REFERRAL CREATOR
+           ==================================================== */
+
+        const fakeReferralActor =
+          await supabase
+            .from("referrals")
+            .insert({
+              case_id: CASE_SITE_1,
+              veteran_id: VETERAN_SITE_1,
+              created_by_staff_id: FAKE_STAFF,
+              assigned_to_staff_id: STAFF_ID,
+              destination_name:
+                "RBAC DEV TEST",
+              referral_purpose:
+                "RBAC 7E ACTOR SPOOF TEST",
+              referral_status: "identified",
+              consent_confirmed: true
+            })
+            .select("id");
+
+
+        blockedResult(
+          "Fake referral creator blocked",
+          fakeReferralActor
+        );
+
+
+        /* ====================================================
+           7. SUPPORT WORKER CANNOT APPROVE POLICY VERSION
+
+           Find one visible draft version first.
+           ==================================================== */
+
+        const draftVersion =
+          await supabase
+            .from("policy_versions")
+            .select("id,version_status")
+            .eq("version_status", "draft")
+            .limit(1)
+            .maybeSingle();
+
+
+        if (
+          draftVersion.error ||
+          !draftVersion.data
+        ) {
+
+          addResult(
+            results,
+            "Support Worker cannot approve policy",
+            "BLOCK",
+            draftVersion.error
+              ? `PRECHECK: ${draftVersion.error.message}`
+              : "NO VISIBLE DRAFT VERSION",
+            false
+          );
+
+        } else {
+
+          const approvePolicy =
+            await supabase
+              .from("policy_versions")
+              .update({
+                version_status: "approved",
+                approved_by_staff_id:
+                  STAFF_ID,
+                approved_at:
+                  new Date().toISOString()
+              })
+              .eq(
+                "id",
+                draftVersion.data.id
+              )
+              .select("id");
+
+
+          blockedResult(
+            "Support Worker cannot approve policy",
+            approvePolicy
+          );
+        }
+
+
+        /* ====================================================
+           8. SUPPORT WORKER CANNOT MAKE ASSURANCE DECISION
+           ==================================================== */
+
+        const assuranceTarget =
+          await supabase
+            .from("assurance_items")
+            .select("id")
+            .limit(1)
+            .maybeSingle();
+
+
+        if (
+          assuranceTarget.error ||
+          !assuranceTarget.data
+        ) {
+
+          addResult(
+            results,
+            "Support Worker cannot make assurance decision",
+            "BLOCK",
+            assuranceTarget.error
+              ? `PRECHECK: ${assuranceTarget.error.message}`
+              : "NO VISIBLE ASSURANCE ITEM",
+            false
+          );
+
+        } else {
+
+          const assuranceDecision =
+            await supabase
+              .from("assurance_items")
+              .update({
+                human_decision:
+                  "RBAC DEV FORBIDDEN TEST",
+                decision_rationale:
+                  "This must be blocked.",
+                decided_at:
+                  new Date().toISOString(),
+                decided_by_staff_id:
+                  STAFF_ID
+              })
+              .eq(
+                "id",
+                assuranceTarget.data.id
+              )
+              .select("id");
+
+
+          blockedResult(
+            "Support Worker cannot make assurance decision",
+            assuranceDecision
+          );
+        }
+
+
+        /* ====================================================
+           9. RBAC ROLE WRITE
+           ==================================================== */
+
+        const roleWrite =
+          await supabase
+            .from("roles")
+            .update({
+              role_name:
+                "RBAC FORBIDDEN TEST"
+            })
+            .eq(
+              "role_code",
+              "SUPPORT_WORKER"
+            )
+            .select("id");
+
+
+        addResult(
+          results,
+          "RBAC role modification blocked",
+          "BLOCK",
+          roleWrite.error
+            ? `BLOCKED: ${roleWrite.error.message}`
+            : `${roleWrite.data.length} changed row(s)`,
+          !!roleWrite.error ||
+          roleWrite.data.length === 0
+        );
+
+
+        /* ====================================================
+           10. IDENTITY VAULT WRITE
+           ==================================================== */
+
+        const vaultWrite =
+          await supabase
+            .from("veteran_identity_vault")
+            .update({
+              updated_at:
+                new Date().toISOString()
+            })
+            .eq(
+              "veteran_id",
+              VETERAN_SITE_1
+            )
+            .select("*");
+
+
+        addResult(
+          results,
+          "Identity vault modification blocked",
+          "BLOCK",
+          vaultWrite.error
+            ? `BLOCKED: ${vaultWrite.error.message}`
+            : `${vaultWrite.data.length} changed row(s)`,
+          !!vaultWrite.error ||
+          vaultWrite.data.length === 0
+        );
+
+
+      } catch (error) {
+
+        addResult(
+          results,
+          "Forbidden-write harness execution",
+          "NO HARNESS ERROR",
+          error.message,
+          false
+        );
+      }
+
+
+      render(results);
+
+      writeButton.disabled = false;
+    }
+
+
+    writeButton.addEventListener(
+      "click",
+      runForbiddenWriteTests
+    );
 
 
     button.addEventListener(
