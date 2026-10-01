@@ -102,6 +102,10 @@
   RUN FORBIDDEN WRITE TESTS 😈
 </button>
 
+    <button id="run-allowed-write-tests">
+  RUN ALLOWED WRITE TESTS ✅
+</button>
+
     <div id="summary" class="waiting">
       Waiting to run.
     </div>
@@ -961,6 +965,338 @@
 
       writeButton.disabled = false;
     }
+
+        /* ========================================================
+       VB RBAC v1 — CHUNK 7F
+       ALLOWED WRITE TESTS
+
+       These actions SHOULD succeed for the authenticated
+       Support Worker.
+
+       DEV FICTIONAL DATA ONLY.
+       ======================================================== */
+
+    const allowedWriteButton =
+      document.getElementById(
+        "run-allowed-write-tests"
+      );
+
+
+    async function runAllowedWriteTests() {
+
+      allowedWriteButton.disabled = true;
+
+      summary.textContent =
+        "Testing authorised Support Worker actions...";
+
+      summary.className =
+        "waiting";
+
+      tbody.innerHTML = "";
+
+      const results = [];
+
+
+      const TEST_VETERAN =
+        "7e000001-0000-4000-8000-000000000001";
+
+      const TEST_CASE =
+        "7e000002-0000-4000-8000-000000000001";
+
+
+      try {
+
+        /* ====================================================
+           1. CREATE AUTHORISED CASE NOTE
+           ==================================================== */
+
+        const noteInsert =
+          await supabase
+            .from("case_notes")
+            .insert({
+              case_id: TEST_CASE,
+              veteran_id: TEST_VETERAN,
+
+              recorded_by_staff_id:
+                STAFF_ID,
+
+              contact_type: "internal",
+
+              contact_outcome:
+                "not_applicable",
+
+              note_title:
+                "RBAC 7F DEV authorised note",
+
+              note_body:
+                "Fictional DEV-only authorised-write test.",
+
+              follow_up_required: false
+            })
+            .select(
+              "id,recorded_by_staff_id,note_title"
+            )
+            .single();
+
+
+        addResult(
+          results,
+          "Support Worker can create case note",
+          "ALLOW",
+          noteInsert.error
+            ? noteInsert.error.message
+            : "CREATED",
+          !noteInsert.error &&
+          !!noteInsert.data
+        );
+
+
+        /* ====================================================
+           2. CASE NOTE ATTRIBUTED TO REAL STAFF ID
+           ==================================================== */
+
+        addResult(
+          results,
+          "Case note attributed to authenticated staff",
+          STAFF_ID,
+          noteInsert.error
+            ? "INSERT FAILED"
+            : noteInsert.data
+                ?.recorded_by_staff_id ||
+              "NO ACTOR",
+          !noteInsert.error &&
+          noteInsert.data
+            ?.recorded_by_staff_id ===
+              STAFF_ID
+        );
+
+
+        /* ====================================================
+           3. CREATE AUTHORISED REFERRAL
+           ==================================================== */
+
+        const referralInsert =
+          await supabase
+            .from("referrals")
+            .insert({
+              case_id: TEST_CASE,
+
+              veteran_id:
+                TEST_VETERAN,
+
+              created_by_staff_id:
+                STAFF_ID,
+
+              assigned_to_staff_id:
+                STAFF_ID,
+
+              destination_name:
+                "RBAC 7F DEV TEST DESTINATION",
+
+              referral_purpose:
+                "RBAC 7F AUTHORISED WRITE TEST",
+
+              referral_status:
+                "identified",
+
+              consent_confirmed:
+                true
+            })
+            .select(
+              "id,created_by_staff_id,referral_status"
+            )
+            .single();
+
+
+        addResult(
+          results,
+          "Support Worker can create referral",
+          "ALLOW",
+          referralInsert.error
+            ? referralInsert.error.message
+            : "CREATED",
+          !referralInsert.error &&
+          !!referralInsert.data
+        );
+
+
+        /* ====================================================
+           4. REFERRAL ATTRIBUTED TO REAL STAFF ID
+           ==================================================== */
+
+        addResult(
+          results,
+          "Referral attributed to authenticated staff",
+          STAFF_ID,
+          referralInsert.error
+            ? "INSERT FAILED"
+            : referralInsert.data
+                ?.created_by_staff_id ||
+              "NO ACTOR",
+          !referralInsert.error &&
+          referralInsert.data
+            ?.created_by_staff_id ===
+              STAFF_ID
+        );
+
+
+        /* ====================================================
+           5. NORMAL CASE UPDATE
+
+           No significant authority action:
+           - no assignment change
+           - no close
+           - no reopen
+           ==================================================== */
+
+        const caseUpdate =
+          await supabase
+            .from("cases")
+            .update({
+              case_status:
+                "transition"
+            })
+            .eq(
+              "id",
+              TEST_CASE
+            )
+            .select(
+              "id,case_status"
+            )
+            .single();
+
+
+        addResult(
+          results,
+          "Support Worker can make permitted case update",
+          "transition",
+          caseUpdate.error
+            ? caseUpdate.error.message
+            : caseUpdate.data
+                ?.case_status ||
+              "NO ROW",
+          !caseUpdate.error &&
+          caseUpdate.data
+            ?.case_status ===
+              "transition"
+        );
+
+
+        /* ====================================================
+           6. RETURN TEST CASE TO OPEN
+
+           Still an ordinary CASE_UPDATE rather than reopening
+           a CLOSED case.
+           ==================================================== */
+
+        const caseRestore =
+          await supabase
+            .from("cases")
+            .update({
+              case_status:
+                "open"
+            })
+            .eq(
+              "id",
+              TEST_CASE
+            )
+            .select(
+              "id,case_status"
+            )
+            .single();
+
+
+        addResult(
+          results,
+          "Permitted case update persists correctly",
+          "open",
+          caseRestore.error
+            ? caseRestore.error.message
+            : caseRestore.data
+                ?.case_status ||
+              "NO ROW",
+          !caseRestore.error &&
+          caseRestore.data
+            ?.case_status ===
+              "open"
+        );
+
+
+        /* ====================================================
+           7. UPDATE OWN-SCOPE REFERRAL
+
+           Ordinary REFERRAL_UPDATE only.
+           ==================================================== */
+
+        if (
+          referralInsert.error ||
+          !referralInsert.data
+        ) {
+
+          addResult(
+            results,
+            "Support Worker can update referral",
+            "ALLOW",
+            "REFERRAL CREATION FAILED",
+            false
+          );
+
+        } else {
+
+          const referralUpdate =
+            await supabase
+              .from("referrals")
+              .update({
+                referral_purpose:
+                  "RBAC 7F AUTHORISED UPDATE TEST"
+              })
+              .eq(
+                "id",
+                referralInsert.data.id
+              )
+              .select(
+                "id,referral_purpose"
+              )
+              .single();
+
+
+          addResult(
+            results,
+            "Support Worker can update referral",
+            "ALLOW",
+            referralUpdate.error
+              ? referralUpdate.error.message
+              : "UPDATED",
+            !referralUpdate.error &&
+            referralUpdate.data
+              ?.referral_purpose ===
+                "RBAC 7F AUTHORISED UPDATE TEST"
+          );
+        }
+
+
+      } catch (error) {
+
+        addResult(
+          results,
+          "Allowed-write harness execution",
+          "NO HARNESS ERROR",
+          error.message,
+          false
+        );
+      }
+
+
+      render(results);
+
+      allowedWriteButton.disabled = false;
+    }
+
+
+    allowedWriteButton.addEventListener(
+      "click",
+      runAllowedWriteTests
+    );
 
 
     writeButton.addEventListener(
