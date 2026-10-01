@@ -1,0 +1,1199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>VB DOC-C2 Authenticated Test</title>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #111;
+      color: #fff;
+      padding: 30px;
+      margin: 0;
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin-bottom: 8px;
+    }
+
+    .warning {
+      background: #2a2100;
+      border: 1px solid #8b7200;
+      padding: 16px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+
+    button {
+      padding: 14px 22px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      margin-bottom: 20px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #1c1c1c;
+    }
+
+    th, td {
+      padding: 11px;
+      border: 1px solid #444;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #292929;
+    }
+
+    .pass {
+      color: #69e58c;
+      font-weight: bold;
+    }
+
+    .fail {
+      color: #ff7070;
+      font-weight: bold;
+    }
+
+    #summary {
+      font-size: 20px;
+      font-weight: bold;
+      margin: 20px 0;
+    }
+
+    code {
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+  <h1>VB DOC-C2</h1>
+  <p>Authenticated Document Governance Test</p>
+
+  <div class="warning">
+    DEV TEST ONLY. Uses the currently logged-in Supabase user.
+    Any successfully created DOC-C2 fixture is cleaned up by changing
+    its lifecycle state rather than attempting forbidden deletion.
+  </div>
+
+  <button id="runTest">RUN DOC-C2</button>
+
+  <div id="summary">Waiting to run…</div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Test</th>
+        <th>Expected</th>
+        <th>Actual</th>
+        <th>Result</th>
+      </tr>
+    </thead>
+
+    <tbody id="results"></tbody>
+  </table>
+
+</div>
+
+
+<script type="module">
+
+import { supabase } from "./js/supabase-client.js";
+
+const EXPECTED_AUTH_USER =
+  "4f72cbe3-8b73-45c7-a2d7-2d5484bdfb5e";
+
+const EXPECTED_STAFF =
+  "692a00f9-5944-46b0-9efe-e4eccabc21e2";
+
+const EXPECTED_ORG =
+  "71c87b5e-f84f-4e9b-b167-d48745fc838c";
+
+const EXPECTED_SITE =
+  "b7129ac5-924c-46fb-9e84-79274064f318";
+
+
+const results = [];
+
+function addResult(number, name, expected, actual, passed) {
+
+  results.push({
+    number,
+    name,
+    expected,
+    actual,
+    result: passed ? "PASS" : "FAIL"
+  });
+
+}
+
+
+function renderResults() {
+
+  const tbody =
+    document.getElementById("results");
+
+  tbody.innerHTML = "";
+
+  for (const row of results) {
+
+    const tr =
+      document.createElement("tr");
+
+    tr.innerHTML = `
+      <td>${row.number}</td>
+      <td>${escapeHtml(row.name)}</td>
+      <td>${escapeHtml(row.expected)}</td>
+      <td><code>${escapeHtml(row.actual)}</code></td>
+      <td class="${row.result === "PASS" ? "pass" : "fail"}">
+        ${row.result}
+      </td>
+    `;
+
+    tbody.appendChild(tr);
+  }
+
+
+  const passed =
+    results.filter(r => r.result === "PASS").length;
+
+  const total =
+    results.length;
+
+  const summary =
+    document.getElementById("summary");
+
+  summary.textContent =
+    `${passed}/${total} PASS`;
+
+  summary.className =
+    passed === total ? "pass" : "fail";
+}
+
+
+function escapeHtml(value) {
+
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+
+function errorText(error) {
+
+  if (!error) return "NO ERROR";
+
+  return [
+    error.code,
+    error.message,
+    error.details,
+    error.hint
+  ]
+    .filter(Boolean)
+    .join(" | ");
+}
+
+
+async function runTests() {
+
+  results.length = 0;
+
+  document.getElementById("summary").textContent =
+    "Running DOC-C2…";
+
+
+  // ==========================================================
+  // TEST 1
+  // REAL AUTH SESSION
+  // ==========================================================
+
+  const {
+    data: sessionData,
+    error: sessionError
+  } = await supabase.auth.getSession();
+
+  const user =
+    sessionData?.session?.user ?? null;
+
+  addResult(
+    1,
+    "Authenticated Supabase session exists",
+    "SIGNED IN",
+    sessionError
+      ? errorText(sessionError)
+      : user
+        ? "SIGNED IN"
+        : "NOT SIGNED IN",
+    !sessionError && !!user
+  );
+
+
+  // ==========================================================
+  // TEST 2
+  // EXPECTED PERMANENT AUTH UUID
+  // ==========================================================
+
+  addResult(
+    2,
+    "Authenticated DEV Auth UUID",
+    EXPECTED_AUTH_USER,
+    user?.id ?? "NULL",
+    user?.id === EXPECTED_AUTH_USER
+  );
+
+
+  if (!user) {
+
+    renderResults();
+    return;
+  }
+
+
+  // ==========================================================
+  // TEST 3
+  // OWN STAFF PROFILE THROUGH RLS
+  // ==========================================================
+
+  const {
+    data: staff,
+    error: staffError
+  } = await supabase
+    .from("staff_profiles")
+    .select(`
+      id,
+      auth_user_id,
+      organisation_id,
+      primary_site_id,
+      staff_code,
+      display_name,
+      is_active
+    `)
+    .eq("auth_user_id", user.id)
+    .maybeSingle();
+
+
+  addResult(
+    3,
+    "Authenticated user resolves to active staff profile",
+    EXPECTED_STAFF,
+    staffError
+      ? errorText(staffError)
+      : staff?.id ?? "NULL",
+    !staffError &&
+    staff?.id === EXPECTED_STAFF &&
+    staff?.is_active === true
+  );
+
+
+  if (!staff) {
+
+    renderResults();
+    return;
+  }
+
+
+  // ==========================================================
+  // TEST 4
+  // ORGANISATION SCOPE
+  // ==========================================================
+
+  addResult(
+    4,
+    "Staff organisation scope",
+    EXPECTED_ORG,
+    staff.organisation_id ?? "NULL",
+    staff.organisation_id === EXPECTED_ORG
+  );
+
+
+  // ==========================================================
+  // TEST 5
+  // SITE SCOPE
+  // ==========================================================
+
+  addResult(
+    5,
+    "Staff primary site scope",
+    EXPECTED_SITE,
+    staff.primary_site_id ?? "NULL",
+    staff.primary_site_id === EXPECTED_SITE
+  );
+
+
+  // ==========================================================
+  // TEST 6
+  // DOCUMENT READ ACCESS
+  // ==========================================================
+
+  const {
+    error: documentReadError
+  } = await supabase
+    .from("documents")
+    .select("id")
+    .limit(1);
+
+
+  addResult(
+    6,
+    "Support Worker can execute permitted document read",
+    "ALLOWED",
+    documentReadError
+      ? errorText(documentReadError)
+      : "ALLOWED",
+    !documentReadError
+  );
+
+
+  // ==========================================================
+  // TEST 7
+  // DOCUMENT HISTORY READ
+  // ==========================================================
+
+  const {
+    error: historyReadError
+  } = await supabase
+    .from("document_events")
+    .select("id")
+    .limit(1);
+
+
+  addResult(
+    7,
+    "Support Worker can execute permitted document history read",
+    "ALLOWED",
+    historyReadError
+      ? errorText(historyReadError)
+      : "ALLOWED",
+    !historyReadError
+  );
+
+
+  // ==========================================================
+  // TEST 8
+  // FALSE CREATOR ATTRIBUTION
+  // MUST FAIL
+  // ==========================================================
+
+  const fakeStaff =
+    crypto.randomUUID();
+
+  const {
+    data: fakeCreatorData,
+    error: fakeCreatorError
+  } = await supabase
+    .from("documents")
+    .insert({
+      organisation_id: EXPECTED_ORG,
+      site_id: EXPECTED_SITE,
+
+      context_type: "governance",
+      context_id: null,
+
+      document_title:
+        "DOC-C2 INVALID FALSE ACTOR",
+
+      document_description:
+        "Must never be created.",
+
+      document_category:
+        "governance",
+
+      classification:
+        "internal",
+
+      document_status:
+        "active",
+
+      owner_staff_id:
+        EXPECTED_STAFF,
+
+      created_by_staff_id:
+        fakeStaff,
+
+      required_document:
+        false
+    })
+    .select("id");
+
+
+  addResult(
+    8,
+    "False creator attribution blocked",
+    "BLOCKED",
+    fakeCreatorError
+      ? "BLOCKED"
+      : "ALLOWED",
+    !!fakeCreatorError &&
+    (!fakeCreatorData || fakeCreatorData.length === 0)
+  );
+
+
+  // ==========================================================
+  // TEST 9
+  // INVALID REQUIRED DOCUMENT
+  // MUST FAIL
+  // ==========================================================
+
+  const {
+    data: missingReasonData,
+    error: missingReasonError
+  } = await supabase
+    .from("documents")
+    .insert({
+      organisation_id: EXPECTED_ORG,
+      site_id: EXPECTED_SITE,
+
+      context_type: "governance",
+      context_id: null,
+
+      document_title:
+        "DOC-C2 INVALID REQUIRED REASON",
+
+      document_description:
+        "Must never be created.",
+
+      document_category:
+        "governance",
+
+      classification:
+        "internal",
+
+      document_status:
+        "active",
+
+      owner_staff_id:
+        EXPECTED_STAFF,
+
+      created_by_staff_id:
+        EXPECTED_STAFF,
+
+      required_document:
+        true,
+
+      required_reason:
+        null
+    })
+    .select("id");
+
+
+  addResult(
+    9,
+    "Required document without reason blocked",
+    "BLOCKED",
+    missingReasonError
+      ? "BLOCKED"
+      : "ALLOWED",
+    !!missingReasonError &&
+    (!missingReasonData || missingReasonData.length === 0)
+  );
+
+
+  // ==========================================================
+  // TEST 10
+  // INVALID RESTRICTED DOCUMENT
+  // MUST FAIL
+  // ==========================================================
+
+  const {
+    data: restrictedData,
+    error: restrictedError
+  } = await supabase
+    .from("documents")
+    .insert({
+      organisation_id: EXPECTED_ORG,
+      site_id: EXPECTED_SITE,
+
+      context_type: "governance",
+      context_id: null,
+
+      document_title:
+        "DOC-C2 INVALID RESTRICTED REASON",
+
+      document_description:
+        "Must never be created.",
+
+      document_category:
+        "governance",
+
+      classification:
+        "restricted",
+
+      document_status:
+        "active",
+
+      owner_staff_id:
+        EXPECTED_STAFF,
+
+      created_by_staff_id:
+        EXPECTED_STAFF,
+
+      required_document:
+        false,
+
+      sensitivity_reason:
+        null
+    })
+    .select("id");
+
+
+  addResult(
+    10,
+    "Restricted document without sensitivity reason blocked",
+    "BLOCKED",
+    restrictedError
+      ? "BLOCKED"
+      : "ALLOWED",
+    !!restrictedError &&
+    (!restrictedData || restrictedData.length === 0)
+  );
+
+
+  // ==========================================================
+  // TEST 11
+  // VALID DOCUMENT CREATE
+  //
+  // This tells us whether SUPPORT_WORKER genuinely has
+  // DOCUMENT_CREATE in the live browser context.
+  // ==========================================================
+
+  const fixtureTitle =
+    `DOC-C2 TEST ${Date.now()}`;
+
+  const {
+    data: createdDocument,
+    error: createError
+  } = await supabase
+    .from("documents")
+    .insert({
+      organisation_id:
+        EXPECTED_ORG,
+
+      site_id:
+        EXPECTED_SITE,
+
+      context_type:
+        "governance",
+
+      context_id:
+        null,
+
+      document_title:
+        fixtureTitle,
+
+      document_description:
+        "Temporary authenticated DOC-C2 fixture.",
+
+      document_category:
+        "governance",
+
+      classification:
+        "internal",
+
+      document_status:
+        "active",
+
+      owner_staff_id:
+        EXPECTED_STAFF,
+
+      created_by_staff_id:
+        EXPECTED_STAFF,
+
+      required_document:
+        true,
+
+      required_reason:
+        "DOC-C2 authenticated integrity test.",
+
+      next_review_due_at:
+        new Date(
+          Date.now() - 86400000
+        ).toISOString()
+    })
+    .select(`
+      id,
+      document_title,
+      created_by_staff_id,
+      owner_staff_id,
+      organisation_id,
+      site_id
+    `)
+    .single();
+
+
+  addResult(
+    11,
+    "Valid document creation as authenticated Support Worker",
+    "ALLOWED",
+    createError
+      ? errorText(createError)
+      : "ALLOWED",
+    !createError &&
+    !!createdDocument?.id
+  );
+
+
+  const documentId =
+    createdDocument?.id ?? null;
+
+
+  // ==========================================================
+  // TEST 12
+  // CREATED ACTOR ATTRIBUTION
+  // ==========================================================
+
+  addResult(
+    12,
+    "Created document permanently attributed to logged-in staff",
+    EXPECTED_STAFF,
+    createdDocument?.created_by_staff_id ?? "NO DOCUMENT",
+    !!documentId &&
+    createdDocument.created_by_staff_id === EXPECTED_STAFF
+  );
+
+
+  // ==========================================================
+  // TEST 13
+  // DIRECT DELETE MUST FAIL
+  // ==========================================================
+
+  if (documentId) {
+
+    const {
+      error: deleteError
+    } = await supabase
+      .from("documents")
+      .delete()
+      .eq("id", documentId);
+
+
+    addResult(
+      13,
+      "Authenticated direct document deletion blocked",
+      "BLOCKED",
+      deleteError
+        ? "BLOCKED"
+        : "NO ERROR",
+      !!deleteError
+    );
+
+  } else {
+
+    addResult(
+      13,
+      "Authenticated direct document deletion blocked",
+      "BLOCKED",
+      "NOT TESTED — FIXTURE CREATE FAILED",
+      false
+    );
+  }
+
+
+  // ==========================================================
+  // TEST 14
+  // DIRECT EVENT INSERT MUST FAIL
+  // ==========================================================
+
+  if (documentId) {
+
+    const {
+      error: eventInsertError
+    } = await supabase
+      .from("document_events")
+      .insert({
+        document_id:
+          documentId,
+
+        document_version_id:
+          null,
+
+        event_type:
+          "DOC_C2_ILLEGAL_BROWSER_EVENT",
+
+        event_summary:
+          "This direct browser event must not be accepted.",
+
+        authority_used:
+          "DOCUMENT_MANAGE",
+
+        actor_staff_id:
+          EXPECTED_STAFF,
+
+        organisation_id:
+          EXPECTED_ORG,
+
+        site_id:
+          EXPECTED_SITE
+      });
+
+
+    addResult(
+      14,
+      "Direct browser write to immutable document history blocked",
+      "BLOCKED",
+      eventInsertError
+        ? "BLOCKED"
+        : "ALLOWED",
+      !!eventInsertError
+    );
+
+  } else {
+
+    addResult(
+      14,
+      "Direct browser write to immutable document history blocked",
+      "BLOCKED",
+      "NOT TESTED — FIXTURE CREATE FAILED",
+      false
+    );
+  }
+
+
+  // ==========================================================
+  // TEST 15
+  // FALSE REVIEW ACTOR
+  // MUST FAIL
+  // ==========================================================
+
+  if (documentId) {
+
+    const {
+      error: fakeReviewError
+    } = await supabase
+      .from("documents")
+      .update({
+        last_reviewed_at:
+          new Date().toISOString(),
+
+        last_reviewed_by_staff_id:
+          crypto.randomUUID()
+      })
+      .eq("id", documentId);
+
+
+    addResult(
+      15,
+      "False review attribution blocked",
+      "BLOCKED",
+      fakeReviewError
+        ? "BLOCKED"
+        : "ALLOWED",
+      !!fakeReviewError
+    );
+
+  } else {
+
+    addResult(
+      15,
+      "False review attribution blocked",
+      "BLOCKED",
+      "NOT TESTED — FIXTURE CREATE FAILED",
+      false
+    );
+  }
+
+
+  // ==========================================================
+  // TEST 16
+  // VERSION RPC EXISTS THROUGH AUTHENTICATED SESSION
+  //
+  // We deliberately supply a fictional storage reference.
+  // The database is testing governance metadata here,
+  // not uploading a real file.
+  // ==========================================================
+
+  let versionId = null;
+
+  if (documentId) {
+
+    const {
+      data: versionData,
+      error: versionError
+    } = await supabase.rpc(
+      "create_document_version",
+      {
+        p_document_id:
+          documentId,
+
+        p_original_file_name:
+          "doc-c2-test.pdf",
+
+        p_storage_bucket:
+          "doc-c2-test",
+
+        p_storage_path:
+          `fictional/${documentId}/doc-c2-test.pdf`,
+
+        p_mime_type:
+          "application/pdf",
+
+        p_file_size_bytes:
+          100,
+
+        p_file_checksum:
+          "DOC-C2-FICTIONAL-CHECKSUM",
+
+        p_version_summary:
+          "Authenticated DOC-C2 version test.",
+
+        p_supersession_reason:
+          "DOC-C2 test."
+      }
+    );
+
+
+    if (
+      typeof versionData === "string"
+    ) {
+      versionId = versionData;
+    }
+
+    else if (
+      versionData &&
+      typeof versionData === "object" &&
+      !Array.isArray(versionData)
+    ) {
+      versionId =
+        versionData.id ??
+        versionData.document_version_id ??
+        versionData.version_id ??
+        null;
+    }
+
+    else if (
+      Array.isArray(versionData) &&
+      versionData.length
+    ) {
+      versionId =
+        versionData[0]?.id ??
+        versionData[0]?.document_version_id ??
+        versionData[0]?.version_id ??
+        null;
+    }
+
+
+    addResult(
+      16,
+      "Controlled authenticated document-version RPC executes",
+      "ALLOWED",
+      versionError
+        ? errorText(versionError)
+        : "ALLOWED",
+      !versionError
+    );
+
+  } else {
+
+    addResult(
+      16,
+      "Controlled authenticated document-version RPC executes",
+      "ALLOWED",
+      "NOT TESTED — FIXTURE CREATE FAILED",
+      false
+    );
+  }
+
+
+  // ==========================================================
+  // TEST 17
+  // DOCUMENT NOW HAS CURRENT VERSION
+  // ==========================================================
+
+  if (documentId) {
+
+    const {
+      data: refreshedDocument,
+      error: refreshError
+    } = await supabase
+      .from("documents")
+      .select("current_version_id")
+      .eq("id", documentId)
+      .single();
+
+
+    const currentVersion =
+      refreshedDocument?.current_version_id ?? null;
+
+
+    if (!versionId) {
+      versionId = currentVersion;
+    }
+
+
+    addResult(
+      17,
+      "Atomic version route updates current-version pointer",
+      "CURRENT VERSION PRESENT",
+      refreshError
+        ? errorText(refreshError)
+        : currentVersion
+          ? "CURRENT VERSION PRESENT"
+          : "NULL",
+      !refreshError &&
+      !!currentVersion
+    );
+
+  } else {
+
+    addResult(
+      17,
+      "Atomic version route updates current-version pointer",
+      "CURRENT VERSION PRESENT",
+      "NOT TESTED — FIXTURE CREATE FAILED",
+      false
+    );
+  }
+
+
+  // ==========================================================
+  // TEST 18
+  // DIRECT VERSION DELETE MUST FAIL
+  // ==========================================================
+
+  if (versionId) {
+
+    const {
+      error: versionDeleteError
+    } = await supabase
+      .from("document_versions")
+      .delete()
+      .eq("id", versionId);
+
+
+    addResult(
+      18,
+      "Authenticated direct version deletion blocked",
+      "BLOCKED",
+      versionDeleteError
+        ? "BLOCKED"
+        : "NO ERROR",
+      !!versionDeleteError
+    );
+
+  } else {
+
+    addResult(
+      18,
+      "Authenticated direct version deletion blocked",
+      "BLOCKED",
+      "NOT TESTED — NO VERSION ID",
+      false
+    );
+  }
+
+
+  // ==========================================================
+  // TEST 19
+  // SYSTEM EVALUATOR MUST NOT BE CALLABLE BY BROWSER
+  // ==========================================================
+
+  const {
+    error: evaluatorError
+  } = await supabase.rpc(
+    "evaluate_document_controls"
+  );
+
+
+  addResult(
+    19,
+    "Authenticated browser cannot execute system evaluator",
+    "BLOCKED",
+    evaluatorError
+      ? "BLOCKED"
+      : "ALLOWED",
+    !!evaluatorError
+  );
+
+
+  // ==========================================================
+  // TEST 20
+  // AUDIT HISTORY SHOULD EXIST FOR VALID DOCUMENT
+  // ==========================================================
+
+  if (documentId) {
+
+    const {
+      data: events,
+      error: eventsError
+    } = await supabase
+      .from("document_events")
+      .select(`
+        id,
+        event_type,
+        actor_staff_id
+      `)
+      .eq("document_id", documentId);
+
+
+    const validEvents =
+      Array.isArray(events)
+        ? events
+        : [];
+
+
+    const actorMismatch =
+      validEvents.some(
+        event =>
+          event.actor_staff_id !== EXPECTED_STAFF
+      );
+
+
+    addResult(
+      20,
+      "Authenticated document actions produce attributable history",
+      "HISTORY + CORRECT ACTOR",
+      eventsError
+        ? errorText(eventsError)
+        : `${validEvents.length} EVENT(S)`,
+      !eventsError &&
+      validEvents.length > 0 &&
+      !actorMismatch
+    );
+
+  } else {
+
+    addResult(
+      20,
+      "Authenticated document actions produce attributable history",
+      "HISTORY + CORRECT ACTOR",
+      "NOT TESTED — FIXTURE CREATE FAILED",
+      false
+    );
+  }
+
+
+  // ==========================================================
+  // TEST 21
+  // CLEANUP BY LIFECYCLE, NOT DELETE
+  //
+  // This is deliberate:
+  // our architecture says records are not silently deleted.
+  // ==========================================================
+
+  if (documentId) {
+
+    const {
+      error: archiveError
+    } = await supabase
+      .from("documents")
+      .update({
+        document_status:
+          "archived",
+
+        archived_at:
+          new Date().toISOString(),
+
+        archived_by_staff_id:
+          EXPECTED_STAFF,
+
+        lifecycle_reason:
+          "DOC-C2 authenticated test fixture retired after successful test."
+      })
+      .eq("id", documentId);
+
+
+    addResult(
+      21,
+      "DOC-C2 fixture retired through controlled lifecycle",
+      "ARCHIVED",
+      archiveError
+        ? errorText(archiveError)
+        : "ARCHIVED",
+      !archiveError
+    );
+
+  } else {
+
+    addResult(
+      21,
+      "DOC-C2 fixture retired through controlled lifecycle",
+      "ARCHIVED",
+      "NO FIXTURE CREATED",
+      true
+    );
+  }
+
+
+  // ==========================================================
+  // TEST 22
+  // VERIFY RETIRED RECORD REMAINS AS HISTORY
+  // ==========================================================
+
+  if (documentId) {
+
+    const {
+      data: archived,
+      error: archivedError
+    } = await supabase
+      .from("documents")
+      .select(`
+        id,
+        document_status,
+        archived_at,
+        archived_by_staff_id,
+        lifecycle_reason
+      `)
+      .eq("id", documentId)
+      .single();
+
+
+    addResult(
+      22,
+      "Retired test record preserved with lifecycle evidence",
+      "ARCHIVED + ATTRIBUTED",
+      archivedError
+        ? errorText(archivedError)
+        : archived?.document_status ?? "NULL",
+      !archivedError &&
+      archived?.document_status === "archived" &&
+      !!archived?.archived_at &&
+      archived?.archived_by_staff_id === EXPECTED_STAFF &&
+      !!archived?.lifecycle_reason
+    );
+
+  } else {
+
+    addResult(
+      22,
+      "Retired test record preserved with lifecycle evidence",
+      "ARCHIVED + ATTRIBUTED",
+      "NO FIXTURE CREATED",
+      true
+    );
+  }
+
+
+  renderResults();
+}
+
+
+document
+  .getElementById("runTest")
+  .addEventListener(
+    "click",
+    runTests
+  );
+
+</script>
+
+</body>
+</html>
