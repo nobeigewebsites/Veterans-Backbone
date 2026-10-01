@@ -3,7 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>VB REF-6B Test</title>
+
+  <title>VB REF-6B Authenticated Test</title>
 
   <style>
     body {
@@ -15,39 +16,65 @@
       color: #eee;
     }
 
+    h1 {
+      margin-bottom: 6px;
+    }
+
+    .sub {
+      opacity: 0.8;
+      margin-bottom: 20px;
+    }
+
     button {
       padding: 12px 18px;
+      font-size: 16px;
       cursor: pointer;
-      margin: 15px 0 25px;
+      margin: 10px 0 25px;
+    }
+
+    button:disabled {
+      cursor: not-allowed;
+      opacity: 0.6;
     }
 
     table {
       width: 100%;
       border-collapse: collapse;
+      background: #1c1c1c;
     }
 
-    th, td {
+    th,
+    td {
       border: 1px solid #444;
       padding: 10px;
       text-align: left;
       vertical-align: top;
     }
 
-    #summary {
-      margin-top: 20px;
-      padding: 15px;
-      background: #1c1c1c;
+    .PASS {
       font-weight: bold;
     }
 
-    .PASS { font-weight: bold; }
-    .FAIL { font-weight: bold; }
-    .INFO { font-weight: bold; }
+    .FAIL {
+      font-weight: bold;
+    }
+
+    .INFO {
+      font-weight: bold;
+    }
 
     pre {
       white-space: pre-wrap;
       word-break: break-word;
       margin: 0;
+    }
+
+    #summary {
+      margin-top: 20px;
+      padding: 16px;
+      background: #1c1c1c;
+      font-size: 18px;
+      font-weight: bold;
     }
   </style>
 </head>
@@ -56,9 +83,14 @@
 
   <h1>REF-6B — Authenticated Browser Assault</h1>
 
-  <p>DEV only. Read-only authenticated boundary test.</p>
+  <div class="sub">
+    DEV only. Read-only authenticated boundary test.
+    No genuine case or referral records are changed.
+  </div>
 
-  <button id="runBtn" disabled>Loading test harness...</button>
+  <button id="runBtn" disabled>
+    Loading test harness...
+  </button>
 
   <table>
     <thead>
@@ -73,12 +105,16 @@
     <tbody id="results"></tbody>
   </table>
 
-  <div id="summary">Initialising...</div>
+  <div id="summary">
+    Initialising...
+  </div>
 
 
   <script type="module">
 
-    const results = [];
+    // ========================================================
+    // EXPECTED DEV IDENTITY
+    // ========================================================
 
     const EXPECTED_AUTH_UID =
       "4f72cbe3-8b73-45c7-a2d7-2d5484bdfb5e";
@@ -90,23 +126,41 @@
       "b7129ac5-924c-46fb-9e84-79274064f318";
 
 
-    function add(number, test, result, evidence = "") {
+    const results = [];
+
+    let supabase;
+
+
+    // ========================================================
+    // DISPLAY HELPERS
+    // ========================================================
+
+    function add(
+      number,
+      test,
+      result,
+      evidence = ""
+    ) {
+
       results.push({
         number,
         test,
         result,
         evidence
       });
+
     }
 
 
-    function esc(value) {
+    function escapeHtml(value) {
+
       return String(value ?? "")
         .replaceAll("&", "&amp;")
         .replaceAll("<", "&lt;")
         .replaceAll(">", "&gt;")
         .replaceAll('"', "&quot;")
         .replaceAll("'", "&#039;");
+
     }
 
 
@@ -115,64 +169,83 @@
       const tbody =
         document.getElementById("results");
 
-      tbody.innerHTML = results.map(row => `
-        <tr>
-          <td>${row.number}</td>
-          <td>${esc(row.test)}</td>
-          <td class="${esc(row.result)}">
-            ${esc(row.result)}
-          </td>
-          <td>
-            <pre>${esc(row.evidence)}</pre>
-          </td>
-        </tr>
-      `).join("");
+      tbody.innerHTML =
+        results.map(row => `
+          <tr>
+            <td>${row.number}</td>
+
+            <td>
+              ${escapeHtml(row.test)}
+            </td>
+
+            <td class="${escapeHtml(row.result)}">
+              ${escapeHtml(row.result)}
+            </td>
+
+            <td>
+              <pre>${escapeHtml(row.evidence)}</pre>
+            </td>
+          </tr>
+        `).join("");
 
 
       const pass =
-        results.filter(r => r.result === "PASS").length;
+        results.filter(
+          row => row.result === "PASS"
+        ).length;
 
       const fail =
-        results.filter(r => r.result === "FAIL").length;
+        results.filter(
+          row => row.result === "FAIL"
+        ).length;
 
       const info =
-        results.filter(r => r.result === "INFO").length;
+        results.filter(
+          row => row.result === "INFO"
+        ).length;
 
 
-      document.getElementById("summary").textContent =
+      document.getElementById(
+        "summary"
+      ).textContent =
         `PASS=${pass} | FAIL=${fail} | INFO=${info} | TOTAL=${results.length}`;
+
     }
 
 
-    let supabase;
+    // ========================================================
+    // LOAD ACTUAL SHARED VB SUPABASE CLIENT
+    // ========================================================
 
-
-    /*
-     * IMPORT THE ACTUAL VB SHARED CLIENT.
-     *
-     * Dynamic import lets us catch a loading failure and
-     * display it on screen rather than leaving a dead button.
-     */
     try {
 
       const module =
-        await import("./js/supabase-client.js");
+        await import(
+          "./js/supabase-client.js"
+        );
 
       supabase = module.supabase;
 
+
       if (!supabase) {
+
         throw new Error(
-          "Module loaded but did not export supabase."
+          "supabase-client.js loaded but did not export supabase."
         );
+
       }
 
 
-      document.getElementById("runBtn").disabled = false;
+      const button =
+        document.getElementById("runBtn");
 
-      document.getElementById("runBtn").textContent =
-        "Run REF-6B";
+      button.disabled = false;
+      button.textContent = "Run REF-6B";
 
-      document.getElementById("summary").textContent =
+
+      document.getElementById(
+        "summary"
+      ).textContent =
         "Harness loaded. Ready to test.";
 
 
@@ -186,29 +259,42 @@
       );
 
       render();
+
     }
 
+
+    // ========================================================
+    // TEST RUNNER
+    // ========================================================
 
     async function runTests() {
 
       results.length = 0;
 
+
+      // ======================================================
+      // 1 — SHARED CLIENT
+      // ======================================================
+
       add(
         1,
         "Shared Supabase client loaded",
-        "PASS",
-        "Imported from ./js/supabase-client.js"
+        supabase ? "PASS" : "FAIL",
+        supabase
+          ? "Imported from ./js/supabase-client.js"
+          : "Shared client unavailable"
       );
 
 
       // ======================================================
-      // AUTH SESSION
+      // 2 — AUTH SESSION
       // ======================================================
 
       const {
         data: sessionData,
         error: sessionError
-      } = await supabase.auth.getSession();
+      } =
+        await supabase.auth.getSession();
 
 
       if (sessionError) {
@@ -221,12 +307,17 @@
         );
 
         render();
+
         return;
+
       }
 
 
-      const session = sessionData?.session;
-      const user = session?.user;
+      const session =
+        sessionData?.session;
+
+      const user =
+        session?.user;
 
 
       add(
@@ -235,15 +326,22 @@
         session ? "PASS" : "FAIL",
         session
           ? `Authenticated as ${user.email}`
-          : "No active session"
+          : "No active authenticated session"
       );
 
 
       if (!session) {
+
         render();
+
         return;
+
       }
 
+
+      // ======================================================
+      // 3 — EXPECTED AUTH UID
+      // ======================================================
 
       add(
         3,
@@ -256,16 +354,16 @@
 
 
       // ======================================================
-      // RESOLVE STAFF THROUGH DATABASE FUNCTION
-      //
-      // We already know current_staff_id() is the canonical
-      // authenticated identity resolver used by VB.
+      // 4 — CANONICAL STAFF RESOLUTION
       // ======================================================
 
       const {
         data: currentStaffId,
         error: currentStaffError
-      } = await supabase.rpc("current_staff_id");
+      } =
+        await supabase.rpc(
+          "current_staff_id"
+        );
 
 
       add(
@@ -275,6 +373,7 @@
         currentStaffId === EXPECTED_STAFF_ID
           ? "PASS"
           : "FAIL",
+
         currentStaffError
           ? currentStaffError.message
           : `staff_id=${currentStaffId}`
@@ -282,21 +381,39 @@
 
 
       // ======================================================
-      // STAFF RECORD
+      // 5 — STAFF PROFILE
+      //
+      // ACTUAL VERIFIED TABLE:
+      // public.staff_profiles
       // ======================================================
 
       const {
         data: staffRows,
         error: staffError
-      } = await supabase
-        .from("staff_profiles")
-        .select("*")
-        .eq("id", EXPECTED_STAFF_ID)
-        .limit(1);
+      } =
+        await supabase
+          .from("staff_profiles")
+          .select(`
+            id,
+            auth_user_id,
+            organisation_id,
+            primary_site_id,
+            primary_team_id,
+            staff_code,
+            display_name,
+            employment_type,
+            is_active
+          `)
+          .eq(
+            "id",
+            EXPECTED_STAFF_ID
+          )
+          .limit(1);
 
 
       const staff =
-        !staffError && staffRows?.length
+        !staffError &&
+        staffRows?.length
           ? staffRows[0]
           : null;
 
@@ -309,35 +426,31 @@
           : staff
             ? "PASS"
             : "FAIL",
+
         staffError
           ? staffError.message
           : staff
             ? `${staff.display_name} / ${staff.staff_code}`
-            : "Expected staff record not visible"
+            : "Expected staff profile not visible"
       );
 
 
+      // ======================================================
+      // 6 — STAFF ACTIVE
+      //
+      // ACTUAL VERIFIED COLUMN:
+      // is_active
+      // ======================================================
+
       if (staff) {
 
-        
-       add(
-  6,
-  "Staff identity active",
-  staff.is_active === true
-    ? "PASS"
-    : "FAIL",
-  `is_active=${staff.is_active}`
-);
-
-
-       add(
-  7,
-  "Expected primary site scope",
-  staff.primary_site_id === EXPECTED_SITE_ID
-    ? "PASS"
-    : "FAIL",
-  `primary_site_id=${staff.primary_site_id}`
-);d=${staff.site_id}`
+        add(
+          6,
+          "Staff identity active",
+          staff.is_active === true
+            ? "PASS"
+            : "FAIL",
+          `is_active=${staff.is_active}`
         );
 
       } else {
@@ -346,60 +459,100 @@
           6,
           "Staff identity active",
           "INFO",
-          "Skipped because staff record unavailable"
+          "Skipped because staff profile unavailable"
         );
 
-        add(
-          7,
-          "Expected site scope",
-          "INFO",
-          "Skipped because staff record unavailable"
-        );
       }
 
 
       // ======================================================
-      // CASE READ
+      // 7 — PRIMARY SITE
+      //
+      // ACTUAL VERIFIED COLUMN:
+      // primary_site_id
+      // ======================================================
+
+      if (staff) {
+
+        add(
+          7,
+          "Expected primary site scope",
+          staff.primary_site_id ===
+            EXPECTED_SITE_ID
+            ? "PASS"
+            : "FAIL",
+
+          `primary_site_id=${staff.primary_site_id}`
+        );
+
+      } else {
+
+        add(
+          7,
+          "Expected primary site scope",
+          "INFO",
+          "Skipped because staff profile unavailable"
+        );
+
+      }
+
+
+      // ======================================================
+      // 8 — CASE READ
       // ======================================================
 
       const {
         data: cases,
         error: caseError
-      } = await supabase
-        .from("cases")
-        .select(
-          "id,case_code,case_status,veteran_id,site_id,assigned_staff_id"
-        )
-        .limit(20);
+      } =
+        await supabase
+          .from("cases")
+          .select(`
+            id,
+            case_code,
+            case_status,
+            veteran_id,
+            site_id,
+            assigned_staff_id
+          `)
+          .limit(20);
 
 
       add(
         8,
         "Permitted cases readable",
-        caseError ? "FAIL" : "PASS",
+        caseError
+          ? "FAIL"
+          : "PASS",
+
         caseError
           ? caseError.message
           : `visible_rows=${cases.length}`
       );
 
 
+      // ======================================================
+      // 9 — CASE SITE BOUNDARY
+      // ======================================================
+
       if (!caseError) {
 
-        const outside =
+        const outsideCases =
           cases.filter(
             row =>
               row.site_id &&
-              row.site_id !== EXPECTED_SITE_ID
+              row.site_id !==
+                EXPECTED_SITE_ID
           );
 
 
         add(
           9,
           "Visible cases remain within expected site",
-          outside.length === 0
+          outsideCases.length === 0
             ? "PASS"
             : "FAIL",
-          `out_of_scope_rows=${outside.length}`
+          `out_of_scope_rows=${outsideCases.length}`
         );
 
       } else {
@@ -408,51 +561,62 @@
           9,
           "Visible cases remain within expected site",
           "INFO",
-          "Case query failed"
+          "Case query unavailable"
         );
+
       }
 
 
       // ======================================================
-      // REFERRAL READ
+      // 10 — REFERRAL READ
       // ======================================================
 
       const {
         data: referrals,
         error: referralError
-      } = await supabase
-        .from("referrals")
-        .select("*")
-        .limit(20);
+      } =
+        await supabase
+          .from("referrals")
+          .select("*")
+          .limit(20);
 
 
       add(
         10,
         "Permitted referrals readable",
-        referralError ? "FAIL" : "PASS",
+        referralError
+          ? "FAIL"
+          : "PASS",
+
         referralError
           ? referralError.message
           : `visible_rows=${referrals.length}`
       );
 
 
+      // ======================================================
+      // 11 — REFERRAL SITE BOUNDARY
+      // ======================================================
+
       if (!referralError) {
 
-        const outside =
+        const outsideReferrals =
           referrals.filter(
             row =>
               row.site_id &&
-              row.site_id !== EXPECTED_SITE_ID
+              row.site_id !==
+                EXPECTED_SITE_ID
           );
 
 
         add(
           11,
           "Visible referrals remain within expected site",
-          outside.length === 0
+          outsideReferrals.length === 0
             ? "PASS"
             : "FAIL",
-          `out_of_scope_rows=${outside.length}`
+
+          `out_of_scope_rows=${outsideReferrals.length}`
         );
 
       } else {
@@ -461,28 +625,38 @@
           11,
           "Visible referrals remain within expected site",
           "INFO",
-          "Referral query failed"
+          "Referral query unavailable"
         );
+
       }
 
 
       // ======================================================
-      // CASE OPERATIONAL EXCEPTIONS
+      // 12 — CASE OPERATIONAL EXCEPTIONS
+      //
+      // View is security_invoker=true.
+      // Authenticated SELECT was verified/repaired.
       // ======================================================
 
       const {
         data: exceptions,
         error: exceptionError
-      } = await supabase
-        .from("case_operational_exceptions")
-        .select("*")
-        .limit(20);
+      } =
+        await supabase
+          .from(
+            "case_operational_exceptions"
+          )
+          .select("*")
+          .limit(20);
 
 
       add(
         12,
         "Case exception view respects authenticated access",
-        exceptionError ? "FAIL" : "PASS",
+        exceptionError
+          ? "FAIL"
+          : "PASS",
+
         exceptionError
           ? exceptionError.message
           : `visible_rows=${exceptions.length}`
@@ -490,20 +664,26 @@
 
 
       // ======================================================
-      // INTERNAL EVALUATOR MUST NOT BE CALLABLE
+      // 13 — INTERNAL EVALUATOR
+      //
+      // Browser MUST NOT execute this.
       // ======================================================
 
       const {
         error: evaluatorError
-      } = await supabase.rpc(
-        "evaluate_case_controls"
-      );
+      } =
+        await supabase.rpc(
+          "evaluate_case_controls"
+        );
 
 
       add(
         13,
         "Internal case evaluator blocked from browser",
-        evaluatorError ? "PASS" : "FAIL",
+        evaluatorError
+          ? "PASS"
+          : "FAIL",
+
         evaluatorError
           ? evaluatorError.message
           : "Evaluator unexpectedly executed"
@@ -511,22 +691,29 @@
 
 
       // ======================================================
-      // CASE TIMELINE
+      // 14 — CASE TIMELINE
+      //
+      // Authenticated SELECT exists.
+      // Existing RLS requires CASE_VIEW.
       // ======================================================
 
       const {
         data: events,
         error: eventsError
-      } = await supabase
-        .from("case_events")
-        .select("*")
-        .limit(20);
+      } =
+        await supabase
+          .from("case_events")
+          .select("*")
+          .limit(20);
 
 
       add(
         14,
         "Permitted case timeline readable",
-        eventsError ? "FAIL" : "PASS",
+        eventsError
+          ? "FAIL"
+          : "PASS",
+
         eventsError
           ? eventsError.message
           : `visible_rows=${events.length}`
@@ -534,22 +721,26 @@
 
 
       // ======================================================
-      // CASE ACTIONS
+      // 15 — CASE ACTIONS
       // ======================================================
 
       const {
         data: actions,
         error: actionsError
-      } = await supabase
-        .from("case_actions")
-        .select("*")
-        .limit(20);
+      } =
+        await supabase
+          .from("case_actions")
+          .select("*")
+          .limit(20);
 
 
       add(
         15,
         "Permitted case actions readable",
-        actionsError ? "FAIL" : "PASS",
+        actionsError
+          ? "FAIL"
+          : "PASS",
+
         actionsError
           ? actionsError.message
           : `visible_rows=${actions.length}`
@@ -557,22 +748,26 @@
 
 
       // ======================================================
-      // CASE REVIEWS
+      // 16 — CASE REVIEWS
       // ======================================================
 
       const {
         data: reviews,
         error: reviewsError
-      } = await supabase
-        .from("case_reviews")
-        .select("*")
-        .limit(20);
+      } =
+        await supabase
+          .from("case_reviews")
+          .select("*")
+          .limit(20);
 
 
       add(
         16,
         "Permitted case reviews readable",
-        reviewsError ? "FAIL" : "PASS",
+        reviewsError
+          ? "FAIL"
+          : "PASS",
+
         reviewsError
           ? reviewsError.message
           : `visible_rows=${reviews.length}`
@@ -580,22 +775,26 @@
 
 
       // ======================================================
-      // REFERRAL FOLLOW-UPS
+      // 17 — REFERRAL FOLLOW-UPS
       // ======================================================
 
       const {
         data: followUps,
         error: followUpError
-      } = await supabase
-        .from("referral_follow_ups")
-        .select("*")
-        .limit(20);
+      } =
+        await supabase
+          .from("referral_follow_ups")
+          .select("*")
+          .limit(20);
 
 
       add(
         17,
         "Permitted referral follow-ups readable",
-        followUpError ? "FAIL" : "PASS",
+        followUpError
+          ? "FAIL"
+          : "PASS",
+
         followUpError
           ? followUpError.message
           : `visible_rows=${followUps.length}`
@@ -603,12 +802,10 @@
 
 
       // ======================================================
-      // DELETE AUTHORITY
+      // 18 — CASE DELETE ATTACK
       //
-      // REF-6A already proved authenticated has NO DELETE
-      // grants. Here we report browser behaviour as INFO,
-      // because PostgREST may represent an RLS-denied DELETE
-      // as zero affected rows rather than an HTTP error.
+      // Impossible UUID.
+      // No genuine case can be touched.
       // ======================================================
 
       const fakeCaseId =
@@ -618,29 +815,44 @@
       const {
         data: deleteCaseData,
         error: deleteCaseError
-      } = await supabase
-        .from("cases")
-        .delete()
-        .eq("id", fakeCaseId)
-        .select("id");
+      } =
+        await supabase
+          .from("cases")
+          .delete()
+          .eq(
+            "id",
+            fakeCaseId
+          )
+          .select("id");
+
+
+      const caseDeleteBlocked =
+        Boolean(deleteCaseError) ||
+        (
+          Array.isArray(deleteCaseData) &&
+          deleteCaseData.length === 0
+        );
 
 
       add(
         18,
         "Browser case DELETE boundary",
-        deleteCaseError
+        caseDeleteBlocked
           ? "PASS"
-          : (
-              Array.isArray(deleteCaseData) &&
-              deleteCaseData.length === 0
-                ? "PASS"
-                : "FAIL"
-            ),
+          : "FAIL",
+
         deleteCaseError
           ? deleteCaseError.message
           : `affected_rows=${deleteCaseData?.length ?? 0}`
       );
 
+
+      // ======================================================
+      // 19 — REFERRAL DELETE ATTACK
+      //
+      // Impossible UUID.
+      // No genuine referral can be touched.
+      // ======================================================
 
       const fakeReferralId =
         "00000000-0000-0000-0000-000000000002";
@@ -649,24 +861,34 @@
       const {
         data: deleteReferralData,
         error: deleteReferralError
-      } = await supabase
-        .from("referrals")
-        .delete()
-        .eq("id", fakeReferralId)
-        .select("id");
+      } =
+        await supabase
+          .from("referrals")
+          .delete()
+          .eq(
+            "id",
+            fakeReferralId
+          )
+          .select("id");
+
+
+      const referralDeleteBlocked =
+        Boolean(deleteReferralError) ||
+        (
+          Array.isArray(
+            deleteReferralData
+          ) &&
+          deleteReferralData.length === 0
+        );
 
 
       add(
         19,
         "Browser referral DELETE boundary",
-        deleteReferralError
+        referralDeleteBlocked
           ? "PASS"
-          : (
-              Array.isArray(deleteReferralData) &&
-              deleteReferralData.length === 0
-                ? "PASS"
-                : "FAIL"
-            ),
+          : "FAIL",
+
         deleteReferralError
           ? deleteReferralError.message
           : `affected_rows=${deleteReferralData?.length ?? 0}`
@@ -674,55 +896,89 @@
 
 
       // ======================================================
-      // FINAL AUTH CONTEXT
+      // 20 — FINAL AUTHENTICATED BOUNDARY
       // ======================================================
+
+      const previousFailures =
+        results.filter(
+          row => row.result === "FAIL"
+        ).length;
+
+      const previousInfo =
+        results.filter(
+          row => row.result === "INFO"
+        ).length;
+
 
       add(
         20,
         "Authenticated REF-6B boundary completed",
-        results.some(r => r.result === "FAIL")
-          ? "FAIL"
-          : "PASS",
-        "No test writes to genuine case/referral records."
+
+        previousFailures === 0 &&
+        previousInfo === 0
+          ? "PASS"
+          : "FAIL",
+
+        previousFailures === 0 &&
+        previousInfo === 0
+          ? "Authenticated boundary completed cleanly. No genuine case/referral records changed."
+          : `Outstanding before final check: FAIL=${previousFailures}, INFO=${previousInfo}`
       );
 
 
       render();
+
     }
 
 
+    // ========================================================
+    // BUTTON
+    // ========================================================
+
     document
       .getElementById("runBtn")
-      .addEventListener("click", async () => {
+      .addEventListener(
+        "click",
+        async () => {
 
-        const button =
-          document.getElementById("runBtn");
+          const button =
+            document.getElementById(
+              "runBtn"
+            );
 
-        button.disabled = true;
-        button.textContent = "Running...";
 
-        try {
+          button.disabled = true;
 
-          await runTests();
+          button.textContent =
+            "Running REF-6B...";
 
-        } catch (error) {
 
-          add(
-            999,
-            "Unexpected harness error",
-            "FAIL",
-            `${error.name}: ${error.message}`
-          );
+          try {
 
-          render();
+            await runTests();
 
-        } finally {
+          } catch (error) {
 
-          button.disabled = false;
-          button.textContent = "Run REF-6B";
+            add(
+              999,
+              "Unexpected test harness error",
+              "FAIL",
+              `${error.name}: ${error.message}`
+            );
+
+            render();
+
+          } finally {
+
+            button.disabled = false;
+
+            button.textContent =
+              "Run REF-6B";
+
+          }
+
         }
-
-      });
+      );
 
   </script>
 
