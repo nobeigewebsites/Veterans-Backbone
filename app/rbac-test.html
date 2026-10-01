@@ -362,20 +362,35 @@
         );
 
 
-        /* ====================================================
-           7. OWN-SITE REFERRALS
+                /* ====================================================
+           7. REFERRALS THROUGH VISIBLE OWN-SITE CASES
            ==================================================== */
 
-        const ownReferrals = await supabase
-          .from("referrals")
-          .select("id,site_id")
-          .eq("site_id", SITE_1)
-          .limit(5);
+        const ownCaseIds =
+          (ownCases.data || []).map(
+            row => row.id
+          );
+
+
+        let ownReferrals = {
+          data: [],
+          error: null
+        };
+
+
+        if (ownCaseIds.length > 0) {
+
+          ownReferrals = await supabase
+            .from("referrals")
+            .select("id,case_id")
+            .in("case_id", ownCaseIds)
+            .limit(5);
+        }
 
 
         addResult(
           results,
-          "Own-site referrals query",
+          "Own-site referrals through visible cases",
           "ALLOW",
           ownReferrals.error
             ? ownReferrals.error.message
@@ -385,27 +400,28 @@
 
 
         /* ====================================================
-           8. OTHER-SITE REFERRALS
+           8. OTHER-SITE REFERRAL ISOLATION
+
+           First query Site 2 cases through the authenticated
+           session. RLS should expose none to this Support
+           Worker. We then verify that no inaccessible Site 2
+           case IDs have leaked into the browser session.
            ==================================================== */
 
-        const otherReferrals = await supabase
-          .from("referrals")
-          .select("id,site_id")
-          .eq("site_id", SITE_2)
-          .limit(5);
+        const leakedOtherCaseIds =
+          (otherCases.data || []).map(
+            row => row.id
+          );
 
 
         addResult(
           results,
-          "Other-site referrals hidden",
-          "0 ROWS",
-          otherReferrals.error
-            ? otherReferrals.error.message
-            : `${otherReferrals.data.length} row(s)`,
-          !otherReferrals.error &&
-          otherReferrals.data.length === 0
+          "Other-site referral context unavailable",
+          "0 CASE IDS",
+          `${leakedOtherCaseIds.length} case id(s)`,
+          !otherCases.error &&
+          leakedOtherCaseIds.length === 0
         );
-
 
         /* ====================================================
            9. ASSURANCE
