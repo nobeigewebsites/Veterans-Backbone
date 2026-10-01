@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>VB Core | RBAC Live Test</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 40px 20px;
+      background: #071426;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+    }
+
+    .test-shell {
+      width: min(100%, 1000px);
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin-bottom: 8px;
+    }
+
+    .warning {
+      padding: 16px;
+      margin: 20px 0;
+      background: #14233b;
+      border: 1px solid #536cff;
+      border-radius: 12px;
+    }
+
+    button {
+      padding: 14px 22px;
+      border: 0;
+      border-radius: 10px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    #summary {
+      margin: 24px 0;
+      font-size: 1.2rem;
+      font-weight: 700;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #101d31;
+    }
+
+    th,
+    td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid #2c3a50;
+    }
+
+    .pass {
+      color: #72f1a7;
+      font-weight: 700;
+    }
+
+    .fail {
+      color: #ff7373;
+      font-weight: 700;
+    }
+
+    .waiting {
+      color: #ffd166;
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="test-shell">
+
+    <h1>Veterans Backbone RBAC Live Test</h1>
+
+    <p>
+      DEV-only authenticated RLS test harness.
+    </p>
+
+    <div class="warning">
+      This page performs read-only tests using the currently
+      authenticated VB Core staff session.
+    </div>
+
+    <button id="run-tests">
+      RUN RBAC TESTS
+    </button>
+
+    <div id="summary" class="waiting">
+      Waiting to run.
+    </div>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Test</th>
+          <th>Expected</th>
+          <th>Actual</th>
+          <th>Result</th>
+        </tr>
+      </thead>
+
+      <tbody id="results"></tbody>
+    </table>
+
+  </main>
+
+
+  <script type="module">
+
+    import { supabase } from "./js/auth.js";
+
+
+    const SITE_1 =
+      "b7129ac5-924c-46fb-9e84-79274064f318";
+
+    const SITE_2 =
+      "0a5d06a8-1ffc-41b9-ad37-cf536c492756";
+
+    const STAFF_ID =
+      "692a00f9-5944-46b0-9efe-e4eccabc21e2";
+
+    const AUTH_UID =
+      "4f72cbe3-8b73-45c7-a2d7-2d5484bdfb5e";
+
+
+    const button =
+      document.getElementById("run-tests");
+
+    const summary =
+      document.getElementById("summary");
+
+    const tbody =
+      document.getElementById("results");
+
+
+    function addResult(
+      results,
+      test,
+      expected,
+      actual,
+      pass
+    ) {
+
+      results.push({
+        test,
+        expected,
+        actual,
+        pass
+      });
+    }
+
+
+    function render(results) {
+
+      tbody.innerHTML = "";
+
+      for (const row of results) {
+
+        const tr =
+          document.createElement("tr");
+
+        tr.innerHTML = `
+          <td>${row.test}</td>
+          <td>${row.expected}</td>
+          <td>${row.actual}</td>
+          <td class="${row.pass ? "pass" : "fail"}">
+            ${row.pass ? "PASS" : "FAIL"}
+          </td>
+        `;
+
+        tbody.appendChild(tr);
+      }
+
+
+      const passed =
+        results.filter(
+          row => row.pass
+        ).length;
+
+
+      summary.textContent =
+        `VB RBAC LIVE TEST: ${passed}/${results.length} passed`;
+
+      summary.className =
+        passed === results.length
+          ? "pass"
+          : "fail";
+    }
+
+
+    async function runTests() {
+
+      button.disabled = true;
+
+      summary.textContent =
+        "Running authenticated RBAC tests...";
+
+      summary.className =
+        "waiting";
+
+      tbody.innerHTML = "";
+
+      const results = [];
+
+
+      try {
+
+        /* ====================================================
+           1. AUTHENTICATED USER
+           ==================================================== */
+
+        const {
+          data: { user },
+          error: userError
+        } = await supabase.auth.getUser();
+
+
+        addResult(
+          results,
+          "Authenticated user exists",
+          "ALLOW",
+          userError
+            ? userError.message
+            : user?.id || "NO USER",
+          !userError && !!user
+        );
+
+
+        addResult(
+          results,
+          "Auth UUID matches DEV Support Worker",
+          AUTH_UID,
+          user?.id || "NO USER",
+          user?.id === AUTH_UID
+        );
+
+
+        /* ====================================================
+           2. OWN STAFF PROFILE
+           ==================================================== */
+
+        const profile = await supabase
+          .from("staff_profiles")
+          .select(
+            "id,staff_code,display_name,is_active"
+          )
+          .eq("id", STAFF_ID)
+          .maybeSingle();
+
+
+        addResult(
+          results,
+          "Own staff profile visible",
+          "USR-TEST-001",
+          profile.error
+            ? profile.error.message
+            : profile.data?.staff_code || "NO ROW",
+          !profile.error &&
+          profile.data?.staff_code ===
+            "USR-TEST-001"
+        );
+
+
+        /* ====================================================
+           3. OWN-SITE VETERANS
+           ==================================================== */
+
+        const ownVeterans = await supabase
+          .from("veterans")
+          .select("id,primary_site_id")
+          .eq("primary_site_id", SITE_1)
+          .limit(5);
+
+
+        addResult(
+          results,
+          "Own-site veterans query",
+          "ALLOW",
+          ownVeterans.error
+            ? ownVeterans.error.message
+            : `${ownVeterans.data.length} row(s)`,
+          !ownVeterans.error
+        );
+
+
+        /* ====================================================
+           4. OTHER-SITE VETERANS
+           ==================================================== */
+
+        const otherVeterans = await supabase
+          .from("veterans")
+          .select("id,primary_site_id")
+          .eq("primary_site_id", SITE_2)
+          .limit(5);
+
+
+        addResult(
+          results,
+          "Other-site veterans hidden",
+          "0 ROWS",
+          otherVeterans.error
+            ? otherVeterans.error.message
+            : `${otherVeterans.data.length} row(s)`,
+          !otherVeterans.error &&
+          otherVeterans.data.length === 0
+        );
+
+
+        /* ====================================================
+           5. OWN-SITE CASES
+           ==================================================== */
+
+        const ownCases = await supabase
+          .from("cases")
+          .select("id,site_id")
+          .eq("site_id", SITE_1)
+          .limit(5);
+
+
+        addResult(
+          results,
+          "Own-site cases query",
+          "ALLOW",
+          ownCases.error
+            ? ownCases.error.message
+            : `${ownCases.data.length} row(s)`,
+          !ownCases.error
+        );
+
+
+        /* ====================================================
+           6. OTHER-SITE CASES
+           ==================================================== */
+
+        const otherCases = await supabase
+          .from("cases")
+          .select("id,site_id")
+          .eq("site_id", SITE_2)
+          .limit(5);
+
+
+        addResult(
+          results,
+          "Other-site cases hidden",
+          "0 ROWS",
+          otherCases.error
+            ? otherCases.error.message
+            : `${otherCases.data.length} row(s)`,
+          !otherCases.error &&
+          otherCases.data.length === 0
+        );
+
+
+        /* ====================================================
+           7. OWN-SITE REFERRALS
+           ==================================================== */
+
+        const ownReferrals = await supabase
+          .from("referrals")
+          .select("id,site_id")
+          .eq("site_id", SITE_1)
+          .limit(5);
+
+
+        addResult(
+          results,
+          "Own-site referrals query",
+          "ALLOW",
+          ownReferrals.error
+            ? ownReferrals.error.message
+            : `${ownReferrals.data.length} row(s)`,
+          !ownReferrals.error
+        );
+
+
+        /* ====================================================
+           8. OTHER-SITE REFERRALS
+           ==================================================== */
+
+        const otherReferrals = await supabase
+          .from("referrals")
+          .select("id,site_id")
+          .eq("site_id", SITE_2)
+          .limit(5);
+
+
+        addResult(
+          results,
+          "Other-site referrals hidden",
+          "0 ROWS",
+          otherReferrals.error
+            ? otherReferrals.error.message
+            : `${otherReferrals.data.length} row(s)`,
+          !otherReferrals.error &&
+          otherReferrals.data.length === 0
+        );
+
+
+        /* ====================================================
+           9. ASSURANCE
+           ==================================================== */
+
+        const assurance = await supabase
+          .from("assurance_items")
+          .select(
+            "id,assurance_code,item_status,site_id"
+          )
+          .limit(10);
+
+
+        addResult(
+          results,
+          "Assurance RLS query",
+          "ALLOW",
+          assurance.error
+            ? assurance.error.message
+            : `${assurance.data.length} row(s)`,
+          !assurance.error
+        );
+
+
+        /* ====================================================
+           10. POLICY BRAIN
+           ==================================================== */
+
+        const policies = await supabase
+          .from("policies")
+          .select("id,policy_name,status")
+          .limit(5);
+
+
+        addResult(
+          results,
+          "Policy Brain query",
+          "ALLOW",
+          policies.error
+            ? policies.error.message
+            : `${policies.data.length} row(s)`,
+          !policies.error
+        );
+
+
+        /* ====================================================
+           11. ROLES — MUST BE CLOSED
+           ==================================================== */
+
+        const roles = await supabase
+          .from("roles")
+          .select("id,role_code")
+          .limit(5);
+
+
+        addResult(
+          results,
+          "Roles table closed",
+          "BLOCK / 0 ROWS",
+          roles.error
+            ? "BLOCKED"
+            : `${roles.data.length} row(s)`,
+          !!roles.error ||
+          roles.data.length === 0
+        );
+
+
+        /* ====================================================
+           12. PERMISSIONS — MUST BE CLOSED
+           ==================================================== */
+
+        const permissions = await supabase
+          .from("permissions")
+          .select("id,permission_code")
+          .limit(5);
+
+
+        addResult(
+          results,
+          "Permissions table closed",
+          "BLOCK / 0 ROWS",
+          permissions.error
+            ? "BLOCKED"
+            : `${permissions.data.length} row(s)`,
+          !!permissions.error ||
+          permissions.data.length === 0
+        );
+
+
+        /* ====================================================
+           13. ROLE ASSIGNMENTS — MUST BE CLOSED
+           ==================================================== */
+
+        const assignments = await supabase
+          .from("staff_role_assignments")
+          .select(
+            "id,staff_profile_id,role_id"
+          )
+          .limit(5);
+
+
+        addResult(
+          results,
+          "Role assignments closed",
+          "BLOCK / 0 ROWS",
+          assignments.error
+            ? "BLOCKED"
+            : `${assignments.data.length} row(s)`,
+          !!assignments.error ||
+          assignments.data.length === 0
+        );
+
+
+        /* ====================================================
+           14. IDENTITY VAULT — MUST BE CLOSED
+           ==================================================== */
+
+        const vault = await supabase
+          .from("veteran_identity_vault")
+          .select("*")
+          .limit(1);
+
+
+        addResult(
+          results,
+          "Veteran identity vault closed",
+          "BLOCK / 0 ROWS",
+          vault.error
+            ? "BLOCKED"
+            : `${vault.data.length} row(s)`,
+          !!vault.error ||
+          vault.data.length === 0
+        );
+
+
+      } catch (error) {
+
+        addResult(
+          results,
+          "Test harness execution",
+          "NO ERROR",
+          error.message,
+          false
+        );
+      }
+
+
+      render(results);
+
+      button.disabled = false;
+    }
+
+
+    button.addEventListener(
+      "click",
+      runTests
+    );
+
+  </script>
+
+</body>
+</html>
