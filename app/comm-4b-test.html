@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>COMM-4B Authenticated Assault | Veterans Backbone</title>
+
+  <style>
+    body {
+      margin: 0;
+      padding: 30px;
+      font-family: Arial, sans-serif;
+      background: #101418;
+      color: #f4f4f4;
+    }
+
+    .wrap {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      margin-bottom: 8px;
+    }
+
+    .warning {
+      background: #2a2020;
+      border: 1px solid #7a4545;
+      padding: 16px;
+      border-radius: 8px;
+      margin: 20px 0;
+    }
+
+    button {
+      padding: 12px 18px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+      border: 0;
+      border-radius: 6px;
+    }
+
+    #summary {
+      margin: 24px 0;
+      padding: 18px;
+      background: #1b2228;
+      border-radius: 8px;
+      font-size: 20px;
+      font-weight: bold;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background: #171c20;
+    }
+
+    th,
+    td {
+      border: 1px solid #343c43;
+      padding: 10px;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    th {
+      background: #222a30;
+    }
+
+    .pass {
+      font-weight: bold;
+      color: #78e08f;
+    }
+
+    .fail {
+      font-weight: bold;
+      color: #ff7675;
+    }
+
+    .pending {
+      color: #f6e58d;
+    }
+
+    .detail {
+      font-size: 13px;
+      word-break: break-word;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="wrap">
+
+  <h1>COMM-4B — Authenticated Browser Assault</h1>
+
+  <p>
+    Veterans Backbone Commercial Licensing & Tier Foundation
+  </p>
+
+  <div class="warning">
+    DEV TEST ONLY. This page must be deleted after COMM-4B passes.
+    It uses the currently authenticated browser session and contains
+    no login credentials.
+  </div>
+
+  <button id="run-tests">
+    Run COMM-4B Assault
+  </button>
+
+  <div id="summary">
+    Waiting to run.
+  </div>
+
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Area</th>
+        <th>Check</th>
+        <th>Result</th>
+        <th>Detail</th>
+      </tr>
+    </thead>
+
+    <tbody id="results"></tbody>
+  </table>
+
+</div>
+
+
+<script type="module">
+
+import { supabase } from "./js/supabase-client.js";
+
+
+const resultsBody =
+  document.getElementById("results");
+
+const summary =
+  document.getElementById("summary");
+
+const runButton =
+  document.getElementById("run-tests");
+
+
+let results = [];
+
+
+/* ============================================================
+   HELPERS
+   ============================================================ */
+
+function addResult(
+  number,
+  area,
+  name,
+  passed,
+  detail = ""
+) {
+
+  results.push({
+    number,
+    area,
+    name,
+    passed,
+    detail
+  });
+
+  const row =
+    document.createElement("tr");
+
+  row.innerHTML = `
+    <td>${number}</td>
+    <td>${escapeHtml(area)}</td>
+    <td>${escapeHtml(name)}</td>
+    <td class="${passed ? "pass" : "fail"}">
+      ${passed ? "PASS" : "FAIL"}
+    </td>
+    <td class="detail">
+      ${escapeHtml(detail || "")}
+    </td>
+  `;
+
+  resultsBody.appendChild(row);
+}
+
+
+function escapeHtml(value) {
+
+  return String(value ?? "")
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+}
+
+
+function errorText(error) {
+
+  if (!error) {
+    return "";
+  }
+
+  return [
+    error.message,
+    error.details,
+    error.hint,
+    error.code
+  ]
+    .filter(Boolean)
+    .join(" | ");
+}
+
+
+async function expectRpcDenied(
+  number,
+  area,
+  name,
+  rpcName,
+  args
+) {
+
+  try {
+
+    const { error } =
+      await supabase.rpc(
+        rpcName,
+        args
+      );
+
+    addResult(
+      number,
+      area,
+      name,
+      Boolean(error),
+      error
+        ? errorText(error)
+        : "RPC unexpectedly succeeded."
+    );
+
+  } catch (error) {
+
+    addResult(
+      number,
+      area,
+      name,
+      true,
+      error.message
+    );
+  }
+}
+
+
+async function expectTableDenied(
+  number,
+  area,
+  name,
+  action
+) {
+
+  try {
+
+    const result =
+      await action();
+
+    const denied =
+      Boolean(result.error);
+
+    addResult(
+      number,
+      area,
+      name,
+      denied,
+      result.error
+        ? errorText(result.error)
+        : "Direct table operation unexpectedly succeeded."
+    );
+
+  } catch (error) {
+
+    addResult(
+      number,
+      area,
+      name,
+      true,
+      error.message
+    );
+  }
+}
+
+
+/* ============================================================
+   RUN TESTS
+   ============================================================ */
+
+async function runTests() {
+
+  runButton.disabled = true;
+
+  results = [];
+
+  resultsBody.innerHTML = "";
+
+  summary.textContent =
+    "Running COMM-4B assault...";
+
+  summary.className =
+    "pending";
+
+
+  /* ==========================================================
+     1. AUTHENTICATED SESSION EXISTS
+     ========================================================== */
+
+  const {
+    data: sessionData,
+    error: sessionError
+  } =
+    await supabase.auth.getSession();
+
+  const session =
+    sessionData?.session ?? null;
+
+  addResult(
+    1,
+    "AUTH",
+    "Authenticated browser session exists",
+    !sessionError && Boolean(session),
+    sessionError
+      ? errorText(sessionError)
+      : session
+        ? `Authenticated user: ${session.user.id}`
+        : "No authenticated session."
+  );
+
+
+  if (!session) {
+
+    summary.textContent =
+      "STOP — no authenticated session. Log into the VB app first.";
+
+    summary.className =
+      "fail";
+
+    runButton.disabled = false;
+
+    return;
+  }
+
+
+  /* ==========================================================
+     2. CURRENT STAFF IDENTITY RESOLVES
+     ========================================================== */
+
+  const {
+    data: staffId,
+    error: staffError
+  } =
+    await supabase.rpc(
+      "current_staff_id"
+    );
+
+  addResult(
+    2,
+    "IDENTITY",
+    "Authenticated account resolves to a staff identity",
+    !staffError && Boolean(staffId),
+    staffError
+      ? errorText(staffError)
+      : `Staff ID: ${staffId}`
+  );
+
+
+  /* ==========================================================
+     3–6. SUPPORT WORKER HAS NO COMMERCIAL PERMISSIONS
+     ========================================================== */
+
+  const permissionTests = [
+    [
+      3,
+      "LICENCE_VIEW",
+      "Support Worker does not have LICENCE_VIEW"
+    ],
+    [
+      4,
+      "LICENCE_MANAGE",
+      "Support Worker does not have LICENCE_MANAGE"
+    ],
+    [
+      5,
+      "LICENCE_CATALOGUE_MANAGE",
+      "Support Worker does not have LICENCE_CATALOGUE_MANAGE"
+    ],
+    [
+      6,
+      "LICENCE_AUDIT_VIEW",
+      "Support Worker does not have LICENCE_AUDIT_VIEW"
+    ]
+  ];
+
+
+  for (
+    const [
+      number,
+      permissionCode,
+      label
+    ]
+    of permissionTests
+  ) {
+
+    const {
+      data,
+      error
+    } =
+      await supabase.rpc(
+        "has_licence_permission",
+        {
+          p_permission_code:
+            permissionCode
+        }
+      );
+
+    addResult(
+      number,
+      "RBAC",
+      label,
+      !error && data === false,
+      error
+        ? errorText(error)
+        : `Resolver returned: ${data}`
+    );
+  }
+
+
+  /* ==========================================================
+     7. PRIVATE AUTHORITY ASSERTION CANNOT BE CALLED
+     ========================================================== */
+
+  await expectRpcDenied(
+    7,
+    "AUTHORITY",
+    "Support Worker cannot directly call commercial authority assertion",
+    "assert_licence_authority",
+    {
+      p_permission_code:
+        "LICENCE_MANAGE"
+    }
+  );
+
+
+  /* ==========================================================
+     8. CANNOT CREATE LICENCE
+     ========================================================== */
+
+  await expectRpcDenied(
+    8,
+    "CONTROLLED WRITE",
+    "Support Worker cannot create an organisation licence",
+    "create_organisation_licence",
+    {
+      p_organisation_id:
+        "71c87b5e-f84f-4e9b-b167-d48745fc838c",
+
+      p_tier_code:
+        "CORE",
+
+      p_licence_status:
+        "pending",
+
+      p_starts_at:
+        new Date().toISOString(),
+
+      p_ends_at:
+        null,
+
+      p_licence_reference:
+        "COMM4B-UNAUTHORISED",
+
+      p_reason:
+        "COMM-4B unauthorised creation attempt."
+    }
+  );
+
+
+  /* ==========================================================
+     FIND DEV ORGANISATION THROUGH DIRECT TABLE ACCESS
+
+     THIS SHOULD FAIL.
+
+     We deliberately do NOT depend on retrieving its UUID here.
+     ========================================================== */
+
+  await expectTableDenied(
+    9,
+    "TABLE SECURITY",
+    "Support Worker cannot directly read organisation licences",
+    async () => {
+
+      return await supabase
+        .from("organisation_licences")
+        .select("*")
+        .limit(1);
+    }
+  );
+
+
+  /* ==========================================================
+     10. DIRECT FEATURE OVERRIDE READ DENIED
+     ========================================================== */
+
+  await expectTableDenied(
+    10,
+    "TABLE SECURITY",
+    "Support Worker cannot directly read feature overrides",
+    async () => {
+
+      return await supabase
+        .from("organisation_feature_overrides")
+        .select("*")
+        .limit(1);
+    }
+  );
+
+
+  /* ==========================================================
+     11. DIRECT LICENCE EVENT READ DENIED
+     ========================================================== */
+
+  await expectTableDenied(
+    11,
+    "TABLE SECURITY",
+    "Support Worker cannot directly read licence audit events",
+    async () => {
+
+      return await supabase
+        .from("licence_events")
+        .select("*")
+        .limit(1);
+    }
+  );
+
+
+  /* ==========================================================
+     12. DIRECT TIER READ DENIED
+     ========================================================== */
+
+  await expectTableDenied(
+    12,
+    "TABLE SECURITY",
+    "Support Worker cannot directly read licence tier catalogue",
+    async () => {
+
+      return await supabase
+        .from("licence_tiers")
+        .select("*")
+        .limit(1);
+    }
+  );
+
+
+  /* ==========================================================
+     13. DIRECT FEATURE CATALOGUE READ DENIED
+     ========================================================== */
+
+  await expectTableDenied(
+    13,
+    "TABLE SECURITY",
+    "Support Worker cannot directly read licence feature catalogue",
+    async () => {
+
+      return await supabase
+        .from("licence_features")
+        .select("*")
+        .limit(1);
+    }
+  );
+
+
+  /* ==========================================================
+     14. DIRECT LICENCE INSERT DENIED
+     ========================================================== */
+
+  await expectTableDenied(
+    14,
+    "DIRECT WRITE",
+    "Support Worker cannot directly insert organisation licence",
+    async () => {
+
+      return await supabase
+        .from("organisation_licences")
+        .insert({
+          organisation_id:
+            "71c87b5e-f84f-4e9b-b167-d48745fc838c",
+
+          licence_tier_id:
+            "00000000-0000-0000-0000-000000000000",
+
+          licence_status:
+            "pending",
+
+          starts_at:
+            new Date().toISOString(),
+
+          licence_reference:
+            "COMM4B-DIRECT-ATTACK"
+        });
+    }
+  );
+
+
+  /* ==========================================================
+     15. DIRECT OVERRIDE INSERT DENIED
+     ========================================================== */
+
+  await expectTableDenied(
+    15,
+    "DIRECT WRITE",
+    "Support Worker cannot directly insert feature override",
+    async () => {
+
+      return await supabase
+        .from(
+          "organisation_feature_overrides"
+        )
+        .insert({
+          organisation_id:
+            "71c87b5e-f84f-4e9b-b167-d48745fc838c",
+
+          licence_feature_id:
+            "00000000-0000-0000-0000-000000000000",
+
+          boolean_value:
+            true,
+
+          override_reason:
+            "COMM-4B direct attack",
+
+          is_active:
+            true
+        });
+    }
+  );
+
+
+  /* ==========================================================
+     16. DIRECT EVENT INSERT DENIED
+     ========================================================== */
+
+  await expectTableDenied(
+    16,
+    "AUDIT",
+    "Support Worker cannot forge commercial audit event",
+    async () => {
+
+      return await supabase
+        .from("licence_events")
+        .insert({
+          organisation_id:
+            "71c87b5e-f84f-4e9b-b167-d48745fc838c",
+
+          event_type:
+            "FORGED_EVENT",
+
+          event_summary:
+            "COMM-4B forged event attempt."
+        });
+    }
+  );
+
+
+  /* ==========================================================
+     17. DIRECT TIER CONFIGURATION WRITE DENIED
+     ========================================================== */
+
+  await expectTableDenied(
+    17,
+    "DIRECT WRITE",
+    "Support Worker cannot directly change tier entitlements",
+    async () => {
+
+      return await supabase
+        .from("licence_tier_features")
+        .insert({
+          licence_tier_id:
+            "00000000-0000-0000-0000-000000000000",
+
+          licence_feature_id:
+            "00000000-0000-0000-0000-000000000000",
+
+          boolean_value:
+            true
+        });
+    }
+  );
+
+
+  /* ==========================================================
+     18. CONTROLLED TIER CONFIGURATION RPC DENIED
+     ========================================================== */
+
+  await expectRpcDenied(
+    18,
+    "CATALOGUE",
+    "Support Worker cannot change tier entitlement through controlled RPC",
+    "set_tier_feature_entitlement",
+    {
+      p_tier_code:
+        "CORE",
+
+      p_feature_code:
+        "SERVICE_DIRECTORY_INTERNAL",
+
+      p_boolean_value:
+        true,
+
+      p_integer_value:
+        null,
+
+      p_reason:
+        "COMM-4B unauthorised tier change attempt."
+    }
+  );
+
+
+  /* ==========================================================
+     19. CONTROLLED OVERRIDE RPC DENIED
+
+     We can safely target VB-HQ because authority must fail
+     BEFORE mutation occurs.
+     ========================================================== */
+
+  await expectRpcDenied(
+    19,
+    "OVERRIDE",
+    "Support Worker cannot create organisation feature override through RPC",
+    "set_organisation_feature_override",
+    {
+      p_organisation_id:
+        "71c87b5e-f84f-4e9b-b167-d48745fc838c",
+
+      p_feature_code:
+        "SERVICE_DIRECTORY_INTERNAL",
+
+      p_boolean_value:
+        false,
+
+      p_integer_value:
+        null,
+
+      p_starts_at:
+        new Date().toISOString(),
+
+      p_ends_at:
+        null,
+
+      p_reason:
+        "COMM-4B unauthorised override attempt."
+    }
+  );
+
+
+  /* ==========================================================
+     20. SAFE BOOLEAN ENTITLEMENT RESOLVER STILL WORKS
+     ========================================================== */
+
+  const {
+    data: booleanEntitlement,
+    error: booleanError
+  } =
+    await supabase.rpc(
+      "organisation_has_feature",
+      {
+        p_organisation_id:
+          "71c87b5e-f84f-4e9b-b167-d48745fc838c",
+
+        p_feature_code:
+          "SERVICE_DIRECTORY_INTERNAL"
+      }
+    );
+
+  addResult(
+    20,
+    "SAFE READ",
+    "Authenticated application can resolve VB internal entitlement",
+    !booleanError &&
+      booleanEntitlement === true,
+    booleanError
+      ? errorText(booleanError)
+      : `Resolver returned: ${booleanEntitlement}`
+  );
+
+
+  /* ==========================================================
+     21. SAFE INTEGER LIMIT RESOLVER STILL WORKS
+     ========================================================== */
+
+  const {
+    data: integerLimit,
+    error: integerError
+  } =
+    await supabase.rpc(
+      "organisation_feature_limit",
+      {
+        p_organisation_id:
+          "71c87b5e-f84f-4e9b-b167-d48745fc838c",
+
+        p_feature_code:
+          "MAX_SITES"
+      }
+    );
+
+  addResult(
+    21,
+    "SAFE READ",
+    "Authenticated application can resolve VB integer limit",
+    !integerError &&
+      integerLimit === null,
+    integerError
+      ? errorText(integerError)
+      : `Resolver returned: ${integerLimit}`
+  );
+
+
+  /* ==========================================================
+     22. UNKNOWN BOOLEAN FEATURE FAILS CLOSED IN BROWSER
+     ========================================================== */
+
+  const {
+    data: unknownFeature,
+    error: unknownFeatureError
+  } =
+    await supabase.rpc(
+      "organisation_has_feature",
+      {
+        p_organisation_id:
+          "71c87b5e-f84f-4e9b-b167-d48745fc838c",
+
+        p_feature_code:
+          "STEVE_HAS_ENTERED_THE_BUILDING"
+      }
+    );
+
+  addResult(
+    22,
+    "FAIL CLOSED",
+    "Unknown feature fails closed in authenticated browser",
+    !unknownFeatureError &&
+      unknownFeature === false,
+    unknownFeatureError
+      ? errorText(unknownFeatureError)
+      : `Resolver returned: ${unknownFeature}`
+  );
+
+
+  /* ==========================================================
+     23. UNKNOWN INTEGER LIMIT FAILS CLOSED
+     ========================================================== */
+
+  const {
+    data: unknownLimit,
+    error: unknownLimitError
+  } =
+    await supabase.rpc(
+      "organisation_feature_limit",
+      {
+        p_organisation_id:
+          "71c87b5e-f84f-4e9b-b167-d48745fc838c",
+
+        p_feature_code:
+          "MAX_IMAGINARY_UNICORNS"
+      }
+    );
+
+  addResult(
+    23,
+    "FAIL CLOSED",
+    "Unknown integer limit fails closed in authenticated browser",
+    !unknownLimitError &&
+      unknownLimit === null,
+    unknownLimitError
+      ? errorText(unknownLimitError)
+      : `Resolver returned: ${unknownLimit}`
+  );
+
+
+  /* ==========================================================
+     24. COMMERCIAL PERMISSION RESOLVER DOES NOT INVENT
+         PERMISSION
+     ========================================================== */
+
+  const {
+    data: inventedPermission,
+    error: inventedPermissionError
+  } =
+    await supabase.rpc(
+      "has_licence_permission",
+      {
+        p_permission_code:
+          "LICENCE_STEVE_SUPREME_OVERLORD"
+      }
+    );
+
+  addResult(
+    24,
+    "FAIL CLOSED",
+    "Commercial permission resolver rejects imaginary permission",
+    !inventedPermissionError &&
+      inventedPermission === false,
+    inventedPermissionError
+      ? errorText(inventedPermissionError)
+      : `Resolver returned: ${inventedPermission}`
+  );
+
+
+  /* ==========================================================
+     25. SESSION SURVIVED THE ASSAULT
+     ========================================================== */
+
+  const {
+    data: finalSessionData,
+    error: finalSessionError
+  } =
+    await supabase.auth.getSession();
+
+  addResult(
+    25,
+    "SESSION",
+    "Authenticated session survives rejected commercial attacks",
+    !finalSessionError &&
+      Boolean(finalSessionData?.session),
+    finalSessionError
+      ? errorText(finalSessionError)
+      : "Session remains authenticated."
+  );
+
+
+  /* ==========================================================
+     FINAL SUMMARY
+     ========================================================== */
+
+  const passed =
+    results.filter(
+      result => result.passed
+    ).length;
+
+  const total =
+    results.length;
+
+
+  summary.textContent =
+    `${passed}/${total} COMM-4B checks passed.`;
+
+
+  summary.className =
+    passed === total
+      ? "pass"
+      : "fail";
+
+
+  runButton.disabled = false;
+}
+
+
+runButton.addEventListener(
+  "click",
+  runTests
+);
+
+</script>
+
+</body>
+</html>
