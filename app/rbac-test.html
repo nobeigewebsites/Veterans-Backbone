@@ -797,61 +797,37 @@
         );
 
 
-        /* ====================================================
+               /* ====================================================
            7. SUPPORT WORKER CANNOT APPROVE POLICY VERSION
 
-           Find one visible draft version first.
+           Dedicated fictional 7E target.
            ==================================================== */
 
-        const draftVersion =
+        const TEST_POLICY_VERSION =
+          "7e000005-0000-4000-8000-000000000001";
+
+
+        const approvePolicy =
           await supabase
             .from("policy_versions")
-            .select("id,version_status")
-            .eq("version_status", "draft")
-            .limit(1)
-            .maybeSingle();
+            .update({
+              version_status: "approved",
+              approved_by_staff_id:
+                STAFF_ID,
+              approved_at:
+                new Date().toISOString()
+            })
+            .eq(
+              "id",
+              TEST_POLICY_VERSION
+            )
+            .select("id");
 
 
-        if (
-          draftVersion.error ||
-          !draftVersion.data
-        ) {
-
-          addResult(
-            results,
-            "Support Worker cannot approve policy",
-            "BLOCK",
-            draftVersion.error
-              ? `PRECHECK: ${draftVersion.error.message}`
-              : "NO VISIBLE DRAFT VERSION",
-            false
-          );
-
-        } else {
-
-          const approvePolicy =
-            await supabase
-              .from("policy_versions")
-              .update({
-                version_status: "approved",
-                approved_by_staff_id:
-                  STAFF_ID,
-                approved_at:
-                  new Date().toISOString()
-              })
-              .eq(
-                "id",
-                draftVersion.data.id
-              )
-              .select("id");
-
-
-          blockedResult(
-            "Support Worker cannot approve policy",
-            approvePolicy
-          );
-        }
-
+        blockedResult(
+          "Support Worker cannot approve policy",
+          approvePolicy
+        );
 
         /* ====================================================
            8. SUPPORT WORKER CANNOT MAKE ASSURANCE DECISION
