@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>VB REF-6B Authenticated Test</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="./js/supabase-client.js"></script>
+
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 1100px;
+      margin: 40px auto;
+      padding: 20px;
+      background: #111;
+      color: #eee;
+    }
+
+    h1 {
+      margin-bottom: 6px;
+    }
+
+    .sub {
+      opacity: .8;
+      margin-bottom: 24px;
+    }
+
+    button {
+      padding: 12px 18px;
+      font-size: 16px;
+      cursor: pointer;
+      margin-bottom: 24px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background: #1c1c1c;
+    }
+
+    th,
+    td {
+      padding: 10px;
+      border: 1px solid #444;
+      text-align: left;
+      vertical-align: top;
+    }
+
+    .PASS {
+      font-weight: bold;
+    }
+
+    .FAIL {
+      font-weight: bold;
+    }
+
+    .INFO {
+      font-weight: bold;
+    }
+
+    #summary {
+      margin-top: 20px;
+      padding: 16px;
+      background: #1c1c1c;
+      font-size: 18px;
+      font-weight: bold;
+    }
+
+    pre {
+      white-space: pre-wrap;
+      word-break: break-word;
+      margin: 0;
+    }
+  </style>
+</head>
+
+<body>
+
+<h1>REF-6B — Authenticated Browser Assault</h1>
+
+<div class="sub">
+  DEV only. Read-only test. No case or referral records are changed.
+</div>
+
+<button id="runBtn">Run REF-6B</button>
+
+<table>
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Test</th>
+      <th>Result</th>
+      <th>Evidence</th>
+    </tr>
+  </thead>
+
+  <tbody id="results"></tbody>
+</table>
+
+<div id="summary">Not run yet.</div>
+
+
+<script>
+const EXPECTED_AUTH_UID =
+  "4f72cbe3-8b73-45c7-a2d7-2d5484bdfb5e";
+
+const EXPECTED_STAFF_ID =
+  "692a00f9-5944-46b0-9efe-e4eccabc21e2";
+
+const EXPECTED_SITE_ID =
+  "b7129ac5-924c-46fb-9e84-79274064f318";
+
+const EXPECTED_TEAM_ID =
+  "b3832f55-91c9-47fe-a021-e59c6401052d";
+
+
+const results = [];
+
+
+function addResult(number, test, result, evidence) {
+
+  results.push({
+    number,
+    test,
+    result,
+    evidence
+  });
+
+}
+
+
+function render() {
+
+  const tbody = document.getElementById("results");
+
+  tbody.innerHTML = "";
+
+  for (const row of results) {
+
+    const tr = document.createElement("tr");
+
+    tr.innerHTML = `
+      <td>${row.number}</td>
+      <td>${escapeHtml(row.test)}</td>
+      <td class="${row.result}">
+        ${escapeHtml(row.result)}
+      </td>
+      <td>
+        <pre>${escapeHtml(String(row.evidence ?? ""))}</pre>
+      </td>
+    `;
+
+    tbody.appendChild(tr);
+
+  }
+
+
+  const pass =
+    results.filter(r => r.result === "PASS").length;
+
+  const fail =
+    results.filter(r => r.result === "FAIL").length;
+
+  const info =
+    results.filter(r => r.result === "INFO").length;
+
+
+  document.getElementById("summary").textContent =
+    `PASS=${pass} | FAIL=${fail} | INFO=${info} | TOTAL=${results.length}`;
+
+}
+
+
+function escapeHtml(value) {
+
+  return value
+    .replaceAll("&", "&amp;")
+    .replaceAll("<", "&lt;")
+    .replaceAll(">", "&gt;")
+    .replaceAll('"', "&quot;")
+    .replaceAll("'", "&#039;");
+
+}
+
+
+async function runTests() {
+
+  results.length = 0;
+
+  const sb = window.vbSupabase;
+
+  if (!sb) {
+
+    addResult(
+      1,
+      "Shared Supabase client loaded",
+      "FAIL",
+      "window.vbSupabase was not found."
+    );
+
+    render();
+
+    return;
+
+  }
+
+
+  addResult(
+    1,
+    "Shared Supabase client loaded",
+    "PASS",
+    "window.vbSupabase available"
+  );
+
+
+  // ==========================================================
+  // AUTH SESSION
+  // ==========================================================
+
+  const {
+    data: sessionData,
+    error: sessionError
+  } = await sb.auth.getSession();
+
+
+  if (sessionError) {
+
+    addResult(
+      2,
+      "Authenticated session available",
+      "FAIL",
+      sessionError.message
+    );
+
+    render();
+
+    return;
+
+  }
+
+
+  const session = sessionData?.session;
+
+  const user = session?.user;
+
+
+  addResult(
+    2,
+    "Authenticated session available",
+    session ? "PASS" : "FAIL",
+    session
+      ? `Authenticated as ${user.email}`
+      : "No active session"
+  );
+
+
+  if (!session) {
+
+    render();
+
+    return;
+
+  }
+
+
+  addResult(
+    3,
+    "Correct DEV auth identity",
+    user.id === EXPECTED_AUTH_UID
+      ? "PASS"
+      : "FAIL",
+    `auth.uid=${user.id}`
+  );
+
+
+  // ==========================================================
+  // STAFF IDENTITY
+  //
+  // We query by auth_user_id because this is the permanent
+  // authentication -> staff identity link.
+  // ==========================================================
+
+  const {
+    data: staffRows,
+    error: staffError
+  } = await sb
+    .from("staff")
+    .select(`
+      id,
+      staff_code,
+      display_name,
+      organisation_id,
+      site_id,
+      team_id,
+      active,
+      auth_user_id
+    `)
+    .eq("auth_user_id", user.id);
+
+
+  if (staffError) {
+
+    addResult(
+      4,
+      "Authenticated user resolves to staff identity",
+      "FAIL",
+      staffError.message
+    );
+
+  } else {
+
+    const staff = staffRows?.[0];
+
+    addResult(
+      4,
+      "Authenticated user resolves to staff identity",
+      staff ? "PASS" : "FAIL",
+      staff
+        ? `${staff.display_name} / ${staff.staff_code}`
+        : "No staff record returned"
+    );
+
+
+    if (staff) {
+
+      addResult(
+        5,
+        "Permanent staff identity is correct",
+        staff.id === EXPECTED_STAFF_ID
+          ? "PASS"
+          : "FAIL",
+        `staff_id=${staff.id}`
+      );
+
+
+      addResult(
+        6,
+        "Staff identity is active",
+        staff.active === true
+          ? "PASS"
+          : "FAIL",
+        `active=${staff.active}`
+      );
+
+
+      addResult(
+        7,
+        "Site scope resolves correctly",
+        staff.site_id === EXPECTED_SITE_ID
+          ? "PASS"
+          : "FAIL",
+        `site_id=${staff.site_id}`
+      );
+
+
+      addResult(
+        8,
+        "Team scope resolves correctly",
+        staff.team_id === EXPECTED_TEAM_ID
+          ? "PASS"
+          : "FAIL",
+        `team_id=${staff.team_id}`
+      );
+
+    }
+
+  }
+
+
+  // ==========================================================
+  // CASE RLS
+  // ==========================================================
+
+  const {
+    data: cases,
+    error: casesError
+  } = await sb
+    .from("cases")
+    .select(`
+      id,
+      case_code,
+      case_status,
+      veteran_id,
+      organisation_id,
+      site_id,
+      team_id,
+      assigned_staff_id
+    `)
+    .limit(10);
+
+
+  addResult(
+    9,
+    "Authenticated staff can read permitted case scope",
+    casesError ? "FAIL" : "PASS",
+    casesError
+      ? casesError.message
+      : `Visible case rows=${cases.length}`
+  );
+
+
+  if (!casesError && cases.length > 0) {
+
+    const badScope =
+      cases.filter(
+        row =>
+          row.site_id &&
+          row.site_id !== EXPECTED_SITE_ID
+      );
+
+    addResult(
+      10,
+      "Visible cases remain inside expected site scope",
+      badScope.length === 0
+        ? "PASS"
+        : "FAIL",
+      `out_of_scope_rows=${badScope.length}`
+    );
+
+  } else {
+
+    addResult(
+      10,
+      "Visible cases remain inside expected site scope",
+      "INFO",
+      "No visible case rows available for row-level comparison."
+    );
+
+  }
+
+
+  // ==========================================================
+  // REFERRAL RLS
+  // ==========================================================
+
+  const {
+    data: referrals,
+    error: referralError
+  } = await sb
+    .from("referrals")
+    .select(`
+      id,
+      referral_code,
+      referral_status,
+      veteran_id,
+      case_id,
+      organisation_id,
+      site_id
+    `)
+    .limit(10);
+
+
+  addResult(
+    11,
+    "Authenticated staff can read permitted referral scope",
+    referralError ? "FAIL" : "PASS",
+    referralError
+      ? referralError.message
+      : `Visible referral rows=${referrals.length}`
+  );
+
+
+  if (!referralError && referrals.length > 0) {
+
+    const badReferralScope =
+      referrals.filter(
+        row =>
+          row.site_id &&
+          row.site_id !== EXPECTED_SITE_ID
+      );
+
+    addResult(
+      12,
+      "Visible referrals remain inside expected site scope",
+      badReferralScope.length === 0
+        ? "PASS"
+        : "FAIL",
+      `out_of_scope_rows=${badReferralScope.length}`
+    );
+
+  } else {
+
+    addResult(
+      12,
+      "Visible referrals remain inside expected site scope",
+      "INFO",
+      "No visible referral rows available for comparison."
+    );
+
+  }
+
+
+  // ==========================================================
+  // CASE OPERATIONAL EXCEPTIONS
+  // security_invoker means browser RLS should still apply.
+  // ==========================================================
+
+  const {
+    data: exceptions,
+    error: exceptionError
+  } = await sb
+    .from("case_operational_exceptions")
+    .select("*")
+    .limit(20);
+
+
+  addResult(
+    13,
+    "Authenticated staff can query case exception view",
+    exceptionError ? "FAIL" : "PASS",
+    exceptionError
+      ? exceptionError.message
+      : `Visible exception rows=${exceptions.length}`
+  );
+
+
+  // ==========================================================
+  // INTERNAL EVALUATOR
+  //
+  // Browser role MUST NOT be able to execute this.
+  // ==========================================================
+
+  const {
+    error: evaluatorError
+  } = await sb.rpc(
+    "evaluate_case_controls"
+  );
+
+
+  addResult(
+    14,
+    "Browser cannot execute internal case evaluator",
+    evaluatorError ? "PASS" : "FAIL",
+    evaluatorError
+      ? evaluatorError.message
+      : "RPC unexpectedly executed"
+  );
+
+
+  // ==========================================================
+  // DIRECT DELETE ATTACKS
+  //
+  // IMPORTANT:
+  // We deliberately use impossible UUIDs.
+  // Nothing real can be touched.
+  //
+  // PostgreSQL/Supabase should reject DELETE authority.
+  // ==========================================================
+
+  const fakeCaseId =
+    "00000000-0000-0000-0000-000000000001";
+
+  const {
+    error: deleteCaseError
+  } = await sb
+    .from("cases")
+    .delete()
+    .eq("id", fakeCaseId);
+
+
+  addResult(
+    15,
+    "Browser direct case DELETE is blocked",
+    deleteCaseError ? "PASS" : "FAIL",
+    deleteCaseError
+      ? deleteCaseError.message
+      : "DELETE request returned without permission error"
+  );
+
+
+  const fakeReferralId =
+    "00000000-0000-0000-0000-000000000002";
+
+  const {
+    error: deleteReferralError
+  } = await sb
+    .from("referrals")
+    .delete()
+    .eq("id", fakeReferralId);
+
+
+  addResult(
+    16,
+    "Browser direct referral DELETE is blocked",
+    deleteReferralError ? "PASS" : "FAIL",
+    deleteReferralError
+      ? deleteReferralError.message
+      : "DELETE request returned without permission error"
+  );
+
+
+  // ==========================================================
+  // TIMELINE READS
+  // ==========================================================
+
+  const {
+    data: events,
+    error: eventsError
+  } = await sb
+    .from("case_events")
+    .select(`
+      id,
+      case_id,
+      veteran_id,
+      event_type,
+      event_at
+    `)
+    .limit(20);
+
+
+  addResult(
+    17,
+    "Authenticated staff can read permitted case timeline",
+    eventsError ? "FAIL" : "PASS",
+    eventsError
+      ? eventsError.message
+      : `Visible timeline rows=${events.length}`
+  );
+
+
+  const {
+    data: reviews,
+    error: reviewsError
+  } = await sb
+    .from("case_reviews")
+    .select(`
+      id,
+      case_id,
+      veteran_id,
+      review_type,
+      reviewed_at,
+      reviewed_by_staff_id,
+      next_review_at
+    `)
+    .limit(20);
+
+
+  addResult(
+    18,
+    "Authenticated staff can read permitted case reviews",
+    reviewsError ? "FAIL" : "PASS",
+    reviewsError
+      ? reviewsError.message
+      : `Visible review rows=${reviews.length}`
+  );
+
+
+  const {
+    data: actions,
+    error: actionsError
+  } = await sb
+    .from("case_actions")
+    .select(`
+      id,
+      case_id,
+      veteran_id,
+      action_status,
+      assigned_to_staff_id,
+      due_at,
+      review_at
+    `)
+    .limit(20);
+
+
+  addResult(
+    19,
+    "Authenticated staff can read permitted case actions",
+    actionsError ? "FAIL" : "PASS",
+    actionsError
+      ? actionsError.message
+      : `Visible action rows=${actions.length}`
+  );
+
+
+  const {
+    data: followUps,
+    error: followUpError
+  } = await sb
+    .from("referral_follow_ups")
+    .select("*")
+    .limit(20);
+
+
+  addResult(
+    20,
+    "Authenticated staff can read permitted referral follow-ups",
+    followUpError ? "FAIL" : "PASS",
+    followUpError
+      ? followUpError.message
+      : `Visible follow-up rows=${followUps.length}`
+  );
+
+
+  // ==========================================================
+  // FINAL
+  // ==========================================================
+
+  render();
+
+}
+
+
+document
+  .getElementById("runBtn")
+  .addEventListener("click", runTests);
+</script>
+
+</body>
+</html>
