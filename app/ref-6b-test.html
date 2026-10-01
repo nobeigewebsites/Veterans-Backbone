@@ -319,7 +319,7 @@
 
       if (staff) {
 
-        add(
+        
        add(
   6,
   "Staff identity active",
@@ -330,13 +330,14 @@
 );
 
 
-        add(
-          7,
-          "Expected site scope",
-          staff.site_id === EXPECTED_SITE_ID
-            ? "PASS"
-            : "FAIL",
-          `site_id=${staff.site_id}`
+       add(
+  7,
+  "Expected primary site scope",
+  staff.primary_site_id === EXPECTED_SITE_ID
+    ? "PASS"
+    : "FAIL",
+  `primary_site_id=${staff.primary_site_id}`
+);d=${staff.site_id}`
         );
 
       } else {
