@@ -320,13 +320,14 @@
       if (staff) {
 
         add(
-          6,
-          "Staff identity active",
-          staff.active === true
-            ? "PASS"
-            : "FAIL",
-          `active=${staff.active}`
-        );
+       add(
+  6,
+  "Staff identity active",
+  staff.is_active === true
+    ? "PASS"
+    : "FAIL",
+  `is_active=${staff.is_active}`
+);
 
 
         add(
