@@ -120,22 +120,7 @@
 
   <script type="module">
 
-    import { createClient } from
-  "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
-
-const supabase = createClient(
-  "https://jygyirqtiuxjllcltpks.supabase.co",
-  "sb_publishable_36yMEHR4-bWypaun6X2oNw_fTaoOt9p",
-  {
-    auth: {
-      persistSession: true,
-      autoRefreshToken: true,
-      detectSessionInUrl: true
-    }
-  }
-);
-
-
+    import { supabase } from "./js/supabase-client.js";
     const SITE_1 =
       "b7129ac5-924c-46fb-9e84-79274064f318";
 
