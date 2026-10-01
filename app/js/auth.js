@@ -3,36 +3,7 @@
    STAFF AUTHENTICATION
    ============================================================ */
 
-import { createClient } from
-  "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm";
-
-
-/* ============================================================
-   1. SUPABASE CONFIGURATION
-   ============================================================ */
-
-const SUPABASE_URL =
-  "https://jygyirqtiuxjllcltpks.supabase.co";
-
-const SUPABASE_PUBLISHABLE_KEY =
-  "sb_publishable_36yMEHR4-bWypaun6X2oNw_fTaoOt9p";
-
-
-/* ============================================================
-   2. SUPABASE CLIENT
-   ============================================================ */
-
-const supabase = createClient(
-  SUPABASE_URL,
-  SUPABASE_PUBLISHABLE_KEY,
-  {
-    auth: {
-      persistSession: true,
-      autoRefreshToken: true,
-      detectSessionInUrl: true
-    }
-  }
-);
+import { supabase } from "./supabase-client.js";
 
 
 /* ============================================================
