@@ -1,449 +1,215 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <meta
-    name="description"
-    content="Veterans Backbone member login."
-  >
-
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Veterans Backbone member login development page. Member services and RV Crew membership are not open to the public.">
+  <meta name="robots" content="noindex, follow">
   <title>Member Login | Veterans Backbone</title>
-
   <link rel="stylesheet" href="style.css">
+  <link rel="icon" type="image/png" href="images/vblogo.png">
 </head>
-
 <body>
 
-  <a href="#main-content" class="skip-link">
-    Skip to main content
-  </a>
+<a href="#main-content" class="skip-link">Skip to main content</a>
 
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="index.html" class="logo-link" aria-label="Veterans Backbone home">
+      <img src="images/vblogo.png" alt="Veterans Backbone" class="site-logo">
+    </a>
 
-  <!-- =========================================================
-       HEADER
-  ========================================================= -->
+    <button class="menu-toggle" id="menuToggle" aria-label="Open navigation"
+      aria-expanded="false" aria-controls="mainNav">
+      <span></span><span></span><span></span>
+    </button>
 
-  <header class="site-header">
+    <nav class="main-nav" id="mainNav">
+      <a href="index.html">Home</a>
+      <a href="about.html">About VB</a>
+      <a href="meet-the-people.html">Meet the People</a>
+      <a href="support.html">Support Plans</a>
+      <a href="rv-crew.html">The RV Crew</a>
+      <a href="events.html">Events</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="blog.html">Blog</a>
+      <a href="resources.html">Resources</a>
+      <a href="licensed-sites.html">Future Sites</a>
+      <a href="faq.html">FAQs</a>
+    </nav>
 
-    <div class="header-inner">
+    <div class="header-actions">
+      <a href="login.html" class="header-login">Member Login</a>
+      <a href="support.html" class="btn btn-dark">Our Support Plans</a>
+      <a href="get-involved.html" class="btn btn-colour">Get Involved</a>
+    </div>
+  </div>
+</header>
 
-      <a
-        href="index.html"
-        class="logo-link"
-        aria-label="Veterans Backbone home"
-      >
-        <img
-          src="images/vblogo.png"
-          alt="Veterans Backbone"
-          class="site-logo"
-        >
-      </a>
+<main id="main-content">
+  <section class="auth-page">
+    <div class="auth-card">
+      <p class="eyebrow eyebrow-purple">Future RV Crew / VB Members</p>
 
-      <button
-        class="menu-toggle"
-        id="menuToggle"
-        aria-label="Open navigation"
-        aria-expanded="false"
-        aria-controls="mainNav"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+      <h1>MEMBER <span class="logo-ombre">LOGIN</span></h1>
 
-      <nav class="main-nav" id="mainNav">
-        <a href="index.html">Home</a>
-        <a href="about.html">About VB</a>
-        <a href="meet-the-people.html">Meet the People</a>
-        <a href="support.html">Getting Support</a>
-        <a href="rv-crew.html">The RV Crew</a>
-        <a href="events.html">Events</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="blog.html">Blog</a>
-        <a href="resources.html">Resources</a>
-        <a href="licensed-sites.html">Licensed Sites</a>
-        <a href="faq.html">FAQs</a>
-      </nav>
+      <p class="lead">
+        This will be the entrance to the member side of Veterans Backbone.
+      </p>
 
-      <div class="header-actions">
-        <a href="login.html" class="header-login">Member Login</a>
-        <a href="support.html" class="btn btn-dark">Get Support</a>
-        <a href="donate.html" class="btn btn-colour">Donate</a>
+      <div class="callout callout-orange">
+        <p class="big-handwritten">We're still building this bit. 🚧</p>
+        <p>
+          Veterans Backbone is not yet a registered charity and support services,
+          RV Crew membership and member activities have not launched.
+        </p>
+        <p>
+          There are no public membership applications open at present.
+          The authentication integration on this page is being developed and tested.
+        </p>
+        <p>
+          A login here is not an application for veteran support, and this page
+          is not a referral or emergency contact route.
+        </p>
       </div>
 
-    </div>
-
-  </header>
-
-
-  <!-- =========================================================
-       MAIN
-  ========================================================= -->
-
-  <main id="main-content">
-
-    <section class="auth-page">
-
-      <div class="auth-card">
-
-        <p class="eyebrow eyebrow-purple">
-          RV Crew / VB Members
-        </p>
-
-        <h1>
-          MEMBER
-          <span class="logo-ombre">LOGIN</span>
-        </h1>
-
-        <p class="lead">
-          This is the door to the private side of Veterans Backbone.
-        </p>
-
+      <div class="callout callout-blue">
+        <p class="big-handwritten">Not everything needs to live on the public internet.</p>
         <p>
-          Approved members can access member-only resources,
-          private updates, member events and useful VB downloads from here.
+          Future member resources, updates and activities are planned.
+          Private data and access controls must be properly tested before they are used.
         </p>
+      </div>
 
-
-        <div class="callout callout-blue">
-
-          <p class="big-handwritten">
-            Not everything needs to live on the public internet.
-          </p>
-
+      <!-- Existing Clerk integration retained for development/testing.
+           IMPORTANT: turn off public sign-up at the provider if no sign-up is authorised.
+           GitHub Pages client-side checks do NOT protect private static HTML. -->
+      <div class="login-form">
+        <div id="clerk-sign-in"></div>
+        <div id="clerk-signed-in" style="display: none;">
+          <p class="big-handwritten">Well look at you. You're signed in.</p>
           <p>
-            Member access is intended for approved Veterans Backbone
-            and RV Crew members only.
+            The members area is still a development preview.
+            It is not an operational veteran support service.
           </p>
-
-        </div>
-
-
-        <!-- =====================================================
-             CLERK LOGIN
-        ====================================================== -->
-
-        <div class="login-form">
-
-          <!-- Clerk places the sign-in screen here -->
-          <div id="clerk-sign-in"></div>
-
-
-          <!-- Shown if the visitor is already signed in -->
-          <div
-            id="clerk-signed-in"
-            style="display: none;"
-          >
-
-            <p class="big-handwritten">
-              Well look at you. You're already in.
-            </p>
-
-            <p>
-              Your member account is signed in and ready to go.
-            </p>
-
-            <div class="button-row">
-
-              <a
-                href="members.html"
-                class="btn btn-colour"
-              >
-                Enter Members Area
-              </a>
-
-              <div id="clerk-user-button"></div>
-
-            </div>
-
-          </div>
-
-        </div>
-
-
-        <!-- =====================================================
-             LOGIN HELP
-        ====================================================== -->
-
-        <div class="callout callout-orange">
-
-          <h2>
-            CAN'T GET
-            <span class="logo-ombre">IN?</span>
-          </h2>
-
-          <p>
-            If you're having trouble with your member account,
-            get in touch with Veterans Backbone.
-          </p>
-
-          <p>
-            If you need support from VB, you do not need to wait
-            for member access.
-          </p>
-
           <div class="button-row">
-
-            <a
-              href="support.html"
-              class="btn btn-dark"
-            >
-              Get Support
-            </a>
-
-            <a
-              href="contact.html"
-              class="btn btn-paper"
-            >
-              Talk to Us
-            </a>
-
+            <a href="members.html" class="btn btn-colour">Preview Members Area</a>
+            <div id="clerk-user-button"></div>
           </div>
-
         </div>
-
-
-        <p class="small-note">
-          Member access is managed securely through our authentication provider.
-        </p>
-
       </div>
 
-    </section>
-
-  </main>
-
-
-  <!-- =========================================================
-       FOOTER
-  ========================================================= -->
-
-  <footer class="site-footer">
-
-    <div class="footer-main">
-
-      <div class="footer-brand">
-
-        <img
-          src="images/vblogo.png"
-          alt="Veterans Backbone"
-          class="footer-logo"
-        >
-
+      <div class="callout callout-orange">
+        <h2>CAN'T GET <span class="logo-ombre">IN?</span></h2>
         <p>
-          Different journeys.<br>
-          Same direction.
+          Existing development account holders with login problems can contact
+          the project. We are not taking general membership or support applications.
         </p>
-
+        <div class="button-row">
+          <a href="support.html" class="btn btn-dark">Our Support Plans</a>
+          <a href="contact.html" class="btn btn-paper">General Project Contact</a>
+        </div>
       </div>
 
-
-      <div class="footer-column">
-
-        <h3>Find Your Way</h3>
-
-        <a href="support.html">Getting Support</a>
-        <a href="rv-crew.html">The RV Crew</a>
-        <a href="events.html">Events</a>
-        <a href="gallery.html">Gallery</a>
-        <a href="blog.html">Blog</a>
-        <a href="resources.html">Resources</a>
-        <a href="licensed-sites.html">Licensed Sites</a>
-        <a href="faq.html">FAQs</a>
-
-      </div>
-
-
-      <div class="footer-column">
-
-        <h3>Know Us</h3>
-
-        <a href="about.html">About VB</a>
-        <a href="meet-the-people.html">Meet the People</a>
-        <a href="flamingo-rise.html">Flamingo Rise</a>
-        <a href="get-involved.html">Get Involved</a>
-        <a href="donate.html">Donate</a>
-        <a href="contact.html">Talk to Us</a>
-
-      </div>
-
-
-      <div class="footer-column">
-
-        <h3>How We Keep Our Shit Together</h3>
-
-        <a href="legal/safeguarding.html">
-          Safeguarding & Standards
-        </a>
-
-        <a href="legal/privacy.html">
-          Privacy & Data
-        </a>
-
-        <a href="legal/cookies.html">
-          Cookies
-        </a>
-
-        <a href="legal/accessibility.html">
-          Accessibility
-        </a>
-
-        <a href="legal/complaints.html">
-          Complaints & Concerns
-        </a>
-
-      </div>
-
-
-      <div class="footer-column">
-
-        <h3>RV Members</h3>
-
-        <a href="login.html">
-          Member Login
-        </a>
-
-        <a href="members.html">
-          Members Area
-        </a>
-
-        <p class="small-note">
-          Members-only content requires an approved account.
-        </p>
-
-      </div>
-
-    </div>
-
-
-    <div class="footer-bottom">
-
-      <p>
-        © <span id="currentYear"></span> Veterans Backbone.
+      <p class="small-note">
+        Authentication is provided by Clerk. Member services are in development;
+        signing in does not establish eligibility for support.
       </p>
-
-      <p class="footer-signoff">
-        Built on backbone, banter and giving a shit.
-      </p>
-
     </div>
+  </section>
+</main>
 
-  </footer>
+<!-- FOOTER -->
+<footer class="site-footer">
+  <div class="footer-main">
+    <div class="footer-brand">
+      <img src="images/vblogo.png" alt="Veterans Backbone" class="footer-logo">
+      <p>Different journeys.<br>Same direction.</p>
+      <p class="small-note">
+        Veterans Backbone is being established. It is not yet a registered charity,
+        and veteran support services have not launched.
+      </p>
+    </div>
+    <div class="footer-column">
+      <h3>Find Your Way</h3>
+      <a href="support.html">Support Plans</a>
+      <a href="rv-crew.html">The RV Crew</a>
+      <a href="events.html">Events</a>
+      <a href="gallery.html">Gallery</a>
+      <a href="blog.html">Blog</a>
+      <a href="resources.html">Resources</a>
+      <a href="licensed-sites.html">Future Sites</a>
+      <a href="faq.html">FAQs</a>
+    </div>
+    <div class="footer-column">
+      <h3>Know Us</h3>
+      <a href="about.html">About VB</a>
+      <a href="meet-the-people.html">Meet the People</a>
+      <a href="flamingo-rise.html">Flamingo Rise</a>
+      <a href="get-involved.html">Get Involved</a>
+      <a href="contact.html">Talk to Us</a>
+    </div>
+    <div class="footer-column">
+      <h3>How We Keep Our Shit Together</h3>
+      <a href="legal/safeguarding.html">Safeguarding &amp; Standards</a>
+      <a href="legal/privacy.html">Privacy &amp; Data</a>
+      <a href="legal/cookies.html">Cookies</a>
+      <a href="legal/accessibility.html">Accessibility</a>
+      <a href="legal/complaints.html">Complaints &amp; Concerns</a>
+    </div>
+    <div class="footer-column">
+      <h3>Private Members</h3>
+      <a href="login.html">Member Login</a>
+      <p class="small-note">Member services are in development and not open to the public.</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© <span id="currentYear"></span> Veterans Backbone.</p>
+    <p class="footer-signoff">Built on backbone, banter and giving a shit.</p>
+  </div>
+</footer>
 
-
-  <!-- =========================================================
-       CLERK
-       UI bundle must load before ClerkJS
-  ========================================================= -->
-
-  <script
-    defer
-    crossorigin="anonymous"
-    src="https://helped-mite-2212.clerk.accounts.dev/npm/@clerk/ui@1/dist/ui.browser.js"
-    type="text/javascript"
-  ></script>
-
-  <script
-    defer
-    crossorigin="anonymous"
-    data-clerk-publishable-key="pk_test_aGVscGVkLW1pdGUtMjIxMi5jbGVyay5hY2NvdW50cy5kZXYk"
-    src="https://helped-mite-2212.clerk.accounts.dev/npm/@clerk/clerk-js@6/dist/clerk.browser.js"
-    type="text/javascript"
-  ></script>
-
-
-  <!-- =========================================================
-       CLERK LOGIN LOGIC
-  ========================================================= -->
-
-  <script>
-
-    window.addEventListener('load', async function () {
-
-      try {
-
-        await Clerk.load({
-          ui: {
-            ClerkUI: window.__internal_ClerkUICtor
-          }
+<!-- Clerk integration retained from the original page. -->
+<script defer crossorigin="anonymous"
+  src="https://helped-mite-2212.clerk.accounts.dev/npm/@clerk/ui@1/dist/ui.browser.js"
+  type="text/javascript"></script>
+<script defer crossorigin="anonymous"
+  data-clerk-publishable-key="pk_test_aGVscGVkLW1pdGUtMjIxMi5jbGVyay5hY2NvdW50cy5kZXYk"
+  src="https://helped-mite-2212.clerk.accounts.dev/npm/@clerk/clerk-js@6/dist/clerk.browser.js"
+  type="text/javascript"></script>
+<script>
+  window.addEventListener('load', async function () {
+    try {
+      if (!window.Clerk) throw new Error('Clerk did not load');
+      await Clerk.load({ui: {ClerkUI: window.__internal_ClerkUICtor}});
+      const signInDiv = document.getElementById('clerk-sign-in');
+      const signedInDiv = document.getElementById('clerk-signed-in');
+      const userButtonDiv = document.getElementById('clerk-user-button');
+      if (Clerk.isSignedIn) {
+        signInDiv.style.display = 'none';
+        signedInDiv.style.display = 'block';
+        Clerk.mountUserButton(userButtonDiv);
+      } else {
+        signInDiv.style.display = 'block';
+        signedInDiv.style.display = 'none';
+        Clerk.mountSignIn(signInDiv, {
+          forceRedirectUrl: new URL('members.html', window.location.href).href
         });
-
-
-        const signInDiv =
-          document.getElementById('clerk-sign-in');
-
-        const signedInDiv =
-          document.getElementById('clerk-signed-in');
-
-        const userButtonDiv =
-          document.getElementById('clerk-user-button');
-
-
-        if (Clerk.isSignedIn) {
-
-          signInDiv.style.display = 'none';
-          signedInDiv.style.display = 'block';
-
-          Clerk.mountUserButton(userButtonDiv);
-
-        } else {
-
-          signInDiv.style.display = 'block';
-          signedInDiv.style.display = 'none';
-
-          Clerk.mountSignIn(signInDiv, {
-  forceRedirectUrl: 'https://nobeigewebsites.github.io/Veterans-Backbone/members.html'
-});
-
-        }
-
-      } catch (error) {
-
-        console.error(
-          'Veterans Backbone member login failed to load:',
-          error
-        );
-
-        const signInDiv =
-          document.getElementById('clerk-sign-in');
-
-        if (signInDiv) {
-
-          signInDiv.innerHTML = `
-            <div class="callout callout-orange">
-              <p class="big-handwritten">
-                Well, that's being a knob.
-              </p>
-
-              <p>
-                The member login couldn't load properly.
-                Please refresh the page or try again shortly.
-              </p>
-            </div>
-          `;
-
-        }
-
       }
-
-    });
-
-  </script>
-
-
-  <!-- =========================================================
-       MAIN SITE JAVASCRIPT
-  ========================================================= -->
-
-  <script src="script.js"></script>
-
+    } catch (error) {
+      console.error('Veterans Backbone member login failed to load:', error);
+      const signInDiv = document.getElementById('clerk-sign-in');
+      if (signInDiv) {
+        signInDiv.innerHTML = `
+          <div class="callout callout-orange">
+            <p class="big-handwritten">Well, that's being a knob.</p>
+            <p>The login isn't available right now. Member access is still in development.</p>
+          </div>`;
+      }
+    }
+  });
+</script>
+<script src="script.js"></script>
 </body>
-
 </html>
