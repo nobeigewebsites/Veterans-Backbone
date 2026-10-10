@@ -12,10 +12,11 @@
 
   <meta
     name="description"
-    content="Veterans Backbone private members area."
+    content="Development preview of the future Veterans Backbone member area. Member services are not currently available."
   >
 
   <title>Members Area | Veterans Backbone</title>
+  <meta name="robots" content="noindex, follow">
 
   <link rel="stylesheet" href="style.css">
 
@@ -101,41 +102,22 @@
       <a href="index.html">Home</a>
       <a href="about.html">About VB</a>
       <a href="meet-the-people.html">Meet the People</a>
-      <a href="support.html">Getting Support</a>
+      <a href="support.html">Support Plans</a>
       <a href="rv-crew.html">The RV Crew</a>
       <a href="events.html">Events</a>
       <a href="gallery.html">Gallery</a>
       <a href="blog.html">Blog</a>
       <a href="resources.html">Resources</a>
-      <a href="licensed-sites.html">Licensed Sites</a>
+      <a href="licensed-sites.html">Future Sites</a>
       <a href="faq.html">FAQs</a>
 
     </nav>
 
 
     <div class="header-actions">
-
-      <a
-        href="login.html"
-        class="header-login"
-      >
-        Member Login
-      </a>
-
-      <a
-        href="support.html"
-        class="btn btn-dark"
-      >
-        Get Support
-      </a>
-
-      <a
-        href="donate.html"
-        class="btn btn-colour"
-      >
-        Donate
-      </a>
-
+      <a href="login.html" class="header-login">Member Login</a>
+      <a href="support.html" class="btn btn-dark">Our Support Plans</a>
+      <a href="get-involved.html" class="btn btn-colour">Get Involved</a>
     </div>
 
   </div>
@@ -148,6 +130,8 @@
 ========================================================= -->
 
 <main id="main-content">
+<!-- Development preview: HTML in public GitHub Pages remains public source.
+     Do not embed private records or confidential files here. -->
 
 
 <!-- =======================================================
@@ -176,13 +160,11 @@
       </p>
 
       <p>
-        You've made it past the sensible part of the website.
-        Welcome to the bit where we keep the useful shit,
-        member stuff and significantly fewer fucks about sounding professional.
+        This is a preview of the members area we intend to develop. RV Crew events, downloads and individual VB support services have not launched.
       </p>
 
       <p class="big-handwritten">
-        Kettle on. You're home.
+        Kettle on. Still building.
       </p>
 
     </div>
@@ -212,7 +194,7 @@
       <div class="section-heading centred">
 
         <span class="eyebrow">
-          YOUR PRIVATE VB BIT
+          FUTURE MEMBER SPACE
         </span>
 
         <h2>
@@ -223,8 +205,8 @@
         </h2>
 
         <p>
-          Resources, events, updates and all the useful stuff
-          that doesn't need waving around on the public internet.
+          Planned resources, future events and updates.
+          These sections are not operational yet.
         </p>
 
       </div>
@@ -391,7 +373,8 @@
           </p>
 
           <p class="small-note">
-            Go straight back into VB support from here.
+            VB support services are not open yet.
+          You can read about our proposed support plans.
           </p>
 
           <div class="button-row">
@@ -400,7 +383,7 @@
               href="support.html"
               class="btn btn-colour"
             >
-              I Need Support
+              Our Support Plans
             </a>
 
           </div>
@@ -417,7 +400,7 @@
           </span>
 
           <h2>
-            The Boring Bit
+            The Account Bit
           </h2>
 
           <p>
@@ -426,7 +409,8 @@
           </p>
 
           <p class="small-note">
-            This will become functional when member authentication is connected.
+            Clerk authentication is included for development/testing.
+          Public membership applications are not open.
           </p>
 
           <div class="button-row">
@@ -476,8 +460,8 @@
         </h2>
 
         <p>
-          Flamingo resources stay with Flamingo.
-          These will be built specifically for Veterans Backbone members.
+          Flamingo Rise is a separate project.
+          VB-specific resources and workbooks are planned for this area.
         </p>
 
       </div>
@@ -771,8 +755,7 @@
       </h2>
 
       <p>
-        Have a nose around, use what helps
-        and shout if life decides to be a dick again.
+        This page is a development preview. The real members area, resources and services are not yet open.
       </p>
 
       <div class="final-buttons">
@@ -781,14 +764,14 @@
           href="support.html"
           class="btn btn-large btn-colour"
         >
-          I Need Support
+          Our Support Plans
         </a>
 
         <a
           href="contact.html"
           class="btn btn-large btn-dark"
         >
-          Talk to Us
+          General Project Enquiries
         </a>
 
       </div>
@@ -822,6 +805,12 @@
         Same direction.
       </p>
 
+      <p class="small-note">
+        Veterans Backbone is being established. It is not yet a
+        registered charity and veteran support services have not
+        launched. This website remains under construction.
+      </p>
+
     </div>
 
 
@@ -831,13 +820,13 @@
         Find Your Way
       </h3>
 
-      <a href="support.html">Getting Support</a>
+      <a href="support.html">Support Plans</a>
       <a href="rv-crew.html">The RV Crew</a>
       <a href="events.html">Events</a>
       <a href="gallery.html">Gallery</a>
       <a href="blog.html">Blog</a>
       <a href="resources.html">Resources</a>
-      <a href="licensed-sites.html">Licensed Sites</a>
+      <a href="licensed-sites.html">Future Sites</a>
       <a href="faq.html">FAQs</a>
 
     </div>
@@ -853,7 +842,6 @@
       <a href="meet-the-people.html">Meet the People</a>
       <a href="flamingo-rise.html">Flamingo Rise</a>
       <a href="get-involved.html">Get Involved</a>
-      <a href="donate.html">Donate</a>
       <a href="contact.html">Talk to Us</a>
 
     </div>
@@ -970,7 +958,7 @@
       if (!Clerk.isSignedIn) {
 
         window.location.replace(
-          'https://nobeigewebsites.github.io/Veterans-Backbone/login.html'
+          'login.html'
         );
 
         return;
@@ -1000,7 +988,7 @@
       );
 
       window.location.replace(
-        'https://nobeigewebsites.github.io/Veterans-Backbone/login.html'
+        'login.html'
       );
 
     }
