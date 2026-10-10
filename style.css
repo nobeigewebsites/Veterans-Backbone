@@ -6089,3 +6089,61 @@ img[src$="rise.png"] {
 .content-grid-4 .card h3 {
   font-size: 1.65rem;
 }
+
+
+
+/* HOMEPAGE UNDER-CONSTRUCTION BANNER */
+
+.vb-construction-banner {
+  background: linear-gradient(
+    110deg,
+    #fce3f0,
+    #fce7c8,
+    #e2d8ff
+  );
+  border-bottom: 3px solid #d95792;
+  padding: 18px 20px;
+  text-align: center;
+  color: #292139;
+}
+
+.vb-construction-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.vb-construction-inner strong {
+  display: block;
+  font-size: 1.05rem;
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  margin-bottom: 7px;
+}
+
+.vb-construction-inner p {
+  margin: 0 auto 7px;
+  max-width: 900px;
+  line-height: 1.5;
+}
+
+.vb-construction-inner span {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+@media (max-width: 600px) {
+  .vb-construction-banner {
+    padding: 15px;
+  }
+
+  .vb-construction-inner strong {
+    font-size: 0.95rem;
+  }
+
+  .vb-construction-inner p {
+    font-size: 0.9rem;
+  }
+}
+
+
